@@ -35,8 +35,8 @@ and this should produce a `coverage.json`, `lcov.info` and `lcov-report/*html` u
 
 Sample of code coverage reports produced by this tool (for this tool!):
 
-* [HTML reports](http://istanbul-js.org/coverage/lcov-report/index.html)
-* [Standard LCOV reports](http://istanbul-js.org/coverage/std-lcov/index.html) (using `genhtml` on the lcov trace file)
+* [HTML reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html)
+* [Standard LCOV reports](http://gotwarlost.github.com/istanbul/public/coverage/std-lcov/index.html) (using `genhtml` on the lcov trace file)
 
 Use cases
 ---------
@@ -126,7 +126,7 @@ Writes reports using `coverage*.json` files as the source of coverage informatio
 Library usage
 -------------
 
-All the features of istanbul can be accessed as a library using its [public API](http://istanbul-js.org/apidocs/index.html)
+All the features of istanbul can be accessed as a library using its [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
 License
 -------
