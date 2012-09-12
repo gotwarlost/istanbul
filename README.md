@@ -105,9 +105,11 @@ have a `package.json` that looks as follows.
     }
 
 Then:
+
     $ npm test # will run tests without coverage
 
 And:
+
     $ npm test --coverage # will run tests with coverage
 
 **Note**: This needs `node 0.6` or better to work. `npm` for `node 0.4.x` does
