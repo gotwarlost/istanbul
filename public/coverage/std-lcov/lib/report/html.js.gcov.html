@@ -1,0 +1,517 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/report/html.js</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/report</a> - html.js<span style="font-size: 80%;"> (source / <a href="html.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">148</td>
+            <td class="headerCovTableEntry">160</td>
+            <td class="headerCovTableEntryHi">92.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-09-11</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">66</td>
+            <td class="headerCovTableEntry">82</td>
+            <td class="headerCovTableEntryMed">80.5 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :            : /*jslint nomen: true */
+<span class="lineNum">       7 </span>                :<span class="lineCov">         39 : var handlebars = require('handlebars'),</span>
+<span class="lineNum">       8 </span>                :            :     path = require('path'),
+<span class="lineNum">       9 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchCov" title="Branch 1 was taken 39 times"> + </span>]:            :     SEP = path.sep || '/',
+<span class="lineNum">      10 </span>                :            :     fs = require('fs'),
+<span class="lineNum">      11 </span>                :            :     util = require('util'),
+<span class="lineNum">      12 </span>                :            :     mkdirp = require('mkdirp'),
+<span class="lineNum">      13 </span>                :            :     FileWriter = require('../util/file-writer'),
+<span class="lineNum">      14 </span>                :            :     Report = require('./index'),
+<span class="lineNum">      15 </span>                :            :     Store = require('../store'),
+<span class="lineNum">      16 </span>                :            :     InsertionText = require('../util/insertion-text'),
+<a name="17"><span class="lineNum">      17 </span>                :            :     TreeSummarizer = require('../util/tree-summarizer'),</a>
+<span class="lineNum">      18 </span>                :            :     utils = require('../object-utils'),
+<span class="lineNum">      19 </span>                :<span class="lineCov">         78 :     templateFor = function (name) { return handlebars.compile(fs.readFileSync(path.resolve(__dirname, 'templates', name + '.txt'), 'utf8')); },</span>
+<span class="lineNum">      20 </span>                :            :     headerTemplate = templateFor('head'),
+<span class="lineNum">      21 </span>                :            :     footerTemplate = templateFor('foot'),
+<span class="lineNum">      22 </span>                :            :     pathTemplate = handlebars.compile('&lt;div class=&quot;path&quot;&gt;{{{html}}}&lt;/div&gt;'),
+<span class="lineNum">      23 </span>                :            :     detailTemplate = handlebars.compile([
+<span class="lineNum">      24 </span>                :            :         '&lt;tr&gt;',
+<span class="lineNum">      25 </span>                :            :         '&lt;td class=&quot;line-count&quot;&gt;{{line}}&lt;/td&gt;',
+<span class="lineNum">      26 </span>                :            :         '&lt;td class=&quot;line-coverage cline-{{covered}}&quot;&gt;{{executionCount}}&lt;/td&gt;',
+<span class="lineNum">      27 </span>                :            :         '&lt;td class=&quot;text&quot;&gt;{{{text}}}&lt;/td&gt;',
+<span class="lineNum">      28 </span>                :            :         '&lt;/tr&gt;\n'
+<span class="lineNum">      29 </span>                :            :     ].join('\n\t')),
+<span class="lineNum">      30 </span>                :            :     summaryTableHeader = [
+<span class="lineNum">      31 </span>                :            :         '&lt;div class=&quot;coverage-summary&quot;&gt;',
+<span class="lineNum">      32 </span>                :            :         '&lt;table&gt;',
+<span class="lineNum">      33 </span>                :            :         '&lt;thead&gt;',
+<span class="lineNum">      34 </span>                :            :         '&lt;tr&gt;',
+<span class="lineNum">      35 </span>                :            :         '   &lt;th data-col=&quot;file&quot; data-fmt=&quot;html&quot; data-html=&quot;true&quot; class=&quot;file&quot;&gt;File&lt;/th&gt;',
+<span class="lineNum">      36 </span>                :            :         '   &lt;th data-col=&quot;pic&quot; data-type=&quot;number&quot; data-fmt=&quot;html&quot; data-html=&quot;true&quot; class=&quot;pic&quot;&gt;&lt;/th&gt;',
+<span class="lineNum">      37 </span>                :            :         '   &lt;th data-col=&quot;statements&quot; data-type=&quot;number&quot; data-fmt=&quot;pct&quot; class=&quot;pct&quot;&gt;Statements&lt;/th&gt;',
+<span class="lineNum">      38 </span>                :            :         '   &lt;th data-col=&quot;statements_raw&quot; data-type=&quot;number&quot; data-fmt=&quot;html&quot; class=&quot;abs&quot;&gt;&lt;/th&gt;',
+<span class="lineNum">      39 </span>                :            :         '   &lt;th data-col=&quot;branches&quot; data-type=&quot;number&quot; data-fmt=&quot;pct&quot; class=&quot;pct&quot;&gt;Branches&lt;/th&gt;',
+<span class="lineNum">      40 </span>                :            :         '   &lt;th data-col=&quot;branches_raw&quot; data-type=&quot;number&quot; data-fmt=&quot;html&quot; class=&quot;abs&quot;&gt;&lt;/th&gt;',
+<span class="lineNum">      41 </span>                :            :         '   &lt;th data-col=&quot;functions&quot; data-type=&quot;number&quot; data-fmt=&quot;pct&quot; class=&quot;pct&quot;&gt;Functions&lt;/th&gt;',
+<span class="lineNum">      42 </span>                :            :         '   &lt;th data-col=&quot;functions_raw&quot; data-type=&quot;number&quot; data-fmt=&quot;html&quot; class=&quot;abs&quot;&gt;&lt;/th&gt;',
+<span class="lineNum">      43 </span>                :            :         '   &lt;th data-col=&quot;lines&quot; data-type=&quot;number&quot; data-fmt=&quot;pct&quot; class=&quot;pct&quot;&gt;Lines&lt;/th&gt;',
+<span class="lineNum">      44 </span>                :            :         '   &lt;th data-col=&quot;lines_raw&quot; data-type=&quot;number&quot; data-fmt=&quot;html&quot; class=&quot;abs&quot;&gt;&lt;/th&gt;',
+<span class="lineNum">      45 </span>                :            :         '&lt;/tr&gt;',
+<span class="lineNum">      46 </span>                :            :         '&lt;/thead&gt;',
+<span class="lineNum">      47 </span>                :            :         '&lt;tbody&gt;'
+<span class="lineNum">      48 </span>                :            :     ].join('\n'),
+<span class="lineNum">      49 </span>                :            :     summaryLineTemplate = handlebars.compile([
+<span class="lineNum">      50 </span>                :            :         '&lt;tr&gt;',
+<span class="lineNum">      51 </span>                :            :         '&lt;td class=&quot;file {{reportClasses.statements}}&quot; data-value=&quot;{{file}}&quot;&gt;&lt;a href=&quot;{{output}}&quot;&gt;{{file}}&lt;/a&gt;&lt;/td&gt;',
+<span class="lineNum">      52 </span>                :            :         '&lt;td data-value=&quot;{{metrics.statements.pct}}&quot; class=&quot;pic {{reportClasses.statements}}&quot;&gt;{{#picture}}{{metrics.statements.pct}}{{/picture}}&lt;/td&gt;',
+<span class="lineNum">      53 </span>                :            :         '&lt;td data-value=&quot;{{metrics.statements.pct}}&quot; class=&quot;pct {{reportClasses.statements}}&quot;&gt;{{metrics.statements.pct}}%&lt;/td&gt;',
+<span class="lineNum">      54 </span>                :            :         '&lt;td data-value=&quot;{{metrics.statements.total}}&quot; class=&quot;abs {{reportClasses.statements}}&quot;&gt;({{metrics.statements.covered}} / {{metrics.statements.total}})&lt;/td&gt;',
+<span class="lineNum">      55 </span>                :            :         '&lt;td data-value=&quot;{{metrics.branches.pct}}&quot; class=&quot;pct {{reportClasses.branches}}&quot;&gt;{{metrics.branches.pct}}%&lt;/td&gt;',
+<span class="lineNum">      56 </span>                :            :         '&lt;td data-value=&quot;{{metrics.branches.total}}&quot; class=&quot;abs {{reportClasses.branches}}&quot;&gt;({{metrics.branches.covered}} / {{metrics.branches.total}})&lt;/td&gt;',
+<span class="lineNum">      57 </span>                :            :         '&lt;td data-value=&quot;{{metrics.functions.pct}}&quot; class=&quot;pct {{reportClasses.functions}}&quot;&gt;{{metrics.functions.pct}}%&lt;/td&gt;',
+<span class="lineNum">      58 </span>                :            :         '&lt;td data-value=&quot;{{metrics.functions.total}}&quot; class=&quot;abs {{reportClasses.functions}}&quot;&gt;({{metrics.functions.covered}} / {{metrics.functions.total}})&lt;/td&gt;',
+<span class="lineNum">      59 </span>                :            :         '&lt;td data-value=&quot;{{metrics.lines.pct}}&quot; class=&quot;pct {{reportClasses.lines}}&quot;&gt;{{metrics.lines.pct}}%&lt;/td&gt;',
+<span class="lineNum">      60 </span>                :            :         '&lt;td data-value=&quot;{{metrics.lines.total}}&quot; class=&quot;abs {{reportClasses.lines}}&quot;&gt;({{metrics.lines.covered}} / {{metrics.lines.total}})&lt;/td&gt;',
+<span class="lineNum">      61 </span>                :            :         '&lt;/tr&gt;\n'
+<span class="lineNum">      62 </span>                :            :     ].join('\n\t')),
+<span class="lineNum">      63 </span>                :            :     summaryTableFooter = [
+<span class="lineNum">      64 </span>                :            :         '&lt;/tbody&gt;',
+<span class="lineNum">      65 </span>                :            :         '&lt;/table&gt;',
+<span class="lineNum">      66 </span>                :            :         '&lt;/div&gt;'
+<span class="lineNum">      67 </span>                :            :     ].join('\n'),
+<span class="lineNum">      68 </span>                :            :     seq = 0,
+<span class="lineNum">      69 </span>                :            :     lt = '\u0001',
+<span class="lineNum">      70 </span>                :            :     gt = '\u0002',
+<span class="lineNum">      71 </span>                :            :     RE_LT = /&lt;/g,
+<span class="lineNum">      72 </span>                :            :     RE_GT = /&gt;/g,
+<span class="lineNum">      73 </span>                :            :     RE_AMP = /&amp;/g,
+<span class="lineNum">      74 </span>                :            :     RE_lt = /\u0001/g,
+<a name="75"><span class="lineNum">      75 </span>                :            :     RE_gt = /\u0002/g;</a>
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :<span class="lineCov">         39 : handlebars.registerHelper('picture', function (opts) {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">         73 :     var num = Number(opts.fn(this)),</span>
+<span class="lineNum">      79 </span>                :            :         rest,
+<span class="lineNum">      80 </span>                :            :         cls = '';
+<span class="lineNum">      81 </span>        [<span class="branchCov" title="Branch 0 was taken 73 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         73 :     if (isFinite(num)) {</span>
+<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 0 was taken 29 times"> + </span><span class="branchCov" title="Branch 1 was taken 44 times"> + </span>]:<span class="lineCov">         73 :         if (num === 100) {</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">         29 :             cls = ' cover-full';</span>
+<span class="lineNum">      84 </span>                :            :         }
+<span class="lineNum">      85 </span>                :<span class="lineCov">         73 :         num = Math.floor(num);</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">         73 :         rest = 100 - num;</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">         73 :         return '&lt;span class=&quot;cover-fill' + cls + '&quot; style=&quot;width: ' + num + 'px;&quot;&gt;&lt;/span&gt;'</span>
+<span class="lineNum">      88 </span>                :            :             + '&lt;span class=&quot;cover-empty&quot; style=&quot;width:' + rest + 'px;&quot;&gt;&lt;/span&gt;';
+<span class="lineNum">      89 </span>                :            :     } else {
+<span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 :         return '';</span>
+<span class="lineNum">      91 </span>                :            :     }
+<a name="92"><span class="lineNum">      92 </span>                :            : });</a>
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :<span class="lineCov">         39 : function annotateLines(fileCoverage, structuredText) {</span>
+<a name="95"><span class="lineNum">      95 </span>                :<span class="lineCov">         41 :     var lineStats = fileCoverage.l;</span></a>
+<span class="lineNum">      96 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         41 :     if (!lineStats) { return; }</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">         41 :     Object.keys(lineStats).forEach(function (lineNumber) {</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">        154 :         var count = lineStats[lineNumber];</span>
+<a name="99"><span class="lineNum">      99 </span>        [<span class="branchCov" title="Branch 0 was taken 112 times"> + </span><span class="branchCov" title="Branch 1 was taken 42 times"> + </span>]:<span class="lineCov">        154 :         structuredText[lineNumber].covered = count &gt; 0 ? 'yes' : 'no';</span></a>
+<span class="lineNum">     100 </span>                :            :     });
+<span class="lineNum">     101 </span>                :<span class="lineCov">         41 :     structuredText.forEach(function (item) {</span>
+<span class="lineNum">     102 </span>        [<span class="branchCov" title="Branch 0 was taken 340 times"> + </span><span class="branchCov" title="Branch 1 was taken 154 times"> + </span>]:<span class="lineCov">        494 :         if (item.covered === null) {</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">        340 :             item.covered = 'neutral';</span>
+<span class="lineNum">     104 </span>                :            :         }
+<span class="lineNum">     105 </span>                :            :     });
+<a name="106"><span class="lineNum">     106 </span>                :            : }</a>
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineCov">         39 : function annotateStatements(fileCoverage, structuredText) {</span>
+<a name="109"><span class="lineNum">     109 </span>                :<span class="lineCov">         41 :     var statementStats = fileCoverage.s,</span></a>
+<span class="lineNum">     110 </span>                :            :         statementMeta = fileCoverage.statementMap;
+<span class="lineNum">     111 </span>                :<span class="lineCov">         41 :     Object.keys(statementStats).forEach(function (stName) {</span>
+<span class="lineNum">     112 </span>                :<span class="lineCov">        154 :         var count = statementStats[stName],</span>
+<span class="lineNum">     113 </span>                :            :             meta = statementMeta[stName],
+<span class="lineNum">     114 </span>        [<span class="branchCov" title="Branch 0 was taken 112 times"> + </span><span class="branchCov" title="Branch 1 was taken 42 times"> + </span>]:            :             type = count &gt; 0 ? 'yes' : 'no',
+<span class="lineNum">     115 </span>                :            :             startCol = meta.start.column,
+<span class="lineNum">     116 </span>                :            :             endCol = meta.end.column + 1,
+<span class="lineNum">     117 </span>                :            :             startLine = meta.start.line,
+<span class="lineNum">     118 </span>                :            :             endLine = meta.end.line,
+<span class="lineNum">     119 </span>                :            :             openSpan = lt + 'span class=&quot;cstat-' + type + '&quot;' + gt,
+<span class="lineNum">     120 </span>                :            :             closeSpan = lt + '/span' + gt,
+<span class="lineNum">     121 </span>                :            :             text;
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchCov" title="Branch 1 was taken 112 times"> + </span>]:<span class="lineCov">        154 :         if (type === 'no') {</span>
+<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchCov" title="Branch 1 was taken 32 times"> + </span>]:<span class="lineCov">         42 :             if (endLine !== startLine) {</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">         10 :                 endLine = startLine;</span>
+<span class="lineNum">     126 </span>                :<span class="lineCov">         10 :                 endCol = structuredText[startLine].text.originalLength();</span>
+<span class="lineNum">     127 </span>                :            :             }
+<span class="lineNum">     128 </span>                :<span class="lineCov">         42 :             text = structuredText[startLine].text;</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">         42 :             text.wrap(startCol,</span>
+<span class="lineNum">     130 </span>                :            :                 openSpan,
+<span class="lineNum">     131 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:            :                 startLine === endLine ? endCol : text.originalLength(),
+<span class="lineNum">     132 </span>                :            :                 closeSpan);
+<span class="lineNum">     133 </span>                :            :         }
+<span class="lineNum">     134 </span>                :            :     });
+<a name="135"><span class="lineNum">     135 </span>                :            : }</a>
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :<span class="lineCov">         39 : function annotateFunctions(fileCoverage, structuredText) {</span>
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :<span class="lineCov">         41 :     var fnStats = fileCoverage.f,</span>
+<a name="140"><span class="lineNum">     140 </span>                :            :         fnMeta = fileCoverage.fnMap;</a>
+<span class="lineNum">     141 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         41 :     if (!fnStats) { return; }</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">         41 :     Object.keys(fnStats).forEach(function (fName) {</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">         51 :         var count = fnStats[fName],</span>
+<span class="lineNum">     144 </span>                :            :             meta = fnMeta[fName],
+<span class="lineNum">     145 </span>        [<span class="branchCov" title="Branch 0 was taken 30 times"> + </span><span class="branchCov" title="Branch 1 was taken 21 times"> + </span>]:            :             type = count &gt; 0 ? 'yes' : 'no',
+<span class="lineNum">     146 </span>                :            :             startCol = meta.loc.start.column,
+<span class="lineNum">     147 </span>                :            :             endCol = meta.loc.end.column + 1,
+<span class="lineNum">     148 </span>                :            :             startLine = meta.loc.start.line,
+<span class="lineNum">     149 </span>                :            :             endLine = meta.loc.end.line,
+<span class="lineNum">     150 </span>                :            :             openSpan = lt + 'span class=&quot;fstat-' + type + '&quot;' + gt,
+<span class="lineNum">     151 </span>                :            :             closeSpan = lt + '/span' + gt,
+<span class="lineNum">     152 </span>                :            :             text;
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">         51 :         if (type === 'no') {</span>
+<span class="lineNum">     155 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 21 times"> + </span>]:<span class="lineCov">         21 :             if (endLine !== startLine) {</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :                 endLine = startLine;</span>
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :                 endCol = structuredText[startLine].text.originalLength();</span>
+<span class="lineNum">     158 </span>                :            :             }
+<span class="lineNum">     159 </span>                :<span class="lineCov">         21 :             text = structuredText[startLine].text;</span>
+<span class="lineNum">     160 </span>                :<span class="lineCov">         21 :             text.wrap(startCol,</span>
+<span class="lineNum">     161 </span>                :            :                 openSpan,
+<span class="lineNum">     162 </span>        [<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:            :                 startLine === endLine ? endCol : text.originalLength(),
+<span class="lineNum">     163 </span>                :            :                 closeSpan);
+<span class="lineNum">     164 </span>                :            :         }
+<span class="lineNum">     165 </span>                :            :     });
+<a name="166"><span class="lineNum">     166 </span>                :            : }</a>
+<span class="lineNum">     167 </span>                :            : 
+<span class="lineNum">     168 </span>                :<span class="lineCov">         39 : function annotateBranches(fileCoverage, structuredText) {</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">         41 :     var branchStats = fileCoverage.b,</span>
+<span class="lineNum">     170 </span>                :            :         branchMeta = fileCoverage.branchMap;
+<a name="171"><span class="lineNum">     171 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         41 :     if (!branchStats) { return; }</span></a>
+<span class="lineNum">     172 </span>                :            : 
+<a name="173"><span class="lineNum">     173 </span>                :<span class="lineCov">         41 :     Object.keys(branchStats).forEach(function (branchName) {</span></a>
+<span class="lineNum">     174 </span>                :<span class="lineCov">         32 :         var branchArray = branchStats[branchName],</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">         64 :             sumCount = branchArray.reduce(function (p, n) { return p + n; }, 0),</span>
+<span class="lineNum">     176 </span>                :            :             metaArray = branchMeta[branchName].locations,
+<span class="lineNum">     177 </span>                :            :             i,
+<span class="lineNum">     178 </span>                :            :             count,
+<span class="lineNum">     179 </span>                :            :             meta,
+<span class="lineNum">     180 </span>                :            :             type,
+<span class="lineNum">     181 </span>                :            :             startCol,
+<span class="lineNum">     182 </span>                :            :             endCol,
+<span class="lineNum">     183 </span>                :            :             startLine,
+<span class="lineNum">     184 </span>                :            :             endLine,
+<span class="lineNum">     185 </span>                :            :             openSpan,
+<span class="lineNum">     186 </span>                :            :             closeSpan,
+<span class="lineNum">     187 </span>                :            :             text;
+<span class="lineNum">     188 </span>                :            : 
+<span class="lineNum">     189 </span>        [<span class="branchCov" title="Branch 0 was taken 22 times"> + </span><span class="branchCov" title="Branch 1 was taken 10 times"> + </span>]:<span class="lineCov">         32 :         if (sumCount &gt; 0) { //only highlight if partial branches are missing</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">         22 :             for (i = 0; i &lt; branchArray.length; i += 1) {</span>
+<span class="lineNum">     191 </span>                :<span class="lineCov">         44 :                 count = branchArray[i];</span>
+<span class="lineNum">     192 </span>                :<span class="lineCov">         44 :                 meta = metaArray[i];</span>
+<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 41 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">         44 :                 type = count &gt; 0 ? 'yes' : 'no';</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">         44 :                 startCol = meta.start.column;</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">         44 :                 endCol = meta.end.column + 1;</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">         44 :                 startLine = meta.start.line;</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">         44 :                 endLine = meta.end.line;</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">         44 :                 openSpan = lt + 'span class=&quot;branch-' + i + ' cbranch-' + type + '&quot;' + gt;</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">         44 :                 closeSpan = lt + '/span' + gt;</span>
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         44 :                 if (count === 0) { //skip branches taken</span>
+<span class="lineNum">     202 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :                     if (endLine !== startLine) {</span>
+<span class="lineNum">     203 </span>                :<span class="lineNoCov">          0 :                         endLine = startLine;</span>
+<span class="lineNum">     204 </span>                :<span class="lineNoCov">          0 :                         endCol = structuredText[startLine].text.originalLength();</span>
+<span class="lineNum">     205 </span>                :            :                     }
+<span class="lineNum">     206 </span>                :<span class="lineCov">          3 :                     text = structuredText[startLine].text;</span>
+<span class="lineNum">     207 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          3 :                     if (branchMeta[branchName].type === 'if') { // and 'if' is a special case since the else branch might not be visible, being non-existent</span>
+<span class="lineNum">     208 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :                         text.insertAt(startCol, lt + 'span class=&quot;missing-if-branch&quot;' + gt + (i === 0 ? 'I' : 'E')  + lt + '/span' + gt, true, false);</span>
+<span class="lineNum">     209 </span>                :            :                     } else {
+<span class="lineNum">     210 </span>                :<span class="lineCov">          2 :                         text.wrap(startCol,</span>
+<span class="lineNum">     211 </span>                :            :                             openSpan,
+<span class="lineNum">     212 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:            :                             startLine === endLine ? endCol : text.originalLength(),
+<span class="lineNum">     213 </span>                :            :                             closeSpan);
+<span class="lineNum">     214 </span>                :            :                     }
+<span class="lineNum">     215 </span>                :            :                 }
+<span class="lineNum">     216 </span>                :            :             }
+<span class="lineNum">     217 </span>                :            :         }
+<span class="lineNum">     218 </span>                :            :     });
+<a name="219"><span class="lineNum">     219 </span>                :            : }</a>
+<span class="lineNum">     220 </span>                :            : 
+<span class="lineNum">     221 </span>                :<span class="lineCov">         39 : function customEscape(text) {</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">        453 :     text = text.toString();</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">        453 :     return text.replace(RE_AMP, '&amp;amp;')</span>
+<span class="lineNum">     224 </span>                :            :         .replace(RE_LT, '&amp;lt;')
+<span class="lineNum">     225 </span>                :            :         .replace(RE_GT, '&amp;gt;')
+<span class="lineNum">     226 </span>                :            :         .replace(RE_lt, '&lt;')
+<span class="lineNum">     227 </span>                :            :         .replace(RE_gt, '&gt;');
+<a name="228"><span class="lineNum">     228 </span>                :            : }</a>
+<span class="lineNum">     229 </span>                :            : 
+<span class="lineNum">     230 </span>                :<span class="lineCov">         39 : function getReportClass(stats) {</span>
+<span class="lineNum">     231 </span>                :<span class="lineCov">        375 :     var coveragePct = stats.pct,</span>
+<span class="lineNum">     232 </span>                :            :         identity  = 1;
+<span class="lineNum">     233 </span>        [<span class="branchCov" title="Branch 0 was taken 375 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        375 :     if (coveragePct * identity === coveragePct) {</span>
+<span class="lineNum">     234 </span>[<span class="branchCov" title="Branch 0 was taken 174 times"> + </span><span class="branchCov" title="Branch 1 was taken 201 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 146 times"> + </span><span class="branchCov" title="Branch 1 was taken 55 times"> + </span>]:<span class="lineCov">        375 :         return coveragePct &gt;= 80 ? 'high' : coveragePct &gt;= 50 ? 'medium' : 'low';</span>
+<span class="lineNum">     235 </span>                :            :     } else {
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :         return '';</span>
+<span class="lineNum">     237 </span>                :            :     }
+<span class="lineNum">     238 </span>                :            : }
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :            : /**
+<span class="lineNum">     241 </span>                :            :  * a `Report` implementation that produces HTML coverage reports.
+<span class="lineNum">     242 </span>                :            :  *
+<span class="lineNum">     243 </span>                :            :  * Usage
+<span class="lineNum">     244 </span>                :            :  * -----
+<span class="lineNum">     245 </span>                :            :  *
+<span class="lineNum">     246 </span>                :            :  *      var report = require('istanbul').Report.create('html');
+<span class="lineNum">     247 </span>                :            :  *
+<span class="lineNum">     248 </span>                :            :  *
+<span class="lineNum">     249 </span>                :            :  * @class HtmlReport
+<span class="lineNum">     250 </span>                :            :  * @extends Report
+<span class="lineNum">     251 </span>                :            :  * @constructor
+<span class="lineNum">     252 </span>                :            :  * @param {Object} opts optional
+<a name="253"><span class="lineNum">     253 </span>                :            :  * @param {String} [opts.dir] the directory in which to generate reports. Defaults to `./html-report`</a>
+<span class="lineNum">     254 </span>                :            :  */
+<span class="lineNum">     255 </span>                :<span class="lineCov">         39 : function HtmlReport(opts) {</span>
+<span class="lineNum">     256 </span>                :<span class="lineCov">         11 :     Report.call(this);</span>
+<span class="lineNum">     257 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         11 :     this.opts = opts || {};</span>
+<span class="lineNum">     258 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         11 :     this.opts.dir = this.opts.dir || path.resolve(process.cwd(), 'html-report');</span>
+<span class="lineNum">     259 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 11 times"> + </span>]:<span class="lineCov">         11 :     this.opts.sourceStore = this.opts.sourceStore || Store.create('fslookup');</span>
+<span class="lineNum">     260 </span>                :            : }
+<span class="lineNum">     261 </span>                :            : 
+<span class="lineNum">     262 </span>                :<span class="lineCov">         39 : HtmlReport.TYPE = 'html';</span>
+<span class="lineNum">     263 </span>                :<span class="lineCov">         39 : util.inherits(HtmlReport, Report);</span>
+<span class="lineNum">     264 </span>                :            : 
+<a name="265"><span class="lineNum">     265 </span>                :<span class="lineCov">         39 : Report.mix(HtmlReport, {</span></a>
+<span class="lineNum">     266 </span>                :            : 
+<span class="lineNum">     267 </span>                :            :     getPathHtml: function (node, linkMapper) {
+<span class="lineNum">     268 </span>                :<span class="lineCov">         83 :         var parent = node.parent,</span>
+<span class="lineNum">     269 </span>                :            :             nodePath = [],
+<span class="lineNum">     270 </span>                :            :             linkPath = [],
+<span class="lineNum">     271 </span>                :            :             i;
+<span class="lineNum">     272 </span>                :            : 
+<span class="lineNum">     273 </span>                :<span class="lineCov">         83 :         while (parent) {</span>
+<span class="lineNum">     274 </span>                :<span class="lineCov">        114 :             nodePath.push(parent);</span>
+<span class="lineNum">     275 </span>                :<span class="lineCov">        114 :             parent = parent.parent;</span>
+<span class="lineNum">     276 </span>                :            :         }
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :<span class="lineCov">         83 :         for (i = 0; i &lt; nodePath.length; i += 1) {</span>
+<span class="lineNum">     279 </span>                :<span class="lineCov">        114 :             linkPath.push('&lt;a href=&quot;' + linkMapper.ancestor(node, i + 1) + '&quot;&gt;'</span>
+<span class="lineNum">     280 </span>        [<span class="branchCov" title="Branch 0 was taken 114 times"> + </span><span class="branchCov" title="Branch 1 was taken 73 times"> + </span>]:            :                 + (nodePath[i].relativeName || 'All files') + '&lt;/a&gt;');
+<span class="lineNum">     281 </span>                :            :         }
+<span class="lineNum">     282 </span>                :<span class="lineCov">         83 :         linkPath.reverse();</span>
+<span class="lineNum">     283 </span>        [<span class="branchCov" title="Branch 0 was taken 73 times"> + </span><span class="branchCov" title="Branch 1 was taken 10 times"> + </span>]:<span class="lineCov">         83 :         return linkPath.length &gt; 0 ? linkPath.join(' &amp;#187; ') + ' &amp;#187; '</span>
+<span class="lineNum">     284 </span>                :            :             + node.displayShortName() : '';
+<a name="285"><span class="lineNum">     285 </span>                :            :     },</a>
+<span class="lineNum">     286 </span>                :            : 
+<span class="lineNum">     287 </span>                :            :     writeDetailPage: function (writer, node, linkMapper, templateData, fileCoverage, metrics) {
+<span class="lineNum">     288 </span>                :<span class="lineCov">         41 :         var opts = this.opts,</span>
+<span class="lineNum">     289 </span>                :            :             sourceStore = opts.sourceStore,
+<span class="lineNum">     290 </span>                :            :             sourceText = sourceStore.get(fileCoverage.path),
+<a name="291"><span class="lineNum">     291 </span>                :            :             code = sourceText.split(/\r?\n/),</a>
+<span class="lineNum">     292 </span>                :            :             count = 0,
+<span class="lineNum">     293 </span>                :<span class="lineCov">        453 :             structured = code.map(function (str) { count += 1; return { line: count, covered: null, text: new InsertionText(str, true) }; }),</span>
+<span class="lineNum">     294 </span>                :            :             lineNum = 0;
+<span class="lineNum">     295 </span>                :            : 
+<span class="lineNum">     296 </span>                :<span class="lineCov">         41 :         structured.unshift({ line: 0, covered: null, text: new InsertionText(&quot;&quot;) });</span>
+<span class="lineNum">     297 </span>                :            : 
+<span class="lineNum">     298 </span>                :<span class="lineCov">         41 :         templateData.metrics = metrics;</span>
+<span class="lineNum">     299 </span>                :<span class="lineCov">         41 :         templateData.reportClass = getReportClass(templateData.metrics.statements);</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">         41 :         templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });</span>
+<span class="lineNum">     301 </span>                :<span class="lineCov">         41 :         writer.write(headerTemplate(templateData));</span>
+<span class="lineNum">     302 </span>                :<span class="lineCov">         41 :         writer.write('&lt;pre&gt;&lt;table class=&quot;coverage&quot;&gt;\n');</span>
+<span class="lineNum">     303 </span>                :            : 
+<span class="lineNum">     304 </span>                :<span class="lineCov">         41 :         annotateLines(fileCoverage, structured);</span>
+<span class="lineNum">     305 </span>                :            :         //note: order is important, since statements typically result in spanning the whole line and doing branches late
+<span class="lineNum">     306 </span>                :            :         //causes mismatched tags
+<span class="lineNum">     307 </span>                :<span class="lineCov">         41 :         annotateBranches(fileCoverage, structured);</span>
+<span class="lineNum">     308 </span>                :<span class="lineCov">         41 :         annotateFunctions(fileCoverage, structured);</span>
+<span class="lineNum">     309 </span>                :<span class="lineCov">         41 :         annotateStatements(fileCoverage, structured);</span>
+<a name="310"><span class="lineNum">     310 </span>                :            : </a>
+<span class="lineNum">     311 </span>                :<span class="lineCov">         41 :         structured.shift();</span>
+<span class="lineNum">     312 </span>                :<span class="lineCov">         41 :         structured.forEach(function (item) {</span>
+<span class="lineNum">     313 </span>                :<span class="lineCov">        453 :             lineNum += 1;</span>
+<span class="lineNum">     314 </span>[<span class="branchCov" title="Branch 0 was taken 453 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 0 was taken 453 times"> + </span><span class="branchCov" title="Branch 1 was taken 341 times"> + </span>]:<span class="lineCov">        453 :             item.executionCount = fileCoverage.l ? fileCoverage.l[lineNum] || null : null;</span>
+<span class="lineNum">     315 </span>                :<span class="lineCov">        453 :             item.text = customEscape(item.text);</span>
+<span class="lineNum">     316 </span>                :<span class="lineCov">        453 :             writer.write(detailTemplate(item));</span>
+<span class="lineNum">     317 </span>                :            :         });
+<span class="lineNum">     318 </span>                :<span class="lineCov">         41 :         writer.write('&lt;/table&gt;&lt;/pre&gt;\n');</span>
+<span class="lineNum">     319 </span>                :<span class="lineCov">         41 :         writer.write(footerTemplate(templateData));</span>
+<a name="320"><span class="lineNum">     320 </span>                :            :     },</a>
+<span class="lineNum">     321 </span>                :            : 
+<span class="lineNum">     322 </span>                :            :     writeIndexPage: function (writer, node, linkMapper, templateData) {
+<a name="323"><span class="lineNum">     323 </span>                :<span class="lineCov">         42 :         var children = Array.prototype.slice.apply(node.children);</span></a>
+<span class="lineNum">     324 </span>                :            : 
+<span class="lineNum">     325 </span>                :<span class="lineCov">         42 :         children.sort(function (a, b) {</span>
+<span class="lineNum">     326 </span>        [<span class="branchCov" title="Branch 0 was taken 31 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         31 :             return a.name &lt; b.name ? -1 : 1;</span>
+<span class="lineNum">     327 </span>                :            :         });
+<span class="lineNum">     328 </span>                :            : 
+<span class="lineNum">     329 </span>                :<span class="lineCov">         42 :         templateData.metrics = node.metrics;</span>
+<span class="lineNum">     330 </span>                :<span class="lineCov">         42 :         templateData.reportClass = getReportClass(node.metrics.statements);</span>
+<span class="lineNum">     331 </span>                :<span class="lineCov">         42 :         templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });</span>
+<span class="lineNum">     332 </span>                :            : 
+<a name="333"><span class="lineNum">     333 </span>                :<span class="lineCov">         42 :         writer.write(headerTemplate(templateData));</span></a>
+<span class="lineNum">     334 </span>                :<span class="lineCov">         42 :         writer.write(summaryTableHeader);</span>
+<span class="lineNum">     335 </span>                :<span class="lineCov">         42 :         children.forEach(function (child) {</span>
+<span class="lineNum">     336 </span>                :<span class="lineCov">         73 :             var metrics = child.metrics,</span>
+<span class="lineNum">     337 </span>                :            :                 reportClasses = {
+<span class="lineNum">     338 </span>                :            :                     statements: getReportClass(metrics.statements),
+<span class="lineNum">     339 </span>                :            :                     lines: getReportClass(metrics.lines),
+<span class="lineNum">     340 </span>                :            :                     functions: getReportClass(metrics.functions),
+<span class="lineNum">     341 </span>                :            :                     branches: getReportClass(metrics.branches)
+<span class="lineNum">     342 </span>                :            :                 },
+<span class="lineNum">     343 </span>                :            :                 data = {
+<span class="lineNum">     344 </span>                :            :                     metrics: metrics,
+<span class="lineNum">     345 </span>                :            :                     reportClasses: reportClasses,
+<span class="lineNum">     346 </span>                :            :                     file: child.displayShortName(),
+<span class="lineNum">     347 </span>                :            :                     output: linkMapper.fromParent(child)
+<span class="lineNum">     348 </span>                :            :                 };
+<span class="lineNum">     349 </span>                :<span class="lineCov">         73 :             writer.write(summaryLineTemplate(data) + '\n');</span>
+<span class="lineNum">     350 </span>                :            :         });
+<span class="lineNum">     351 </span>                :<span class="lineCov">         42 :         writer.write(summaryTableFooter);</span>
+<span class="lineNum">     352 </span>                :<span class="lineCov">         42 :         writer.write(footerTemplate(templateData));</span>
+<a name="353"><span class="lineNum">     353 </span>                :            :     },</a>
+<span class="lineNum">     354 </span>                :            : 
+<span class="lineNum">     355 </span>                :            :     writeFiles: function (writer, node, dir, linkMapper, templateData, collector) {
+<span class="lineNum">     356 </span>                :<span class="lineCov">         42 :         var that = this,</span>
+<span class="lineNum">     357 </span>                :            :             indexFile = path.resolve(dir, 'index.html'),
+<span class="lineNum">     358 </span>                :            :             childFile;
+<span class="lineNum">     359 </span>                :<span class="lineCov">         42 :         mkdirp.sync(dir);</span>
+<a name="360"><span class="lineNum">     360 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchCov" title="Branch 1 was taken 10 times"> + </span>]:<span class="lineCov">         42 :         templateData.entity = node.name || 'All files';</span></a>
+<span class="lineNum">     361 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>]:<span class="lineCov">         42 :         if (this.opts.verbose) { console.error('Writing ' + indexFile); }</span>
+<span class="lineNum">     362 </span>                :<span class="lineCov">         42 :         writer.writeFile(indexFile, function () {</span>
+<a name="363"><span class="lineNum">     363 </span>                :<span class="lineCov">         42 :             that.writeIndexPage(writer, node, linkMapper, templateData);</span></a>
+<span class="lineNum">     364 </span>                :            :         });
+<span class="lineNum">     365 </span>                :<span class="lineCov">         42 :         node.children.forEach(function (child) {</span>
+<span class="lineNum">     366 </span>        [<span class="branchCov" title="Branch 0 was taken 32 times"> + </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         73 :             if (child.kind === 'dir') {</span>
+<span class="lineNum">     367 </span>                :<span class="lineCov">         32 :                 that.writeFiles(writer, child, path.resolve(dir, child.relativeName), linkMapper, templateData, collector);</span>
+<span class="lineNum">     368 </span>                :            :             } else {
+<span class="lineNum">     369 </span>                :<span class="lineCov">         41 :                 childFile = path.resolve(dir, child.relativeName + '.html');</span>
+<a name="370"><span class="lineNum">     370 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 37 times"> + </span>]:<span class="lineCov">         41 :                 if (that.opts.verbose) { console.error('Writing ' + childFile); }</span></a>
+<span class="lineNum">     371 </span>                :<span class="lineCov">         41 :                 templateData.entity = child.name;</span>
+<span class="lineNum">     372 </span>                :<span class="lineCov">         41 :                 writer.writeFile(childFile, function () {</span>
+<span class="lineNum">     373 </span>                :<span class="lineCov">         41 :                     that.writeDetailPage(writer, child, linkMapper, templateData, collector.fileCoverageFor(child.fullPath()), child.metrics);</span>
+<span class="lineNum">     374 </span>                :            :                 });
+<span class="lineNum">     375 </span>                :            :             }
+<span class="lineNum">     376 </span>                :            :         });
+<a name="377"><span class="lineNum">     377 </span>                :            :     },</a>
+<span class="lineNum">     378 </span>                :            : 
+<span class="lineNum">     379 </span>                :            :     writeReport: function (collector, sync) {
+<span class="lineNum">     380 </span>                :<span class="lineCov">         10 :         var opts = this.opts,</span>
+<span class="lineNum">     381 </span>                :            :             dir = opts.dir,
+<span class="lineNum">     382 </span>                :            :             dt = new Date().toString(),
+<a name="383"><span class="lineNum">     383 </span>                :            :             summarizer = new TreeSummarizer(),</a>
+<span class="lineNum">     384 </span>                :            :             linkMapper = {
+<span class="lineNum">     385 </span>                :            :                 fromParent: function (node) {
+<span class="lineNum">     386 </span>                :<span class="lineCov">         73 :                     var i = 0,</span>
+<span class="lineNum">     387 </span>                :            :                         relativeName = node.relativeName,
+<span class="lineNum">     388 </span>                :            :                         ch;
+<span class="lineNum">     389 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 73 times"> + </span>]:<span class="lineCov">         73 :                     if (SEP !== '/') {</span>
+<span class="lineNum">     390 </span>                :<span class="lineNoCov">          0 :                         relativeName = '';</span>
+<span class="lineNum">     391 </span>                :<span class="lineNoCov">          0 :                         for (i = 0; i &lt; node.relativeName.length; i += 1) {</span>
+<span class="lineNum">     392 </span>                :<span class="lineNoCov">          0 :                             ch = node.relativeName.charAt(i);</span>
+<span class="lineNum">     393 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineNoCov">          0 :                             if (ch === SEP) {</span>
+<span class="lineNum">     394 </span>                :<span class="lineNoCov">          0 :                                 relativeName += '/';</span>
+<span class="lineNum">     395 </span>                :            :                             } else {
+<span class="lineNum">     396 </span>                :<span class="lineNoCov">          0 :                                 relativeName += ch;</span>
+<span class="lineNum">     397 </span>                :            :                             }
+<span class="lineNum">     398 </span>                :            :                         }
+<span class="lineNum">     399 </span>                :            :                     }
+<a name="400"><span class="lineNum">     400 </span>        [<span class="branchCov" title="Branch 0 was taken 32 times"> + </span><span class="branchCov" title="Branch 1 was taken 41 times"> + </span>]:<span class="lineCov">         73 :                     return node.kind === 'dir' ? relativeName + 'index.html' : relativeName + '.html';</span></a>
+<span class="lineNum">     401 </span>                :            :                 },
+<span class="lineNum">     402 </span>                :            :                 ancestor: function (node, num) {
+<span class="lineNum">     403 </span>                :<span class="lineCov">        114 :                     var href = '',</span>
+<span class="lineNum">     404 </span>                :            :                         separated,
+<span class="lineNum">     405 </span>                :            :                         levels,
+<span class="lineNum">     406 </span>                :            :                         i,
+<span class="lineNum">     407 </span>                :            :                         j;
+<span class="lineNum">     408 </span>                :<span class="lineCov">        114 :                     for (i = 0; i &lt; num; i += 1) {</span>
+<span class="lineNum">     409 </span>                :<span class="lineCov">        155 :                         separated = node.relativeName.split(SEP);</span>
+<span class="lineNum">     410 </span>                :<span class="lineCov">        155 :                         levels = separated.length - 1;</span>
+<span class="lineNum">     411 </span>                :<span class="lineCov">        155 :                         for (j = 0; j &lt; levels; j += 1) {</span>
+<span class="lineNum">     412 </span>                :<span class="lineCov">         95 :                             href += '../';</span>
+<span class="lineNum">     413 </span>                :            :                         }
+<span class="lineNum">     414 </span>                :<span class="lineCov">        155 :                         node = node.parent;</span>
+<span class="lineNum">     415 </span>                :            :                     }
+<span class="lineNum">     416 </span>                :<span class="lineCov">        114 :                     return href + 'index.html';</span>
+<span class="lineNum">     417 </span>                :            :                 }
+<span class="lineNum">     418 </span>                :            :             },
+<span class="lineNum">     419 </span>                :            :             writer = new FileWriter(sync),
+<a name="420"><span class="lineNum">     420 </span>                :            :             tree;</a>
+<span class="lineNum">     421 </span>                :            : 
+<span class="lineNum">     422 </span>                :<span class="lineCov">         10 :         collector.files().forEach(function (key) {</span>
+<span class="lineNum">     423 </span>                :<span class="lineCov">         41 :             summarizer.addFileCoverageSummary(key, utils.summarizeFileCoverage(collector.fileCoverageFor(key)));</span>
+<span class="lineNum">     424 </span>                :            :         });
+<span class="lineNum">     425 </span>                :<span class="lineCov">         10 :         tree = summarizer.getTreeSummary();</span>
+<span class="lineNum">     426 </span>                :            :         //console.log(JSON.stringify(tree.root, undefined, 4));
+<span class="lineNum">     427 </span>                :<span class="lineCov">         10 :         this.writeFiles(writer, tree.root, dir, linkMapper, { datetime: dt }, collector);</span>
+<span class="lineNum">     428 </span>                :            :     }
+<span class="lineNum">     429 </span>                :            : });
+<span class="lineNum">     430 </span>                :            : 
+<span class="lineNum">     431 </span>                :<span class="lineCov">         39 : module.exports = HtmlReport;</span>
+<span class="lineNum">     432 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

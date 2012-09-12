@@ -1,0 +1,42 @@
+{
+    "name": "istanbul",
+    "version": "0.1.0",
+    "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
+    "keywords": "coverage,code coverage, JS code coverage, JS coverage",
+    "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
+    "contributors": [
+        "Reid Burke <me@reidburke.com>",
+        "Martin Cooper <mfncooper@gmail.com>"
+    ],
+    "preferGlobal": true,
+    "scripts": {
+        "test": "test/run.js",
+        "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
+    },
+    "bin": {
+        "istanbul": "./lib/cli.js"
+    },
+    "dependencies": {
+        "esprima": "0.9.x",
+        "escodegen": "0.0.x",
+        "handlebars": "1.0.x",
+        "mkdirp": "0.3.x",
+        "nopt": "2.0.x",
+        "fileset": "0.1.x",
+        "which": "1.0.x",
+        "async": "0.1.x",
+        "abbrev": "1.0.x",
+        "wordwrap": "0.0.x"
+    },
+    "devDependencies": {
+        "rimraf": "*",
+        "nodeunit": "*"
+    },
+    "TODO": [
+        "Turn project name into a link at the bottom of the HTML report when such a link is available",
+        "Need a legend for the HTML report + some explanation on how branch coverage is shown",
+        "add README.md file",
+        "figure out a controlled mechanism to suppress branch coverage when impossible-to-test branches are present in source"
+    ]
+}
+

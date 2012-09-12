@@ -1,0 +1,1172 @@
+{
+    "project": {
+        "name": "The Istanbul API",
+        "description": "The Istanbul API: a code coverage library"
+    },
+    "files": {
+        "lib/report/html.js": {
+            "name": "lib/report/html.js",
+            "modules": {},
+            "classes": {
+                "HtmlReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/index.js": {
+            "name": "lib/report/index.js",
+            "modules": {},
+            "classes": {
+                "Report": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/lcov.js": {
+            "name": "lib/report/lcov.js",
+            "modules": {},
+            "classes": {
+                "LcovReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/lcovonly.js": {
+            "name": "lib/report/lcovonly.js",
+            "modules": {},
+            "classes": {
+                "LcovOnlyReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/store/fslookup.js": {
+            "name": "lib/store/fslookup.js",
+            "modules": {},
+            "classes": {
+                "LookupStore": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/store/index.js": {
+            "name": "lib/store/index.js",
+            "modules": {},
+            "classes": {
+                "Store": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/store/memory.js": {
+            "name": "lib/store/memory.js",
+            "modules": {},
+            "classes": {
+                "MemoryStore": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/store/tmp.js": {
+            "name": "lib/store/tmp.js",
+            "modules": {},
+            "classes": {
+                "TmpStore": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/collector.js": {
+            "name": "lib/collector.js",
+            "modules": {},
+            "classes": {
+                "Collector": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/hook.js": {
+            "name": "lib/hook.js",
+            "modules": {},
+            "classes": {
+                "Hook": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/instrumenter.js": {
+            "name": "lib/instrumenter.js",
+            "modules": {},
+            "classes": {
+                "Instrumenter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/object-utils.js": {
+            "name": "lib/object-utils.js",
+            "modules": {},
+            "classes": {
+                "ObjectUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "index.js": {
+            "name": "index.js",
+            "modules": {
+                "istanbul": 1
+            },
+            "classes": {
+                "API": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "istanbul": {
+            "name": "istanbul",
+            "submodules": {},
+            "classes": {
+                "HtmlReport": 1,
+                "Report": 1,
+                "LcovReport": 1,
+                "LcovOnlyReport": 1,
+                "LookupStore": 1,
+                "Store": 1,
+                "MemoryStore": 1,
+                "TmpStore": 1,
+                "Collector": 1,
+                "Hook": 1,
+                "Instrumenter": 1,
+                "ObjectUtils": 1,
+                "API": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "index.js",
+            "line": 22,
+            "description": "provides access to the key libraries in istanbul so you can write\nyour own tools using `istanbul` as a library."
+        }
+    },
+    "classes": {
+        "HtmlReport": {
+            "name": "HtmlReport",
+            "shortname": "HtmlReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/html.js",
+            "line": 240,
+            "description": "a `Report` implementation that produces HTML coverage reports.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('html');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to generate reports. Defaults to `./html-report`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "Report": {
+            "name": "Report",
+            "shortname": "Report",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/index.js",
+            "line": 9,
+            "description": "abstract report class for producing coverage reports.\n\nUsage\n-----\n\n     var Report = require('istanbul').Report,\n         report = Report.create('html'),\n         collector = new require('istanbul').Collector;\n\n     collector.add(coverageObject);\n    report.writeReport(collector);",
+            "is_constructor": 1,
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Optional. The options supported by a specific store implementation.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "LcovReport": {
+            "name": "LcovReport",
+            "shortname": "LcovReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/lcov.js",
+            "line": 13,
+            "description": "a `Report` implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.\nThe name and behavior of this report is designed to ease migration for projects that currently use `yuitest_coverage`\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('lcov');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the `lcov.info` file. HTML files are written in a subdirectory called `lcov-report`. Defaults to `process.cwd()`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "LcovOnlyReport": {
+            "name": "LcovOnlyReport",
+            "shortname": "LcovOnlyReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/lcovonly.js",
+            "line": 14,
+            "description": "a `Report` implementation that produces an LCOV coverage file from coverage objects.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('lcovonly');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the `lcov.info` file. Defaults to `process.cwd()`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "LookupStore": {
+            "name": "LookupStore",
+            "shortname": "LookupStore",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/store/fslookup.js",
+            "line": 10,
+            "description": "a `Store` implementation that doesn't actually store anything. It assumes that keys\nare absolute file paths, and contents are contents of those files.\nThus, `set` for this store is no-op, `get` returns the\ncontents of the filename that the key represents, `hasKey` returns true if the key\nsupplied is a valid file path and `keys` always returns an empty array.\n\nUsage\n-----\n\n     var store = require('istanbul').Store.create('fslookup');",
+            "extends": "Store",
+            "is_constructor": 1
+        },
+        "Store": {
+            "name": "Store",
+            "shortname": "Store",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/store/index.js",
+            "line": 9,
+            "description": "An abstraction for keeping track of content against some keys (e.g.\noriginal source, instrumented source, coverage objects against file names).\nThis class is both the base class as well as a factory for `Store` implementations.\n\nUsage\n-----\n\n     var Store = require('istanbul').Store,\n         store = Store.create('memory');\n\n     //basic use\n     store.set('foo', 'foo-content');\n     var content = store.get('foo');\n\n     //keys and values\n     store.keys().forEach(function (key) {\n         console.log(key + ':\\n' + store.get(key);\n     });\n     if (store.hasKey('bar') { console.log(store.get('bar'); }\n\n\n     //syntactic sugar\n     store.setObject('foo', { foo: true });\n     console.log(store.getObject('foo').foo);\n\n     store.dispose();",
+            "is_constructor": 1,
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Optional. The options supported by a specific store implementation.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "MemoryStore": {
+            "name": "MemoryStore",
+            "shortname": "MemoryStore",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/store/memory.js",
+            "line": 9,
+            "description": "a `Store` implementation using an in-memory object.\n\nUsage\n-----\n\n     var store = require('istanbul').Store.create('memory');",
+            "extends": "Store",
+            "is_constructor": 1
+        },
+        "TmpStore": {
+            "name": "TmpStore",
+            "shortname": "TmpStore",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/store/tmp.js",
+            "line": 18,
+            "description": "a `Store` implementation using temporary files.\n\nUsage\n-----\n\n     var store = require('istanbul').Store.create('tmp');",
+            "extends": "Store",
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "Optional.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "tmp",
+                            "description": "a pre-existing directory to use as the `tmp` directory. When not specified, a random directory\n     is created under `os.tmpDir()`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "is_constructor": 1
+        },
+        "Collector": {
+            "name": "Collector",
+            "shortname": "Collector",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/collector.js",
+            "line": 9,
+            "description": "a mechanism to merge multiple coverage objects into one. Handles the use case\nof overlapping coverage information for the same files in multiple coverage\nobjects and does not double-count in this situation. For example, if\nyou pass the same coverage object multiple times, the final merged object will be\nno different that any of the objects passed in (except for execution counts).\n\nThe `Collector` is built for scale to handle thousands of coverage objects.\nBy default, all processing is done in memory since the common use-case is of\none or a few coverage objects. You can work around memory\nissues by passing in a `Store` implementation that stores temporary computations\non disk (the `tmp` store, for example).\n\nThe `getFinalCoverage` method returns an object with merged coverage information\nand is provided as a convenience for implementors working with coverage information\nthat can fit into memory. Reporters, in the interest of generality, should *not* use this method for\ncreating reports.\n\nUsage\n-----\n\n     var collector = new require('istanbul').Collector();\n\n     files.forEach(function (f) {\n         //each coverage object can have overlapping information about multiple files\n         collector.add(JSON.parse(fs.readFileSync(f, 'utf8')));\n     });\n\n     collector.files().forEach(function(file) {\n         var fileCoverage = collector.fileCoverageFor(file);\n         console.log('Coverage for ' + file + ' is:' + JSON.stringify(fileCoverage));\n     });\n\n     // convenience method: do not use this when dealing with a large number of files\n     var finalCoverage = collector.getFinalCoverage();",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Optional. Configuration options.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "store",
+                            "description": "- an implementation of `Store` to use for temporary\n     calculations.",
+                            "type": "Store"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Hook": {
+            "name": "Hook",
+            "shortname": "Hook",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/hook.js",
+            "line": 6,
+            "description": "provides a mechanism to transform code in the scope of `require` or `vm.createScript`.\nThis mechanism is general and relies on a user-supplied `matcher` function that determines when transformations should be\nperformed and a user-supplied `transformer` function that performs the actual transform.\nInstrumenting code for coverage is one specific example of useful hooking.\n\nNote that both the `matcher` and `transformer` must execute synchronously.\n\nFor the common case of matching filesystem paths based on inclusion/ exclusion patterns, use the `matcherFor`\nfunction in the istanbul API to get a matcher.\n\nIt is up to the transformer to perform processing with side-effects, such as caching, storing the original\nsource code to disk in case of dynamically generated scripts etc. The `Store` class can help you with this.\n\nUsage\n-----\n\n     var hook = require('istanbul').hook,\n         myMatcher = function (file) { return file.match(/foo/); },\n         myTransformer = function (code, file) { return 'console.log(\"' + file + '\");' + code; };\n\n     hook.hookRequire(myMatcher, myTransformer);\n\n     var foo = require('foo'); //will now print foo's module path to console"
+        },
+        "Instrumenter": {
+            "name": "Instrumenter",
+            "shortname": "Instrumenter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/instrumenter.js",
+            "line": 252,
+            "description": "mechanism to instrument code for coverage. It uses the `esprima` and\n`escodegen` libraries for JS parsing and code generation respectively.\n\nWorks on `node` as well as the browser.\n\nUsage on nodejs\n---------------\n\n     var instrumenter = new require('istanbul').Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nUsage in a browser\n------------------\n\nLoad `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.\n\nCreate an instrumenter object as:\n\n     var instrumenter = new Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nAside from demonstration purposes, it is unclear why you would want to instrument code in a browser.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Optional. Configuration options.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "coverageVariable",
+                            "description": "the global variable name to use for\n     tracking coverage. Defaults to `__coverage__`",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "embedSource",
+                            "description": "whether to embed the source code of every\n     file as an array in the file coverage object for that file. Defaults to `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "noCompact",
+                            "description": "emit readable code when set. Defaults to `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "noAutoWrap",
+                            "description": "do not automatically wrap the source in\n     an anonymous function before covering it. By default, code is wrapped in\n     an anonymous function before it is parsed. This is done because\n     some nodejs libraries have `return` statements outside of\n     a function which is technically invalid Javascript and causes the parser to fail.\n     This construct, however, works correctly in node since module loading\n     is done in the context of an anonymous function.\n\nNote that the semantics of the code *returned* by the instrumenter does not change in any way.\nThe function wrapper is \"unwrapped\" before the instrumented code is generated.",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "codeGenerationOptions",
+                            "description": "an object that is directly passed to the `escodegen`\n     library as configuration for code generation. The `noCompact` setting is not honored when this\n     option is specified",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
+                            "name": "debug",
+                            "description": "assist in debugging. Currently, the only effect of\n     setting this option is a pretty-print of the coverage variable. Defaults to `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "walkDebug",
+                            "description": "assist in debugging of the AST walker used by this class.",
+                            "type": "Boolean",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "ObjectUtils": {
+            "name": "ObjectUtils",
+            "shortname": "ObjectUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/object-utils.js",
+            "line": 6,
+            "description": "utility methods to process coverage objects. A coverage object has the following\nformat.\n\n     {\n         \"/path/to/file1.js\": { file1 coverage },\n         \"/path/to/file2.js\": { file2 coverage }\n     }\n\n The internals of the file coverage object are intentionally not documented since\n it is not a public interface.\n\n *Note:* When a method of this module has the word `File` in it, it will accept\n one of the sub-objects of the main coverage object as an argument. Other\n methods accept the higher level coverage object with multiple keys.\n\nUsage\n-----\n\n     var objectUtils = require('istanbul').utils;"
+        },
+        "API": {
+            "name": "API",
+            "shortname": "API",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "namespace": "",
+            "file": "index.js",
+            "line": 22,
+            "description": "the top-level API for `istanbul`.\n\nUsage\n-----\n\n     var istanbul = require('istanbul');"
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/report/index.js",
+            "line": 31,
+            "description": "registers a new report implementation.",
+            "itemtype": "method",
+            "name": "register",
+            "static": 1,
+            "params": [
+                {
+                    "name": "constructor",
+                    "description": "the constructor function for the report. This function must have a\n `TYPE` property of type String, that will be used in `Report.create()`",
+                    "type": "Function"
+                }
+            ],
+            "class": "Report"
+        },
+        {
+            "file": "lib/report/index.js",
+            "line": 38,
+            "description": "returns a report implementation of the specified type.",
+            "itemtype": "method",
+            "name": "create",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "the type of report to create",
+                    "type": "String"
+                },
+                {
+                    "name": "opts",
+                    "description": "Optional. Options specific to the report implementation",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "a new store of the specified type",
+                "type": "Report"
+            },
+            "class": "Report"
+        },
+        {
+            "file": "lib/report/index.js",
+            "line": 48,
+            "description": "writes the report for a set of coverage objects added to a collector.",
+            "itemtype": "method",
+            "name": "writeReport",
+            "params": [
+                {
+                    "name": "collector",
+                    "description": "the collector for getting the set of files and coverage",
+                    "type": "Collector"
+                },
+                {
+                    "name": "sync",
+                    "description": "true if reports must be written synchronously, false if they can be written using asynchronous means (e.g. stream.write)",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Report"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 47,
+            "description": "registers a new store implementation.",
+            "itemtype": "method",
+            "name": "register",
+            "static": 1,
+            "params": [
+                {
+                    "name": "constructor",
+                    "description": "the constructor function for the store. This function must have a\n `TYPE` property of type String, that will be used in `Store.create()`",
+                    "type": "Function"
+                }
+            ],
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 54,
+            "description": "returns a store implementation of the specified type.",
+            "itemtype": "method",
+            "name": "create",
+            "static": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "the type of store to create",
+                    "type": "String"
+                },
+                {
+                    "name": "opts",
+                    "description": "Optional. Options specific to the store implementation",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "a new store of the specified type",
+                "type": "Store"
+            },
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 64,
+            "description": "sets some content associated with a specific key. The manner in which\nduplicate keys are handled for multiple `set()` calls with the same\nkey is implementation-specific.",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key for the content",
+                    "type": "String"
+                },
+                {
+                    "name": "contents",
+                    "description": "the contents for the key",
+                    "type": "String"
+                }
+            ],
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 74,
+            "description": "returns the content associated to a specific key or throws if the key\nwas not `set`",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key for which to get the content",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the content for the specified key",
+                "type": "String"
+            },
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 82,
+            "description": "returns a list of all known keys",
+            "itemtype": "method",
+            "name": "keys",
+            "return": {
+                "description": "an array of seen keys",
+                "type": "Array"
+            },
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 88,
+            "description": "returns true if the key is one for which a `get()` call would work.",
+            "itemtype": "method",
+            "name": "hasKey",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the key is valid for this store, false otherwise"
+            },
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 95,
+            "description": "lifecycle method to dispose temporary resources associated with the store",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 100,
+            "description": "sugar method to return an object associated with a specific key. Throws\nif the content set against the key was not a valid JSON string.",
+            "itemtype": "method",
+            "name": "getObject",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key for which to return the associated object",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the object corresponding to the key",
+                "type": "Object"
+            },
+            "class": "Store"
+        },
+        {
+            "file": "lib/store/index.js",
+            "line": 110,
+            "description": "sugar method to set an object against a specific key.",
+            "itemtype": "method",
+            "name": "setObject",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key for the object",
+                    "type": "String"
+                },
+                {
+                    "name": "object",
+                    "description": "the object to be stored",
+                    "type": "Object"
+                }
+            ],
+            "class": "Store"
+        },
+        {
+            "file": "lib/collector.js",
+            "line": 57,
+            "description": "adds a coverage object to the collector.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "coverage",
+                    "description": "the coverage object.",
+                    "type": "Object"
+                },
+                {
+                    "name": "testName",
+                    "description": "Optional. The name of the test used to produce the object.\n     This is currently not used.",
+                    "type": "String"
+                }
+            ],
+            "class": "Collector"
+        },
+        {
+            "file": "lib/collector.js",
+            "line": 76,
+            "description": "returns a list of unique file paths for which coverage information has been added.",
+            "itemtype": "method",
+            "name": "files",
+            "return": {
+                "description": "an array of file paths for which coverage information is present.",
+                "type": "Array"
+            },
+            "class": "Collector"
+        },
+        {
+            "file": "lib/collector.js",
+            "line": 84,
+            "description": "return file coverage information for a single file",
+            "itemtype": "method",
+            "name": "fileCoverageFor",
+            "params": [
+                {
+                    "name": "fileName",
+                    "description": "the path for the file for which coverage information is\n     required. Must be one of the values returned in the `files()` method.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the coverage information for the specified file.",
+                "type": "Object"
+            },
+            "class": "Collector"
+        },
+        {
+            "file": "lib/collector.js",
+            "line": 96,
+            "description": "returns file coverage information for all files. This has the same format as\nany of the objects passed in to the `add` method. The number of keys in this\nobject will be a superset of all keys found in the objects passed to `add()`",
+            "itemtype": "method",
+            "name": "getFinalCoverage",
+            "return": {
+                "description": "the merged coverage information",
+                "type": "Object"
+            },
+            "class": "Collector"
+        },
+        {
+            "file": "lib/collector.js",
+            "line": 111,
+            "description": "disposes this collector and reclaims temporary resources used in the\ncomputation. Calls `dispose()` on the underlying store.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Collector"
+        },
+        {
+            "file": "lib/hook.js",
+            "line": 77,
+            "description": "hooks `require` to return transformed code to the node module loader.\nExceptions in the transform result in the original code being used instead.",
+            "itemtype": "method",
+            "name": "hookRequire",
+            "static": 1,
+            "params": [
+                {
+                    "name": "matcher",
+                    "description": "a function that is called with the absolute path to the file being\n `require`-d. Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise",
+                    "type": "Function(filePath)"
+                },
+                {
+                    "name": "transformer",
+                    "description": "a function called with the original code and the associated path of the file\n from where the code was loaded. Should return the transformed code.",
+                    "type": "Function(code, filePath)"
+                },
+                {
+                    "name": "options",
+                    "description": "options Optional.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "verbose",
+                            "description": "write a line to standard error every time the transformer is called",
+                            "type": "Boolean",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Hook"
+        },
+        {
+            "file": "lib/hook.js",
+            "line": 109,
+            "description": "unhook `require` to restore it to its original state. Also unloads the  modules in\nthe `require` cache that would have matched the matcher provide in the\n`hookRequire` method.",
+            "itemtype": "method",
+            "name": "unhookRequire",
+            "static": 1,
+            "class": "Hook"
+        },
+        {
+            "file": "lib/hook.js",
+            "line": 120,
+            "description": "hooks `vm.createScript` to return transformed code out of which a `Script` object will be created.\nExceptions in the transform result in the original code being used instead.",
+            "itemtype": "method",
+            "name": "hookCreateScript",
+            "static": 1,
+            "params": [
+                {
+                    "name": "matcher",
+                    "description": "a function that is called with the filename passed to `vm.createScript`\n Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise",
+                    "type": "Function(filePath)"
+                },
+                {
+                    "name": "transformer",
+                    "description": "a function called with the original code and the filename passed to\n `vm.createScript`. Should return the transformed code.",
+                    "type": "Function(code, filePath)"
+                },
+                {
+                    "name": "options",
+                    "description": "options Optional.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "verbose",
+                            "description": "write a line to standard error every time the transformer is called",
+                            "type": "Boolean",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Hook"
+        },
+        {
+            "file": "lib/hook.js",
+            "line": 141,
+            "description": "unhooks vm.createScript, restoring it to its original state.",
+            "itemtype": "method",
+            "name": "unhookCreateScript",
+            "static": 1,
+            "class": "Hook"
+        },
+        {
+            "file": "lib/instrumenter.js",
+            "line": 343,
+            "description": "synchronous instrumentation method. Throws when illegal code is passed to it",
+            "itemtype": "method",
+            "name": "instrumentSync",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "the code to be instrumented as a String",
+                    "type": "String"
+                },
+                {
+                    "name": "filename",
+                    "description": "Optional. The name of the file from which\n the code was read. A temporary filename is generated when not specified.\n Not specifying a filename is only useful for unit tests and demonstrations\n of this library.",
+                    "type": "String"
+                }
+            ],
+            "class": "Instrumenter"
+        },
+        {
+            "file": "lib/instrumenter.js",
+            "line": 389,
+            "description": "Callback based instrumentation. Note that this still executes synchronously in the same process tick\nand calls back immediately. It only provides the options for callback style error handling as\nopposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`",
+            "itemtype": "method",
+            "name": "instrument",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "the code to be instrumented as a String",
+                    "type": "String"
+                },
+                {
+                    "name": "filename",
+                    "description": "Optional. The name of the file from which\n the code was read. A temporary filename is generated when not specified.\n Not specifying a filename is only useful for unit tests and demonstrations\n of this library.",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "- the callback function",
+                    "type": "Function(err, instrumentedCode)"
+                }
+            ],
+            "class": "Instrumenter"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 30,
+            "description": "adds line coverage information to a file coverage object, reverse-engineering\nit from statement coverage. The object passed in is updated in place.\n\nNote that if line coverage information is already present in the object,\nit is not recomputed.",
+            "itemtype": "method",
+            "name": "addDerivedInfoForFile",
+            "static": 1,
+            "params": [
+                {
+                    "name": "fileCoverage",
+                    "description": "the coverage object for a single file",
+                    "type": "Object"
+                }
+            ],
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 58,
+            "description": "adds line coverage information to all file coverage objects.",
+            "itemtype": "method",
+            "name": "addDerivedInfo",
+            "static": 1,
+            "params": [
+                {
+                    "name": "coverage",
+                    "description": "the coverage object",
+                    "type": "Object"
+                }
+            ],
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 70,
+            "description": "removes line coverage information from all file coverage objects",
+            "itemtype": "method",
+            "name": "removeDerivedInfo",
+            "static": 1,
+            "params": [
+                {
+                    "name": "coverage",
+                    "description": "the coverage object",
+                    "type": "Object"
+                }
+            ],
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 119,
+            "description": "returns a blank summary metrics object. A metrics object has the following\nformat.\n\n     {\n         lines: lineMetrics,\n         statements: statementMetrics,\n         functions: functionMetrics,\n         branches: branchMetrics\n     }\n\n Each individual metric object looks as follows:\n\n     {\n         total: n,\n         covered: m,\n         pct: percent\n     }",
+            "itemtype": "method",
+            "name": "blankSummary",
+            "static": 1,
+            "return": {
+                "description": "a blank metrics object",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 166,
+            "description": "returns the summary metrics given the coverage object for a single file. See `blankSummary()`\nto understand the format of the returned object.",
+            "itemtype": "method",
+            "name": "summarizeFileCoverage",
+            "static": 1,
+            "params": [
+                {
+                    "name": "fileCoverage",
+                    "description": "the coverage object for a single file.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the summary metrics for the file",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 184,
+            "description": "merges two instances of file coverage objects *for the same file*\nsuch that the execution counts are correct.",
+            "itemtype": "method",
+            "name": "mergeFileCoverage",
+            "static": 1,
+            "params": [
+                {
+                    "name": "first",
+                    "description": "the first file coverage object for a given file",
+                    "type": "Object"
+                },
+                {
+                    "name": "second",
+                    "description": "the second file coverage object for the same file",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "an object that is a result of merging the two. Note that\n     the input objects are not changed in any way.",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 217,
+            "description": "merges multiple summary metrics objects by summing up the `totals` and\n`covered` fields and recomputing the percentages. This function is generic\nand can accept any number of arguments.",
+            "itemtype": "method",
+            "name": "mergeSummaryObjects",
+            "static": 1,
+            "params": [
+                {
+                    "name": "summary...",
+                    "description": "multiple summary metrics objects",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the merged summary metrics",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 249,
+            "description": "makes the coverage object generated by this library yuitest_coverage compatible.\nNote that this transformation is lossy since the returned object will not have\nstatement and branch coverage.",
+            "itemtype": "method",
+            "name": "toYUICoverage",
+            "static": 1,
+            "params": [
+                {
+                    "name": "coverage",
+                    "description": "The `istanbul` coverage object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "a coverage object in `yuitest_coverage` format.",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "index.js",
+            "line": 35,
+            "description": "the Instrumenter class.",
+            "itemtype": "property",
+            "name": "Instrumenter",
+            "type": "Instrumenter",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 41,
+            "description": "the Store class.",
+            "itemtype": "property",
+            "name": "Store",
+            "type": "Store",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 47,
+            "description": "the Collector class",
+            "itemtype": "property",
+            "name": "Collector",
+            "type": "Collector",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 53,
+            "description": "the hook module",
+            "itemtype": "property",
+            "name": "hook",
+            "type": "Hook",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 59,
+            "description": "the Report class",
+            "itemtype": "property",
+            "name": "Report",
+            "type": "Report",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 65,
+            "description": "utility for processing coverage objects",
+            "itemtype": "property",
+            "name": "utils",
+            "type": "ObjectUtils",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 71,
+            "description": "asynchronously returns a function that can match filesystem paths.\nThe function returned in the callback may be passed directly as a `matcher`\nto the functions in the `hook` module.\n\nWhen no options are passed, the match function is one that matches all JS\nfiles under the current working directory except ones under `node_modules`\n\nMatch patterns are `ant`-style patterns processed using the `fileset` library.\nExamples not provided due to limitations in putting asterisks inside\njsdoc comments. Please refer to tests under `test/other/test-matcher.js`\nfor examples.",
+            "itemtype": "method",
+            "name": "matcherFor",
+            "static": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Optional. Lookup options.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "root",
+                            "description": "the root of the filesystem tree under\n    which to match files. Defaults to `process.cwd()`",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "includes",
+                            "description": "an array of include patterns to match.\n    Defaults to all JS files under the root.",
+                            "type": "Array",
+                            "optional": true
+                        },
+                        {
+                            "name": "excludes",
+                            "description": "and array of exclude patterns. File paths\n    matching these patterns will be excluded by the returned matcher.\n    Defaults to files under `node_modules` found anywhere under root.",
+                            "type": "Array",
+                            "optional": true
+                        }
+                    ]
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback that is\n     called with two arguments. The first is an `Error` object in case\n     of errors or a falsy value if there were no errors. The second\n     is a function that may be use as a matcher.",
+                    "type": "Function(err, matchFunction)"
+                }
+            ],
+            "class": "API",
+            "module": "istanbul"
+        },
+        {
+            "file": "index.js",
+            "line": 100,
+            "description": "the version of the library",
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "String",
+            "static": 1,
+            "class": "API",
+            "module": "istanbul"
+        }
+    ]
+}

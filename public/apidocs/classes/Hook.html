@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hook - The Istanbul API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/API.html">API</a></li>
+            
+                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+            
+                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+            
+                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+            
+                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+            
+                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+            
+                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+            
+                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+            
+                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+            
+                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+            
+                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+            
+                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+            
+                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Hook Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;lib_hook.js.html#l6"><code>lib&#x2F;hook.js:6</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/istanbul.html">istanbul</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>provides a mechanism to transform code in the scope of <code>require</code> or <code>vm.createScript</code>.
+This mechanism is general and relies on a user-supplied <code>matcher</code> function that determines when transformations should be
+performed and a user-supplied <code>transformer</code> function that performs the actual transform.
+Instrumenting code for coverage is one specific example of useful hooking.</p>
+
+<p>Note that both the <code>matcher</code> and <code>transformer</code> must execute synchronously.</p>
+
+<p>For the common case of matching filesystem paths based on inclusion/ exclusion patterns, use the <code>matcherFor</code>
+function in the istanbul API to get a matcher.</p>
+
+<p>It is up to the transformer to perform processing with side-effects, such as caching, storing the original
+source code to disk in case of dynamically generated scripts etc. The <code>Store</code> class can help you with this.</p>
+
+<h2>Usage</h2>
+
+<pre class="code"><code class="prettyprint"> var hook = require('istanbul').hook,
+     myMatcher = function (file) { return file.match(/foo/); },
+     myTransformer = function (code, file) { return 'console.log("' + file + '");' + code; };
+
+ hook.hookRequire(myMatcher, myTransformer);
+
+ var foo = require('foo'); //will now print foo's module path to console
+</code></pre>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_hookCreateScript">hookCreateScript</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_hookRequire">hookRequire</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unhookCreateScript">unhookCreateScript</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unhookRequire">unhookRequire</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_hookCreateScript" class="method item">
+    <h3 class="name"><code>hookCreateScript</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>matcher</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>transformer</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l120"><code>lib&#x2F;hook.js:120</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>hooks <code>vm.createScript</code> to return transformed code out of which a <code>Script</code> object will be created.
+Exceptions in the transform result in the original code being used instead.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">matcher</code>
+                        <span class="type">Function(filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function that is called with the filename passed to <code>vm.createScript</code>
+ Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">transformer</code>
+                        <span class="type">Function(code, filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function called with the original code and the filename passed to
+ <code>vm.createScript</code>. Should return the transformed code.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>options Optional.</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[verbose]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>write a line to standard error every time the transformer is called</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hookRequire" class="method item">
+    <h3 class="name"><code>hookRequire</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>matcher</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>transformer</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l77"><code>lib&#x2F;hook.js:77</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>hooks <code>require</code> to return transformed code to the node module loader.
+Exceptions in the transform result in the original code being used instead.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">matcher</code>
+                        <span class="type">Function(filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function that is called with the absolute path to the file being
+ <code>require</code>-d. Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">transformer</code>
+                        <span class="type">Function(code, filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function called with the original code and the associated path of the file
+ from where the code was loaded. Should return the transformed code.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>options Optional.</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[verbose]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>write a line to standard error every time the transformer is called</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_unhookCreateScript" class="method item">
+    <h3 class="name"><code>unhookCreateScript</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l141"><code>lib&#x2F;hook.js:141</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>unhooks vm.createScript, restoring it to its original state.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_unhookRequire" class="method item">
+    <h3 class="name"><code>unhookRequire</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l109"><code>lib&#x2F;hook.js:109</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>unhook <code>require</code> to restore it to its original state. Also unloads the  modules in
+the <code>require</code> cache that would have matched the matcher provide in the
+<code>hookRequire</code> method.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

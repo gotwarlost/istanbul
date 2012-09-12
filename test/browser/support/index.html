@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Instrumentation test on the browser</title>
+<script src='/_esprima.js'></script>
+<script src='/_escodegen.js'></script>
+<script src='/_instrumenter.js'></script>
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<style type="text/css">
+    body { font-family: verdana; font-size: 10pt; margin: 2em; }
+    h1 { font-family: arial; font-size: 12pt; }
+    pre, textarea { font-family: consolas, monaco, monospace; font-size: 14px; }
+    pre { padding: 1em; background: #eee; border: 1px solid #ccc;}
+    pre.error { background: #fc8c84; }
+</style>
+</head>
+<body>
+{{#if demo}}
+    <h1>Instrumentation tests</h1>
+    <form>
+        <input type='checkbox' id="debug" > Pretty printed coverage object
+        <input type='checkbox' id="compact"> Compact code
+        <br>
+        <textarea id="code" rows='10' cols='80'>function meaningOfLife() {
+  return 42;
+}
+        </textarea>
+        <br>
+        <input type='submit' value='Instrument!'>
+    </form>
+    <pre id="instrumented"></pre>
+{{/if}}
+</body>
+<script>window.demoMode = '{{demo}}' === 'yes';</script>
+<script>
+    YUI().use('io-base', 'node', function (Y) {
+
+        var files,
+            testInstrumenter = new Instrumenter({ backdoor: { omitTrackerSuffix: true } }),
+            instrumented;
+
+        function done() {
+            var coverage = window.__coverage__ || {};
+            postResults('/', JSON.stringify(coverage), function (err, data) {
+                console.log('Server returned: ' + data);
+                document.done = true;
+            });
+        }
+
+        function getCode(file, callback) {
+            var cfg = {
+                method: 'GET',
+                on: {
+                    success: function (id, response) {
+                        callback(null, response.responseText);
+                    },
+                    failure: function (id, response) {
+                        callback('Failed GET: ' + response.status);
+                    }
+                }
+            };
+            Y.io('/' + file, cfg);
+        }
+
+        function postResults(url, data, callback) {
+            var cfg = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/octet-stream'
+                },
+                data: data,
+                on: {
+                    success: function (id, response) {
+                        callback(null, response.responseText);
+                    },
+                    failure: function (id, response) {
+                        callback('Failed POST: ' + response.status);
+                    }
+                }
+            };
+            Y.io(url, cfg);
+        }
+
+        function instrument(file, callback) {
+            getCode(file, function (err, code) {
+                if (err) {
+                    console.log('Error getting code for: ' + file);
+                    return callback(err);
+                }
+                try {
+                    instrumented = testInstrumenter.instrumentSync(code, file);
+                } catch (ex) {
+                    console.log('Error instrumenting: ' + file);
+                    instrumented = code;
+                }
+                postResults('/' + file, instrumented, function (err, data) {
+                    console.log('Server returned: ' + data);
+                    callback(err, data);
+                });
+            });
+        }
+
+        function instrumentNext(err) {
+            if (err) {
+                console.log(err.message || err);
+            }
+            if (files.length === 0) {
+                return done();
+            }
+            var file = files.pop();
+            Y.log('Instrumenting: ' + file);
+            instrument(file, instrumentNext);
+        }
+
+        function runTests(testFiles) {
+            console.log(testFiles.length + ' tests(s) required');
+            files = testFiles;
+            instrumentNext();
+        }
+
+        if (window.demoMode) {
+            Y.on('domready', function () {
+                Y.one('form').on('submit', function (e) {
+                    e.halt();
+                    var instrumenter = new Instrumenter({
+                        debug: !!Y.one('#debug').get('checked'),
+                        noAutoWrap: true,
+                        codeGenerationOptions: {
+                            format: {
+                                compact: !!Y.one('#compact').get('checked')
+                            }
+                        }
+                    });
+                    Y.one('#instrumented').removeClass('error');
+                    Y.one('#instrumented').set('innerHTML', '');
+                    try {
+                        var instrumented = instrumenter.instrumentSync(Y.one('#code').get('value'));
+                        Y.one('#instrumented').set('innerHTML', instrumented);
+                    } catch (ex) {
+                        Y.one('#instrumented').addClass('error');
+                        Y.one('#instrumented').set('innerHTML', ex.message || ex);
+                    }
+                });
+            });
+        }
+        else {
+            Y.log('YUI loaded; expose runTests function');
+            document.runTests = runTests;
+        }
+    });
+</script>
+</html>

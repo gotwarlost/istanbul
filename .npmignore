@@ -1,0 +1,10 @@
+.npmignore
+.gitignore
+.travis.yml
+*.tar
+*.tgz
+*.md
+misc/
+build/
+public/
+yuidoc.json

@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/object-utils.js</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">lib</a> - object-utils.js<span style="font-size: 80%;"> (source / <a href="object-utils.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">89</td>
+            <td class="headerCovTableEntry">89</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-09-11</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :            : /**
+<span class="lineNum">       7 </span>                :            :  * utility methods to process coverage objects. A coverage object has the following
+<span class="lineNum">       8 </span>                :            :  * format.
+<span class="lineNum">       9 </span>                :            :  *
+<span class="lineNum">      10 </span>                :            :  *      {
+<span class="lineNum">      11 </span>                :            :  *          &quot;/path/to/file1.js&quot;: { file1 coverage },
+<span class="lineNum">      12 </span>                :            :  *          &quot;/path/to/file2.js&quot;: { file2 coverage }
+<span class="lineNum">      13 </span>                :            :  *      }
+<span class="lineNum">      14 </span>                :            :  *
+<span class="lineNum">      15 </span>                :            :  *  The internals of the file coverage object are intentionally not documented since
+<span class="lineNum">      16 </span>                :            :  *  it is not a public interface.
+<span class="lineNum">      17 </span>                :            :  *
+<span class="lineNum">      18 </span>                :            :  *  *Note:* When a method of this module has the word `File` in it, it will accept
+<span class="lineNum">      19 </span>                :            :  *  one of the sub-objects of the main coverage object as an argument. Other
+<span class="lineNum">      20 </span>                :            :  *  methods accept the higher level coverage object with multiple keys.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * Usage
+<span class="lineNum">      23 </span>                :            :  * -----
+<span class="lineNum">      24 </span>                :            :  *
+<span class="lineNum">      25 </span>                :            :  *      var objectUtils = require('istanbul').utils;
+<span class="lineNum">      26 </span>                :            :  *
+<span class="lineNum">      27 </span>                :            :  * @class ObjectUtils
+<span class="lineNum">      28 </span>                :            :  */
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : /**
+<span class="lineNum">      31 </span>                :            :  * adds line coverage information to a file coverage object, reverse-engineering
+<span class="lineNum">      32 </span>                :            :  * it from statement coverage. The object passed in is updated in place.
+<span class="lineNum">      33 </span>                :            :  *
+<span class="lineNum">      34 </span>                :            :  * Note that if line coverage information is already present in the object,
+<span class="lineNum">      35 </span>                :            :  * it is not recomputed.
+<span class="lineNum">      36 </span>                :            :  *
+<span class="lineNum">      37 </span>                :            :  * @method addDerivedInfoForFile
+<span class="lineNum">      38 </span>                :            :  * @static
+<a name="39"><span class="lineNum">      39 </span>                :            :  * @param {Object} fileCoverage the coverage object for a single file</a>
+<span class="lineNum">      40 </span>                :            :  */
+<span class="lineNum">      41 </span>                :<span class="lineCov">         39 : function addDerivedInfoForFile(fileCoverage) {</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">        289 :     var statementMap = fileCoverage.statementMap,</span>
+<span class="lineNum">      43 </span>                :            :         statements = fileCoverage.s,
+<span class="lineNum">      44 </span>                :            :         lineMap;
+<span class="lineNum">      45 </span>                :            : 
+<a name="46"><span class="lineNum">      46 </span>        [<span class="branchCov" title="Branch 0 was taken 246 times"> + </span><span class="branchCov" title="Branch 1 was taken 43 times"> + </span>]:<span class="lineCov">        289 :     if (!fileCoverage.l) {</span></a>
+<span class="lineNum">      47 </span>                :<span class="lineCov">        246 :         fileCoverage.l = lineMap = {};</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">        246 :         Object.keys(statements).forEach(function (st) {</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">        999 :             var line = statementMap[st].start.line,</span>
+<span class="lineNum">      50 </span>                :            :                 count = statements[st],
+<span class="lineNum">      51 </span>                :            :                 prevVal = lineMap[line];
+<span class="lineNum">      52 </span>[<span class="branchCov" title="Branch 0 was taken 871 times"> + </span><span class="branchCov" title="Branch 1 was taken 128 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 999 times"> + </span><span class="branchCov" title="Branch 1 was taken 161 times"> + </span>]:<span class="lineCov">        999 :             if (typeof prevVal === 'undefined' || prevVal &lt; count) {</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">        871 :                 lineMap[line] = count;</span>
+<span class="lineNum">      54 </span>                :            :             }
+<span class="lineNum">      55 </span>                :            :         });
+<span class="lineNum">      56 </span>                :            :     }
+<span class="lineNum">      57 </span>                :            : }
+<span class="lineNum">      58 </span>                :            : /**
+<span class="lineNum">      59 </span>                :            :  * adds line coverage information to all file coverage objects.
+<span class="lineNum">      60 </span>                :            :  *
+<span class="lineNum">      61 </span>                :            :  * @method addDerivedInfo
+<span class="lineNum">      62 </span>                :            :  * @static
+<a name="63"><span class="lineNum">      63 </span>                :            :  * @param {Object} coverage the coverage object</a>
+<a name="64"><span class="lineNum">      64 </span>                :            :  */</a>
+<span class="lineNum">      65 </span>                :<span class="lineCov">         39 : function addDerivedInfo(coverage) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">        109 :     Object.keys(coverage).forEach(function (k) {</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">        111 :         addDerivedInfoForFile(coverage[k]);</span>
+<span class="lineNum">      68 </span>                :            :     });
+<span class="lineNum">      69 </span>                :            : }
+<span class="lineNum">      70 </span>                :            : /**
+<span class="lineNum">      71 </span>                :            :  * removes line coverage information from all file coverage objects
+<span class="lineNum">      72 </span>                :            :  * @method removeDerivedInfo
+<span class="lineNum">      73 </span>                :            :  * @static
+<a name="74"><span class="lineNum">      74 </span>                :            :  * @param {Object} coverage the coverage object</a>
+<a name="75"><span class="lineNum">      75 </span>                :            :  */</a>
+<span class="lineNum">      76 </span>                :<span class="lineCov">         39 : function removeDerivedInfo(coverage) {</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">          1 :     Object.keys(coverage).forEach(function (k) {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">          1 :         delete coverage[k].l;</span>
+<span class="lineNum">      79 </span>                :            :     });
+<a name="80"><span class="lineNum">      80 </span>                :            : }</a>
+<span class="lineNum">      81 </span>                :            : 
+<span class="lineNum">      82 </span>                :<span class="lineCov">         39 : function percent(covered, total) {</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">        456 :     var tmp;</span>
+<span class="lineNum">      84 </span>        [<span class="branchCov" title="Branch 0 was taken 429 times"> + </span><span class="branchCov" title="Branch 1 was taken 27 times"> + </span>]:<span class="lineCov">        456 :     if (total &gt; 0) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">        429 :         tmp = 1000 * 100 * covered / total + 5;</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">        429 :         return Math.floor(tmp / 10) / 100;</span>
+<span class="lineNum">      87 </span>                :            :     } else {
+<span class="lineNum">      88 </span>                :<span class="lineCov">         27 :         return 100.00;</span>
+<span class="lineNum">      89 </span>                :            :     }
+<a name="90"><span class="lineNum">      90 </span>                :            : }</a>
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :<span class="lineCov">         39 : function computeSimpleTotals(fileCoverage, property) {</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        141 :     var stats = fileCoverage[property],</span>
+<a name="94"><span class="lineNum">      94 </span>                :            :         ret = { total: 0, covered: 0 };</a>
+<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      96 </span>                :<span class="lineCov">        141 :     Object.keys(stats).forEach(function (key) {</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">        425 :         ret.total += 1;</span>
+<span class="lineNum">      98 </span>        [<span class="branchCov" title="Branch 0 was taken 302 times"> + </span><span class="branchCov" title="Branch 1 was taken 123 times"> + </span>]:<span class="lineCov">        425 :         if (stats[key]) {</span>
+<span class="lineNum">      99 </span>                :<span class="lineCov">        302 :             ret.covered += 1;</span>
+<span class="lineNum">     100 </span>                :            :         }
+<span class="lineNum">     101 </span>                :            :     });
+<span class="lineNum">     102 </span>                :<span class="lineCov">        141 :     ret.pct = percent(ret.covered, ret.total);</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">        141 :     return ret;</span>
+<a name="104"><span class="lineNum">     104 </span>                :            : }</a>
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :<span class="lineCov">         39 : function computeBranchTotals(fileCoverage) {</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">         47 :     var stats = fileCoverage.b,</span>
+<a name="108"><span class="lineNum">     108 </span>                :            :         ret = { total: 0, covered: 0 };</a>
+<span class="lineNum">     109 </span>                :            : 
+<a name="110"><span class="lineNum">     110 </span>                :<span class="lineCov">         47 :     Object.keys(stats).forEach(function (key) {</span></a>
+<span class="lineNum">     111 </span>                :<span class="lineCov">         42 :         var branches = stats[key],</span>
+<span class="lineNum">     112 </span>                :<span class="lineCov">         89 :             covered = branches.filter(function (num) { return num &gt; 0; });</span>
+<span class="lineNum">     113 </span>                :<span class="lineCov">         42 :         ret.total += branches.length;</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">         42 :         ret.covered += covered.length;</span>
+<span class="lineNum">     115 </span>                :            :     });
+<span class="lineNum">     116 </span>                :<span class="lineCov">         47 :     ret.pct = percent(ret.covered, ret.total);</span>
+<span class="lineNum">     117 </span>                :<span class="lineCov">         47 :     return ret;</span>
+<span class="lineNum">     118 </span>                :            : }
+<span class="lineNum">     119 </span>                :            : /**
+<span class="lineNum">     120 </span>                :            :  * returns a blank summary metrics object. A metrics object has the following
+<span class="lineNum">     121 </span>                :            :  * format.
+<span class="lineNum">     122 </span>                :            :  *
+<span class="lineNum">     123 </span>                :            :  *      {
+<span class="lineNum">     124 </span>                :            :  *          lines: lineMetrics,
+<span class="lineNum">     125 </span>                :            :  *          statements: statementMetrics,
+<span class="lineNum">     126 </span>                :            :  *          functions: functionMetrics,
+<span class="lineNum">     127 </span>                :            :  *          branches: branchMetrics
+<span class="lineNum">     128 </span>                :            :  *      }
+<span class="lineNum">     129 </span>                :            :  *
+<span class="lineNum">     130 </span>                :            :  *  Each individual metric object looks as follows:
+<span class="lineNum">     131 </span>                :            :  *
+<span class="lineNum">     132 </span>                :            :  *      {
+<span class="lineNum">     133 </span>                :            :  *          total: n,
+<span class="lineNum">     134 </span>                :            :  *          covered: m,
+<span class="lineNum">     135 </span>                :            :  *          pct: percent
+<span class="lineNum">     136 </span>                :            :  *      }
+<span class="lineNum">     137 </span>                :            :  *
+<span class="lineNum">     138 </span>                :            :  * @method blankSummary
+<span class="lineNum">     139 </span>                :            :  * @static
+<a name="140"><span class="lineNum">     140 </span>                :            :  * @return {Object} a blank metrics object</a>
+<span class="lineNum">     141 </span>                :            :  */
+<span class="lineNum">     142 </span>                :<span class="lineCov">         39 : function blankSummary() {</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">        115 :     return {</span>
+<span class="lineNum">     144 </span>                :            :         lines: {
+<span class="lineNum">     145 </span>                :            :             total: 0,
+<span class="lineNum">     146 </span>                :            :             covered: 0,
+<span class="lineNum">     147 </span>                :            :             pct: 'Unknown'
+<span class="lineNum">     148 </span>                :            :         },
+<span class="lineNum">     149 </span>                :            :         statements: {
+<span class="lineNum">     150 </span>                :            :             total: 0,
+<span class="lineNum">     151 </span>                :            :             covered: 0,
+<span class="lineNum">     152 </span>                :            :             pct: 'Unknown'
+<span class="lineNum">     153 </span>                :            :         },
+<span class="lineNum">     154 </span>                :            :         functions: {
+<span class="lineNum">     155 </span>                :            :             total: 0,
+<span class="lineNum">     156 </span>                :            :             covered: 0,
+<span class="lineNum">     157 </span>                :            :             pct: 'Unknown'
+<span class="lineNum">     158 </span>                :            :         },
+<span class="lineNum">     159 </span>                :            :         branches: {
+<span class="lineNum">     160 </span>                :            :             total: 0,
+<span class="lineNum">     161 </span>                :            :             covered: 0,
+<span class="lineNum">     162 </span>                :            :             pct: 'Unknown'
+<span class="lineNum">     163 </span>                :            :         }
+<span class="lineNum">     164 </span>                :            :     };
+<span class="lineNum">     165 </span>                :            : }
+<span class="lineNum">     166 </span>                :            : /**
+<span class="lineNum">     167 </span>                :            :  * returns the summary metrics given the coverage object for a single file. See `blankSummary()`
+<span class="lineNum">     168 </span>                :            :  * to understand the format of the returned object.
+<span class="lineNum">     169 </span>                :            :  *
+<span class="lineNum">     170 </span>                :            :  * @method summarizeFileCoverage
+<span class="lineNum">     171 </span>                :            :  * @static
+<span class="lineNum">     172 </span>                :            :  * @param {Object} fileCoverage the coverage object for a single file.
+<a name="173"><span class="lineNum">     173 </span>                :            :  * @return {Object} the summary metrics for the file</a>
+<span class="lineNum">     174 </span>                :            :  */
+<span class="lineNum">     175 </span>                :<span class="lineCov">         39 : function summarizeFileCoverage(fileCoverage) {</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">         47 :     var ret = blankSummary();</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">         47 :     addDerivedInfoForFile(fileCoverage);</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">         47 :     ret.lines = computeSimpleTotals(fileCoverage, 'l');</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">         47 :     ret.functions = computeSimpleTotals(fileCoverage, 'f');</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">         47 :     ret.statements = computeSimpleTotals(fileCoverage, 's');</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">         47 :     ret.branches = computeBranchTotals(fileCoverage);</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">         47 :     return ret;</span>
+<span class="lineNum">     183 </span>                :            : }
+<span class="lineNum">     184 </span>                :            : /**
+<span class="lineNum">     185 </span>                :            :  * merges two instances of file coverage objects *for the same file*
+<span class="lineNum">     186 </span>                :            :  * such that the execution counts are correct.
+<span class="lineNum">     187 </span>                :            :  *
+<span class="lineNum">     188 </span>                :            :  * @method mergeFileCoverage
+<span class="lineNum">     189 </span>                :            :  * @static
+<span class="lineNum">     190 </span>                :            :  * @param {Object} first the first file coverage object for a given file
+<span class="lineNum">     191 </span>                :            :  * @param {Object} second the second file coverage object for the same file
+<span class="lineNum">     192 </span>                :            :  * @return {Object} an object that is a result of merging the two. Note that
+<a name="193"><span class="lineNum">     193 </span>                :            :  *      the input objects are not changed in any way.</a>
+<span class="lineNum">     194 </span>                :            :  */
+<span class="lineNum">     195 </span>                :<span class="lineCov">         39 : function mergeFileCoverage(first, second) {</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">          3 :     var ret = JSON.parse(JSON.stringify(first)),</span>
+<span class="lineNum">     197 </span>                :            :         i;
+<span class="lineNum">     198 </span>                :            : 
+<a name="199"><span class="lineNum">     199 </span>                :<span class="lineCov">          3 :     delete ret.l; //remove derived info</span></a>
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>                :<span class="lineCov">          3 :     Object.keys(second.s).forEach(function (k) {</span>
+<a name="202"><span class="lineNum">     202 </span>                :<span class="lineCov">         11 :         ret.s[k] += second.s[k];</span></a>
+<span class="lineNum">     203 </span>                :            :     });
+<span class="lineNum">     204 </span>                :<span class="lineCov">          3 :     Object.keys(second.f).forEach(function (k) {</span>
+<a name="205"><span class="lineNum">     205 </span>                :<span class="lineCov">          8 :         ret.f[k] += second.f[k];</span></a>
+<span class="lineNum">     206 </span>                :            :     });
+<span class="lineNum">     207 </span>                :<span class="lineCov">          3 :     Object.keys(second.b).forEach(function (k) {</span>
+<span class="lineNum">     208 </span>                :<span class="lineCov">          8 :         var retArray = ret.b[k],</span>
+<span class="lineNum">     209 </span>                :            :             secondArray = second.b[k];
+<span class="lineNum">     210 </span>                :<span class="lineCov">          8 :         for (i = 0; i &lt; retArray.length; i += 1) {</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">         17 :             retArray[i] += secondArray[i];</span>
+<span class="lineNum">     212 </span>                :            :         }
+<span class="lineNum">     213 </span>                :            :     });
+<span class="lineNum">     214 </span>                :            : 
+<span class="lineNum">     215 </span>                :<span class="lineCov">          3 :     return ret;</span>
+<span class="lineNum">     216 </span>                :            : }
+<span class="lineNum">     217 </span>                :            : /**
+<span class="lineNum">     218 </span>                :            :  * merges multiple summary metrics objects by summing up the `totals` and
+<span class="lineNum">     219 </span>                :            :  * `covered` fields and recomputing the percentages. This function is generic
+<span class="lineNum">     220 </span>                :            :  * and can accept any number of arguments.
+<span class="lineNum">     221 </span>                :            :  *
+<span class="lineNum">     222 </span>                :            :  * @method mergeSummaryObjects
+<span class="lineNum">     223 </span>                :            :  * @static
+<span class="lineNum">     224 </span>                :            :  * @param {Object} summary... multiple summary metrics objects
+<a name="225"><span class="lineNum">     225 </span>                :            :  * @return {Object} the merged summary metrics</a>
+<span class="lineNum">     226 </span>                :            :  */
+<span class="lineNum">     227 </span>                :<span class="lineCov">         39 : function mergeSummaryObjects() {</span>
+<span class="lineNum">     228 </span>                :<span class="lineCov">         67 :     var ret = blankSummary(),</span>
+<a name="229"><span class="lineNum">     229 </span>                :            :         args = Array.prototype.slice.call(arguments),</a>
+<span class="lineNum">     230 </span>                :            :         keys = ['lines', 'statements', 'branches', 'functions'],
+<a name="231"><span class="lineNum">     231 </span>                :            :         increment = function (obj) {</a>
+<span class="lineNum">     232 </span>        [<span class="branchCov" title="Branch 0 was taken 112 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        114 :             if (obj) {</span>
+<span class="lineNum">     233 </span>                :<span class="lineCov">        112 :                 keys.forEach(function (key) {</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">        448 :                     ret[key].total += obj[key].total;</span>
+<span class="lineNum">     235 </span>                :<span class="lineCov">        448 :                     ret[key].covered += obj[key].covered;</span>
+<span class="lineNum">     236 </span>                :            :                 });
+<a name="237"><span class="lineNum">     237 </span>                :            :             }</a>
+<span class="lineNum">     238 </span>                :            :         };
+<span class="lineNum">     239 </span>                :<span class="lineCov">         67 :     args.forEach(function (arg) {</span>
+<a name="240"><span class="lineNum">     240 </span>                :<span class="lineCov">        114 :         increment(arg);</span></a>
+<span class="lineNum">     241 </span>                :            :     });
+<span class="lineNum">     242 </span>                :<span class="lineCov">         67 :     keys.forEach(function (key) {</span>
+<span class="lineNum">     243 </span>                :<span class="lineCov">        268 :         ret[key].pct = percent(ret[key].covered, ret[key].total);</span>
+<span class="lineNum">     244 </span>                :            :     });
+<span class="lineNum">     245 </span>                :            : 
+<span class="lineNum">     246 </span>                :<span class="lineCov">         67 :     return ret;</span>
+<span class="lineNum">     247 </span>                :            : }
+<span class="lineNum">     248 </span>                :            : 
+<span class="lineNum">     249 </span>                :            : /**
+<span class="lineNum">     250 </span>                :            :  * makes the coverage object generated by this library yuitest_coverage compatible.
+<span class="lineNum">     251 </span>                :            :  * Note that this transformation is lossy since the returned object will not have
+<span class="lineNum">     252 </span>                :            :  * statement and branch coverage.
+<span class="lineNum">     253 </span>                :            :  *
+<span class="lineNum">     254 </span>                :            :  * @method toYUICoverage
+<span class="lineNum">     255 </span>                :            :  * @static
+<span class="lineNum">     256 </span>                :            :  * @param {Object} coverage The `istanbul` coverage object
+<a name="257"><span class="lineNum">     257 </span>                :            :  * @return {Object} a coverage object in `yuitest_coverage` format.</a>
+<span class="lineNum">     258 </span>                :            :  */
+<span class="lineNum">     259 </span>                :<span class="lineCov">         39 : function toYUICoverage(coverage) {</span>
+<span class="lineNum">     260 </span>                :<span class="lineCov">          1 :     var ret = {};</span>
+<span class="lineNum">     261 </span>                :            : 
+<a name="262"><span class="lineNum">     262 </span>                :<span class="lineCov">          1 :     addDerivedInfo(coverage);</span></a>
+<span class="lineNum">     263 </span>                :            : 
+<span class="lineNum">     264 </span>                :<span class="lineCov">          1 :     Object.keys(coverage).forEach(function (k) {</span>
+<span class="lineNum">     265 </span>                :<span class="lineCov">          1 :         var fileCoverage = coverage[k],</span>
+<span class="lineNum">     266 </span>                :            :             lines = fileCoverage.l,
+<span class="lineNum">     267 </span>                :            :             functions = fileCoverage.f,
+<span class="lineNum">     268 </span>                :            :             fnMap = fileCoverage.fnMap,
+<span class="lineNum">     269 </span>                :            :             o;
+<span class="lineNum">     270 </span>                :            : 
+<span class="lineNum">     271 </span>                :<span class="lineCov">          1 :         o = ret[k] = {</span>
+<span class="lineNum">     272 </span>                :            :             lines: {},
+<span class="lineNum">     273 </span>                :            :             calledLines: 0,
+<span class="lineNum">     274 </span>                :            :             coveredLines: 0,
+<span class="lineNum">     275 </span>                :            :             functions: {},
+<span class="lineNum">     276 </span>                :            :             calledFunctions: 0,
+<a name="277"><span class="lineNum">     277 </span>                :            :             coveredFunctions: 0</a>
+<span class="lineNum">     278 </span>                :            :         };
+<span class="lineNum">     279 </span>                :<span class="lineCov">          1 :         Object.keys(lines).forEach(function (k) {</span>
+<span class="lineNum">     280 </span>                :<span class="lineCov">          4 :             o.lines[k] = lines[k];</span>
+<span class="lineNum">     281 </span>                :<span class="lineCov">          4 :             o.coveredLines += 1;</span>
+<span class="lineNum">     282 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          4 :             if (lines[k] &gt; 0) {</span>
+<span class="lineNum">     283 </span>                :<span class="lineCov">          3 :                 o.calledLines += 1;</span>
+<a name="284"><span class="lineNum">     284 </span>                :            :             }</a>
+<span class="lineNum">     285 </span>                :            :         });
+<span class="lineNum">     286 </span>                :<span class="lineCov">          1 :         Object.keys(functions).forEach(function (k) {</span>
+<span class="lineNum">     287 </span>                :<span class="lineCov">          2 :             var name = fnMap[k].name + ':' + fnMap[k].line;</span>
+<span class="lineNum">     288 </span>                :<span class="lineCov">          2 :             o.functions[name] = functions[k];</span>
+<span class="lineNum">     289 </span>                :<span class="lineCov">          2 :             o.coveredFunctions += 1;</span>
+<span class="lineNum">     290 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :             if (functions[k] &gt; 0) {</span>
+<span class="lineNum">     291 </span>                :<span class="lineCov">          1 :                 o.calledFunctions += 1;</span>
+<span class="lineNum">     292 </span>                :            :             }
+<span class="lineNum">     293 </span>                :            :         });
+<span class="lineNum">     294 </span>                :            :     });
+<span class="lineNum">     295 </span>                :<span class="lineCov">          1 :     return ret;</span>
+<span class="lineNum">     296 </span>                :            : }
+<span class="lineNum">     297 </span>                :            : 
+<span class="lineNum">     298 </span>                :<span class="lineCov">         39 : module.exports = {</span>
+<span class="lineNum">     299 </span>                :            :     addDerivedInfo: addDerivedInfo,
+<span class="lineNum">     300 </span>                :            :     addDerivedInfoForFile: addDerivedInfoForFile,
+<span class="lineNum">     301 </span>                :            :     removeDerivedInfo: removeDerivedInfo,
+<span class="lineNum">     302 </span>                :            :     blankSummary: blankSummary,
+<span class="lineNum">     303 </span>                :            :     summarizeFileCoverage: summarizeFileCoverage,
+<span class="lineNum">     304 </span>                :            :     mergeFileCoverage: mergeFileCoverage,
+<span class="lineNum">     305 </span>                :            :     mergeSummaryObjects: mergeSummaryObjects,
+<span class="lineNum">     306 </span>                :            :     toYUICoverage: toYUICoverage
+<span class="lineNum">     307 </span>                :            : };
+<span class="lineNum">     308 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

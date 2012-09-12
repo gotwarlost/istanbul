@@ -1,0 +1,682 @@
+<!doctype html>
+<html>
+<head>
+    <title>Code coverage report for istanbul/lib/report/lcovonly.js</title>
+    <style type='text/css'>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: consolas, menlo, monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
+        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
+        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
+        table.coverage td.text {}
+        table.coverage td.cline-neutral { background: #eee; }
+
+        table.coverage td.cline-yes { background: #b5d592; color: #999; }
+        table.coverage td.cline-no { background: #fc8c84; }
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+    </style>
+</head>
+<body>
+<div class='header high'>
+    <h1>Code coverage report for <span class='entity'>istanbul/lib/report/lcovonly.js</span></h1>
+    <h2>
+        
+        Statements: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class='metric'>100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class='metric'>100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/report/</a> &#187; lcovonly.js</div>
+</div>
+<div class='body'>
+<pre><table class="coverage">
+<tr>
+	<td class="line-count">1</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">/*</td>
+	</tr>
+<tr>
+	<td class="line-count">2</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
+	</tr>
+<tr>
+	<td class="line-count">3</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
+	</tr>
+<tr>
+	<td class="line-count">4</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> */</td>
+	</tr>
+<tr>
+	<td class="line-count">5</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">6</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">var path = require('path'),</td>
+	</tr>
+<tr>
+	<td class="line-count">7</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    fs = require('fs'),</td>
+	</tr>
+<tr>
+	<td class="line-count">8</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    util = require('util'),</td>
+	</tr>
+<tr>
+	<td class="line-count">9</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    Report = require('./index'),</td>
+	</tr>
+<tr>
+	<td class="line-count">10</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    Store = require('../store'),</td>
+	</tr>
+<tr>
+	<td class="line-count">11</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    Writer = require('../util/file-writer'),</td>
+	</tr>
+<tr>
+	<td class="line-count">12</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    utils = require('../object-utils');</td>
+	</tr>
+<tr>
+	<td class="line-count">13</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">14</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">/**</td>
+	</tr>
+<tr>
+	<td class="line-count">15</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * a `Report` implementation that produces an LCOV coverage file from coverage objects.</td>
+	</tr>
+<tr>
+	<td class="line-count">16</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">17</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * Usage</td>
+	</tr>
+<tr>
+	<td class="line-count">18</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * -----</td>
+	</tr>
+<tr>
+	<td class="line-count">19</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">20</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *      var report = require('istanbul').Report.create('lcovonly');</td>
+	</tr>
+<tr>
+	<td class="line-count">21</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">22</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">23</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @class LcovOnlyReport</td>
+	</tr>
+<tr>
+	<td class="line-count">24</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @extends Report</td>
+	</tr>
+<tr>
+	<td class="line-count">25</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @constructor</td>
+	</tr>
+<tr>
+	<td class="line-count">26</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @param {Object} opts optional</td>
+	</tr>
+<tr>
+	<td class="line-count">27</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @param {String} [opts.dir] the directory in which to the `lcov.info` file. Defaults to `process.cwd()`</td>
+	</tr>
+<tr>
+	<td class="line-count">28</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> */</td>
+	</tr>
+<tr>
+	<td class="line-count">29</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">function LcovOnlyReport(opts) {</td>
+	</tr>
+<tr>
+	<td class="line-count">30</td>
+	<td class="line-coverage cline-yes">12</td>
+	<td class="text">    this.opts = opts || {};</td>
+	</tr>
+<tr>
+	<td class="line-count">31</td>
+	<td class="line-coverage cline-yes">12</td>
+	<td class="text">    this.opts.dir = this.opts.dir || process.cwd();</td>
+	</tr>
+<tr>
+	<td class="line-count">32</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">}</td>
+	</tr>
+<tr>
+	<td class="line-count">33</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">LcovOnlyReport.TYPE = 'lcovonly';</td>
+	</tr>
+<tr>
+	<td class="line-count">34</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">util.inherits(LcovOnlyReport, Report);</td>
+	</tr>
+<tr>
+	<td class="line-count">35</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">36</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">Report.mix(LcovOnlyReport, {</td>
+	</tr>
+<tr>
+	<td class="line-count">37</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    writeFileCoverage: function (writer, fc) {</td>
+	</tr>
+<tr>
+	<td class="line-count">38</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        var functions = fc.f,</td>
+	</tr>
+<tr>
+	<td class="line-count">39</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            functionMap = fc.fnMap,</td>
+	</tr>
+<tr>
+	<td class="line-count">40</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            lines = fc.l,</td>
+	</tr>
+<tr>
+	<td class="line-count">41</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            branches = fc.b,</td>
+	</tr>
+<tr>
+	<td class="line-count">42</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            branchMap = fc.branchMap;</td>
+	</tr>
+<tr>
+	<td class="line-count">43</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">44</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        writer.println('TN:'); //no test name</td>
+	</tr>
+<tr>
+	<td class="line-count">45</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        writer.println('SF:' + fc.path);</td>
+	</tr>
+<tr>
+	<td class="line-count">46</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">47</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        Object.keys(functions).forEach(function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">48</td>
+	<td class="line-coverage cline-yes">51</td>
+	<td class="text">            var meta = functionMap[key];</td>
+	</tr>
+<tr>
+	<td class="line-count">49</td>
+	<td class="line-coverage cline-yes">51</td>
+	<td class="text">            writer.println('FN:' + [ meta.line, meta.name ].join(','));</td>
+	</tr>
+<tr>
+	<td class="line-count">50</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        });</td>
+	</tr>
+<tr>
+	<td class="line-count">51</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">52</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        Object.keys(functions).forEach(function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">53</td>
+	<td class="line-coverage cline-yes">51</td>
+	<td class="text">            var stats = functions[key],</td>
+	</tr>
+<tr>
+	<td class="line-count">54</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">                meta = functionMap[key];</td>
+	</tr>
+<tr>
+	<td class="line-count">55</td>
+	<td class="line-coverage cline-yes">51</td>
+	<td class="text">            writer.println('FNDA:' + [ stats, meta.name ].join(','));</td>
+	</tr>
+<tr>
+	<td class="line-count">56</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        });</td>
+	</tr>
+<tr>
+	<td class="line-count">57</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">58</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        Object.keys(lines).forEach(function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">59</td>
+	<td class="line-coverage cline-yes">154</td>
+	<td class="text">            var stat = lines[key];</td>
+	</tr>
+<tr>
+	<td class="line-count">60</td>
+	<td class="line-coverage cline-yes">154</td>
+	<td class="text">            writer.println('DA:' + [ key, stat ].join(','));</td>
+	</tr>
+<tr>
+	<td class="line-count">61</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        });</td>
+	</tr>
+<tr>
+	<td class="line-count">62</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">63</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        Object.keys(branches).forEach(function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">64</td>
+	<td class="line-coverage cline-yes">32</td>
+	<td class="text">            var branchArray = branches[key],</td>
+	</tr>
+<tr>
+	<td class="line-count">65</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">                meta = branchMap[key],</td>
+	</tr>
+<tr>
+	<td class="line-count">66</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">                line = meta.line,</td>
+	</tr>
+<tr>
+	<td class="line-count">67</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">                i = 0;</td>
+	</tr>
+<tr>
+	<td class="line-count">68</td>
+	<td class="line-coverage cline-yes">32</td>
+	<td class="text">            branchArray.forEach(function (b) {</td>
+	</tr>
+<tr>
+	<td class="line-count">69</td>
+	<td class="line-coverage cline-yes">64</td>
+	<td class="text">                writer.println('BRDA:' + [line, key, i, b].join(','));</td>
+	</tr>
+<tr>
+	<td class="line-count">70</td>
+	<td class="line-coverage cline-yes">64</td>
+	<td class="text">                i += 1;</td>
+	</tr>
+<tr>
+	<td class="line-count">71</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            });</td>
+	</tr>
+<tr>
+	<td class="line-count">72</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        });</td>
+	</tr>
+<tr>
+	<td class="line-count">73</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">        writer.println('end_of_record');</td>
+	</tr>
+<tr>
+	<td class="line-count">74</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    },</td>
+	</tr>
+<tr>
+	<td class="line-count">75</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">76</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    writeReport: function (collector, sync) {</td>
+	</tr>
+<tr>
+	<td class="line-count">77</td>
+	<td class="line-coverage cline-yes">11</td>
+	<td class="text">        var outputFile = path.resolve(this.opts.dir, 'lcov.info'),</td>
+	</tr>
+<tr>
+	<td class="line-count">78</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            writer = new Writer(sync),</td>
+	</tr>
+<tr>
+	<td class="line-count">79</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">            that = this;</td>
+	</tr>
+<tr>
+	<td class="line-count">80</td>
+	<td class="line-coverage cline-yes">11</td>
+	<td class="text">        writer.start(outputFile);</td>
+	</tr>
+<tr>
+	<td class="line-count">81</td>
+	<td class="line-coverage cline-yes">11</td>
+	<td class="text">        collector.files().forEach(function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">82</td>
+	<td class="line-coverage cline-yes">41</td>
+	<td class="text">            that.writeFileCoverage(writer, collector.fileCoverageFor(key));</td>
+	</tr>
+<tr>
+	<td class="line-count">83</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        });</td>
+	</tr>
+<tr>
+	<td class="line-count">84</td>
+	<td class="line-coverage cline-yes">11</td>
+	<td class="text">        writer.end();</td>
+	</tr>
+<tr>
+	<td class="line-count">85</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    }</td>
+	</tr>
+<tr>
+	<td class="line-count">86</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">});</td>
+	</tr>
+<tr>
+	<td class="line-count">87</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">88</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">module.exports = LcovOnlyReport;</td>
+	</tr>
+</table></pre>
+
+</div>
+<div class='footer'>
+    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+</div>
+</body>
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+        });
+    });
+</script>
+</html>

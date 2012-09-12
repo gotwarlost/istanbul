@@ -1,0 +1,8 @@
+{
+    "name": "istanbul-demo-project",
+    "version": "0.0.1-12",
+    "description": "Dummy project for testing istanbul CLI",
+    "scripts": {
+        "test": "test/run.js"
+    }
+}
