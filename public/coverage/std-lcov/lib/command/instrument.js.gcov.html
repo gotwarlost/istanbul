@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/command/instrument.js</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/command</a> - instrument.js<span style="font-size: 80%;"> (source / <a href="instrument.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-09-11</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntryHi">90.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var path = require('path'),</span>
+<span class="lineNum">       7 </span>                :            :     mkdirp = require('mkdirp'),
+<span class="lineNum">       8 </span>                :            :     async = require('async'),
+<span class="lineNum">       9 </span>                :            :     fs = require('fs'),
+<span class="lineNum">      10 </span>                :            :     filesFor = require('../util/file-matcher').filesFor,
+<span class="lineNum">      11 </span>                :            :     nopt = require('nopt'),
+<span class="lineNum">      12 </span>                :            :     Instrumenter = require('../instrumenter'),
+<span class="lineNum">      13 </span>                :            :     inputError = require('../util/input-error'),
+<span class="lineNum">      14 </span>                :            :     formatOption = require('../util/help-formatter').formatOption,
+<span class="lineNum">      15 </span>                :            :     util = require('util'),
+<span class="lineNum">      16 </span>                :            :     Command = require('./index'),
+<a name="17"><span class="lineNum">      17 </span>                :            :     verbose;</a>
+<a name="18"><span class="lineNum">      18 </span>                :            : </a>
+<span class="lineNum">      19 </span>                :<span class="lineCov">         39 : function processFiles(instrumenter, inputDir, outputDir, relativeNames) {</span>
+<span class="lineNum">      20 </span>                :<span class="lineCov">          2 :     var processor = function (name, callback) {</span>
+<span class="lineNum">      21 </span>                :<span class="lineCov">          7 :             var inputFile = path.resolve(inputDir, name),</span>
+<span class="lineNum">      22 </span>                :            :                 outputFile = path.resolve(outputDir, name),
+<span class="lineNum">      23 </span>                :            :                 oDir = path.dirname(outputFile);
+<a name="24"><span class="lineNum">      24 </span>                :            : </a>
+<span class="lineNum">      25 </span>                :<span class="lineCov">          7 :             mkdirp.sync(oDir);</span>
+<a name="26"><span class="lineNum">      26 </span>                :<span class="lineCov">          7 :             fs.readFile(inputFile, 'utf8', function (err, data) {</span></a>
+<span class="lineNum">      27 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 7 times"> + </span>]:<span class="lineCov">          7 :                 if (err) { return callback(err, name); }</span>
+<a name="28"><span class="lineNum">      28 </span>                :<span class="lineCov">          7 :                 instrumenter.instrument(data, inputFile, function (iErr, instrumented) {</span></a>
+<span class="lineNum">      29 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">          7 :                     if (iErr) { return callback(iErr, name); }</span>
+<span class="lineNum">      30 </span>                :<span class="lineCov">          6 :                     fs.writeFile(outputFile, instrumented, 'utf8', function (err) {</span>
+<span class="lineNum">      31 </span>                :<span class="lineCov">          6 :                         return callback(err, name);</span>
+<span class="lineNum">      32 </span>                :            :                     });
+<span class="lineNum">      33 </span>                :            :                 });
+<span class="lineNum">      34 </span>                :            :             });
+<span class="lineNum">      35 </span>                :            :         },
+<span class="lineNum">      36 </span>                :            :         q = async.queue(processor, 10),
+<span class="lineNum">      37 </span>                :            :         errors = [],
+<span class="lineNum">      38 </span>                :            :         count = 0,
+<a name="39"><span class="lineNum">      39 </span>                :            :         startTime = new Date().getTime();</a>
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :<span class="lineCov">          2 :     q.push(relativeNames, function (err, name) {</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">          7 :         var inputFile, outputFile;</span>
+<span class="lineNum">      43 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">          7 :         if (err) {</span>
+<span class="lineNum">      44 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :             errors.push({ file: name, error: err.message || err.toString() });</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">          1 :             inputFile = path.resolve(inputDir, name);</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">          1 :             outputFile = path.resolve(outputDir, name);</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">          1 :             fs.writeFileSync(outputFile, fs.readFileSync(inputFile));</span>
+<span class="lineNum">      48 </span>                :            :         }
+<span class="lineNum">      49 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          7 :         if (verbose) {</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">          4 :             console.log('Processed: ' + name);</span>
+<span class="lineNum">      51 </span>                :            :         } else {
+<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          3 :             if (count % 100 === 0) { process.stdout.write('.'); }</span>
+<span class="lineNum">      53 </span>                :            :         }
+<span class="lineNum">      54 </span>                :<span class="lineCov">          7 :         count += 1;</span>
+<a name="55"><span class="lineNum">      55 </span>                :            :     });</a>
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :<span class="lineCov">          2 :     q.drain = function () {</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">          2 :         var endTime = new Date().getTime();</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">          2 :         console.log('\nProcessed [' + count + '] files in ' + Math.floor((endTime - startTime) / 1000) + ' secs');</span>
+<span class="lineNum">      60 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :         if (errors.length &gt; 0) {</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">          1 :             console.log('The following ' + errors.length + ' file(s) had errors and were copied as-is');</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">          1 :             console.log(errors);</span>
+<span class="lineNum">      63 </span>                :            :         }
+<span class="lineNum">      64 </span>                :            :     };
+<span class="lineNum">      65 </span>                :            : }
+<a name="66"><span class="lineNum">      66 </span>                :            : </a>
+<span class="lineNum">      67 </span>                :            : 
+<span class="lineNum">      68 </span>                :<span class="lineCov">         39 : function InstrumentCommand() {</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">         16 :     Command.call(this);</span>
+<span class="lineNum">      70 </span>                :            : }
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineCov">         39 : InstrumentCommand.TYPE = 'instrument';</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">         39 : util.inherits(InstrumentCommand, Command);</span>
+<a name="74"><span class="lineNum">      74 </span>                :            : </a>
+<span class="lineNum">      75 </span>                :<span class="lineCov">         39 : Command.mix(InstrumentCommand, {</span>
+<span class="lineNum">      76 </span>                :            :     synopsis: function synopsis() {
+<span class="lineNum">      77 </span>                :<span class="lineCov">          5 :         return &quot;instruments a file or a directory tree and writes the instrumented code to the desired output location&quot;;</span>
+<a name="78"><span class="lineNum">      78 </span>                :            :     },</a>
+<span class="lineNum">      79 </span>                :            : 
+<span class="lineNum">      80 </span>                :            :     usage: function () {
+<span class="lineNum">      81 </span>                :<span class="lineCov">          2 :         console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; &lt;file-or-directory&gt;\n\nOptions are:\n\n'</span>
+<span class="lineNum">      82 </span>                :            :             + [
+<span class="lineNum">      83 </span>                :            :                 formatOption('--output &lt;file-or-dir&gt;', 'The output file or directory. This is required when the input is a directory, defaults to standard output when input is a file'),
+<span class="lineNum">      84 </span>                :            :                 formatOption('-x &lt;exclude-pattern&gt; [-x &lt;exclude-pattern&gt;]', 'one or more fileset patterns (e.g. &quot;**/vendor/**&quot; to ignore all files under a vendor directory). Also see the --default-excludes option'),
+<span class="lineNum">      85 </span>                :            :                 formatOption('--variable &lt;global-coverage-variable-name&gt;', 'change the variable name of the global coverage variable from the default value of `__coverage__` to something else'),
+<span class="lineNum">      86 </span>                :            :                 formatOption('--embed-source', 'embed source code into the coverage object, defaults to false'),
+<span class="lineNum">      87 </span>                :            :                 formatOption('--[no-]compact', 'produce [non]compact output, defaults to compact')
+<span class="lineNum">      88 </span>                :            :             ].join('\n\n') + '\n');
+<span class="lineNum">      89 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
+<a name="90"><span class="lineNum">      90 </span>                :            :     },</a>
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :            :     run: function (args) {
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :<span class="lineCov">         10 :         var config = {</span>
+<span class="lineNum">      95 </span>                :            :                 output: path,
+<span class="lineNum">      96 </span>                :            :                 x: [Array, String],
+<span class="lineNum">      97 </span>                :            :                 variable: String,
+<span class="lineNum">      98 </span>                :            :                 compact: Boolean,
+<span class="lineNum">      99 </span>                :            :                 verbose: Boolean,
+<span class="lineNum">     100 </span>                :            :                 'embed-source': Boolean
+<span class="lineNum">     101 </span>                :            :             },
+<span class="lineNum">     102 </span>                :            :             opts = nopt(config, { v : '--verbose' }, args, 0),
+<span class="lineNum">     103 </span>                :            :             cmdArgs = opts.argv.remain,
+<span class="lineNum">     104 </span>                :            :             file,
+<span class="lineNum">     105 </span>                :            :             stats,
+<span class="lineNum">     106 </span>                :            :             stream,
+<span class="lineNum">     107 </span>                :            :             instrumenter = new Instrumenter({ coverageVariable: opts.variable });
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :<span class="lineCov">         10 :         verbose = opts.verbose;</span>
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span>]:<span class="lineCov">         10 :         if (cmdArgs.length !== 1) {</span>
+<span class="lineNum">     111 </span>                :<span class="lineCov">          1 :             throw inputError.create('Need exactly one filename/ dirname argument for the instrument command!');</span>
+<span class="lineNum">     112 </span>                :            :         }
+<span class="lineNum">     113 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          9 :         if (typeof opts.compact === 'undefined') {</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">          8 :             opts.compact = true;</span>
+<span class="lineNum">     115 </span>                :            :         }
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :<span class="lineCov">          9 :         instrumenter = new Instrumenter({</span>
+<span class="lineNum">     118 </span>                :            :             coverageVariable: opts.variable,
+<span class="lineNum">     119 </span>                :            :             embedSource: opts['embed-source'],
+<span class="lineNum">     120 </span>                :            :             noCompact: !opts.compact
+<span class="lineNum">     121 </span>                :            :         });
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>                :<span class="lineCov">          9 :         file = path.resolve(cmdArgs[0]);</span>
+<span class="lineNum">     124 </span>                :<span class="lineCov">          9 :         stats = fs.statSync(file);</span>
+<span class="lineNum">     125 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">          8 :         if (stats.isDirectory()) {</span>
+<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          4 :             if (!opts.output) { throw inputError.create('Need an output directory [-o &lt;dir&gt;] when input is a directory!'); }</span>
+<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          3 :             if (opts.output === file) { throw inputError.create('Cannot instrument into the same directory/ file as input!'); }</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">          2 :             mkdirp.sync(opts.output);</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">          2 :             filesFor({</span>
+<span class="lineNum">     130 </span>                :            :                 root: file,
+<span class="lineNum">     131 </span>                :            :                 includes: ['**/*.js'],
+<a name="132"><span class="lineNum">     132 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:            :                 excludes: opts.x || ['**/node_modules/**'],</a>
+<span class="lineNum">     133 </span>                :            :                 relative: true
+<span class="lineNum">     134 </span>                :            :             }, function (err, files) {
+<span class="lineNum">     135 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :                 if (err) { throw err; }</span>
+<span class="lineNum">     136 </span>                :<span class="lineCov">          2 :                 processFiles(instrumenter, file, opts.output, files);</span>
+<span class="lineNum">     137 </span>                :            :             });
+<span class="lineNum">     138 </span>                :            :         } else {
+<span class="lineNum">     139 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          4 :             if (opts.output) {</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">          1 :                 stream = fs.createWriteStream(opts.output);</span>
+<span class="lineNum">     141 </span>                :            :             } else {
+<span class="lineNum">     142 </span>                :<span class="lineCov">          3 :                 stream = process.stdout;</span>
+<span class="lineNum">     143 </span>                :            :             }
+<span class="lineNum">     144 </span>                :<span class="lineCov">          4 :             stream.write(instrumenter.instrumentSync(fs.readFileSync(file, 'utf8'), file));</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">          4 :             try { stream.end(); } catch (ex) {}</span>
+<span class="lineNum">     146 </span>                :            :         }
+<span class="lineNum">     147 </span>                :            :     }
+<span class="lineNum">     148 </span>                :            : });
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :<span class="lineCov">         39 : module.exports = InstrumentCommand;</span>
+<span class="lineNum">     151 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

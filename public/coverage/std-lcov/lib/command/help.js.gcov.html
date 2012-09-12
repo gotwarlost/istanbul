@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/command/help.js</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/command</a> - help.js<span style="font-size: 80%;"> (source / <a href="help.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-09-11</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var Command = require('./index.js'),</span>
+<span class="lineNum">       7 </span>                :            :     util = require('util'),
+<span class="lineNum">       8 </span>                :            :     formatOption = require('../util/help-formatter').formatOption,
+<a name="9"><span class="lineNum">       9 </span>                :            :     VERSION = require('../../index').VERSION;</a>
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :<span class="lineCov">         39 : function HelpCommand() {</span>
+<span class="lineNum">      12 </span>                :<span class="lineCov">          6 :     Command.call(this);</span>
+<span class="lineNum">      13 </span>                :            : }
+<span class="lineNum">      14 </span>                :            : 
+<span class="lineNum">      15 </span>                :<span class="lineCov">         39 : HelpCommand.TYPE = 'help';</span>
+<span class="lineNum">      16 </span>                :<span class="lineCov">         39 : util.inherits(HelpCommand, Command);</span>
+<a name="17"><span class="lineNum">      17 </span>                :            : </a>
+<span class="lineNum">      18 </span>                :<span class="lineCov">         39 : Command.mix(HelpCommand, {</span>
+<span class="lineNum">      19 </span>                :            :     synopsis: function () {
+<span class="lineNum">      20 </span>                :<span class="lineCov">          5 :         return &quot;shows help&quot;;</span>
+<a name="21"><span class="lineNum">      21 </span>                :            :     },</a>
+<span class="lineNum">      22 </span>                :            : 
+<span class="lineNum">      23 </span>                :            :     usage: function () {
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :<span class="lineCov">          4 :         console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;command&gt;\n');</span>
+<span class="lineNum">      26 </span>                :<span class="lineCov">          4 :         console.error('Available commands are:\n');</span>
+<a name="27"><span class="lineNum">      27 </span>                :            : </a>
+<span class="lineNum">      28 </span>                :<span class="lineCov">          4 :         var commandObj;</span>
+<span class="lineNum">      29 </span>                :<span class="lineCov">          4 :         Command.getCommandList().forEach(function (cmd) {</span>
+<span class="lineNum">      30 </span>                :<span class="lineCov">         20 :             commandObj = Command.create(cmd);</span>
+<span class="lineNum">      31 </span>                :<span class="lineCov">         20 :             console.error(formatOption(cmd, commandObj.synopsis()));</span>
+<span class="lineNum">      32 </span>                :<span class="lineCov">         20 :             console.error(&quot;\n&quot;);</span>
+<span class="lineNum">      33 </span>                :            :         });
+<span class="lineNum">      34 </span>                :<span class="lineCov">          4 :         console.error(&quot;Command names can be abbreviated as long as the abbreviation is unambiguous&quot;);</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">          4 :         console.error(this.toolName() + ' version:' + VERSION);</span>
+<a name="36"><span class="lineNum">      36 </span>                :<span class="lineCov">          4 :         console.error(&quot;\n&quot;);</span></a>
+<span class="lineNum">      37 </span>                :            :     },
+<span class="lineNum">      38 </span>                :            :     run: function (args) {
+<span class="lineNum">      39 </span>                :<span class="lineCov">          7 :         var command;</span>
+<span class="lineNum">      40 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">          7 :         if (args.length === 0) {</span>
+<span class="lineNum">      41 </span>                :<span class="lineCov">          1 :             this.usage();</span>
+<span class="lineNum">      42 </span>                :            :         } else {
+<span class="lineNum">      43 </span>                :<span class="lineCov">          6 :             try {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">          6 :                 command = Command.create(args[0]);</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">          4 :                 command.usage('istanbul', Command.resolveCommandName(args[0]));</span>
+<span class="lineNum">      46 </span>                :            :             } catch (ex) {
+<span class="lineNum">      47 </span>                :<span class="lineCov">          2 :                 console.error('Invalid command: ' + args[0]);</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">          2 :                 this.usage();</span>
+<span class="lineNum">      49 </span>                :            :             }
+<span class="lineNum">      50 </span>                :            :         }
+<span class="lineNum">      51 </span>                :            :     }
+<span class="lineNum">      52 </span>                :            : });
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :<span class="lineCov">         39 : module.exports = HelpCommand;</span>
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

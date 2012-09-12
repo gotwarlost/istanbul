@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+<head>
+    <title>Code coverage report for istanbul/lib/store/fslookup.js</title>
+    <style type='text/css'>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: consolas, menlo, monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
+        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
+        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
+        table.coverage td.text {}
+        table.coverage td.cline-neutral { background: #eee; }
+
+        table.coverage td.cline-yes { background: #b5d592; color: #999; }
+        table.coverage td.cline-no { background: #fc8c84; }
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+    </style>
+</head>
+<body>
+<div class='header high'>
+    <h1>Code coverage report for <span class='entity'>istanbul/lib/store/fslookup.js</span></h1>
+    <h2>
+        
+        Statements: <span class='metric'>100% <small>(17 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class='metric'>100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class='metric'>100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class='metric'>100% <small>(17 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/store/</a> &#187; fslookup.js</div>
+</div>
+<div class='body'>
+<pre><table class="coverage">
+<tr>
+	<td class="line-count">1</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">/*</td>
+	</tr>
+<tr>
+	<td class="line-count">2</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
+	</tr>
+<tr>
+	<td class="line-count">3</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
+	</tr>
+<tr>
+	<td class="line-count">4</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> */</td>
+	</tr>
+<tr>
+	<td class="line-count">5</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">6</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">var util = require('util'),</td>
+	</tr>
+<tr>
+	<td class="line-count">7</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    fs = require('fs'),</td>
+	</tr>
+<tr>
+	<td class="line-count">8</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    Store = require('./index');</td>
+	</tr>
+<tr>
+	<td class="line-count">9</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">10</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">/**</td>
+	</tr>
+<tr>
+	<td class="line-count">11</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * a `Store` implementation that doesn't actually store anything. It assumes that keys</td>
+	</tr>
+<tr>
+	<td class="line-count">12</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * are absolute file paths, and contents are contents of those files.</td>
+	</tr>
+<tr>
+	<td class="line-count">13</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * Thus, `set` for this store is no-op, `get` returns the</td>
+	</tr>
+<tr>
+	<td class="line-count">14</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * contents of the filename that the key represents, `hasKey` returns true if the key</td>
+	</tr>
+<tr>
+	<td class="line-count">15</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * supplied is a valid file path and `keys` always returns an empty array.</td>
+	</tr>
+<tr>
+	<td class="line-count">16</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">17</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * Usage</td>
+	</tr>
+<tr>
+	<td class="line-count">18</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * -----</td>
+	</tr>
+<tr>
+	<td class="line-count">19</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">20</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *      var store = require('istanbul').Store.create('fslookup');</td>
+	</tr>
+<tr>
+	<td class="line-count">21</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">22</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> *</td>
+	</tr>
+<tr>
+	<td class="line-count">23</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @class LookupStore</td>
+	</tr>
+<tr>
+	<td class="line-count">24</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @extends Store</td>
+	</tr>
+<tr>
+	<td class="line-count">25</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> * @constructor</td>
+	</tr>
+<tr>
+	<td class="line-count">26</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"> */</td>
+	</tr>
+<tr>
+	<td class="line-count">27</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">function LookupStore(opts) {</td>
+	</tr>
+<tr>
+	<td class="line-count">28</td>
+	<td class="line-coverage cline-yes">12</td>
+	<td class="text">    Store.call(this, opts);</td>
+	</tr>
+<tr>
+	<td class="line-count">29</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">}</td>
+	</tr>
+<tr>
+	<td class="line-count">30</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">31</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">LookupStore.TYPE = 'fslookup';</td>
+	</tr>
+<tr>
+	<td class="line-count">32</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">util.inherits(LookupStore, Store);</td>
+	</tr>
+<tr>
+	<td class="line-count">33</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">34</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">Store.mix(LookupStore, {</td>
+	</tr>
+<tr>
+	<td class="line-count">35</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    keys: function () {</td>
+	</tr>
+<tr>
+	<td class="line-count">36</td>
+	<td class="line-coverage cline-yes">1</td>
+	<td class="text">        return [];</td>
+	</tr>
+<tr>
+	<td class="line-count">37</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    },</td>
+	</tr>
+<tr>
+	<td class="line-count">38</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    get: function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">39</td>
+	<td class="line-coverage cline-yes">44</td>
+	<td class="text">        return fs.readFileSync(key, 'utf8');</td>
+	</tr>
+<tr>
+	<td class="line-count">40</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    },</td>
+	</tr>
+<tr>
+	<td class="line-count">41</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    hasKey: function (key) {</td>
+	</tr>
+<tr>
+	<td class="line-count">42</td>
+	<td class="line-coverage cline-yes">5</td>
+	<td class="text">        var stats;</td>
+	</tr>
+<tr>
+	<td class="line-count">43</td>
+	<td class="line-coverage cline-yes">5</td>
+	<td class="text">        try {</td>
+	</tr>
+<tr>
+	<td class="line-count">44</td>
+	<td class="line-coverage cline-yes">5</td>
+	<td class="text">            stats = fs.statSync(key);</td>
+	</tr>
+<tr>
+	<td class="line-count">45</td>
+	<td class="line-coverage cline-yes">3</td>
+	<td class="text">            return stats.isFile();</td>
+	</tr>
+<tr>
+	<td class="line-count">46</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        } catch (ex) {</td>
+	</tr>
+<tr>
+	<td class="line-count">47</td>
+	<td class="line-coverage cline-yes">2</td>
+	<td class="text">            return false;</td>
+	</tr>
+<tr>
+	<td class="line-count">48</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        }</td>
+	</tr>
+<tr>
+	<td class="line-count">49</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    },</td>
+	</tr>
+<tr>
+	<td class="line-count">50</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    set: function (key, contents) {</td>
+	</tr>
+<tr>
+	<td class="line-count">51</td>
+	<td class="line-coverage cline-yes">2</td>
+	<td class="text">        if (!this.hasKey(key)) {</td>
+	</tr>
+<tr>
+	<td class="line-count">52</td>
+	<td class="line-coverage cline-yes">1</td>
+	<td class="text">            throw new Error('Attempt to set contents for non-existent file [' + key + '] on a fslookup store');</td>
+	</tr>
+<tr>
+	<td class="line-count">53</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">        }</td>
+	</tr>
+<tr>
+	<td class="line-count">54</td>
+	<td class="line-coverage cline-yes">1</td>
+	<td class="text">        return key;</td>
+	</tr>
+<tr>
+	<td class="line-count">55</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">    }</td>
+	</tr>
+<tr>
+	<td class="line-count">56</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text">});</td>
+	</tr>
+<tr>
+	<td class="line-count">57</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">58</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">59</td>
+	<td class="line-coverage cline-yes">39</td>
+	<td class="text">module.exports = LookupStore;</td>
+	</tr>
+<tr>
+	<td class="line-count">60</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+<tr>
+	<td class="line-count">61</td>
+	<td class="line-coverage cline-neutral"></td>
+	<td class="text"></td>
+	</tr>
+</table></pre>
+
+</div>
+<div class='footer'>
+    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+</div>
+</body>
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+        });
+    });
+</script>
+</html>
