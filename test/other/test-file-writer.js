@@ -2,6 +2,7 @@
 var path = require('path'),
     fs = require('fs'),
     exists = fs.existsSync || path.existsSync,
+    mkdirp = require('mkdirp'),
     FileWriter = require('../../lib/util/file-writer'),
     outputDir = path.resolve(__dirname, 'output'),
     FOO = path.resolve(outputDir, 'foo-written.js'),
@@ -17,6 +18,7 @@ function testContents(test) {
 function battery(sync) {
     return {
         setUp: function (cb) {
+            mkdirp.sync(outputDir);
             writer = new FileWriter(sync);
             cb();
         },
