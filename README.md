@@ -1,4 +1,4 @@
-Istanbul - a JS code coverage tool written in JS
+Istanbul - a JS code coverage tool written in JS [![Build Status](https://secure.travis-ci.org/gotwarlost/istanbul.png)](http://travis-ci.org/gotwarlost/istanbul)
 ================================================
 
 Features
