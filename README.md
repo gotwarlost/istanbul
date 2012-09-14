@@ -133,7 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
-* v0.1.2 : HTML reporting cosmetics. Reports now show syntax-colored JS using `prettify`
+* v0.1.2 : HTML reporting cosmetics. Reports now show syntax-colored JS using `prettify`. Summary tables no longer wrap in awkward places.
 * v0.1.1 : Fixes issue #1. HTML reports use sources embedded inside the file coverage objects if found rather than reading from the filesystem
 * v0.1.0 : Initial version
 
