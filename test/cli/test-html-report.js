@@ -75,6 +75,49 @@ module.exports = {
         test.done();
     },
 
+    "should test files written when code packed into coverage object": function (test) {
+        var file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            htmlReport = path.resolve(OUTPUT_DIR),
+            reporter = new Reporter({ dir: OUTPUT_DIR, verbose: true }),
+            obj,
+            copy = {},
+            collector = new Collector(),
+            mangler = function (name) {
+                return name.replace(/\.js/,'-mangled.js');
+            },
+            fileFor = function () {
+                var args = Array.prototype.slice.call(arguments);
+                args.unshift(htmlReport);
+                return mangler(path.resolve.apply(null, args));
+            },
+            contentFor = function (file) {
+                return fs.readFileSync(file, 'utf8').split(/\r?\n/);
+            };
+
+        obj = JSON.parse(fs.readFileSync(file, 'utf8'));
+        //stick in the code and mangle the file paths in the coverage object so that default behavior will not work
+        Object.keys(obj).forEach(function (k) {
+            var code = contentFor(k),
+                mangled = mangler(k);
+            obj[k].code = code;
+            obj[k].path = mangled;
+            copy[mangled] = obj[k];
+            test.ok(mangled != k); //verify something _did_ get mangled
+            test.ok(copy[mangled].code);
+        });
+        collector.add(copy);
+        reporter.writeReport(collector, true);
+        test.ok(existsSync(htmlReport));
+        test.ok(existsSync(fileFor('index.html')));
+        test.ok(existsSync(fileFor('lib', 'index.html')));
+        test.ok(existsSync(fileFor('lib', 'util', 'index.html')));
+        test.ok(existsSync(fileFor('lib', 'foo.js.html')));
+        test.ok(existsSync(fileFor('lib', 'bar.js.html')));
+        test.ok(existsSync(fileFor('lib', 'util', 'generate-names.js.html')));
+        test.ok(fs.readFileSync(fileFor('lib', 'bar.js.html'), 'utf8') !== '');
+        test.done();
+    },
+
     "test contents": function (test) {
         console.error('Figure out a way to run meaningful tests for HTML report contents');
         test.ok(1);
