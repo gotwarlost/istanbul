@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/instrumenter.js</title>
+    
+        <link rel='stylesheet' href='../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,3408 +196,2051 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*global esprima, escodegen, window */</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">(function (isNode) {</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    var SYNTAX,</td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        nodeType,</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ESP = isNode ? require('esprima') : esprima,</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ESPGEN = isNode ? require('escodegen') : escodegen,  //TODO - package as dependency</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        crypto = isNode ? require('crypto') : null,</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        LEADER_WRAP = '(function () { ',</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        TRAILER_WRAP = '\n}());',</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        astgen,</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        preconditions,</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        cond,</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        isArray = Array.isArray;</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    <span class="missing-if-branch">I</span>if (!isArray) {</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">        isArray = <span class="fstat-no">function (thing) {</span> <span class="cstat-no">return thing &amp;&amp;  Object.prototype.toString.call(thing) === '[object Array]'; </span>};</span></td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    if (!isNode) {</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        preconditions = {</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            'Could not find esprima': ESP,</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            'Could not find escodegen': ESPGEN,</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            'JSON object not in scope': JSON,</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            'Array does not implement push': [].push,</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            'Array does not implement unshift': [].unshift</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        };</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        for (cond in preconditions) {</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-yes">5</td>
-	<td class="text">            <span class="missing-if-branch">E</span>if (preconditions.hasOwnProperty(cond)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-yes">5</td>
-	<td class="text">                <span class="missing-if-branch">I</span>if (!preconditions[cond]) { <span class="cstat-no">throw new Error(cond); </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    function generateTrackerVar(filename, omitSuffix) {</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">        var hash, suffix;</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">        if (crypto !== null) {</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-yes">140</td>
-	<td class="text">            hash = crypto.createHash('md5');</td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-yes">140</td>
-	<td class="text">            hash.update(filename);</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-yes">140</td>
-	<td class="text">            suffix = hash.digest('base64');</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            //trim trailing equal signs, turn identifier unsafe chars to safe ones + =&gt; _ and / =&gt; $</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-yes">140</td>
-	<td class="text">            suffix = suffix.replace(new RegExp('=', 'g'), '')</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(new RegExp('\\+', 'g'), '_')</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(new RegExp('/', 'g'), '$');</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            /*jslint nomen: true */</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-yes">31</td>
-	<td class="text">            window.__cov_seq = window.__cov_seq || 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-yes">31</td>
-	<td class="text">            window.__cov_seq += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-yes">31</td>
-	<td class="text">            suffix = window.__cov_seq;</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">        return '__cov_' + (omitSuffix ? '' : suffix);</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    function pushAll(ary, thing) {</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-yes">17806</td>
-	<td class="text">        if (!isArray(thing)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-yes">14657</td>
-	<td class="text">            thing = [ thing ];</td>
-	</tr>
-<tr>
-	<td class="line-count">62</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">63</td>
-	<td class="line-coverage cline-yes">17806</td>
-	<td class="text">        Array.prototype.push.apply(ary, thing);</td>
-	</tr>
-<tr>
-	<td class="line-count">64</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">65</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">66</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    SYNTAX = {</td>
-	</tr>
-<tr>
-	<td class="line-count">67</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ArrayExpression: [ 'elements' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">68</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        AssignmentExpression: ['left', 'right'],</td>
-	</tr>
-<tr>
-	<td class="line-count">69</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        BinaryExpression: ['left', 'right' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">70</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        BlockStatement: [ 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">71</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        BreakStatement: [ 'label' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">72</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        CallExpression: [ 'callee', 'arguments'],</td>
-	</tr>
-<tr>
-	<td class="line-count">73</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        CatchClause: ['param', 'body'],</td>
-	</tr>
-<tr>
-	<td class="line-count">74</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ConditionalExpression: [ 'test', 'consequent', 'alternate' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">75</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ContinueStatement: [ 'label' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">76</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        DebuggerStatement: [ ],</td>
-	</tr>
-<tr>
-	<td class="line-count">77</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        DoWhileStatement: [ 'test', 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">78</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        EmptyStatement: [],</td>
-	</tr>
-<tr>
-	<td class="line-count">79</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ExpressionStatement: [ 'expression'],</td>
-	</tr>
-<tr>
-	<td class="line-count">80</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ForInStatement: [ 'left', 'right', 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">81</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ForStatement: ['init', 'test', 'update', 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">82</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        FunctionDeclaration: ['id', 'params', 'body'],</td>
-	</tr>
-<tr>
-	<td class="line-count">83</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        FunctionExpression: ['id', 'params', 'defaults', 'body'],</td>
-	</tr>
-<tr>
-	<td class="line-count">84</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        Identifier: [],</td>
-	</tr>
-<tr>
-	<td class="line-count">85</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        IfStatement: ['test', 'consequent', 'alternate'],</td>
-	</tr>
-<tr>
-	<td class="line-count">86</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        LabeledStatement: ['label', 'body'],</td>
-	</tr>
-<tr>
-	<td class="line-count">87</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        Literal: [],</td>
-	</tr>
-<tr>
-	<td class="line-count">88</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        LogicalExpression: [ 'left', 'right' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">89</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        MemberExpression: ['object', 'property'],</td>
-	</tr>
-<tr>
-	<td class="line-count">90</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        NewExpression: ['callee', 'arguments'],</td>
-	</tr>
-<tr>
-	<td class="line-count">91</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ObjectExpression: [ 'properties' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">92</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        Program: [ 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">93</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        Property: [ 'key', 'value'],</td>
-	</tr>
-<tr>
-	<td class="line-count">94</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ReturnStatement: ['argument'],</td>
-	</tr>
-<tr>
-	<td class="line-count">95</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        SequenceExpression: ['expressions'],</td>
-	</tr>
-<tr>
-	<td class="line-count">96</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        SwitchCase: [ 'test', 'consequent' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">97</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        SwitchStatement: ['discriminant', 'cases' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">98</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ThisExpression: [],</td>
-	</tr>
-<tr>
-	<td class="line-count">99</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ThrowStatement: ['argument'],</td>
-	</tr>
-<tr>
-	<td class="line-count">100</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        TryStatement: [ 'block', 'handlers', 'finalizer' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">101</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        UnaryExpression: ['argument'],</td>
-	</tr>
-<tr>
-	<td class="line-count">102</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        UpdateExpression: [ 'argument' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">103</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        VariableDeclaration: [ 'declarations' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">104</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        VariableDeclarator: [ 'id', 'init' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">105</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        WhileStatement: [ 'test', 'body' ],</td>
-	</tr>
-<tr>
-	<td class="line-count">106</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        WithStatement: [ 'object', 'body' ]</td>
-	</tr>
-<tr>
-	<td class="line-count">107</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">108</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    };</td>
-	</tr>
-<tr>
-	<td class="line-count">109</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">110</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    for (nodeType in SYNTAX) {</td>
-	</tr>
-<tr>
-	<td class="line-count">111</td>
-	<td class="line-coverage cline-yes">80</td>
-	<td class="text">        <span class="missing-if-branch">E</span>if (SYNTAX.hasOwnProperty(nodeType)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">112</td>
-	<td class="line-coverage cline-yes">80</td>
-	<td class="text">            SYNTAX[nodeType] = { name: nodeType, children: SYNTAX[nodeType] };</td>
-	</tr>
-<tr>
-	<td class="line-count">113</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">114</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">115</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">116</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    astgen = {</td>
-	</tr>
-<tr>
-	<td class="line-count">117</td>
-	<td class="line-coverage cline-yes">10418</td>
-	<td class="text">        variable: function (name) { return { type: SYNTAX.Identifier.name, name: name }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">118</td>
-	<td class="line-coverage cline-yes">5209</td>
-	<td class="text">        stringLiteral: function (str) { return { type: SYNTAX.Literal.name, value: String(str) }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">119</td>
-	<td class="line-coverage cline-yes">1447</td>
-	<td class="text">        numericLiteral: function (num) { return { type: SYNTAX.Literal.name, value: Number(num) }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">120</td>
-	<td class="line-coverage cline-yes">4652</td>
-	<td class="text">        statement: function (contents) { return { type: SYNTAX.ExpressionStatement.name, expression: contents }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">121</td>
-	<td class="line-coverage cline-yes">5209</td>
-	<td class="text">        dot: function (obj, field) { return { type: SYNTAX.MemberExpression.name, computed: false, object: obj, property: field }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">122</td>
-	<td class="line-coverage cline-yes">6656</td>
-	<td class="text">        subscript: function (obj, sub) { return { type: SYNTAX.MemberExpression.name, computed: true, object: obj, property: sub }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">123</td>
-	<td class="line-coverage cline-yes">5209</td>
-	<td class="text">        postIncrement: function (obj) { return { type: SYNTAX.UpdateExpression.name, operator: '++', prefix: false, argument: obj }; },</td>
-	</tr>
-<tr>
-	<td class="line-count">124</td>
-	<td class="line-coverage cline-yes">557</td>
-	<td class="text">        sequence: function (one, two) { return { type: SYNTAX.SequenceExpression.name, expressions: [one, two] }; }</td>
-	</tr>
-<tr>
-	<td class="line-count">125</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    };</td>
-	</tr>
-<tr>
-	<td class="line-count">126</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">127</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    function Walker(walkMap, scope, debug) {</td>
-	</tr>
-<tr>
-	<td class="line-count">128</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        this.walkMap = walkMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">129</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        this.scope = scope;</td>
-	</tr>
-<tr>
-	<td class="line-count">130</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        this.debug = debug;</td>
-	</tr>
-<tr>
-	<td class="line-count">131</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        if (this.debug) {</td>
-	</tr>
-<tr>
-	<td class="line-count">132</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            this.level = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">133</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            this.seq = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">134</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">135</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">136</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">137</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    function defaultWalker(node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">138</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">139</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        var type = node.type,</td>
-	</tr>
-<tr>
-	<td class="line-count">140</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            children = SYNTAX[type].children,</td>
-	</tr>
-<tr>
-	<td class="line-count">141</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name, // don't run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)</td>
-	</tr>
-<tr>
-	<td class="line-count">142</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            walkerFn = applyCustomWalker ? walker.walkMap[type] : null,</td>
-	</tr>
-<tr>
-	<td class="line-count">143</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            i,</td>
-	</tr>
-<tr>
-	<td class="line-count">144</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            j,</td>
-	</tr>
-<tr>
-	<td class="line-count">145</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            walkFnIndex,</td>
-	</tr>
-<tr>
-	<td class="line-count">146</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            childType,</td>
-	</tr>
-<tr>
-	<td class="line-count">147</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            childNode,</td>
-	</tr>
-<tr>
-	<td class="line-count">148</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ret = node,</td>
-	</tr>
-<tr>
-	<td class="line-count">149</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            childArray,</td>
-	</tr>
-<tr>
-	<td class="line-count">150</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            childElement,</td>
-	</tr>
-<tr>
-	<td class="line-count">151</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            tmpNode,</td>
-	</tr>
-<tr>
-	<td class="line-count">152</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            pathElement,</td>
-	</tr>
-<tr>
-	<td class="line-count">153</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            assignNode,</td>
-	</tr>
-<tr>
-	<td class="line-count">154</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            isLast;</td>
-	</tr>
-<tr>
-	<td class="line-count">155</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">156</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        <span class="missing-if-branch">I</span>if (node.walking) { <span class="cstat-no">throw new Error('Infinite regress: Custom walkers may NOT call walker.walk(node)'); </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">157</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        node.walking = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">158</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        if (isArray(walkerFn)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">159</td>
-	<td class="line-coverage cline-yes">662</td>
-	<td class="text">            for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">160</td>
-	<td class="line-coverage cline-yes">1826</td>
-	<td class="text">                isLast = walkFnIndex === walkerFn.length - 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">161</td>
-	<td class="line-coverage cline-yes">1826</td>
-	<td class="text">                ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">162</td>
-	<td class="line-coverage cline-yes">1826</td>
-	<td class="text">                <span class="missing-if-branch">I</span>if (ret.type !== type &amp;&amp; <span class="branch-1 cbranch-no">!isLast)</span> { <span class="cstat-no">throw new Error('Only the last walker is allowed to change the node type: [type was: ' + type + ' ]'); </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">163</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">164</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">165</td>
-	<td class="line-coverage cline-yes">48614</td>
-	<td class="text">            if (walkerFn) {</td>
-	</tr>
-<tr>
-	<td class="line-count">166</td>
-	<td class="line-coverage cline-yes">3258</td>
-	<td class="text">                ret = walker.walk(node, walkerFn) || ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">167</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">168</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">169</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">170</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        for (i = 0; i &lt; children.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">171</td>
-	<td class="line-coverage cline-yes">44820</td>
-	<td class="text">            childType = children[i];</td>
-	</tr>
-<tr>
-	<td class="line-count">172</td>
-	<td class="line-coverage cline-yes">44820</td>
-	<td class="text">            childNode = node[childType];</td>
-	</tr>
-<tr>
-	<td class="line-count">173</td>
-	<td class="line-coverage cline-yes">44820</td>
-	<td class="text">            if (childNode &amp;&amp; !childNode.skipWalk) {</td>
-	</tr>
-<tr>
-	<td class="line-count">174</td>
-	<td class="line-coverage cline-yes">43436</td>
-	<td class="text">                pathElement = { node: node, property: childType };</td>
-	</tr>
-<tr>
-	<td class="line-count">175</td>
-	<td class="line-coverage cline-yes">43436</td>
-	<td class="text">                if (isArray(childNode)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">176</td>
-	<td class="line-coverage cline-yes">5831</td>
-	<td class="text">                    childArray = [];</td>
-	</tr>
-<tr>
-	<td class="line-count">177</td>
-	<td class="line-coverage cline-yes">5831</td>
-	<td class="text">                    for (j = 0; j &lt; childNode.length; j += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">178</td>
-	<td class="line-coverage cline-yes">11503</td>
-	<td class="text">                        childElement = childNode[j];</td>
-	</tr>
-<tr>
-	<td class="line-count">179</td>
-	<td class="line-coverage cline-yes">11503</td>
-	<td class="text">                        pathElement.index = j;</td>
-	</tr>
-<tr>
-	<td class="line-count">180</td>
-	<td class="line-coverage cline-yes">11503</td>
-	<td class="text">                        assignNode = walker.walk(childElement, null, pathElement) || <span class="branch-1 cbranch-no">childElement;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">181</td>
-	<td class="line-coverage cline-yes">11503</td>
-	<td class="text">                        if (isArray(assignNode.prepend)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">182</td>
-	<td class="line-coverage cline-yes">3149</td>
-	<td class="text">                            pushAll(childArray, assignNode.prepend);</td>
-	</tr>
-<tr>
-	<td class="line-count">183</td>
-	<td class="line-coverage cline-yes">3149</td>
-	<td class="text">                            delete assignNode.prepend;</td>
-	</tr>
-<tr>
-	<td class="line-count">184</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        }</td>
-	</tr>
-<tr>
-	<td class="line-count">185</td>
-	<td class="line-coverage cline-yes">11503</td>
-	<td class="text">                        pushAll(childArray, assignNode);</td>
-	</tr>
-<tr>
-	<td class="line-count">186</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">187</td>
-	<td class="line-coverage cline-yes">5831</td>
-	<td class="text">                    node[childType] = childArray;</td>
-	</tr>
-<tr>
-	<td class="line-count">188</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">189</td>
-	<td class="line-coverage cline-yes">37605</td>
-	<td class="text">                    assignNode = walker.walk(childNode, null, pathElement) || <span class="branch-1 cbranch-no">childNode;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">190</td>
-	<td class="line-coverage cline-yes">37605</td>
-	<td class="text">                    <span class="missing-if-branch">I</span>if (isArray(assignNode.prepend)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">191</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                        throw new Error('Internal error: attempt to prepend statements in disallowed (non-array) context');</span></td>
-	</tr>
-<tr>
-	<td class="line-count">192</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        /* if this should be allowed, this is how to solve it</td>
-	</tr>
-<tr>
-	<td class="line-count">193</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        tmpNode = { type: 'BlockStatement', body: [] };</td>
-	</tr>
-<tr>
-	<td class="line-count">194</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        pushAll(tmpNode.body, assignNode.prepend);</td>
-	</tr>
-<tr>
-	<td class="line-count">195</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        pushAll(tmpNode.body, assignNode);</td>
-	</tr>
-<tr>
-	<td class="line-count">196</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        node[childType] = tmpNode;</td>
-	</tr>
-<tr>
-	<td class="line-count">197</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        delete assignNode.prepend;</td>
-	</tr>
-<tr>
-	<td class="line-count">198</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        */</td>
-	</tr>
-<tr>
-	<td class="line-count">199</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">200</td>
-	<td class="line-coverage cline-yes">37605</td>
-	<td class="text">                        node[childType] = assignNode;</td>
-	</tr>
-<tr>
-	<td class="line-count">201</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">202</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                }</td>
-	</tr>
-<tr>
-	<td class="line-count">203</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">204</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">205</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">206</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        delete node.walking;</td>
-	</tr>
-<tr>
-	<td class="line-count">207</td>
-	<td class="line-coverage cline-yes">49276</td>
-	<td class="text">        return ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">208</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">209</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">210</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    Walker.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">211</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        startWalk: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">212</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            this.path = [];</td>
-	</tr>
-<tr>
-	<td class="line-count">213</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            this.walk(node);</td>
-	</tr>
-<tr>
-	<td class="line-count">214</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">215</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">216</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        walk: function (node, walkFn, pathElement) {</td>
-	</tr>
-<tr>
-	<td class="line-count">217</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            var ret, i, seq, prefix;</td>
-	</tr>
-<tr>
-	<td class="line-count">218</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">219</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            walkFn = walkFn || defaultWalker;</td>
-	</tr>
-<tr>
-	<td class="line-count">220</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            if (this.debug) {</td>
-	</tr>
-<tr>
-	<td class="line-count">221</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                this.seq += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">222</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                this.level += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">223</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                seq = this.seq;</td>
-	</tr>
-<tr>
-	<td class="line-count">224</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                prefix = '';</td>
-	</tr>
-<tr>
-	<td class="line-count">225</td>
-	<td class="line-coverage cline-yes">27</td>
-	<td class="text">                for (i = 0; i &lt; this.level; i += 1) { prefix += '    '; }</td>
-	</tr>
-<tr>
-	<td class="line-count">226</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                console.log(prefix + 'Enter (' + seq + '):' + node.type);</td>
-	</tr>
-<tr>
-	<td class="line-count">227</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">228</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            if (pathElement) { this.path.push(pathElement); }</td>
-	</tr>
-<tr>
-	<td class="line-count">229</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            ret = walkFn.call(this.scope, node, this);</td>
-	</tr>
-<tr>
-	<td class="line-count">230</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            if (pathElement) { this.path.pop(); }</td>
-	</tr>
-<tr>
-	<td class="line-count">231</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            if (this.debug) {</td>
-	</tr>
-<tr>
-	<td class="line-count">232</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                this.level -= 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">233</td>
-	<td class="line-coverage cline-yes">8</td>
-	<td class="text">                console.log(prefix + 'Return (' + seq + '):' + node.type);</td>
-	</tr>
-<tr>
-	<td class="line-count">234</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">235</td>
-	<td class="line-coverage cline-yes">54360</td>
-	<td class="text">            return ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">236</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">237</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">238</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        startLineForNode: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">239</td>
-	<td class="line-coverage cline-yes">1317</td>
-	<td class="text">            return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : <span class="branch-1 cbranch-no">null;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">240</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">241</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">242</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        parent: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">243</td>
-	<td class="line-coverage cline-yes">3339</td>
-	<td class="text">            return this.path.length &gt; 0 ? this.path[this.path.length - 1] : <span class="branch-1 cbranch-no">null;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">244</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">245</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">246</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        isLabeled: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">247</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            var el = this.parent();</td>
-	</tr>
-<tr>
-	<td class="line-count">248</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            return el &amp;&amp; el.node.type === SYNTAX.LabeledStatement.name;</td>
-	</tr>
-<tr>
-	<td class="line-count">249</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">250</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    };</td>
-	</tr>
-<tr>
-	<td class="line-count">251</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">252</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">253</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * mechanism to instrument code for coverage. It uses the `esprima` and</td>
-	</tr>
-<tr>
-	<td class="line-count">254</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * `escodegen` libraries for JS parsing and code generation respectively.</td>
-	</tr>
-<tr>
-	<td class="line-count">255</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">256</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Works on `node` as well as the browser.</td>
-	</tr>
-<tr>
-	<td class="line-count">257</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">258</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Usage on nodejs</td>
-	</tr>
-<tr>
-	<td class="line-count">259</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * ---------------</td>
-	</tr>
-<tr>
-	<td class="line-count">260</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">261</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      var instrumenter = new require('istanbul').Instrumenter(),</td>
-	</tr>
-<tr>
-	<td class="line-count">262</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');</td>
-	</tr>
-<tr>
-	<td class="line-count">263</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">264</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Usage in a browser</td>
-	</tr>
-<tr>
-	<td class="line-count">265</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * ------------------</td>
-	</tr>
-<tr>
-	<td class="line-count">266</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">267</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Load `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.</td>
-	</tr>
-<tr>
-	<td class="line-count">268</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">269</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Create an instrumenter object as:</td>
-	</tr>
-<tr>
-	<td class="line-count">270</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">271</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      var instrumenter = new Instrumenter(),</td>
-	</tr>
-<tr>
-	<td class="line-count">272</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');</td>
-	</tr>
-<tr>
-	<td class="line-count">273</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">274</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Aside from demonstration purposes, it is unclear why you would want to instrument code in a browser.</td>
-	</tr>
-<tr>
-	<td class="line-count">275</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">276</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @class Instrumenter</td>
-	</tr>
-<tr>
-	<td class="line-count">277</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @constructor</td>
-	</tr>
-<tr>
-	<td class="line-count">278</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Object} options Optional. Configuration options.</td>
-	</tr>
-<tr>
-	<td class="line-count">279</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} [options.coverageVariable] the global variable name to use for</td>
-	</tr>
-<tr>
-	<td class="line-count">280</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      tracking coverage. Defaults to `__coverage__`</td>
-	</tr>
-<tr>
-	<td class="line-count">281</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Boolean} [options.embedSource] whether to embed the source code of every</td>
-	</tr>
-<tr>
-	<td class="line-count">282</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      file as an array in the file coverage object for that file. Defaults to `false`</td>
-	</tr>
-<tr>
-	<td class="line-count">283</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Boolean} [options.noCompact] emit readable code when set. Defaults to `false`</td>
-	</tr>
-<tr>
-	<td class="line-count">284</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Boolean} [options.noAutoWrap] do not automatically wrap the source in</td>
-	</tr>
-<tr>
-	<td class="line-count">285</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      an anonymous function before covering it. By default, code is wrapped in</td>
-	</tr>
-<tr>
-	<td class="line-count">286</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      an anonymous function before it is parsed. This is done because</td>
-	</tr>
-<tr>
-	<td class="line-count">287</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      some nodejs libraries have `return` statements outside of</td>
-	</tr>
-<tr>
-	<td class="line-count">288</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      a function which is technically invalid Javascript and causes the parser to fail.</td>
-	</tr>
-<tr>
-	<td class="line-count">289</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      This construct, however, works correctly in node since module loading</td>
-	</tr>
-<tr>
-	<td class="line-count">290</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      is done in the context of an anonymous function.</td>
-	</tr>
-<tr>
-	<td class="line-count">291</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">292</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * Note that the semantics of the code *returned* by the instrumenter does not change in any way.</td>
-	</tr>
-<tr>
-	<td class="line-count">293</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * The function wrapper is "unwrapped" before the instrumented code is generated.</td>
-	</tr>
-<tr>
-	<td class="line-count">294</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Object} [options.codeGenerationOptions] an object that is directly passed to the `escodegen`</td>
-	</tr>
-<tr>
-	<td class="line-count">295</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      library as configuration for code generation. The `noCompact` setting is not honored when this</td>
-	</tr>
-<tr>
-	<td class="line-count">296</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      option is specified</td>
-	</tr>
-<tr>
-	<td class="line-count">297</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Boolean} [options.debug] assist in debugging. Currently, the only effect of</td>
-	</tr>
-<tr>
-	<td class="line-count">298</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *      setting this option is a pretty-print of the coverage variable. Defaults to `false`</td>
-	</tr>
-<tr>
-	<td class="line-count">299</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Boolean} [options.walkDebug] assist in debugging of the AST walker used by this class.</td>
-	</tr>
-<tr>
-	<td class="line-count">300</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">301</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">302</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    function Instrumenter(options) {</td>
-	</tr>
-<tr>
-	<td class="line-count">303</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        this.opts = options || {</td>
-	</tr>
-<tr>
-	<td class="line-count">304</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            debug: false,</td>
-	</tr>
-<tr>
-	<td class="line-count">305</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            walkDebug: false,</td>
-	</tr>
-<tr>
-	<td class="line-count">306</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            coverageVariable: '__coverage__',</td>
-	</tr>
-<tr>
-	<td class="line-count">307</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            codeGenerationOptions: undefined,</td>
-	</tr>
-<tr>
-	<td class="line-count">308</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            noAutoWrap: false,</td>
-	</tr>
-<tr>
-	<td class="line-count">309</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            noCompact: false,</td>
-	</tr>
-<tr>
-	<td class="line-count">310</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            embedSource: false</td>
-	</tr>
-<tr>
-	<td class="line-count">311</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        };</td>
-	</tr>
-<tr>
-	<td class="line-count">312</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">313</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        this.walker = new Walker({</td>
-	</tr>
-<tr>
-	<td class="line-count">314</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ExpressionStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">315</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            BreakStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">316</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ContinueStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">317</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            DebuggerStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">318</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ReturnStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">319</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ThrowStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">320</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            TryStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">321</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            VariableDeclaration: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">322</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            IfStatement: [ this.ifBlockConverter, this.ifBranchInjector, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">323</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ForStatement: [ this.skipInit, this.loopBlockConverter, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">324</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ForInStatement: [ this.skipLeft, this.loopBlockConverter, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">325</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            WhileStatement: [ this.loopBlockConverter, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">326</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            DoWhileStatement: [ this.loopBlockConverter, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">327</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            SwitchStatement: [ this.switchBranchInjector, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">328</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            WithStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">329</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            FunctionDeclaration: [ this.coverFunction, this.coverStatement ],</td>
-	</tr>
-<tr>
-	<td class="line-count">330</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            FunctionExpression: this.coverFunction,</td>
-	</tr>
-<tr>
-	<td class="line-count">331</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            LabeledStatement: this.coverStatement,</td>
-	</tr>
-<tr>
-	<td class="line-count">332</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ConditionalExpression: this.conditionalBranchInjector,</td>
-	</tr>
-<tr>
-	<td class="line-count">333</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            LogicalExpression: this.logicalExpressionBranchInjector</td>
-	</tr>
-<tr>
-	<td class="line-count">334</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }, this, this.opts.walkDebug);</td>
-	</tr>
-<tr>
-	<td class="line-count">335</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">336</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        //unit testing purposes only</td>
-	</tr>
-<tr>
-	<td class="line-count">337</td>
-	<td class="line-coverage cline-yes">110</td>
-	<td class="text">        if (this.opts.backdoor &amp;&amp; this.opts.backdoor.omitTrackerSuffix) {</td>
-	</tr>
-<tr>
-	<td class="line-count">338</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            this.omitTrackerSuffix = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">339</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">340</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">341</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">342</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    Instrumenter.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">343</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        /**</td>
-	</tr>
-<tr>
-	<td class="line-count">344</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * synchronous instrumentation method. Throws when illegal code is passed to it</td>
-	</tr>
-<tr>
-	<td class="line-count">345</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @method instrumentSync</td>
-	</tr>
-<tr>
-	<td class="line-count">346</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @param {String} code the code to be instrumented as a String</td>
-	</tr>
-<tr>
-	<td class="line-count">347</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @param {String} filename Optional. The name of the file from which</td>
-	</tr>
-<tr>
-	<td class="line-count">348</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  the code was read. A temporary filename is generated when not specified.</td>
-	</tr>
-<tr>
-	<td class="line-count">349</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  Not specifying a filename is only useful for unit tests and demonstrations</td>
-	</tr>
-<tr>
-	<td class="line-count">350</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  of this library.</td>
-	</tr>
-<tr>
-	<td class="line-count">351</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         */</td>
-	</tr>
-<tr>
-	<td class="line-count">352</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        instrumentSync: function (code, filename) {</td>
-	</tr>
-<tr>
-	<td class="line-count">353</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">            var codegenOptions,</td>
-	</tr>
-<tr>
-	<td class="line-count">354</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                program;</td>
-	</tr>
-<tr>
-	<td class="line-count">355</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">            filename = filename || String(new Date().getTime()) + '.js';</td>
-	</tr>
-<tr>
-	<td class="line-count">356</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">            this.coverState = {</td>
-	</tr>
-<tr>
-	<td class="line-count">357</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                path: filename,</td>
-	</tr>
-<tr>
-	<td class="line-count">358</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                s: {},</td>
-	</tr>
-<tr>
-	<td class="line-count">359</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                b: {},</td>
-	</tr>
-<tr>
-	<td class="line-count">360</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                f: {},</td>
-	</tr>
-<tr>
-	<td class="line-count">361</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                fnMap: {},</td>
-	</tr>
-<tr>
-	<td class="line-count">362</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                statementMap: {},</td>
-	</tr>
-<tr>
-	<td class="line-count">363</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                branchMap: {}</td>
-	</tr>
-<tr>
-	<td class="line-count">364</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            };</td>
-	</tr>
-<tr>
-	<td class="line-count">365</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">            this.currentState = {</td>
-	</tr>
-<tr>
-	<td class="line-count">366</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                trackerVar: generateTrackerVar(filename, this.omitTrackerSuffix),</td>
-	</tr>
-<tr>
-	<td class="line-count">367</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                func: 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">368</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                branch: 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">369</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                variable: 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">370</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                statement: 0</td>
-	</tr>
-<tr>
-	<td class="line-count">371</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            };</td>
-	</tr>
-<tr>
-	<td class="line-count">372</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">373</td>
-	<td class="line-coverage cline-yes">171</td>
-	<td class="text">            if (typeof code !== 'string') { throw new Error('Code must be string'); } //protect from users accidentally passing in a Buffer object instead</td>
-	</tr>
-<tr>
-	<td class="line-count">374</td>
-	<td class="line-coverage cline-yes">170</td>
-	<td class="text">            if (code.charAt(0) === '#') { //shebang, 'comment' it out, won't affect syntax tree locations for things we care about</td>
-	</tr>
-<tr>
-	<td class="line-count">375</td>
-	<td class="line-coverage cline-yes">6</td>
-	<td class="text">                code = '//' + code;</td>
-	</tr>
-<tr>
-	<td class="line-count">376</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">377</td>
-	<td class="line-coverage cline-yes">170</td>
-	<td class="text">            if (!this.opts.noAutoWrap) {</td>
-	</tr>
-<tr>
-	<td class="line-count">378</td>
-	<td class="line-coverage cline-yes">167</td>
-	<td class="text">                code = LEADER_WRAP + code + TRAILER_WRAP;</td>
-	</tr>
-<tr>
-	<td class="line-count">379</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">380</td>
-	<td class="line-coverage cline-yes">170</td>
-	<td class="text">            program = ESP.parse(code, { loc: true });</td>
-	</tr>
-<tr>
-	<td class="line-count">381</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            if (!this.opts.noAutoWrap) {</td>
-	</tr>
-<tr>
-	<td class="line-count">382</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">                program = { type: SYNTAX.Program.name, body: program.body[0].expression.callee.body.body };</td>
-	</tr>
-<tr>
-	<td class="line-count">383</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">384</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            this.walker.startWalk(program);</td>
-	</tr>
-<tr>
-	<td class="line-count">385</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            codegenOptions = this.opts.codeGenerationOptions || { format: { compact: !this.opts.noCompact }};</td>
-	</tr>
-<tr>
-	<td class="line-count">386</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            //console.log(JSON.stringify(program, undefined, 2));</td>
-	</tr>
-<tr>
-	<td class="line-count">387</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            return this.getPreamble(code) + '\n' + ESPGEN.generate(program, codegenOptions) + '\n';</td>
-	</tr>
-<tr>
-	<td class="line-count">388</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">389</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        /**</td>
-	</tr>
-<tr>
-	<td class="line-count">390</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * Callback based instrumentation. Note that this still executes synchronously in the same process tick</td>
-	</tr>
-<tr>
-	<td class="line-count">391</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * and calls back immediately. It only provides the options for callback style error handling as</td>
-	</tr>
-<tr>
-	<td class="line-count">392</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * opposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`</td>
-	</tr>
-<tr>
-	<td class="line-count">393</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *</td>
-	</tr>
-<tr>
-	<td class="line-count">394</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @method instrument</td>
-	</tr>
-<tr>
-	<td class="line-count">395</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @param {String} code the code to be instrumented as a String</td>
-	</tr>
-<tr>
-	<td class="line-count">396</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @param {String} filename Optional. The name of the file from which</td>
-	</tr>
-<tr>
-	<td class="line-count">397</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  the code was read. A temporary filename is generated when not specified.</td>
-	</tr>
-<tr>
-	<td class="line-count">398</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  Not specifying a filename is only useful for unit tests and demonstrations</td>
-	</tr>
-<tr>
-	<td class="line-count">399</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         *  of this library.</td>
-	</tr>
-<tr>
-	<td class="line-count">400</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         * @param {Function(err, instrumentedCode)} callback - the callback function</td>
-	</tr>
-<tr>
-	<td class="line-count">401</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">         */</td>
-	</tr>
-<tr>
-	<td class="line-count">402</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        instrument: function (code, filename, callback) {</td>
-	</tr>
-<tr>
-	<td class="line-count">403</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">404</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">            if (!callback &amp;&amp; typeof filename === 'function') {</td>
-	</tr>
-<tr>
-	<td class="line-count">405</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                callback = filename;</td>
-	</tr>
-<tr>
-	<td class="line-count">406</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                filename = null;</td>
-	</tr>
-<tr>
-	<td class="line-count">407</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">408</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">            try {</td>
-	</tr>
-<tr>
-	<td class="line-count">409</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">                callback(null, this.instrumentSync(code, filename));</td>
-	</tr>
-<tr>
-	<td class="line-count">410</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            } catch (ex) {</td>
-	</tr>
-<tr>
-	<td class="line-count">411</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                callback(ex);</td>
-	</tr>
-<tr>
-	<td class="line-count">412</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">413</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">414</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">415</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        fixColumnPositions: function (coverState) {</td>
-	</tr>
-<tr>
-	<td class="line-count">416</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            var offset = LEADER_WRAP.length,</td>
-	</tr>
-<tr>
-	<td class="line-count">417</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                fixer = function (loc) {</td>
-	</tr>
-<tr>
-	<td class="line-count">418</td>
-	<td class="line-coverage cline-yes">5201</td>
-	<td class="text">                    if (loc.start.line === 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">419</td>
-	<td class="line-coverage cline-yes">238</td>
-	<td class="text">                        loc.start.column -= offset;</td>
-	</tr>
-<tr>
-	<td class="line-count">420</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">421</td>
-	<td class="line-coverage cline-yes">5201</td>
-	<td class="text">                    if (loc.end.line === 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">422</td>
-	<td class="line-coverage cline-yes">222</td>
-	<td class="text">                        loc.end.column -= offset;</td>
-	</tr>
-<tr>
-	<td class="line-count">423</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">424</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                },</td>
-	</tr>
-<tr>
-	<td class="line-count">425</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                k,</td>
-	</tr>
-<tr>
-	<td class="line-count">426</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                obj,</td>
-	</tr>
-<tr>
-	<td class="line-count">427</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                i,</td>
-	</tr>
-<tr>
-	<td class="line-count">428</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                locations;</td>
-	</tr>
-<tr>
-	<td class="line-count">429</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">430</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            obj = coverState.statementMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">431</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            for (k in obj) {</td>
-	</tr>
-<tr>
-	<td class="line-count">432</td>
-	<td class="line-coverage cline-yes">3150</td>
-	<td class="text">                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) { fixer(obj[k]); }</td>
-	</tr>
-<tr>
-	<td class="line-count">433</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">434</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            obj = coverState.fnMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">435</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            for (k in obj) {</td>
-	</tr>
-<tr>
-	<td class="line-count">436</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) { fixer(obj[k].loc); }</td>
-	</tr>
-<tr>
-	<td class="line-count">437</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">438</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            obj = coverState.branchMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">439</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">            for (k in obj) {</td>
-	</tr>
-<tr>
-	<td class="line-count">440</td>
-	<td class="line-coverage cline-yes">707</td>
-	<td class="text">                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">441</td>
-	<td class="line-coverage cline-yes">707</td>
-	<td class="text">                    locations = obj[k].locations;</td>
-	</tr>
-<tr>
-	<td class="line-count">442</td>
-	<td class="line-coverage cline-yes">707</td>
-	<td class="text">                    for (i = 0; i &lt; locations.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">443</td>
-	<td class="line-coverage cline-yes">1443</td>
-	<td class="text">                        fixer(locations[i]);</td>
-	</tr>
-<tr>
-	<td class="line-count">444</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">445</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                }</td>
-	</tr>
-<tr>
-	<td class="line-count">446</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">447</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">448</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">449</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        getPreamble: function (sourceCode) {</td>
-	</tr>
-<tr>
-	<td class="line-count">450</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            var varName = this.opts.coverageVariable || '__coverage__',</td>
-	</tr>
-<tr>
-	<td class="line-count">451</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                file = this.coverState.path,</td>
-	</tr>
-<tr>
-	<td class="line-count">452</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                tracker = this.currentState.trackerVar,</td>
-	</tr>
-<tr>
-	<td class="line-count">453</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                coverState,</td>
-	</tr>
-<tr>
-	<td class="line-count">454</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                replacer = function (s) { //return replacements using the function to ensure that the replacement is treated like a dumb string and not as a string with RE replacement patterns</td>
-	</tr>
-<tr>
-	<td class="line-count">455</td>
-	<td class="line-coverage cline-yes">1680</td>
-	<td class="text">                    return function () { return s; };</td>
-	</tr>
-<tr>
-	<td class="line-count">456</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                },</td>
-	</tr>
-<tr>
-	<td class="line-count">457</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                code;</td>
-	</tr>
-<tr>
-	<td class="line-count">458</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            if (!this.opts.noAutoWrap) {</td>
-	</tr>
-<tr>
-	<td class="line-count">459</td>
-	<td class="line-coverage cline-yes">166</td>
-	<td class="text">                this.fixColumnPositions(this.coverState);</td>
-	</tr>
-<tr>
-	<td class="line-count">460</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">461</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            if (this.opts.embedSource) {</td>
-	</tr>
-<tr>
-	<td class="line-count">462</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">                this.coverState.code = sourceCode.split(/\n/);</td>
-	</tr>
-<tr>
-	<td class="line-count">463</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">464</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            coverState = this.opts.debug ? JSON.stringify(this.coverState, undefined, 4) : JSON.stringify(this.coverState);</td>
-	</tr>
-<tr>
-	<td class="line-count">465</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            code = [</td>
-	</tr>
-<tr>
-	<td class="line-count">466</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                "if (typeof %GLOBAL% === 'undefined') { %GLOBAL% = {}; }",</td>
-	</tr>
-<tr>
-	<td class="line-count">467</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                "if (!%GLOBAL%['%FILE%']) {",</td>
-	</tr>
-<tr>
-	<td class="line-count">468</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                "   %GLOBAL%['%FILE%'] = %OBJECT%;",</td>
-	</tr>
-<tr>
-	<td class="line-count">469</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                "}",</td>
-	</tr>
-<tr>
-	<td class="line-count">470</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                "var %VAR% = %GLOBAL%['%FILE%'];"</td>
-	</tr>
-<tr>
-	<td class="line-count">471</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            ].join("\n")</td>
-	</tr>
-<tr>
-	<td class="line-count">472</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(/%VAR%/g, replacer(tracker))</td>
-	</tr>
-<tr>
-	<td class="line-count">473</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(/%GLOBAL%/g, replacer(varName))</td>
-	</tr>
-<tr>
-	<td class="line-count">474</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(/%FILE%/g, replacer(file))</td>
-	</tr>
-<tr>
-	<td class="line-count">475</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                .replace(/%OBJECT%/g, replacer(coverState));</td>
-	</tr>
-<tr>
-	<td class="line-count">476</td>
-	<td class="line-coverage cline-yes">168</td>
-	<td class="text">            return code;</td>
-	</tr>
-<tr>
-	<td class="line-count">477</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">478</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">479</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        convertToBlock: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">480</td>
-	<td class="line-coverage cline-yes">941</td>
-	<td class="text">            if (!node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">481</td>
-	<td class="line-coverage cline-yes">295</td>
-	<td class="text">                return { type: 'BlockStatement', body: [] };</td>
-	</tr>
-<tr>
-	<td class="line-count">482</td>
-	<td class="line-coverage cline-yes">646</td>
-	<td class="text">            } else if (node.type === 'BlockStatement') {</td>
-	</tr>
-<tr>
-	<td class="line-count">483</td>
-	<td class="line-coverage cline-yes">521</td>
-	<td class="text">                return node;</td>
-	</tr>
-<tr>
-	<td class="line-count">484</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">485</td>
-	<td class="line-coverage cline-yes">125</td>
-	<td class="text">                return { type: 'BlockStatement', body: [ node ] };</td>
-	</tr>
-<tr>
-	<td class="line-count">486</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">487</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">488</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">489</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ifBlockConverter: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">490</td>
-	<td class="line-coverage cline-yes">424</td>
-	<td class="text">            node.consequent = this.convertToBlock(node.consequent);</td>
-	</tr>
-<tr>
-	<td class="line-count">491</td>
-	<td class="line-coverage cline-yes">424</td>
-	<td class="text">            node.alternate = this.convertToBlock(node.alternate);</td>
-	</tr>
-<tr>
-	<td class="line-count">492</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">493</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">494</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        loopBlockConverter: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">495</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            node.body = this.convertToBlock(node.body);</td>
-	</tr>
-<tr>
-	<td class="line-count">496</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">497</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">498</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        statementName: function (location) {</td>
-	</tr>
-<tr>
-	<td class="line-count">499</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            var sName;</td>
-	</tr>
-<tr>
-	<td class="line-count">500</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            this.currentState.statement += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">501</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            sName = this.currentState.statement;</td>
-	</tr>
-<tr>
-	<td class="line-count">502</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            this.coverState.statementMap[sName] = location;</td>
-	</tr>
-<tr>
-	<td class="line-count">503</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            this.coverState.s[sName] = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">504</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            return sName;</td>
-	</tr>
-<tr>
-	<td class="line-count">505</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">506</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">507</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        skipInit: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">508</td>
-	<td class="line-coverage cline-yes">61</td>
-	<td class="text">            if (node.init) {</td>
-	</tr>
-<tr>
-	<td class="line-count">509</td>
-	<td class="line-coverage cline-yes">60</td>
-	<td class="text">                node.init.skipWalk = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">510</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">511</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">512</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">513</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        skipLeft: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">514</td>
-	<td class="line-coverage cline-yes">17</td>
-	<td class="text">            node.left.skipWalk = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">515</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">516</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">517</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        coverStatement: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">518</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            var sName,</td>
-	</tr>
-<tr>
-	<td class="line-count">519</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                incrStatementCount;</td>
-	</tr>
-<tr>
-	<td class="line-count">520</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">521</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            sName = this.statementName(node.loc);</td>
-	</tr>
-<tr>
-	<td class="line-count">522</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            incrStatementCount = astgen.statement(</td>
-	</tr>
-<tr>
-	<td class="line-count">523</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                astgen.postIncrement(</td>
-	</tr>
-<tr>
-	<td class="line-count">524</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    astgen.subscript(</td>
-	</tr>
-<tr>
-	<td class="line-count">525</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('s')),</td>
-	</tr>
-<tr>
-	<td class="line-count">526</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        astgen.stringLiteral(sName)</td>
-	</tr>
-<tr>
-	<td class="line-count">527</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    )</td>
-	</tr>
-<tr>
-	<td class="line-count">528</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                )</td>
-	</tr>
-<tr>
-	<td class="line-count">529</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            );</td>
-	</tr>
-<tr>
-	<td class="line-count">530</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            this.splice(incrStatementCount, node, walker);</td>
-	</tr>
-<tr>
-	<td class="line-count">531</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">532</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">533</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        splice: function (statements, node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">534</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            var targetNode = walker.isLabeled() ? walker.parent().node : node;</td>
-	</tr>
-<tr>
-	<td class="line-count">535</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            targetNode.prepend = targetNode.prepend || [];</td>
-	</tr>
-<tr>
-	<td class="line-count">536</td>
-	<td class="line-coverage cline-yes">3154</td>
-	<td class="text">            pushAll(targetNode.prepend, statements);</td>
-	</tr>
-<tr>
-	<td class="line-count">537</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">538</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">539</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        functionName: function (node, line, location) {</td>
-	</tr>
-<tr>
-	<td class="line-count">540</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            this.currentState.func += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">541</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            var id = this.currentState.func,</td>
-	</tr>
-<tr>
-	<td class="line-count">542</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                name = node.id ? node.id.name : '(anonymous_' + id + ')';</td>
-	</tr>
-<tr>
-	<td class="line-count">543</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            this.coverState.fnMap[id] = { name: name, line: line, loc: location };</td>
-	</tr>
-<tr>
-	<td class="line-count">544</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            this.coverState.f[id] = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">545</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            return id;</td>
-	</tr>
-<tr>
-	<td class="line-count">546</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">547</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">548</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        coverFunction: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">549</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            var id = this.functionName(node, walker.startLineForNode(node), { start: node.loc.start, end: { line: node.body.loc.start.line, column: node.body.loc.start.column } }),</td>
-	</tr>
-<tr>
-	<td class="line-count">550</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                body = node.body,</td>
-	</tr>
-<tr>
-	<td class="line-count">551</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                blockBody = body.body;</td>
-	</tr>
-<tr>
-	<td class="line-count">552</td>
-	<td class="line-coverage cline-yes">608</td>
-	<td class="text">            blockBody.unshift(</td>
-	</tr>
-<tr>
-	<td class="line-count">553</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                astgen.statement(</td>
-	</tr>
-<tr>
-	<td class="line-count">554</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    astgen.postIncrement(</td>
-	</tr>
-<tr>
-	<td class="line-count">555</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        astgen.subscript(</td>
-	</tr>
-<tr>
-	<td class="line-count">556</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('f')),</td>
-	</tr>
-<tr>
-	<td class="line-count">557</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            astgen.stringLiteral(id)</td>
-	</tr>
-<tr>
-	<td class="line-count">558</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        )</td>
-	</tr>
-<tr>
-	<td class="line-count">559</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    )</td>
-	</tr>
-<tr>
-	<td class="line-count">560</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                )</td>
-	</tr>
-<tr>
-	<td class="line-count">561</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            );</td>
-	</tr>
-<tr>
-	<td class="line-count">562</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">563</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">564</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        branchName: function (type, startLine, pathLocations) {</td>
-	</tr>
-<tr>
-	<td class="line-count">565</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            var bName,</td>
-	</tr>
-<tr>
-	<td class="line-count">566</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                paths = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">567</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                locations = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">568</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                i;</td>
-	</tr>
-<tr>
-	<td class="line-count">569</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            this.currentState.branch += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">570</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            bName = this.currentState.branch;</td>
-	</tr>
-<tr>
-	<td class="line-count">571</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            for (i = 0; i &lt; pathLocations.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">572</td>
-	<td class="line-coverage cline-yes">1447</td>
-	<td class="text">                paths.push(0);</td>
-	</tr>
-<tr>
-	<td class="line-count">573</td>
-	<td class="line-coverage cline-yes">1447</td>
-	<td class="text">                locations.push(pathLocations[i]);</td>
-	</tr>
-<tr>
-	<td class="line-count">574</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">575</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            this.coverState.b[bName] = paths;</td>
-	</tr>
-<tr>
-	<td class="line-count">576</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            this.coverState.branchMap[bName] = { line: startLine, type: type, locations: locations };</td>
-	</tr>
-<tr>
-	<td class="line-count">577</td>
-	<td class="line-coverage cline-yes">709</td>
-	<td class="text">            return bName;</td>
-	</tr>
-<tr>
-	<td class="line-count">578</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">579</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">580</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        branchIncrementExprAst: function (varName, branchIndex, down) {</td>
-	</tr>
-<tr>
-	<td class="line-count">581</td>
-	<td class="line-coverage cline-yes">1447</td>
-	<td class="text">            var ret = astgen.postIncrement(</td>
-	</tr>
-<tr>
-	<td class="line-count">582</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                astgen.subscript(</td>
-	</tr>
-<tr>
-	<td class="line-count">583</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    astgen.subscript(</td>
-	</tr>
-<tr>
-	<td class="line-count">584</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('b')),</td>
-	</tr>
-<tr>
-	<td class="line-count">585</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        astgen.stringLiteral(varName)</td>
-	</tr>
-<tr>
-	<td class="line-count">586</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    ),</td>
-	</tr>
-<tr>
-	<td class="line-count">587</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    astgen.numericLiteral(branchIndex)</td>
-	</tr>
-<tr>
-	<td class="line-count">588</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                ),</td>
-	</tr>
-<tr>
-	<td class="line-count">589</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                down</td>
-	</tr>
-<tr>
-	<td class="line-count">590</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            );</td>
-	</tr>
-<tr>
-	<td class="line-count">591</td>
-	<td class="line-coverage cline-yes">1447</td>
-	<td class="text">            return ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">592</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">593</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">594</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        locationsForNodes: function (nodes) {</td>
-	</tr>
-<tr>
-	<td class="line-count">595</td>
-	<td class="line-coverage cline-yes">285</td>
-	<td class="text">            var ret = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">596</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                i;</td>
-	</tr>
-<tr>
-	<td class="line-count">597</td>
-	<td class="line-coverage cline-yes">285</td>
-	<td class="text">            for (i = 0; i &lt; nodes.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">598</td>
-	<td class="line-coverage cline-yes">599</td>
-	<td class="text">                ret.push(nodes[i].loc);</td>
-	</tr>
-<tr>
-	<td class="line-count">599</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">600</td>
-	<td class="line-coverage cline-yes">285</td>
-	<td class="text">            return ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">601</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">602</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">603</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ifBranchInjector: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">604</td>
-	<td class="line-coverage cline-yes">424</td>
-	<td class="text">            var line = node.loc.start.line,</td>
-	</tr>
-<tr>
-	<td class="line-count">605</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                col = node.loc.start.column,</td>
-	</tr>
-<tr>
-	<td class="line-count">606</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                start = { line: line, column: col },</td>
-	</tr>
-<tr>
-	<td class="line-count">607</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                end = { line: line, column: col },</td>
-	</tr>
-<tr>
-	<td class="line-count">608</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                bName = this.branchName('if', walker.startLineForNode(node), [</td>
-	</tr>
-<tr>
-	<td class="line-count">609</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    { start: start, end: end },</td>
-	</tr>
-<tr>
-	<td class="line-count">610</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    { start: start, end: end }</td>
-	</tr>
-<tr>
-	<td class="line-count">611</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                ]),</td>
-	</tr>
-<tr>
-	<td class="line-count">612</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                thenBody = node.consequent.body,</td>
-	</tr>
-<tr>
-	<td class="line-count">613</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                elseBody = node.alternate.body;</td>
-	</tr>
-<tr>
-	<td class="line-count">614</td>
-	<td class="line-coverage cline-yes">424</td>
-	<td class="text">            thenBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 0)));</td>
-	</tr>
-<tr>
-	<td class="line-count">615</td>
-	<td class="line-coverage cline-yes">424</td>
-	<td class="text">            elseBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 1)));</td>
-	</tr>
-<tr>
-	<td class="line-count">616</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">617</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">618</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        switchBranchInjector: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">619</td>
-	<td class="line-coverage cline-yes">16</td>
-	<td class="text">            var cases = node.cases,</td>
-	</tr>
-<tr>
-	<td class="line-count">620</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                bName,</td>
-	</tr>
-<tr>
-	<td class="line-count">621</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                i;</td>
-	</tr>
-<tr>
-	<td class="line-count">622</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">623</td>
-	<td class="line-coverage cline-yes">16</td>
-	<td class="text">            if (!cases) {</td>
-	</tr>
-<tr>
-	<td class="line-count">624</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">                return;</td>
-	</tr>
-<tr>
-	<td class="line-count">625</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">626</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">            bName = this.branchName('switch', walker.startLineForNode(node), this.locationsForNodes(cases));</td>
-	</tr>
-<tr>
-	<td class="line-count">627</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">            for (i = 0; i &lt; cases.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">628</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">                cases[i].consequent.unshift(astgen.statement(this.branchIncrementExprAst(bName, i)));</td>
-	</tr>
-<tr>
-	<td class="line-count">629</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">630</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">631</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">632</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        conditionalBranchInjector: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">633</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">            var bName = this.branchName('cond-expr', walker.startLineForNode(node), this.locationsForNodes([ node.consequent, node.alternate ])),</td>
-	</tr>
-<tr>
-	<td class="line-count">634</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                ast1 = this.branchIncrementExprAst(bName, 0),</td>
-	</tr>
-<tr>
-	<td class="line-count">635</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                ast2 = this.branchIncrementExprAst(bName, 1);</td>
-	</tr>
-<tr>
-	<td class="line-count">636</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">637</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">            node.consequent = astgen.sequence(ast1, node.consequent);</td>
-	</tr>
-<tr>
-	<td class="line-count">638</td>
-	<td class="line-coverage cline-yes">107</td>
-	<td class="text">            node.alternate = astgen.sequence(ast2, node.alternate);</td>
-	</tr>
-<tr>
-	<td class="line-count">639</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">640</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">641</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        logicalExpressionBranchInjector: function (node, walker) {</td>
-	</tr>
-<tr>
-	<td class="line-count">642</td>
-	<td class="line-coverage cline-yes">180</td>
-	<td class="text">            var parent = walker.parent(),</td>
-	</tr>
-<tr>
-	<td class="line-count">643</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                leaves = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">644</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                bName,</td>
-	</tr>
-<tr>
-	<td class="line-count">645</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                tuple,</td>
-	</tr>
-<tr>
-	<td class="line-count">646</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                i;</td>
-	</tr>
-<tr>
-	<td class="line-count">647</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">648</td>
-	<td class="line-coverage cline-yes">180</td>
-	<td class="text">            if (parent &amp;&amp; parent.node.type === SYNTAX.LogicalExpression.name) {</td>
-	</tr>
-<tr>
-	<td class="line-count">649</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                //already covered</td>
-	</tr>
-<tr>
-	<td class="line-count">650</td>
-	<td class="line-coverage cline-yes">17</td>
-	<td class="text">                return;</td>
-	</tr>
-<tr>
-	<td class="line-count">651</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">652</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">653</td>
-	<td class="line-coverage cline-yes">163</td>
-	<td class="text">            this.findLeaves(node, leaves);</td>
-	</tr>
-<tr>
-	<td class="line-count">654</td>
-	<td class="line-coverage cline-yes">343</td>
-	<td class="text">            bName = this.branchName('binary-expr', walker.startLineForNode(node), this.locationsForNodes(leaves.map(function (item) { return item.node; })));</td>
-	</tr>
-<tr>
-	<td class="line-count">655</td>
-	<td class="line-coverage cline-yes">163</td>
-	<td class="text">            for (i = 0; i &lt; leaves.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">656</td>
-	<td class="line-coverage cline-yes">343</td>
-	<td class="text">                tuple = leaves[i];</td>
-	</tr>
-<tr>
-	<td class="line-count">657</td>
-	<td class="line-coverage cline-yes">343</td>
-	<td class="text">                tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);</td>
-	</tr>
-<tr>
-	<td class="line-count">658</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">659</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        },</td>
-	</tr>
-<tr>
-	<td class="line-count">660</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">661</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        findLeaves: function (node, accumulator, parent, property) {</td>
-	</tr>
-<tr>
-	<td class="line-count">662</td>
-	<td class="line-coverage cline-yes">523</td>
-	<td class="text">            if (node.type === SYNTAX.LogicalExpression.name) {</td>
-	</tr>
-<tr>
-	<td class="line-count">663</td>
-	<td class="line-coverage cline-yes">180</td>
-	<td class="text">                this.findLeaves(node.left, accumulator, node, 'left');</td>
-	</tr>
-<tr>
-	<td class="line-count">664</td>
-	<td class="line-coverage cline-yes">180</td>
-	<td class="text">                this.findLeaves(node.right, accumulator, node, 'right');</td>
-	</tr>
-<tr>
-	<td class="line-count">665</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">666</td>
-	<td class="line-coverage cline-yes">343</td>
-	<td class="text">                accumulator.push({ node: node, parent: parent, property: property });</td>
-	</tr>
-<tr>
-	<td class="line-count">667</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">668</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">669</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    };</td>
-	</tr>
-<tr>
-	<td class="line-count">670</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">671</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">    if (isNode) {</td>
-	</tr>
-<tr>
-	<td class="line-count">672</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        module.exports = Instrumenter;</td>
-	</tr>
-<tr>
-	<td class="line-count">673</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">674</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        window.Instrumenter = Instrumenter;</td>
-	</tr>
-<tr>
-	<td class="line-count">675</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">676</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">677</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}(typeof module !== 'undefined' &amp;&amp; typeof module.exports !== 'undefined' &amp;&amp; typeof exports !== 'undefined'));</td>
-	</tr>
-<tr>
-	<td class="line-count">678</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">679</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-yes">141</span>
+<span class="cline-any cline-yes">141</span>
+<span class="cline-any cline-yes">141</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">23996</span>
+<span class="cline-any cline-yes">19719</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23996</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">13982</span>
+<span class="cline-any cline-yes">6991</span>
+<span class="cline-any cline-yes">2031</span>
+<span class="cline-any cline-yes">6234</span>
+<span class="cline-any cline-yes">6991</span>
+<span class="cline-any cline-yes">9022</span>
+<span class="cline-any cline-yes">6991</span>
+<span class="cline-any cline-yes">757</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-yes">968</span>
+<span class="cline-any cline-yes">2684</span>
+<span class="cline-any cline-yes">2684</span>
+<span class="cline-any cline-yes">2684</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">63176</span>
+<span class="cline-any cline-yes">4210</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-yes">57906</span>
+<span class="cline-any cline-yes">57906</span>
+<span class="cline-any cline-yes">57906</span>
+<span class="cline-any cline-yes">56350</span>
+<span class="cline-any cline-yes">56350</span>
+<span class="cline-any cline-yes">7813</span>
+<span class="cline-any cline-yes">7813</span>
+<span class="cline-any cline-yes">15437</span>
+<span class="cline-any cline-yes">15437</span>
+<span class="cline-any cline-yes">15437</span>
+<span class="cline-any cline-yes">15437</span>
+<span class="cline-any cline-yes">4277</span>
+<span class="cline-any cline-yes">4277</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15437</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7813</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48537</span>
+<span class="cline-any cline-yes">48537</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48537</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-yes">64144</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71038</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1671</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4547</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">173</span>
+<span class="cline-any cline-yes">172</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">172</span>
+<span class="cline-any cline-yes">169</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">172</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">107</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">107</span>
+<span class="cline-any cline-yes">107</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6983</span>
+<span class="cline-any cline-yes">1928</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6983</span>
+<span class="cline-any cline-yes">1912</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">4278</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">991</span>
+<span class="cline-any cline-yes">991</span>
+<span class="cline-any cline-yes">991</span>
+<span class="cline-any cline-yes">2027</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1700</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1383</span>
+<span class="cline-any cline-yes">431</span>
+<span class="cline-any cline-yes">952</span>
+<span class="cline-any cline-yes">827</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">125</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">610</span>
+<span class="cline-any cline-yes">610</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">163</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">121</span>
+<span class="cline-any cline-yes">118</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-yes">4282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">678</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-yes">2031</span>
+<span class="cline-any cline-yes">2031</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-yes">993</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2031</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2031</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">383</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">383</span>
+<span class="cline-any cline-yes">811</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">383</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">610</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">610</span>
+<span class="cline-any cline-yes">610</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">54</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133</span>
+<span class="cline-any cline-yes">133</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">260</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">260</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">231</span>
+<span class="cline-any cline-yes">491</span>
+<span class="cline-any cline-yes">231</span>
+<span class="cline-any cline-yes">491</span>
+<span class="cline-any cline-yes">491</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">751</span>
+<span class="cline-any cline-yes">260</span>
+<span class="cline-any cline-yes">260</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">491</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+/*global esprima, escodegen, window */
+(function (isNode) {
+&nbsp;
+    var SYNTAX,
+        nodeType,
+        ESP = isNode ? require('esprima') : esprima,
+        ESPGEN = isNode ? require('escodegen') : escodegen,  //TODO - package as dependency
+        crypto = isNode ? require('crypto') : null,
+        LEADER_WRAP = '(function () { ',
+        TRAILER_WRAP = '\n}());',
+        astgen,
+        preconditions,
+        cond,
+        isArray = Array.isArray;
+&nbsp;
+    <span class="missing-if-branch">I</span>if (!isArray) {
+<span class="cstat-no">        isArray = <span class="fstat-no">function (thing) {</span> <span class="cstat-no">return thing &amp;&amp;  Object.prototype.toString.call(thing) === '[object Array]'; </span>};</span>
+    }
+&nbsp;
+    if (!isNode) {
+        preconditions = {
+            'Could not find esprima': ESP,
+            'Could not find escodegen': ESPGEN,
+            'JSON object not in scope': JSON,
+            'Array does not implement push': [].push,
+            'Array does not implement unshift': [].unshift
+        };
+        for (cond in preconditions) {
+            <span class="missing-if-branch">E</span>if (preconditions.hasOwnProperty(cond)) {
+                <span class="missing-if-branch">I</span>if (!preconditions[cond]) { <span class="cstat-no">throw new Error(cond); </span>}
+            }
+        }
+    }
+&nbsp;
+    function generateTrackerVar(filename, omitSuffix) {
+        var hash, suffix;
+        if (crypto !== null) {
+            hash = crypto.createHash('md5');
+            hash.update(filename);
+            suffix = hash.digest('base64');
+            //trim trailing equal signs, turn identifier unsafe chars to safe ones + =&gt; _ and / =&gt; $
+            suffix = suffix.replace(new RegExp('=', 'g'), '')
+                .replace(new RegExp('\\+', 'g'), '_')
+                .replace(new RegExp('/', 'g'), '$');
+        } else {
+            /*jslint nomen: true */
+            window.__cov_seq = window.__cov_seq || 0;
+            window.__cov_seq += 1;
+            suffix = window.__cov_seq;
+        }
+        return '__cov_' + (omitSuffix ? '' : suffix);
+    }
+&nbsp;
+    function pushAll(ary, thing) {
+        if (!isArray(thing)) {
+            thing = [ thing ];
+        }
+        Array.prototype.push.apply(ary, thing);
+    }
+&nbsp;
+    SYNTAX = {
+        ArrayExpression: [ 'elements' ],
+        AssignmentExpression: ['left', 'right'],
+        BinaryExpression: ['left', 'right' ],
+        BlockStatement: [ 'body' ],
+        BreakStatement: [ 'label' ],
+        CallExpression: [ 'callee', 'arguments'],
+        CatchClause: ['param', 'body'],
+        ConditionalExpression: [ 'test', 'consequent', 'alternate' ],
+        ContinueStatement: [ 'label' ],
+        DebuggerStatement: [ ],
+        DoWhileStatement: [ 'test', 'body' ],
+        EmptyStatement: [],
+        ExpressionStatement: [ 'expression'],
+        ForInStatement: [ 'left', 'right', 'body' ],
+        ForStatement: ['init', 'test', 'update', 'body' ],
+        FunctionDeclaration: ['id', 'params', 'body'],
+        FunctionExpression: ['id', 'params', 'defaults', 'body'],
+        Identifier: [],
+        IfStatement: ['test', 'consequent', 'alternate'],
+        LabeledStatement: ['label', 'body'],
+        Literal: [],
+        LogicalExpression: [ 'left', 'right' ],
+        MemberExpression: ['object', 'property'],
+        NewExpression: ['callee', 'arguments'],
+        ObjectExpression: [ 'properties' ],
+        Program: [ 'body' ],
+        Property: [ 'key', 'value'],
+        ReturnStatement: ['argument'],
+        SequenceExpression: ['expressions'],
+        SwitchCase: [ 'test', 'consequent' ],
+        SwitchStatement: ['discriminant', 'cases' ],
+        ThisExpression: [],
+        ThrowStatement: ['argument'],
+        TryStatement: [ 'block', 'handlers', 'finalizer' ],
+        UnaryExpression: ['argument'],
+        UpdateExpression: [ 'argument' ],
+        VariableDeclaration: [ 'declarations' ],
+        VariableDeclarator: [ 'id', 'init' ],
+        WhileStatement: [ 'test', 'body' ],
+        WithStatement: [ 'object', 'body' ]
+&nbsp;
+    };
+&nbsp;
+    for (nodeType in SYNTAX) {
+        <span class="missing-if-branch">E</span>if (SYNTAX.hasOwnProperty(nodeType)) {
+            SYNTAX[nodeType] = { name: nodeType, children: SYNTAX[nodeType] };
+        }
+    }
+&nbsp;
+    astgen = {
+        variable: function (name) { return { type: SYNTAX.Identifier.name, name: name }; },
+        stringLiteral: function (str) { return { type: SYNTAX.Literal.name, value: String(str) }; },
+        numericLiteral: function (num) { return { type: SYNTAX.Literal.name, value: Number(num) }; },
+        statement: function (contents) { return { type: SYNTAX.ExpressionStatement.name, expression: contents }; },
+        dot: function (obj, field) { return { type: SYNTAX.MemberExpression.name, computed: false, object: obj, property: field }; },
+        subscript: function (obj, sub) { return { type: SYNTAX.MemberExpression.name, computed: true, object: obj, property: sub }; },
+        postIncrement: function (obj) { return { type: SYNTAX.UpdateExpression.name, operator: '++', prefix: false, argument: obj }; },
+        sequence: function (one, two) { return { type: SYNTAX.SequenceExpression.name, expressions: [one, two] }; }
+    };
+&nbsp;
+    function Walker(walkMap, scope, debug) {
+        this.walkMap = walkMap;
+        this.scope = scope;
+        this.debug = debug;
+        if (this.debug) {
+            this.level = 0;
+            this.seq = true;
+        }
+    }
+&nbsp;
+    function defaultWalker(node, walker) {
+&nbsp;
+        var type = node.type,
+            children = SYNTAX[type].children,
+            applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name, // don't run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
+            walkerFn = applyCustomWalker ? walker.walkMap[type] : null,
+            i,
+            j,
+            walkFnIndex,
+            childType,
+            childNode,
+            ret = node,
+            childArray,
+            childElement,
+            tmpNode,
+            pathElement,
+            assignNode,
+            isLast;
+&nbsp;
+        <span class="missing-if-branch">I</span>if (node.walking) { <span class="cstat-no">throw new Error('Infinite regress: Custom walkers may NOT call walker.walk(node)'); </span>}
+        node.walking = true;
+        if (isArray(walkerFn)) {
+            for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {
+                isLast = walkFnIndex === walkerFn.length - 1;
+                ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;
+                <span class="missing-if-branch">I</span>if (ret.type !== type &amp;&amp; <span class="branch-1 cbranch-no">!isLast)</span> { <span class="cstat-no">throw new Error('Only the last walker is allowed to change the node type: [type was: ' + type + ' ]'); </span>}
+            }
+        } else {
+            if (walkerFn) {
+                ret = walker.walk(node, walkerFn) || ret;
+            }
+        }
+&nbsp;
+        for (i = 0; i &lt; children.length; i += 1) {
+            childType = children[i];
+            childNode = node[childType];
+            if (childNode &amp;&amp; !childNode.skipWalk) {
+                pathElement = { node: node, property: childType };
+                if (isArray(childNode)) {
+                    childArray = [];
+                    for (j = 0; j &lt; childNode.length; j += 1) {
+                        childElement = childNode[j];
+                        pathElement.index = j;
+                        assignNode = walker.walk(childElement, null, pathElement) || <span class="branch-1 cbranch-no">childElement;</span>
+                        if (isArray(assignNode.prepend)) {
+                            pushAll(childArray, assignNode.prepend);
+                            delete assignNode.prepend;
+                        }
+                        pushAll(childArray, assignNode);
+                    }
+                    node[childType] = childArray;
+                } else {
+                    assignNode = walker.walk(childNode, null, pathElement) || <span class="branch-1 cbranch-no">childNode;</span>
+                    <span class="missing-if-branch">I</span>if (isArray(assignNode.prepend)) {
+<span class="cstat-no">                        throw new Error('Internal error: attempt to prepend statements in disallowed (non-array) context');</span>
+                        /* if this should be allowed, this is how to solve it
+                        tmpNode = { type: 'BlockStatement', body: [] };
+                        pushAll(tmpNode.body, assignNode.prepend);
+                        pushAll(tmpNode.body, assignNode);
+                        node[childType] = tmpNode;
+                        delete assignNode.prepend;
+                        */
+                    } else {
+                        node[childType] = assignNode;
+                    }
+                }
+            }
+        }
+&nbsp;
+        delete node.walking;
+        return ret;
+    }
+&nbsp;
+    Walker.prototype = {
+        startWalk: function (node) {
+            this.path = [];
+            this.walk(node);
+        },
+&nbsp;
+        walk: function (node, walkFn, pathElement) {
+            var ret, i, seq, prefix;
+&nbsp;
+            walkFn = walkFn || defaultWalker;
+            if (this.debug) {
+                this.seq += 1;
+                this.level += 1;
+                seq = this.seq;
+                prefix = '';
+                for (i = 0; i &lt; this.level; i += 1) { prefix += '    '; }
+                console.log(prefix + 'Enter (' + seq + '):' + node.type);
+            }
+            if (pathElement) { this.path.push(pathElement); }
+            ret = walkFn.call(this.scope, node, this);
+            if (pathElement) { this.path.pop(); }
+            if (this.debug) {
+                this.level -= 1;
+                console.log(prefix + 'Return (' + seq + '):' + node.type);
+            }
+            return ret;
+        },
+&nbsp;
+        startLineForNode: function (node) {
+            return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : <span class="branch-1 cbranch-no">null;</span>
+        },
+&nbsp;
+        parent: function () {
+            return this.path.length &gt; 0 ? this.path[this.path.length - 1] : <span class="branch-1 cbranch-no">null;</span>
+        },
+&nbsp;
+        isLabeled: function () {
+            var el = this.parent();
+            return el &amp;&amp; el.node.type === SYNTAX.LabeledStatement.name;
+        }
+    };
+&nbsp;
+    /**
+     * mechanism to instrument code for coverage. It uses the `esprima` and
+     * `escodegen` libraries for JS parsing and code generation respectively.
+     *
+     * Works on `node` as well as the browser.
+     *
+     * Usage on nodejs
+     * ---------------
+     *
+     *      var instrumenter = new require('istanbul').Instrumenter(),
+     *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+     *
+     * Usage in a browser
+     * ------------------
+     *
+     * Load `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.
+     *
+     * Create an instrumenter object as:
+     *
+     *      var instrumenter = new Instrumenter(),
+     *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+     *
+     * Aside from demonstration purposes, it is unclear why you would want to instrument code in a browser.
+     *
+     * @class Instrumenter
+     * @constructor
+     * @param {Object} options Optional. Configuration options.
+     * @param {String} [options.coverageVariable] the global variable name to use for
+     *      tracking coverage. Defaults to `__coverage__`
+     * @param {Boolean} [options.embedSource] whether to embed the source code of every
+     *      file as an array in the file coverage object for that file. Defaults to `false`
+     * @param {Boolean} [options.noCompact] emit readable code when set. Defaults to `false`
+     * @param {Boolean} [options.noAutoWrap] do not automatically wrap the source in
+     *      an anonymous function before covering it. By default, code is wrapped in
+     *      an anonymous function before it is parsed. This is done because
+     *      some nodejs libraries have `return` statements outside of
+     *      a function which is technically invalid Javascript and causes the parser to fail.
+     *      This construct, however, works correctly in node since module loading
+     *      is done in the context of an anonymous function.
+     *
+     * Note that the semantics of the code *returned* by the instrumenter does not change in any way.
+     * The function wrapper is "unwrapped" before the instrumented code is generated.
+     * @param {Object} [options.codeGenerationOptions] an object that is directly passed to the `escodegen`
+     *      library as configuration for code generation. The `noCompact` setting is not honored when this
+     *      option is specified
+     * @param {Boolean} [options.debug] assist in debugging. Currently, the only effect of
+     *      setting this option is a pretty-print of the coverage variable. Defaults to `false`
+     * @param {Boolean} [options.walkDebug] assist in debugging of the AST walker used by this class.
+     *
+     */
+    function Instrumenter(options) {
+        this.opts = options || {
+            debug: false,
+            walkDebug: false,
+            coverageVariable: '__coverage__',
+            codeGenerationOptions: undefined,
+            noAutoWrap: false,
+            noCompact: false,
+            embedSource: false
+        };
+&nbsp;
+        this.walker = new Walker({
+            ExpressionStatement: this.coverStatement,
+            BreakStatement: this.coverStatement,
+            ContinueStatement: this.coverStatement,
+            DebuggerStatement: this.coverStatement,
+            ReturnStatement: this.coverStatement,
+            ThrowStatement: this.coverStatement,
+            TryStatement: this.coverStatement,
+            VariableDeclaration: this.coverStatement,
+            IfStatement: [ this.ifBlockConverter, this.ifBranchInjector, this.coverStatement ],
+            ForStatement: [ this.skipInit, this.loopBlockConverter, this.coverStatement ],
+            ForInStatement: [ this.skipLeft, this.loopBlockConverter, this.coverStatement ],
+            WhileStatement: [ this.loopBlockConverter, this.coverStatement ],
+            DoWhileStatement: [ this.loopBlockConverter, this.coverStatement ],
+            SwitchStatement: [ this.switchBranchInjector, this.coverStatement ],
+            WithStatement: this.coverStatement,
+            FunctionDeclaration: [ this.coverFunction, this.coverStatement ],
+            FunctionExpression: this.coverFunction,
+            LabeledStatement: this.coverStatement,
+            ConditionalExpression: this.conditionalBranchInjector,
+            LogicalExpression: this.logicalExpressionBranchInjector
+        }, this, this.opts.walkDebug);
+&nbsp;
+        //unit testing purposes only
+        if (this.opts.backdoor &amp;&amp; this.opts.backdoor.omitTrackerSuffix) {
+            this.omitTrackerSuffix = true;
+        }
+    }
+&nbsp;
+    Instrumenter.prototype = {
+        /**
+         * synchronous instrumentation method. Throws when illegal code is passed to it
+         * @method instrumentSync
+         * @param {String} code the code to be instrumented as a String
+         * @param {String} filename Optional. The name of the file from which
+         *  the code was read. A temporary filename is generated when not specified.
+         *  Not specifying a filename is only useful for unit tests and demonstrations
+         *  of this library.
+         */
+        instrumentSync: function (code, filename) {
+            var codegenOptions,
+                program;
+            filename = filename || String(new Date().getTime()) + '.js';
+            this.coverState = {
+                path: filename,
+                s: {},
+                b: {},
+                f: {},
+                fnMap: {},
+                statementMap: {},
+                branchMap: {}
+            };
+            this.currentState = {
+                trackerVar: generateTrackerVar(filename, this.omitTrackerSuffix),
+                func: 0,
+                branch: 0,
+                variable: 0,
+                statement: 0
+            };
+&nbsp;
+            if (typeof code !== 'string') { throw new Error('Code must be string'); } //protect from users accidentally passing in a Buffer object instead
+            if (code.charAt(0) === '#') { //shebang, 'comment' it out, won't affect syntax tree locations for things we care about
+                code = '//' + code;
+            }
+            if (!this.opts.noAutoWrap) {
+                code = LEADER_WRAP + code + TRAILER_WRAP;
+            }
+            program = ESP.parse(code, { loc: true });
+            if (!this.opts.noAutoWrap) {
+                program = { type: SYNTAX.Program.name, body: program.body[0].expression.callee.body.body };
+            }
+            this.walker.startWalk(program);
+            codegenOptions = this.opts.codeGenerationOptions || { format: { compact: !this.opts.noCompact }};
+            //console.log(JSON.stringify(program, undefined, 2));
+            return this.getPreamble(code) + '\n' + ESPGEN.generate(program, codegenOptions) + '\n';
+        },
+        /**
+         * Callback based instrumentation. Note that this still executes synchronously in the same process tick
+         * and calls back immediately. It only provides the options for callback style error handling as
+         * opposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`
+         *
+         * @method instrument
+         * @param {String} code the code to be instrumented as a String
+         * @param {String} filename Optional. The name of the file from which
+         *  the code was read. A temporary filename is generated when not specified.
+         *  Not specifying a filename is only useful for unit tests and demonstrations
+         *  of this library.
+         * @param {Function(err, instrumentedCode)} callback - the callback function
+         */
+        instrument: function (code, filename, callback) {
+&nbsp;
+            if (!callback &amp;&amp; typeof filename === 'function') {
+                callback = filename;
+                filename = null;
+            }
+            try {
+                callback(null, this.instrumentSync(code, filename));
+            } catch (ex) {
+                callback(ex);
+            }
+        },
+&nbsp;
+        fixColumnPositions: function (coverState) {
+            var offset = LEADER_WRAP.length,
+                fixer = function (loc) {
+                    if (loc.start.line === 1) {
+                        loc.start.column -= offset;
+                    }
+                    if (loc.end.line === 1) {
+                        loc.end.column -= offset;
+                    }
+                },
+                k,
+                obj,
+                i,
+                locations;
+&nbsp;
+            obj = coverState.statementMap;
+            for (k in obj) {
+                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) { fixer(obj[k]); }
+            }
+            obj = coverState.fnMap;
+            for (k in obj) {
+                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) { fixer(obj[k].loc); }
+            }
+            obj = coverState.branchMap;
+            for (k in obj) {
+                <span class="missing-if-branch">E</span>if (obj.hasOwnProperty(k)) {
+                    locations = obj[k].locations;
+                    for (i = 0; i &lt; locations.length; i += 1) {
+                        fixer(locations[i]);
+                    }
+                }
+            }
+        },
+&nbsp;
+        getPreamble: function (sourceCode) {
+            var varName = this.opts.coverageVariable || '__coverage__',
+                file = this.coverState.path,
+                tracker = this.currentState.trackerVar,
+                coverState,
+                replacer = function (s) { //return replacements using the function to ensure that the replacement is treated like a dumb string and not as a string with RE replacement patterns
+                    return function () { return s; };
+                },
+                code;
+            if (!this.opts.noAutoWrap) {
+                this.fixColumnPositions(this.coverState);
+            }
+            if (this.opts.embedSource) {
+                this.coverState.code = sourceCode.split(/\n/);
+            }
+            coverState = this.opts.debug ? JSON.stringify(this.coverState, undefined, 4) : JSON.stringify(this.coverState);
+            code = [
+                "if (typeof %GLOBAL% === 'undefined') { %GLOBAL% = {}; }",
+                "if (!%GLOBAL%['%FILE%']) {",
+                "   %GLOBAL%['%FILE%'] = %OBJECT%;",
+                "}",
+                "var %VAR% = %GLOBAL%['%FILE%'];"
+            ].join("\n")
+                .replace(/%VAR%/g, replacer(tracker))
+                .replace(/%GLOBAL%/g, replacer(varName))
+                .replace(/%FILE%/g, replacer(file))
+                .replace(/%OBJECT%/g, replacer(coverState));
+            return code;
+        },
+&nbsp;
+        convertToBlock: function (node) {
+            if (!node) {
+                return { type: 'BlockStatement', body: [] };
+            } else if (node.type === 'BlockStatement') {
+                return node;
+            } else {
+                return { type: 'BlockStatement', body: [ node ] };
+            }
+        },
+&nbsp;
+        ifBlockConverter: function (node) {
+            node.consequent = this.convertToBlock(node.consequent);
+            node.alternate = this.convertToBlock(node.alternate);
+        },
+&nbsp;
+        loopBlockConverter: function (node) {
+            node.body = this.convertToBlock(node.body);
+        },
+&nbsp;
+        statementName: function (location) {
+            var sName;
+            this.currentState.statement += 1;
+            sName = this.currentState.statement;
+            this.coverState.statementMap[sName] = location;
+            this.coverState.s[sName] = 0;
+            return sName;
+        },
+&nbsp;
+        skipInit: function (node, walker) {
+            if (node.init) {
+                node.init.skipWalk = true;
+            }
+        },
+&nbsp;
+        skipLeft: function (node, walker) {
+            node.left.skipWalk = true;
+        },
+&nbsp;
+        coverStatement: function (node, walker) {
+            var sName,
+                incrStatementCount;
+&nbsp;
+            sName = this.statementName(node.loc);
+            incrStatementCount = astgen.statement(
+                astgen.postIncrement(
+                    astgen.subscript(
+                        astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('s')),
+                        astgen.stringLiteral(sName)
+                    )
+                )
+            );
+            this.splice(incrStatementCount, node, walker);
+        },
+&nbsp;
+        splice: function (statements, node, walker) {
+            var targetNode = walker.isLabeled() ? walker.parent().node : node;
+            targetNode.prepend = targetNode.prepend || [];
+            pushAll(targetNode.prepend, statements);
+        },
+&nbsp;
+        functionName: function (node, line, location) {
+            this.currentState.func += 1;
+            var id = this.currentState.func,
+                name = node.id ? node.id.name : '(anonymous_' + id + ')';
+            this.coverState.fnMap[id] = { name: name, line: line, loc: location };
+            this.coverState.f[id] = 0;
+            return id;
+        },
+&nbsp;
+        coverFunction: function (node, walker) {
+            var id = this.functionName(node, walker.startLineForNode(node), { start: node.loc.start, end: { line: node.body.loc.start.line, column: node.body.loc.start.column } }),
+                body = node.body,
+                blockBody = body.body;
+            blockBody.unshift(
+                astgen.statement(
+                    astgen.postIncrement(
+                        astgen.subscript(
+                            astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('f')),
+                            astgen.stringLiteral(id)
+                        )
+                    )
+                )
+            );
+        },
+&nbsp;
+        branchName: function (type, startLine, pathLocations) {
+            var bName,
+                paths = [],
+                locations = [],
+                i;
+            this.currentState.branch += 1;
+            bName = this.currentState.branch;
+            for (i = 0; i &lt; pathLocations.length; i += 1) {
+                paths.push(0);
+                locations.push(pathLocations[i]);
+            }
+            this.coverState.b[bName] = paths;
+            this.coverState.branchMap[bName] = { line: startLine, type: type, locations: locations };
+            return bName;
+        },
+&nbsp;
+        branchIncrementExprAst: function (varName, branchIndex, down) {
+            var ret = astgen.postIncrement(
+                astgen.subscript(
+                    astgen.subscript(
+                        astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('b')),
+                        astgen.stringLiteral(varName)
+                    ),
+                    astgen.numericLiteral(branchIndex)
+                ),
+                down
+            );
+            return ret;
+        },
+&nbsp;
+        locationsForNodes: function (nodes) {
+            var ret = [],
+                i;
+            for (i = 0; i &lt; nodes.length; i += 1) {
+                ret.push(nodes[i].loc);
+            }
+            return ret;
+        },
+&nbsp;
+        ifBranchInjector: function (node, walker) {
+            var line = node.loc.start.line,
+                col = node.loc.start.column,
+                start = { line: line, column: col },
+                end = { line: line, column: col },
+                bName = this.branchName('if', walker.startLineForNode(node), [
+                    { start: start, end: end },
+                    { start: start, end: end }
+                ]),
+                thenBody = node.consequent.body,
+                elseBody = node.alternate.body;
+            thenBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 0)));
+            elseBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 1)));
+        },
+&nbsp;
+        switchBranchInjector: function (node, walker) {
+            var cases = node.cases,
+                bName,
+                i;
+&nbsp;
+            if (!cases) {
+                return;
+            }
+            bName = this.branchName('switch', walker.startLineForNode(node), this.locationsForNodes(cases));
+            for (i = 0; i &lt; cases.length; i += 1) {
+                cases[i].consequent.unshift(astgen.statement(this.branchIncrementExprAst(bName, i)));
+            }
+        },
+&nbsp;
+        conditionalBranchInjector: function (node, walker) {
+            var bName = this.branchName('cond-expr', walker.startLineForNode(node), this.locationsForNodes([ node.consequent, node.alternate ])),
+                ast1 = this.branchIncrementExprAst(bName, 0),
+                ast2 = this.branchIncrementExprAst(bName, 1);
+&nbsp;
+            node.consequent = astgen.sequence(ast1, node.consequent);
+            node.alternate = astgen.sequence(ast2, node.alternate);
+        },
+&nbsp;
+        logicalExpressionBranchInjector: function (node, walker) {
+            var parent = walker.parent(),
+                leaves = [],
+                bName,
+                tuple,
+                i;
+&nbsp;
+            if (parent &amp;&amp; parent.node.type === SYNTAX.LogicalExpression.name) {
+                //already covered
+                return;
+            }
+&nbsp;
+            this.findLeaves(node, leaves);
+            bName = this.branchName('binary-expr', walker.startLineForNode(node), this.locationsForNodes(leaves.map(function (item) { return item.node; })));
+            for (i = 0; i &lt; leaves.length; i += 1) {
+                tuple = leaves[i];
+                tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);
+            }
+        },
+&nbsp;
+        findLeaves: function (node, accumulator, parent, property) {
+            if (node.type === SYNTAX.LogicalExpression.name) {
+                this.findLeaves(node.left, accumulator, node, 'left');
+                this.findLeaves(node.right, accumulator, node, 'right');
+            } else {
+                accumulator.push({ node: node, parent: parent, property: property });
+            }
+        }
+    };
+&nbsp;
+    if (isNode) {
+        module.exports = Instrumenter;
+    } else {
+        window.Instrumenter = Instrumenter;
+    }
+&nbsp;
+}(typeof module !== 'undefined' &amp;&amp; typeof module.exports !== 'undefined' &amp;&amp; typeof exports !== 'undefined'));
+&nbsp;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -3631,6 +2327,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

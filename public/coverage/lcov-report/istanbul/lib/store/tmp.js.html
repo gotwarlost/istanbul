@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/store/tmp.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,418 +196,257 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">var util = require('util'),</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    path = require('path'),</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    os = require('os'),</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    fs = require('fs'),</td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    mkdirp = require('mkdirp'),</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    Store = require('./index');</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function makeTempDir() {</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    var dir = path.join(os.tmpDir ? <span class="branch-0 cbranch-no">os.tmpDir() </span>: (process.env.TMPDIR || <span class="branch-1 cbranch-no">'/tmp')</span>, 'ts' + new Date().getTime());</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    mkdirp.sync(dir);</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    return dir;</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/**</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * a `Store` implementation using temporary files.</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * Usage</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * -----</td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      var store = require('istanbul').Store.create('tmp');</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @class TmpStore</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @extends Store</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {Object} opts Optional.</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {String} [opts.tmp] a pre-existing directory to use as the `tmp` directory. When not specified, a random directory</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      is created under `os.tmpDir()`</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @constructor</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function TmpStore(opts) {</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    opts = opts || {};</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    this.tmp = opts.tmp || makeTempDir();</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    this.map = {};</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    this.seq = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    this.prefix = 't' + new Date().getTime() + '-';</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">TmpStore.TYPE = 'tmp';</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">util.inherits(TmpStore, Store);</td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">Store.mix(TmpStore, {</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    generateTmpFileName: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        this.seq += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        return this.prefix + this.seq + '.tmp';</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    set: function (key, contents) {</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        var tmpFile = this.generateTmpFileName();</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        fs.writeFileSync(tmpFile, contents, 'utf8');</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        this.map[key] = tmpFile;</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    get: function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">        var tmpFile = this.map[key];</td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">        if (!tmpFile) { throw new Error('Unable to find tmp entry for [' + tmpFile + ']'); }</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">        return fs.readFileSync(tmpFile, 'utf8');</td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">62</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">63</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    hasKey: function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">64</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">        return !!this.map[key];</td>
-	</tr>
-<tr>
-	<td class="line-count">65</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">66</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">67</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    keys: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">68</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">        return Object.keys(this.map);</td>
-	</tr>
-<tr>
-	<td class="line-count">69</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">70</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">71</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    dispose: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">72</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        var map = this.map;</td>
-	</tr>
-<tr>
-	<td class="line-count">73</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        Object.keys(map).forEach(function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">74</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            fs.unlinkSync(map[key]);</td>
-	</tr>
-<tr>
-	<td class="line-count">75</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">76</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        this.map = {};</td>
-	</tr>
-<tr>
-	<td class="line-count">77</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">78</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">});</td>
-	</tr>
-<tr>
-	<td class="line-count">79</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">80</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">module.exports = TmpStore;</td>
-	</tr>
-<tr>
-	<td class="line-count">81</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+var util = require('util'),
+    path = require('path'),
+    os = require('os'),
+    fs = require('fs'),
+    mkdirp = require('mkdirp'),
+    Store = require('./index');
+&nbsp;
+function makeTempDir() {
+    var dir = path.join(os.tmpDir ? <span class="branch-0 cbranch-no">os.tmpDir() </span>: (process.env.TMPDIR || <span class="branch-1 cbranch-no">'/tmp')</span>, 'ts' + new Date().getTime());
+    mkdirp.sync(dir);
+    return dir;
+}
+/**
+ * a `Store` implementation using temporary files.
+ *
+ * Usage
+ * -----
+ *
+ *      var store = require('istanbul').Store.create('tmp');
+ *
+ *
+ * @class TmpStore
+ * @extends Store
+ * @param {Object} opts Optional.
+ * @param {String} [opts.tmp] a pre-existing directory to use as the `tmp` directory. When not specified, a random directory
+ *      is created under `os.tmpDir()`
+ * @constructor
+ */
+function TmpStore(opts) {
+    opts = opts || {};
+    this.tmp = opts.tmp || makeTempDir();
+    this.map = {};
+    this.seq = 0;
+    this.prefix = 't' + new Date().getTime() + '-';
+}
+&nbsp;
+TmpStore.TYPE = 'tmp';
+util.inherits(TmpStore, Store);
+&nbsp;
+Store.mix(TmpStore, {
+    generateTmpFileName: function () {
+        this.seq += 1;
+        return this.prefix + this.seq + '.tmp';
+    },
+&nbsp;
+    set: function (key, contents) {
+        var tmpFile = this.generateTmpFileName();
+        fs.writeFileSync(tmpFile, contents, 'utf8');
+        this.map[key] = tmpFile;
+    },
+&nbsp;
+    get: function (key) {
+        var tmpFile = this.map[key];
+        if (!tmpFile) { throw new Error('Unable to find tmp entry for [' + tmpFile + ']'); }
+        return fs.readFileSync(tmpFile, 'utf8');
+    },
+&nbsp;
+    hasKey: function (key) {
+        return !!this.map[key];
+    },
+&nbsp;
+    keys: function () {
+        return Object.keys(this.map);
+    },
+&nbsp;
+    dispose: function () {
+        var map = this.map;
+        Object.keys(map).forEach(function (key) {
+            fs.unlinkSync(map[key]);
+        });
+        this.map = {};
+    }
+});
+&nbsp;
+module.exports = TmpStore;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -641,6 +533,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

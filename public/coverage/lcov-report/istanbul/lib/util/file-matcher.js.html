@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/util/file-matcher.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,318 +196,197 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">var fileset = require('fileset'),</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    path = require('path'),</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    seq = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">function filesFor(options, callback) {</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    if (!callback &amp;&amp; typeof options === 'function') {</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        callback = options;</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        options = null;</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    options = options || {};</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    var root = options.root,</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        includes = options.includes,</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        excludes = options.excludes,</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        relative = options.relative,</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        opts;</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    root = root || process.cwd();</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    includes = includes &amp;&amp; Array.isArray(includes) ? includes : [ '**/*.js' ];</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    excludes = excludes &amp;&amp; Array.isArray(excludes) ? excludes : [ '**/node_modules/**' ];</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    opts = { cwd: root };</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    seq += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    opts['x' + seq + new Date().getTime()] = true; //cache buster for minimatch cache bug</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">    fileset(includes.join(' '), excludes.join(' '), opts, function (err, files) {</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">        <span class="missing-if-branch">I</span>if (err) { <span class="cstat-no">return callback(err); </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">        if (!relative) {</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-yes">349</td>
-	<td class="text">            files = files.map(function (file) { return path.resolve(root, file); });</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-yes">7</td>
-	<td class="text">        callback(err, files);</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">function matcherFor(options, callback) {</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">    if (!callback &amp;&amp; typeof options === 'function') {</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        callback = options;</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        options = null;</td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">    options = options || {};</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">    options.relative = false; //force absolute paths</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">    filesFor(options, function (err, files) {</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">        var fileMap = {};</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">        <span class="missing-if-branch">I</span>if (err) { <span class="cstat-no">return callback(err); </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-yes">234</td>
-	<td class="text">        files.forEach(function (file) { fileMap[file] = true; });</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">        return callback(null, function (file) { return fileMap[file]; });</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">module.exports = {</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    filesFor: filesFor,</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    matcherFor: matcherFor</td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">355</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">238</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+var fileset = require('fileset'),
+    path = require('path'),
+    seq = 0;
+&nbsp;
+function filesFor(options, callback) {
+    if (!callback &amp;&amp; typeof options === 'function') {
+        callback = options;
+        options = null;
+    }
+    options = options || {};
+&nbsp;
+    var root = options.root,
+        includes = options.includes,
+        excludes = options.excludes,
+        relative = options.relative,
+        opts;
+&nbsp;
+    root = root || process.cwd();
+    includes = includes &amp;&amp; Array.isArray(includes) ? includes : [ '**/*.js' ];
+    excludes = excludes &amp;&amp; Array.isArray(excludes) ? excludes : [ '**/node_modules/**' ];
+&nbsp;
+    opts = { cwd: root };
+    seq += 1;
+    opts['x' + seq + new Date().getTime()] = true; //cache buster for minimatch cache bug
+    fileset(includes.join(' '), excludes.join(' '), opts, function (err, files) {
+        <span class="missing-if-branch">I</span>if (err) { <span class="cstat-no">return callback(err); </span>}
+        if (!relative) {
+            files = files.map(function (file) { return path.resolve(root, file); });
+        }
+        callback(err, files);
+    });
+}
+&nbsp;
+function matcherFor(options, callback) {
+&nbsp;
+    if (!callback &amp;&amp; typeof options === 'function') {
+        callback = options;
+        options = null;
+    }
+    options = options || {};
+    options.relative = false; //force absolute paths
+&nbsp;
+    filesFor(options, function (err, files) {
+        var fileMap = {};
+        <span class="missing-if-branch">I</span>if (err) { <span class="cstat-no">return callback(err); </span>}
+        files.forEach(function (file) { fileMap[file] = true; });
+        return callback(null, function (file) { return fileMap[file]; });
+    });
+}
+&nbsp;
+module.exports = {
+    filesFor: filesFor,
+    matcherFor: matcherFor
+};
+&nbsp;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -541,6 +473,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

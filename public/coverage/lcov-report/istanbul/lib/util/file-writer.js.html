@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/util/file-writer.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,303 +196,188 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">var fs = require('fs');</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function FileWriter(sync) {</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-yes">29</td>
-	<td class="text">    this.writing = false;</td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-yes">29</td>
-	<td class="text">    this.start = sync ? this.startSync : this.startAsync;</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-yes">29</td>
-	<td class="text">    this.write = sync ? this.writeSync : this.writeAsync;</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-yes">29</td>
-	<td class="text">    this.end = sync ? this.endSync : this.endAsync;</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">FileWriter.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeFile: function (file, callback) {</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-yes">85</td>
-	<td class="text">        this.start(file);</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-yes">85</td>
-	<td class="text">        callback(this);</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-yes">85</td>
-	<td class="text">        this.end();</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    println: function (str) {</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-yes">449</td>
-	<td class="text">        this.write(str);</td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-yes">449</td>
-	<td class="text">        this.write('\n');</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    startSync: function (fileName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-yes">80</td>
-	<td class="text">        this.doStart();</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-yes">79</td>
-	<td class="text">        this.contents = '';</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-yes">79</td>
-	<td class="text">        this.filename = fileName;</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeSync: function (str) {</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-yes">1508</td>
-	<td class="text">        this.contents += str;</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    endSync: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-yes">79</td>
-	<td class="text">        this.doEnd();</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-yes">78</td>
-	<td class="text">        fs.writeFileSync(this.filename, this.contents, 'utf8');</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    startAsync: function (fileName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-yes">22</td>
-	<td class="text">        this.doStart();</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-yes">21</td>
-	<td class="text">        this.stream = fs.createWriteStream(fileName);</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeAsync: function (str) {</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-yes">260</td>
-	<td class="text">        this.stream.write(str);</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    endAsync: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-yes">21</td>
-	<td class="text">        this.doEnd();</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-yes">20</td>
-	<td class="text">        this.stream.end();</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    doStart: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-yes">102</td>
-	<td class="text">        if (this.writing) { throw new Error('Attempt to start a new file before ending the previous one'); }</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-yes">100</td>
-	<td class="text">        this.writing = true;</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    doEnd : function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-yes">100</td>
-	<td class="text">        if (!this.writing) { throw new Error('Attempt to end a file without starting it'); }</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-yes">98</td>
-	<td class="text">        this.writing = false;</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">module.exports = FileWriter;</td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">93</span>
+<span class="cline-any cline-yes">93</span>
+<span class="cline-any cline-yes">93</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">449</span>
+<span class="cline-any cline-yes">449</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">88</span>
+<span class="cline-any cline-yes">87</span>
+<span class="cline-any cline-yes">87</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1217</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87</span>
+<span class="cline-any cline-yes">86</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">182</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">110</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">106</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+var fs = require('fs');
+&nbsp;
+function FileWriter(sync) {
+    this.writing = false;
+    this.start = sync ? this.startSync : this.startAsync;
+    this.write = sync ? this.writeSync : this.writeAsync;
+    this.end = sync ? this.endSync : this.endAsync;
+}
+&nbsp;
+FileWriter.prototype = {
+    writeFile: function (file, callback) {
+        this.start(file);
+        callback(this);
+        this.end();
+    },
+    println: function (str) {
+        this.write(str);
+        this.write('\n');
+    },
+    startSync: function (fileName) {
+        this.doStart();
+        this.contents = '';
+        this.filename = fileName;
+    },
+    writeSync: function (str) {
+        this.contents += str;
+    },
+    endSync: function () {
+        this.doEnd();
+        fs.writeFileSync(this.filename, this.contents, 'utf8');
+    },
+    startAsync: function (fileName) {
+        this.doStart();
+        this.stream = fs.createWriteStream(fileName);
+    },
+    writeAsync: function (str) {
+        this.stream.write(str);
+    },
+    endAsync: function () {
+        this.doEnd();
+        this.stream.end();
+    },
+    doStart: function () {
+        if (this.writing) { throw new Error('Attempt to start a new file before ending the previous one'); }
+        this.writing = true;
+    },
+    doEnd : function () {
+        if (!this.writing) { throw new Error('Attempt to end a file without starting it'); }
+        this.writing = false;
+    }
+};
+&nbsp;
+module.exports = FileWriter;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -526,6 +464,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/util/tree-summarizer.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,1008 +196,611 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">var path = require('path'),</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    SEP = path.sep || '/',</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    utils = require('../object-utils');</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function commonArrayPrefix(first, second) {</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">    var len = first.length &lt; second.length ? first.length : second.length,</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        i,</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ret = [];</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">    for (i = 0; i &lt; len; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-yes">298</td>
-	<td class="text">        if (first[i] === second[i]) {</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-yes">276</td>
-	<td class="text">            ret.push(first[i]);</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-yes">22</td>
-	<td class="text">            break;</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">    return ret;</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function findCommonArrayPrefix(args) {</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">    if (args.length === 0) {</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        return [];</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">    var separated = args.map(function (arg) { return arg.split(SEP); }),</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        ret = separated.pop();</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-yes">14</td>
-	<td class="text">    return separated.reduce(commonArrayPrefix, ret);</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function Node(fullName, kind, metrics) {</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.name = fullName;</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.fullName = fullName;</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.kind = kind;</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.metrics = metrics || null;</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.parent = null;</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">    this.children = [];</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">Node.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    displayShortName: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-yes">156</td>
-	<td class="text">        return this.relativeName;</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    fullPath: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-yes">51</td>
-	<td class="text">        return this.fullName;</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    addChild: function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-yes">99</td>
-	<td class="text">        this.children.push(child);</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-yes">99</td>
-	<td class="text">        child.parent = this;</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    toJSON: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-yes">6</td>
-	<td class="text">        return {</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            name: this.name,</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            relativeName: this.relativeName,</td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            fullName: this.fullName,</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            kind: this.kind,</td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            metrics: this.metrics,</td>
-	</tr>
-<tr>
-	<td class="line-count">62</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            parent: this.parent === null ? null : this.parent.name,</td>
-	</tr>
-<tr>
-	<td class="line-count">63</td>
-	<td class="line-coverage cline-yes">5</td>
-	<td class="text">            children: this.children.map(function (node) { return node.toJSON(); })</td>
-	</tr>
-<tr>
-	<td class="line-count">64</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        };</td>
-	</tr>
-<tr>
-	<td class="line-count">65</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">66</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">67</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">68</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function TreeSummary(summaryMap, commonPrefix) {</td>
-	</tr>
-<tr>
-	<td class="line-count">69</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">    this.prefix = commonPrefix;</td>
-	</tr>
-<tr>
-	<td class="line-count">70</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">    this.convertToTree(summaryMap, commonPrefix);</td>
-	</tr>
-<tr>
-	<td class="line-count">71</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">72</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">73</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">TreeSummary.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">74</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    getNode: function (shortName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">75</td>
-	<td class="line-coverage cline-yes">18</td>
-	<td class="text">        return this.map[shortName];</td>
-	</tr>
-<tr>
-	<td class="line-count">76</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">77</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    convertToTree: function (summaryMap, arrayPrefix) {</td>
-	</tr>
-<tr>
-	<td class="line-count">78</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        var nodes = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">79</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            rootPath = arrayPrefix.join(SEP) + SEP,</td>
-	</tr>
-<tr>
-	<td class="line-count">80</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            root = new Node(rootPath, 'dir'),</td>
-	</tr>
-<tr>
-	<td class="line-count">81</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            tmp,</td>
-	</tr>
-<tr>
-	<td class="line-count">82</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            tmpChildren,</td>
-	</tr>
-<tr>
-	<td class="line-count">83</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            seen = {},</td>
-	</tr>
-<tr>
-	<td class="line-count">84</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            filesUnderRoot = false;</td>
-	</tr>
-<tr>
-	<td class="line-count">85</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">86</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        seen[rootPath] = root;</td>
-	</tr>
-<tr>
-	<td class="line-count">87</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        Object.keys(summaryMap).forEach(function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">88</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            var metrics = summaryMap[key],</td>
-	</tr>
-<tr>
-	<td class="line-count">89</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                node,</td>
-	</tr>
-<tr>
-	<td class="line-count">90</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                parentPath,</td>
-	</tr>
-<tr>
-	<td class="line-count">91</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                parent;</td>
-	</tr>
-<tr>
-	<td class="line-count">92</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            node = new Node(key, 'file', metrics);</td>
-	</tr>
-<tr>
-	<td class="line-count">93</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            seen[key] = node;</td>
-	</tr>
-<tr>
-	<td class="line-count">94</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            nodes.push(node);</td>
-	</tr>
-<tr>
-	<td class="line-count">95</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            parentPath = path.dirname(key) + SEP;</td>
-	</tr>
-<tr>
-	<td class="line-count">96</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            if (parentPath === SEP + SEP) {</td>
-	</tr>
-<tr>
-	<td class="line-count">97</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                parentPath = SEP + '__root__' + SEP;</td>
-	</tr>
-<tr>
-	<td class="line-count">98</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">99</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            parent = seen[parentPath];</td>
-	</tr>
-<tr>
-	<td class="line-count">100</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            if (!parent) {</td>
-	</tr>
-<tr>
-	<td class="line-count">101</td>
-	<td class="line-coverage cline-yes">38</td>
-	<td class="text">                parent = new Node(parentPath, 'dir');</td>
-	</tr>
-<tr>
-	<td class="line-count">102</td>
-	<td class="line-coverage cline-yes">38</td>
-	<td class="text">                root.addChild(parent);</td>
-	</tr>
-<tr>
-	<td class="line-count">103</td>
-	<td class="line-coverage cline-yes">38</td>
-	<td class="text">                seen[parentPath] = parent;</td>
-	</tr>
-<tr>
-	<td class="line-count">104</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">105</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            parent.addChild(node);</td>
-	</tr>
-<tr>
-	<td class="line-count">106</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">            if (parent === root) { filesUnderRoot = true; }</td>
-	</tr>
-<tr>
-	<td class="line-count">107</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">108</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">109</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        if (filesUnderRoot &amp;&amp; arrayPrefix.length &gt; 0) {</td>
-	</tr>
-<tr>
-	<td class="line-count">110</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            arrayPrefix.pop(); //start at one level above</td>
-	</tr>
-<tr>
-	<td class="line-count">111</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            tmp = root;</td>
-	</tr>
-<tr>
-	<td class="line-count">112</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            tmpChildren = tmp.children;</td>
-	</tr>
-<tr>
-	<td class="line-count">113</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            tmp.children = [];</td>
-	</tr>
-<tr>
-	<td class="line-count">114</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            root = new Node(arrayPrefix.join(SEP) + SEP, 'dir');</td>
-	</tr>
-<tr>
-	<td class="line-count">115</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            root.addChild(tmp);</td>
-	</tr>
-<tr>
-	<td class="line-count">116</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">            tmpChildren.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">117</td>
-	<td class="line-coverage cline-yes">6</td>
-	<td class="text">                if (child.kind === 'dir') {</td>
-	</tr>
-<tr>
-	<td class="line-count">118</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                    root.addChild(child);</td>
-	</tr>
-<tr>
-	<td class="line-count">119</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">120</td>
-	<td class="line-coverage cline-yes">4</td>
-	<td class="text">                    tmp.addChild(child);</td>
-	</tr>
-<tr>
-	<td class="line-count">121</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                }</td>
-	</tr>
-<tr>
-	<td class="line-count">122</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            });</td>
-	</tr>
-<tr>
-	<td class="line-count">123</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">124</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        this.fixupNodes(root, arrayPrefix.join(SEP) + SEP);</td>
-	</tr>
-<tr>
-	<td class="line-count">125</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        this.calculateMetrics(root);</td>
-	</tr>
-<tr>
-	<td class="line-count">126</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        this.root = root;</td>
-	</tr>
-<tr>
-	<td class="line-count">127</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        this.map = {};</td>
-	</tr>
-<tr>
-	<td class="line-count">128</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        this.indexAndSortTree(root, this.map);</td>
-	</tr>
-<tr>
-	<td class="line-count">129</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">130</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">131</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    fixupNodes: function (node, prefix, parent) {</td>
-	</tr>
-<tr>
-	<td class="line-count">132</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        var that = this;</td>
-	</tr>
-<tr>
-	<td class="line-count">133</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        <span class="missing-if-branch">E</span>if (node.name.indexOf(prefix) === 0) {</td>
-	</tr>
-<tr>
-	<td class="line-count">134</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">            node.name = node.name.substring(prefix.length);</td>
-	</tr>
-<tr>
-	<td class="line-count">135</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">136</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        <span class="missing-if-branch">I</span>if (node.name.charAt(0) === SEP) {</td>
-	</tr>
-<tr>
-	<td class="line-count">137</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">            node.name = node.name.substring(1);</span></td>
-	</tr>
-<tr>
-	<td class="line-count">138</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">139</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        if (parent) {</td>
-	</tr>
-<tr>
-	<td class="line-count">140</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            if (parent.name !== '__root__/') {</td>
-	</tr>
-<tr>
-	<td class="line-count">141</td>
-	<td class="line-coverage cline-yes">91</td>
-	<td class="text">                node.relativeName = node.name.substring(parent.name.length);</td>
-	</tr>
-<tr>
-	<td class="line-count">142</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">143</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                node.relativeName = node.name;</td>
-	</tr>
-<tr>
-	<td class="line-count">144</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">145</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">146</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">            node.relativeName = node.name.substring(prefix.length);</td>
-	</tr>
-<tr>
-	<td class="line-count">147</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">148</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        node.children.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">149</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            that.fixupNodes(child, prefix, node);</td>
-	</tr>
-<tr>
-	<td class="line-count">150</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">151</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">152</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    calculateMetrics: function (entry) {</td>
-	</tr>
-<tr>
-	<td class="line-count">153</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        var that = this,</td>
-	</tr>
-<tr>
-	<td class="line-count">154</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            metrics = null;</td>
-	</tr>
-<tr>
-	<td class="line-count">155</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        if (entry.kind !== 'dir') {return; }</td>
-	</tr>
-<tr>
-	<td class="line-count">156</td>
-	<td class="line-coverage cline-yes">55</td>
-	<td class="text">        entry.children.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">157</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            that.calculateMetrics(child);</td>
-	</tr>
-<tr>
-	<td class="line-count">158</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">159</td>
-	<td class="line-coverage cline-yes">55</td>
-	<td class="text">        entry.metrics = utils.mergeSummaryObjects.apply(</td>
-	</tr>
-<tr>
-	<td class="line-count">160</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            null,</td>
-	</tr>
-<tr>
-	<td class="line-count">161</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            entry.children.map(function (child) { return child.metrics; })</td>
-	</tr>
-<tr>
-	<td class="line-count">162</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        );</td>
-	</tr>
-<tr>
-	<td class="line-count">163</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">164</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    indexAndSortTree: function (node, map) {</td>
-	</tr>
-<tr>
-	<td class="line-count">165</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        var that = this;</td>
-	</tr>
-<tr>
-	<td class="line-count">166</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        map[node.name] = node;</td>
-	</tr>
-<tr>
-	<td class="line-count">167</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        node.children.sort(function (a, b) {</td>
-	</tr>
-<tr>
-	<td class="line-count">168</td>
-	<td class="line-coverage cline-yes">52</td>
-	<td class="text">            a = a.relativeName;</td>
-	</tr>
-<tr>
-	<td class="line-count">169</td>
-	<td class="line-coverage cline-yes">52</td>
-	<td class="text">            b = b.relativeName;</td>
-	</tr>
-<tr>
-	<td class="line-count">170</td>
-	<td class="line-coverage cline-yes">52</td>
-	<td class="text">            return a &lt; b ? -1 : a &gt; b ? 1 : <span class="branch-1 cbranch-no">0;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">171</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">172</td>
-	<td class="line-coverage cline-yes">108</td>
-	<td class="text">        node.children.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">173</td>
-	<td class="line-coverage cline-yes">93</td>
-	<td class="text">            that.indexAndSortTree(child, map);</td>
-	</tr>
-<tr>
-	<td class="line-count">174</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">175</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">176</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    toJSON: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">177</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">        return {</td>
-	</tr>
-<tr>
-	<td class="line-count">178</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            prefix: this.prefix,</td>
-	</tr>
-<tr>
-	<td class="line-count">179</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            root: this.root.toJSON()</td>
-	</tr>
-<tr>
-	<td class="line-count">180</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        };</td>
-	</tr>
-<tr>
-	<td class="line-count">181</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">182</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">183</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">184</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function TreeSummarizer() {</td>
-	</tr>
-<tr>
-	<td class="line-count">185</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">    this.summaryMap = {};</td>
-	</tr>
-<tr>
-	<td class="line-count">186</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">187</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">188</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">TreeSummarizer.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">189</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    addFileCoverageSummary: function (filePath, metrics) {</td>
-	</tr>
-<tr>
-	<td class="line-count">190</td>
-	<td class="line-coverage cline-yes">53</td>
-	<td class="text">        this.summaryMap[filePath] = metrics;</td>
-	</tr>
-<tr>
-	<td class="line-count">191</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">192</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    getTreeSummary: function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">193</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        var commonArrayPrefix = findCommonArrayPrefix(Object.keys(this.summaryMap));</td>
-	</tr>
-<tr>
-	<td class="line-count">194</td>
-	<td class="line-coverage cline-yes">15</td>
-	<td class="text">        return new TreeSummary(this.summaryMap, commonArrayPrefix);</td>
-	</tr>
-<tr>
-	<td class="line-count">195</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">196</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">197</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">198</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">module.exports = TreeSummarizer;</td>
-	</tr>
-<tr>
-	<td class="line-count">199</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">325</span>
+<span class="cline-any cline-yes">301</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">55</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">106</span>
+<span class="cline-any cline-yes">106</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">41</span>
+<span class="cline-any cline-yes">41</span>
+<span class="cline-any cline-yes">41</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-yes">98</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">59</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+var path = require('path'),
+    SEP = path.sep || '/',
+    utils = require('../object-utils');
+&nbsp;
+function commonArrayPrefix(first, second) {
+    var len = first.length &lt; second.length ? first.length : second.length,
+        i,
+        ret = [];
+    for (i = 0; i &lt; len; i += 1) {
+        if (first[i] === second[i]) {
+            ret.push(first[i]);
+        } else {
+            break;
+        }
+    }
+    return ret;
+}
+&nbsp;
+function findCommonArrayPrefix(args) {
+    if (args.length === 0) {
+        return [];
+    }
+&nbsp;
+    var separated = args.map(function (arg) { return arg.split(SEP); }),
+        ret = separated.pop();
+&nbsp;
+    return separated.reduce(commonArrayPrefix, ret);
+}
+&nbsp;
+function Node(fullName, kind, metrics) {
+    this.name = fullName;
+    this.fullName = fullName;
+    this.kind = kind;
+    this.metrics = metrics || null;
+    this.parent = null;
+    this.children = [];
+}
+&nbsp;
+Node.prototype = {
+    displayShortName: function () {
+        return this.relativeName;
+    },
+    fullPath: function () {
+        return this.fullName;
+    },
+    addChild: function (child) {
+        this.children.push(child);
+        child.parent = this;
+    },
+    toJSON: function () {
+        return {
+            name: this.name,
+            relativeName: this.relativeName,
+            fullName: this.fullName,
+            kind: this.kind,
+            metrics: this.metrics,
+            parent: this.parent === null ? null : this.parent.name,
+            children: this.children.map(function (node) { return node.toJSON(); })
+        };
+    }
+};
+&nbsp;
+function TreeSummary(summaryMap, commonPrefix) {
+    this.prefix = commonPrefix;
+    this.convertToTree(summaryMap, commonPrefix);
+}
+&nbsp;
+TreeSummary.prototype = {
+    getNode: function (shortName) {
+        return this.map[shortName];
+    },
+    convertToTree: function (summaryMap, arrayPrefix) {
+        var nodes = [],
+            rootPath = arrayPrefix.join(SEP) + SEP,
+            root = new Node(rootPath, 'dir'),
+            tmp,
+            tmpChildren,
+            seen = {},
+            filesUnderRoot = false;
+&nbsp;
+        seen[rootPath] = root;
+        Object.keys(summaryMap).forEach(function (key) {
+            var metrics = summaryMap[key],
+                node,
+                parentPath,
+                parent;
+            node = new Node(key, 'file', metrics);
+            seen[key] = node;
+            nodes.push(node);
+            parentPath = path.dirname(key) + SEP;
+            if (parentPath === SEP + SEP) {
+                parentPath = SEP + '__root__' + SEP;
+            }
+            parent = seen[parentPath];
+            if (!parent) {
+                parent = new Node(parentPath, 'dir');
+                root.addChild(parent);
+                seen[parentPath] = parent;
+            }
+            parent.addChild(node);
+            if (parent === root) { filesUnderRoot = true; }
+        });
+&nbsp;
+        if (filesUnderRoot &amp;&amp; arrayPrefix.length &gt; 0) {
+            arrayPrefix.pop(); //start at one level above
+            tmp = root;
+            tmpChildren = tmp.children;
+            tmp.children = [];
+            root = new Node(arrayPrefix.join(SEP) + SEP, 'dir');
+            root.addChild(tmp);
+            tmpChildren.forEach(function (child) {
+                if (child.kind === 'dir') {
+                    root.addChild(child);
+                } else {
+                    tmp.addChild(child);
+                }
+            });
+        }
+        this.fixupNodes(root, arrayPrefix.join(SEP) + SEP);
+        this.calculateMetrics(root);
+        this.root = root;
+        this.map = {};
+        this.indexAndSortTree(root, this.map);
+    },
+&nbsp;
+    fixupNodes: function (node, prefix, parent) {
+        var that = this;
+        <span class="missing-if-branch">E</span>if (node.name.indexOf(prefix) === 0) {
+            node.name = node.name.substring(prefix.length);
+        }
+        <span class="missing-if-branch">I</span>if (node.name.charAt(0) === SEP) {
+<span class="cstat-no">            node.name = node.name.substring(1);</span>
+        }
+        if (parent) {
+            if (parent.name !== '__root__/') {
+                node.relativeName = node.name.substring(parent.name.length);
+            } else {
+                node.relativeName = node.name;
+            }
+        } else {
+            node.relativeName = node.name.substring(prefix.length);
+        }
+        node.children.forEach(function (child) {
+            that.fixupNodes(child, prefix, node);
+        });
+    },
+    calculateMetrics: function (entry) {
+        var that = this,
+            metrics = null;
+        if (entry.kind !== 'dir') {return; }
+        entry.children.forEach(function (child) {
+            that.calculateMetrics(child);
+        });
+        entry.metrics = utils.mergeSummaryObjects.apply(
+            null,
+            entry.children.map(function (child) { return child.metrics; })
+        );
+    },
+    indexAndSortTree: function (node, map) {
+        var that = this;
+        map[node.name] = node;
+        node.children.sort(function (a, b) {
+            a = a.relativeName;
+            b = b.relativeName;
+            return a &lt; b ? -1 : a &gt; b ? 1 : <span class="branch-1 cbranch-no">0;</span>
+        });
+        node.children.forEach(function (child) {
+            that.indexAndSortTree(child, map);
+        });
+    },
+    toJSON: function () {
+        return {
+            prefix: this.prefix,
+            root: this.root.toJSON()
+        };
+    }
+};
+&nbsp;
+function TreeSummarizer() {
+    this.summaryMap = {};
+}
+&nbsp;
+TreeSummarizer.prototype = {
+    addFileCoverageSummary: function (filePath, metrics) {
+        this.summaryMap[filePath] = metrics;
+    },
+    getTreeSummary: function () {
+        var commonArrayPrefix = findCommonArrayPrefix(Object.keys(this.summaryMap));
+        return new TreeSummary(this.summaryMap, commonArrayPrefix);
+    }
+};
+&nbsp;
+module.exports = TreeSummarizer;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -1231,6 +887,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

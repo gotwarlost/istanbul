@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/store/index.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -143,633 +196,386 @@
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*jslint nomen: true */</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">var Factory = require('../util/factory'),</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    factory = new Factory('store', __dirname, false);</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/**</td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * An abstraction for keeping track of content against some keys (e.g.</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * original source, instrumented source, coverage objects against file names).</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * This class is both the base class as well as a factory for `Store` implementations.</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * Usage</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * -----</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      var Store = require('istanbul').Store,</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *          store = Store.create('memory');</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      //basic use</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      store.set('foo', 'foo-content');</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      var content = store.get('foo');</td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      //keys and values</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      store.keys().forEach(function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *          console.log(key + ':\n' + store.get(key);</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      });</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      if (store.hasKey('bar') { console.log(store.get('bar'); }</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      //syntactic sugar</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      store.setObject('foo', { foo: true });</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      console.log(store.getObject('foo').foo);</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      store.dispose();</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @class Store</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @constructor</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @protected</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {Object} options Optional. The options supported by a specific store implementation.</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function Store(options) {}</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">//add register, create, mix, loadAll, getStoreList as class methods</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">factory.bindClassMethods(Store);</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/**</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * registers a new store implementation.</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @method register</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @static</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {Function} constructor the constructor function for the store. This function must have a</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *  `TYPE` property of type String, that will be used in `Store.create()`</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/**</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * returns a store implementation of the specified type.</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @method create</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @static</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {String} type the type of store to create</td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {Object} opts Optional. Options specific to the store implementation</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @return {Store} a new store of the specified type</td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">62</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">63</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">Store.prototype = {</td>
-	</tr>
-<tr>
-	<td class="line-count">64</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">65</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * sets some content associated with a specific key. The manner in which</td>
-	</tr>
-<tr>
-	<td class="line-count">66</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * duplicate keys are handled for multiple `set()` calls with the same</td>
-	</tr>
-<tr>
-	<td class="line-count">67</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * key is implementation-specific.</td>
-	</tr>
-<tr>
-	<td class="line-count">68</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     *</td>
-	</tr>
-<tr>
-	<td class="line-count">69</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method set</td>
-	</tr>
-<tr>
-	<td class="line-count">70</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} key the key for the content</td>
-	</tr>
-<tr>
-	<td class="line-count">71</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} contents the contents for the key</td>
-	</tr>
-<tr>
-	<td class="line-count">72</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">73</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    set: function (key, contents) { throw new Error("set: must be overridden"); },</td>
-	</tr>
-<tr>
-	<td class="line-count">74</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">75</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * returns the content associated to a specific key or throws if the key</td>
-	</tr>
-<tr>
-	<td class="line-count">76</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * was not `set`</td>
-	</tr>
-<tr>
-	<td class="line-count">77</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method get</td>
-	</tr>
-<tr>
-	<td class="line-count">78</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} key the key for which to get the content</td>
-	</tr>
-<tr>
-	<td class="line-count">79</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @return {String} the content for the specified key</td>
-	</tr>
-<tr>
-	<td class="line-count">80</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">81</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    get: function (key) { throw new Error("get: must be overridden"); },</td>
-	</tr>
-<tr>
-	<td class="line-count">82</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">83</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * returns a list of all known keys</td>
-	</tr>
-<tr>
-	<td class="line-count">84</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method keys</td>
-	</tr>
-<tr>
-	<td class="line-count">85</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @return {Array} an array of seen keys</td>
-	</tr>
-<tr>
-	<td class="line-count">86</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">87</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    keys: function () { throw new Error("keys: must be overridden"); },</td>
-	</tr>
-<tr>
-	<td class="line-count">88</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">89</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * returns true if the key is one for which a `get()` call would work.</td>
-	</tr>
-<tr>
-	<td class="line-count">90</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method hasKey</td>
-	</tr>
-<tr>
-	<td class="line-count">91</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} key</td>
-	</tr>
-<tr>
-	<td class="line-count">92</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @return true if the key is valid for this store, false otherwise</td>
-	</tr>
-<tr>
-	<td class="line-count">93</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">94</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">    hasKey: function (key) { throw new Error("hasKey: must be overridden"); },</td>
-	</tr>
-<tr>
-	<td class="line-count">95</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">96</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * lifecycle method to dispose temporary resources associated with the store</td>
-	</tr>
-<tr>
-	<td class="line-count">97</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method dispose</td>
-	</tr>
-<tr>
-	<td class="line-count">98</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">99</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    dispose: function () {},</td>
-	</tr>
-<tr>
-	<td class="line-count">100</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">101</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * sugar method to return an object associated with a specific key. Throws</td>
-	</tr>
-<tr>
-	<td class="line-count">102</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * if the content set against the key was not a valid JSON string.</td>
-	</tr>
-<tr>
-	<td class="line-count">103</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method getObject</td>
-	</tr>
-<tr>
-	<td class="line-count">104</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} key the key for which to return the associated object</td>
-	</tr>
-<tr>
-	<td class="line-count">105</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @return {Object} the object corresponding to the key</td>
-	</tr>
-<tr>
-	<td class="line-count">106</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">107</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    getObject: function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">108</td>
-	<td class="line-coverage cline-yes">132</td>
-	<td class="text">        return JSON.parse(this.get(key));</td>
-	</tr>
-<tr>
-	<td class="line-count">109</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">110</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    /**</td>
-	</tr>
-<tr>
-	<td class="line-count">111</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * sugar method to set an object against a specific key.</td>
-	</tr>
-<tr>
-	<td class="line-count">112</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @method setObject</td>
-	</tr>
-<tr>
-	<td class="line-count">113</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {String} key the key for the object</td>
-	</tr>
-<tr>
-	<td class="line-count">114</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     * @param {Object} object the object to be stored</td>
-	</tr>
-<tr>
-	<td class="line-count">115</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">     */</td>
-	</tr>
-<tr>
-	<td class="line-count">116</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    setObject: function (key, object) {</td>
-	</tr>
-<tr>
-	<td class="line-count">117</td>
-	<td class="line-coverage cline-yes">62</td>
-	<td class="text">        return this.set(key, JSON.stringify(object));</td>
-	</tr>
-<tr>
-	<td class="line-count">118</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">119</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">};</td>
-	</tr>
-<tr>
-	<td class="line-count">120</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">121</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">module.exports = Store;</td>
-	</tr>
-<tr>
-	<td class="line-count">122</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">123</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">124</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">140</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+/*jslint nomen: true */
+var Factory = require('../util/factory'),
+    factory = new Factory('store', __dirname, false);
+/**
+ * An abstraction for keeping track of content against some keys (e.g.
+ * original source, instrumented source, coverage objects against file names).
+ * This class is both the base class as well as a factory for `Store` implementations.
+ *
+ * Usage
+ * -----
+ *
+ *      var Store = require('istanbul').Store,
+ *          store = Store.create('memory');
+ *
+ *      //basic use
+ *      store.set('foo', 'foo-content');
+ *      var content = store.get('foo');
+ *
+ *      //keys and values
+ *      store.keys().forEach(function (key) {
+ *          console.log(key + ':\n' + store.get(key);
+ *      });
+ *      if (store.hasKey('bar') { console.log(store.get('bar'); }
+ *
+ *
+ *      //syntactic sugar
+ *      store.setObject('foo', { foo: true });
+ *      console.log(store.getObject('foo').foo);
+ *
+ *      store.dispose();
+ *
+ * @class Store
+ * @constructor
+ * @protected
+ * @param {Object} options Optional. The options supported by a specific store implementation.
+ */
+function Store(options) {}
+&nbsp;
+//add register, create, mix, loadAll, getStoreList as class methods
+factory.bindClassMethods(Store);
+&nbsp;
+/**
+ * registers a new store implementation.
+ * @method register
+ * @static
+ * @param {Function} constructor the constructor function for the store. This function must have a
+ *  `TYPE` property of type String, that will be used in `Store.create()`
+ */
+/**
+ * returns a store implementation of the specified type.
+ * @method create
+ * @static
+ * @param {String} type the type of store to create
+ * @param {Object} opts Optional. Options specific to the store implementation
+ * @return {Store} a new store of the specified type
+ */
+&nbsp;
+Store.prototype = {
+    /**
+     * sets some content associated with a specific key. The manner in which
+     * duplicate keys are handled for multiple `set()` calls with the same
+     * key is implementation-specific.
+     *
+     * @method set
+     * @param {String} key the key for the content
+     * @param {String} contents the contents for the key
+     */
+    set: function (key, contents) { throw new Error("set: must be overridden"); },
+    /**
+     * returns the content associated to a specific key or throws if the key
+     * was not `set`
+     * @method get
+     * @param {String} key the key for which to get the content
+     * @return {String} the content for the specified key
+     */
+    get: function (key) { throw new Error("get: must be overridden"); },
+    /**
+     * returns a list of all known keys
+     * @method keys
+     * @return {Array} an array of seen keys
+     */
+    keys: function () { throw new Error("keys: must be overridden"); },
+    /**
+     * returns true if the key is one for which a `get()` call would work.
+     * @method hasKey
+     * @param {String} key
+     * @return true if the key is valid for this store, false otherwise
+     */
+    hasKey: function (key) { throw new Error("hasKey: must be overridden"); },
+    /**
+     * lifecycle method to dispose temporary resources associated with the store
+     * @method dispose
+     */
+    dispose: function () {},
+    /**
+     * sugar method to return an object associated with a specific key. Throws
+     * if the content set against the key was not a valid JSON string.
+     * @method getObject
+     * @param {String} key the key for which to return the associated object
+     * @return {Object} the object corresponding to the key
+     */
+    getObject: function (key) {
+        return JSON.parse(this.get(key));
+    },
+    /**
+     * sugar method to set an object against a specific key.
+     * @method setObject
+     * @param {String} key the key for the object
+     * @param {Object} object the object to be stored
+     */
+    setObject: function (key, object) {
+        return this.set(key, JSON.stringify(object));
+    }
+};
+&nbsp;
+module.exports = Store;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -856,6 +662,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

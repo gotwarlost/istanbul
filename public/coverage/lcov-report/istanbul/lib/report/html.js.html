@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/report/html.js</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -127,2194 +180,1542 @@
     <h1>Code coverage report for <span class='entity'>istanbul/lib/report/html.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>90.96% <small>(151 / 166)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>92.42% <small>(183 / 198)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>80.49% <small>(66 / 82)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>83.33% <small>(75 / 90)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(30 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(36 / 36)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>92.5% <small>(148 / 160)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>93.68% <small>(178 / 190)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/report/</a> &#187; html.js</div>
 </div>
 <div class='body'>
 <pre><table class="coverage">
-<tr>
-	<td class="line-count">1</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*</td>
-	</tr>
-<tr>
-	<td class="line-count">2</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyright (c) 2012, Yahoo! Inc.  All rights reserved.</td>
-	</tr>
-<tr>
-	<td class="line-count">3</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.</td>
-	</tr>
-<tr>
-	<td class="line-count">4</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">5</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">6</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/*jslint nomen: true */</td>
-	</tr>
-<tr>
-	<td class="line-count">7</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">var handlebars = require('handlebars'),</td>
-	</tr>
-<tr>
-	<td class="line-count">8</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    path = require('path'),</td>
-	</tr>
-<tr>
-	<td class="line-count">9</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    SEP = path.sep || '/',</td>
-	</tr>
-<tr>
-	<td class="line-count">10</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    fs = require('fs'),</td>
-	</tr>
-<tr>
-	<td class="line-count">11</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    util = require('util'),</td>
-	</tr>
-<tr>
-	<td class="line-count">12</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    mkdirp = require('mkdirp'),</td>
-	</tr>
-<tr>
-	<td class="line-count">13</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    FileWriter = require('../util/file-writer'),</td>
-	</tr>
-<tr>
-	<td class="line-count">14</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    Report = require('./index'),</td>
-	</tr>
-<tr>
-	<td class="line-count">15</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    Store = require('../store'),</td>
-	</tr>
-<tr>
-	<td class="line-count">16</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    InsertionText = require('../util/insertion-text'),</td>
-	</tr>
-<tr>
-	<td class="line-count">17</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    TreeSummarizer = require('../util/tree-summarizer'),</td>
-	</tr>
-<tr>
-	<td class="line-count">18</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    utils = require('../object-utils'),</td>
-	</tr>
-<tr>
-	<td class="line-count">19</td>
-	<td class="line-coverage cline-yes">78</td>
-	<td class="text">    templateFor = function (name) { return handlebars.compile(fs.readFileSync(path.resolve(__dirname, 'templates', name + '.txt'), 'utf8')); },</td>
-	</tr>
-<tr>
-	<td class="line-count">20</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    headerTemplate = templateFor('head'),</td>
-	</tr>
-<tr>
-	<td class="line-count">21</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    footerTemplate = templateFor('foot'),</td>
-	</tr>
-<tr>
-	<td class="line-count">22</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    pathTemplate = handlebars.compile('&lt;div class="path"&gt;{{{html}}}&lt;/div&gt;'),</td>
-	</tr>
-<tr>
-	<td class="line-count">23</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    detailTemplate = handlebars.compile([</td>
-	</tr>
-<tr>
-	<td class="line-count">24</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;tr&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">25</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td class="line-count"&gt;{{line}}&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">26</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td class="line-coverage cline-{{covered}}"&gt;{{executionCount}}&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">27</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td class="text"&gt;{{{text}}}&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">28</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/tr&gt;\n'</td>
-	</tr>
-<tr>
-	<td class="line-count">29</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    ].join('\n\t')),</td>
-	</tr>
-<tr>
-	<td class="line-count">30</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    summaryTableHeader = [</td>
-	</tr>
-<tr>
-	<td class="line-count">31</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;div class="coverage-summary"&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">32</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;table&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">33</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;thead&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">34</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;tr&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">35</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="file" data-fmt="html" data-html="true" class="file"&gt;File&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">36</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"&gt;&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">37</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="statements" data-type="number" data-fmt="pct" class="pct"&gt;Statements&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">38</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">39</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="branches" data-type="number" data-fmt="pct" class="pct"&gt;Branches&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">40</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">41</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="functions" data-type="number" data-fmt="pct" class="pct"&gt;Functions&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">42</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">43</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="lines" data-type="number" data-fmt="pct" class="pct"&gt;Lines&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">44</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '   &lt;th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">45</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/tr&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">46</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/thead&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">47</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;tbody&gt;'</td>
-	</tr>
-<tr>
-	<td class="line-count">48</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    ].join('\n'),</td>
-	</tr>
-<tr>
-	<td class="line-count">49</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    summaryLineTemplate = handlebars.compile([</td>
-	</tr>
-<tr>
-	<td class="line-count">50</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;tr&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">51</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td class="file {{reportClasses.statements}}" data-value="{{file}}"&gt;&lt;a href="{{output}}"&gt;{{file}}&lt;/a&gt;&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">52</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.statements.pct}}" class="pic {{reportClasses.statements}}"&gt;{{#picture}}{{metrics.statements.pct}}{{/picture}}&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">53</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.statements.pct}}" class="pct {{reportClasses.statements}}"&gt;{{metrics.statements.pct}}%&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">54</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.statements.total}}" class="abs {{reportClasses.statements}}"&gt;({{metrics.statements.covered}} / {{metrics.statements.total}})&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">55</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.branches.pct}}" class="pct {{reportClasses.branches}}"&gt;{{metrics.branches.pct}}%&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">56</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.branches.total}}" class="abs {{reportClasses.branches}}"&gt;({{metrics.branches.covered}} / {{metrics.branches.total}})&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">57</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.functions.pct}}" class="pct {{reportClasses.functions}}"&gt;{{metrics.functions.pct}}%&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">58</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.functions.total}}" class="abs {{reportClasses.functions}}"&gt;({{metrics.functions.covered}} / {{metrics.functions.total}})&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">59</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.lines.pct}}" class="pct {{reportClasses.lines}}"&gt;{{metrics.lines.pct}}%&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">60</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;td data-value="{{metrics.lines.total}}" class="abs {{reportClasses.lines}}"&gt;({{metrics.lines.covered}} / {{metrics.lines.total}})&lt;/td&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">61</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/tr&gt;\n'</td>
-	</tr>
-<tr>
-	<td class="line-count">62</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    ].join('\n\t')),</td>
-	</tr>
-<tr>
-	<td class="line-count">63</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    summaryTableFooter = [</td>
-	</tr>
-<tr>
-	<td class="line-count">64</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/tbody&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">65</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/table&gt;',</td>
-	</tr>
-<tr>
-	<td class="line-count">66</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        '&lt;/div&gt;'</td>
-	</tr>
-<tr>
-	<td class="line-count">67</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    ].join('\n'),</td>
-	</tr>
-<tr>
-	<td class="line-count">68</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    seq = 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">69</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    lt = '\u0001',</td>
-	</tr>
-<tr>
-	<td class="line-count">70</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    gt = '\u0002',</td>
-	</tr>
-<tr>
-	<td class="line-count">71</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    RE_LT = /&lt;/g,</td>
-	</tr>
-<tr>
-	<td class="line-count">72</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    RE_GT = /&gt;/g,</td>
-	</tr>
-<tr>
-	<td class="line-count">73</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    RE_AMP = /&amp;/g,</td>
-	</tr>
-<tr>
-	<td class="line-count">74</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    RE_lt = /\u0001/g,</td>
-	</tr>
-<tr>
-	<td class="line-count">75</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    RE_gt = /\u0002/g;</td>
-	</tr>
-<tr>
-	<td class="line-count">76</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">77</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">handlebars.registerHelper('picture', function (opts) {</td>
-	</tr>
-<tr>
-	<td class="line-count">78</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">    var num = Number(opts.fn(this)),</td>
-	</tr>
-<tr>
-	<td class="line-count">79</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        rest,</td>
-	</tr>
-<tr>
-	<td class="line-count">80</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        cls = '';</td>
-	</tr>
-<tr>
-	<td class="line-count">81</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">    <span class="missing-if-branch">E</span>if (isFinite(num)) {</td>
-	</tr>
-<tr>
-	<td class="line-count">82</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">        if (num === 100) {</td>
-	</tr>
-<tr>
-	<td class="line-count">83</td>
-	<td class="line-coverage cline-yes">29</td>
-	<td class="text">            cls = ' cover-full';</td>
-	</tr>
-<tr>
-	<td class="line-count">84</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">85</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">        num = Math.floor(num);</td>
-	</tr>
-<tr>
-	<td class="line-count">86</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">        rest = 100 - num;</td>
-	</tr>
-<tr>
-	<td class="line-count">87</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">        return '&lt;span class="cover-fill' + cls + '" style="width: ' + num + 'px;"&gt;&lt;/span&gt;'</td>
-	</tr>
-<tr>
-	<td class="line-count">88</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            + '&lt;span class="cover-empty" style="width:' + rest + 'px;"&gt;&lt;/span&gt;';</td>
-	</tr>
-<tr>
-	<td class="line-count">89</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">90</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">        return '';</span></td>
-	</tr>
-<tr>
-	<td class="line-count">91</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">92</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">});</td>
-	</tr>
-<tr>
-	<td class="line-count">93</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">94</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function annotateLines(fileCoverage, structuredText) {</td>
-	</tr>
-<tr>
-	<td class="line-count">95</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    var lineStats = fileCoverage.l;</td>
-	</tr>
-<tr>
-	<td class="line-count">96</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    <span class="missing-if-branch">I</span>if (!lineStats) { <span class="cstat-no">return; </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">97</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    Object.keys(lineStats).forEach(function (lineNumber) {</td>
-	</tr>
-<tr>
-	<td class="line-count">98</td>
-	<td class="line-coverage cline-yes">154</td>
-	<td class="text">        var count = lineStats[lineNumber];</td>
-	</tr>
-<tr>
-	<td class="line-count">99</td>
-	<td class="line-coverage cline-yes">154</td>
-	<td class="text">        structuredText[lineNumber].covered = count &gt; 0 ? 'yes' : 'no';</td>
-	</tr>
-<tr>
-	<td class="line-count">100</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">101</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    structuredText.forEach(function (item) {</td>
-	</tr>
-<tr>
-	<td class="line-count">102</td>
-	<td class="line-coverage cline-yes">494</td>
-	<td class="text">        if (item.covered === null) {</td>
-	</tr>
-<tr>
-	<td class="line-count">103</td>
-	<td class="line-coverage cline-yes">340</td>
-	<td class="text">            item.covered = 'neutral';</td>
-	</tr>
-<tr>
-	<td class="line-count">104</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">105</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">106</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">107</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">108</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function annotateStatements(fileCoverage, structuredText) {</td>
-	</tr>
-<tr>
-	<td class="line-count">109</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    var statementStats = fileCoverage.s,</td>
-	</tr>
-<tr>
-	<td class="line-count">110</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        statementMeta = fileCoverage.statementMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">111</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    Object.keys(statementStats).forEach(function (stName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">112</td>
-	<td class="line-coverage cline-yes">154</td>
-	<td class="text">        var count = statementStats[stName],</td>
-	</tr>
-<tr>
-	<td class="line-count">113</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            meta = statementMeta[stName],</td>
-	</tr>
-<tr>
-	<td class="line-count">114</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            type = count &gt; 0 ? 'yes' : 'no',</td>
-	</tr>
-<tr>
-	<td class="line-count">115</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startCol = meta.start.column,</td>
-	</tr>
-<tr>
-	<td class="line-count">116</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endCol = meta.end.column + 1,</td>
-	</tr>
-<tr>
-	<td class="line-count">117</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startLine = meta.start.line,</td>
-	</tr>
-<tr>
-	<td class="line-count">118</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endLine = meta.end.line,</td>
-	</tr>
-<tr>
-	<td class="line-count">119</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            openSpan = lt + 'span class="cstat-' + type + '"' + gt,</td>
-	</tr>
-<tr>
-	<td class="line-count">120</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            closeSpan = lt + '/span' + gt,</td>
-	</tr>
-<tr>
-	<td class="line-count">121</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            text;</td>
-	</tr>
-<tr>
-	<td class="line-count">122</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">123</td>
-	<td class="line-coverage cline-yes">154</td>
-	<td class="text">        if (type === 'no') {</td>
-	</tr>
-<tr>
-	<td class="line-count">124</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">            if (endLine !== startLine) {</td>
-	</tr>
-<tr>
-	<td class="line-count">125</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">                endLine = startLine;</td>
-	</tr>
-<tr>
-	<td class="line-count">126</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">                endCol = structuredText[startLine].text.originalLength();</td>
-	</tr>
-<tr>
-	<td class="line-count">127</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">128</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">            text = structuredText[startLine].text;</td>
-	</tr>
-<tr>
-	<td class="line-count">129</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">            text.wrap(startCol,</td>
-	</tr>
-<tr>
-	<td class="line-count">130</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                openSpan,</td>
-	</tr>
-<tr>
-	<td class="line-count">131</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span></td>
-	</tr>
-<tr>
-	<td class="line-count">132</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                closeSpan);</td>
-	</tr>
-<tr>
-	<td class="line-count">133</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">134</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">135</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">136</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">137</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function annotateFunctions(fileCoverage, structuredText) {</td>
-	</tr>
-<tr>
-	<td class="line-count">138</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">139</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    var fnStats = fileCoverage.f,</td>
-	</tr>
-<tr>
-	<td class="line-count">140</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        fnMeta = fileCoverage.fnMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">141</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    <span class="missing-if-branch">I</span>if (!fnStats) { <span class="cstat-no">return; </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">142</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    Object.keys(fnStats).forEach(function (fName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">143</td>
-	<td class="line-coverage cline-yes">51</td>
-	<td class="text">        var count = fnStats[fName],</td>
-	</tr>
-<tr>
-	<td class="line-count">144</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            meta = fnMeta[fName],</td>
-	</tr>
-<tr>
-	<td class="line-count">145</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            type = count &gt; 0 ? 'yes' : 'no',</td>
-	</tr>
-<tr>
-	<td class="line-count">146</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startCol = meta.loc.start.column,</td>
-	</tr>
-<tr>
-	<td class="line-count">147</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endCol = meta.loc.end.column + 1,</td>
-	</tr>
-<tr>
-	<td class="line-count">148</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startLine = meta.loc.start.line,</td>
-	</tr>
-<tr>
-	<td class="line-count">149</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endLine = meta.loc.end.line,</td>
-	</tr>
-<tr>
-	<td class="line-count">150</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            openSpan = lt + 'span class="fstat-' + type + '"' + gt,</td>
-	</tr>
-<tr>
-	<td class="line-count">151</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            closeSpan = lt + '/span' + gt,</td>
-	</tr>
-<tr>
-	<td class="line-count">152</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            text;</td>
-	</tr>
-<tr>
-	<td class="line-count">153</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">154</td>
-	<td class="line-coverage cline-yes">51</td>
-	<td class="text">        if (type === 'no') {</td>
-	</tr>
-<tr>
-	<td class="line-count">155</td>
-	<td class="line-coverage cline-yes">21</td>
-	<td class="text">            <span class="missing-if-branch">I</span>if (endLine !== startLine) {</td>
-	</tr>
-<tr>
-	<td class="line-count">156</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                endLine = startLine;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">157</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                endCol = structuredText[startLine].text.originalLength();</span></td>
-	</tr>
-<tr>
-	<td class="line-count">158</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">159</td>
-	<td class="line-coverage cline-yes">21</td>
-	<td class="text">            text = structuredText[startLine].text;</td>
-	</tr>
-<tr>
-	<td class="line-count">160</td>
-	<td class="line-coverage cline-yes">21</td>
-	<td class="text">            text.wrap(startCol,</td>
-	</tr>
-<tr>
-	<td class="line-count">161</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                openSpan,</td>
-	</tr>
-<tr>
-	<td class="line-count">162</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span></td>
-	</tr>
-<tr>
-	<td class="line-count">163</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                closeSpan);</td>
-	</tr>
-<tr>
-	<td class="line-count">164</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">165</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">166</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">167</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">168</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function annotateBranches(fileCoverage, structuredText) {</td>
-	</tr>
-<tr>
-	<td class="line-count">169</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    var branchStats = fileCoverage.b,</td>
-	</tr>
-<tr>
-	<td class="line-count">170</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        branchMeta = fileCoverage.branchMap;</td>
-	</tr>
-<tr>
-	<td class="line-count">171</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    <span class="missing-if-branch">I</span>if (!branchStats) { <span class="cstat-no">return; </span>}</td>
-	</tr>
-<tr>
-	<td class="line-count">172</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">173</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">    Object.keys(branchStats).forEach(function (branchName) {</td>
-	</tr>
-<tr>
-	<td class="line-count">174</td>
-	<td class="line-coverage cline-yes">32</td>
-	<td class="text">        var branchArray = branchStats[branchName],</td>
-	</tr>
-<tr>
-	<td class="line-count">175</td>
-	<td class="line-coverage cline-yes">64</td>
-	<td class="text">            sumCount = branchArray.reduce(function (p, n) { return p + n; }, 0),</td>
-	</tr>
-<tr>
-	<td class="line-count">176</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            metaArray = branchMeta[branchName].locations,</td>
-	</tr>
-<tr>
-	<td class="line-count">177</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            i,</td>
-	</tr>
-<tr>
-	<td class="line-count">178</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            count,</td>
-	</tr>
-<tr>
-	<td class="line-count">179</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            meta,</td>
-	</tr>
-<tr>
-	<td class="line-count">180</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            type,</td>
-	</tr>
-<tr>
-	<td class="line-count">181</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startCol,</td>
-	</tr>
-<tr>
-	<td class="line-count">182</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endCol,</td>
-	</tr>
-<tr>
-	<td class="line-count">183</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            startLine,</td>
-	</tr>
-<tr>
-	<td class="line-count">184</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            endLine,</td>
-	</tr>
-<tr>
-	<td class="line-count">185</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            openSpan,</td>
-	</tr>
-<tr>
-	<td class="line-count">186</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            closeSpan,</td>
-	</tr>
-<tr>
-	<td class="line-count">187</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            text;</td>
-	</tr>
-<tr>
-	<td class="line-count">188</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">189</td>
-	<td class="line-coverage cline-yes">32</td>
-	<td class="text">        if (sumCount &gt; 0) { //only highlight if partial branches are missing</td>
-	</tr>
-<tr>
-	<td class="line-count">190</td>
-	<td class="line-coverage cline-yes">22</td>
-	<td class="text">            for (i = 0; i &lt; branchArray.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">191</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                count = branchArray[i];</td>
-	</tr>
-<tr>
-	<td class="line-count">192</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                meta = metaArray[i];</td>
-	</tr>
-<tr>
-	<td class="line-count">193</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                type = count &gt; 0 ? 'yes' : 'no';</td>
-	</tr>
-<tr>
-	<td class="line-count">194</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                startCol = meta.start.column;</td>
-	</tr>
-<tr>
-	<td class="line-count">195</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                endCol = meta.end.column + 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">196</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                startLine = meta.start.line;</td>
-	</tr>
-<tr>
-	<td class="line-count">197</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                endLine = meta.end.line;</td>
-	</tr>
-<tr>
-	<td class="line-count">198</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                openSpan = lt + 'span class="branch-' + i + ' cbranch-' + type + '"' + gt;</td>
-	</tr>
-<tr>
-	<td class="line-count">199</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                closeSpan = lt + '/span' + gt;</td>
-	</tr>
-<tr>
-	<td class="line-count">200</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">201</td>
-	<td class="line-coverage cline-yes">44</td>
-	<td class="text">                if (count === 0) { //skip branches taken</td>
-	</tr>
-<tr>
-	<td class="line-count">202</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">                    <span class="missing-if-branch">I</span>if (endLine !== startLine) {</td>
-	</tr>
-<tr>
-	<td class="line-count">203</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                        endLine = startLine;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">204</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                        endCol = structuredText[startLine].text.originalLength();</span></td>
-	</tr>
-<tr>
-	<td class="line-count">205</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">206</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">                    text = structuredText[startLine].text;</td>
-	</tr>
-<tr>
-	<td class="line-count">207</td>
-	<td class="line-coverage cline-yes">3</td>
-	<td class="text">                    if (branchMeta[branchName].type === 'if') { // and 'if' is a special case since the else branch might not be visible, being non-existent</td>
-	</tr>
-<tr>
-	<td class="line-count">208</td>
-	<td class="line-coverage cline-yes">1</td>
-	<td class="text">                        text.insertAt(startCol, lt + 'span class="missing-if-branch"' + gt + (i === 0 ? 'I' : <span class="branch-1 cbranch-no">'E')</span>  + lt + '/span' + gt, true, false);</td>
-	</tr>
-<tr>
-	<td class="line-count">209</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">210</td>
-	<td class="line-coverage cline-yes">2</td>
-	<td class="text">                        text.wrap(startCol,</td>
-	</tr>
-<tr>
-	<td class="line-count">211</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            openSpan,</td>
-	</tr>
-<tr>
-	<td class="line-count">212</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span></td>
-	</tr>
-<tr>
-	<td class="line-count">213</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            closeSpan);</td>
-	</tr>
-<tr>
-	<td class="line-count">214</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">215</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                }</td>
-	</tr>
-<tr>
-	<td class="line-count">216</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">217</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">218</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    });</td>
-	</tr>
-<tr>
-	<td class="line-count">219</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">220</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">221</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function customEscape(text) {</td>
-	</tr>
-<tr>
-	<td class="line-count">222</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">    text = text.toString();</td>
-	</tr>
-<tr>
-	<td class="line-count">223</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">    return text.replace(RE_AMP, '&amp;amp;')</td>
-	</tr>
-<tr>
-	<td class="line-count">224</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        .replace(RE_LT, '&amp;lt;')</td>
-	</tr>
-<tr>
-	<td class="line-count">225</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        .replace(RE_GT, '&amp;gt;')</td>
-	</tr>
-<tr>
-	<td class="line-count">226</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        .replace(RE_lt, '&lt;')</td>
-	</tr>
-<tr>
-	<td class="line-count">227</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        .replace(RE_gt, '&gt;');</td>
-	</tr>
-<tr>
-	<td class="line-count">228</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">229</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">230</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function getReportClass(stats) {</td>
-	</tr>
-<tr>
-	<td class="line-count">231</td>
-	<td class="line-coverage cline-yes">375</td>
-	<td class="text">    var coveragePct = stats.pct,</td>
-	</tr>
-<tr>
-	<td class="line-count">232</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        identity  = 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">233</td>
-	<td class="line-coverage cline-yes">375</td>
-	<td class="text">    <span class="missing-if-branch">E</span>if (coveragePct * identity === coveragePct) {</td>
-	</tr>
-<tr>
-	<td class="line-count">234</td>
-	<td class="line-coverage cline-yes">375</td>
-	<td class="text">        return coveragePct &gt;= 80 ? 'high' : coveragePct &gt;= 50 ? 'medium' : 'low';</td>
-	</tr>
-<tr>
-	<td class="line-count">235</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">236</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">        return '';</span></td>
-	</tr>
-<tr>
-	<td class="line-count">237</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">238</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">239</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">240</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">/**</td>
-	</tr>
-<tr>
-	<td class="line-count">241</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * a `Report` implementation that produces HTML coverage reports.</td>
-	</tr>
-<tr>
-	<td class="line-count">242</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">243</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * Usage</td>
-	</tr>
-<tr>
-	<td class="line-count">244</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * -----</td>
-	</tr>
-<tr>
-	<td class="line-count">245</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">246</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *      var report = require('istanbul').Report.create('html');</td>
-	</tr>
-<tr>
-	<td class="line-count">247</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">248</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> *</td>
-	</tr>
-<tr>
-	<td class="line-count">249</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @class HtmlReport</td>
-	</tr>
-<tr>
-	<td class="line-count">250</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @extends Report</td>
-	</tr>
-<tr>
-	<td class="line-count">251</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @constructor</td>
-	</tr>
-<tr>
-	<td class="line-count">252</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {Object} opts optional</td>
-	</tr>
-<tr>
-	<td class="line-count">253</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> * @param {String} [opts.dir] the directory in which to generate reports. Defaults to `./html-report`</td>
-	</tr>
-<tr>
-	<td class="line-count">254</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"> */</td>
-	</tr>
-<tr>
-	<td class="line-count">255</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">function HtmlReport(opts) {</td>
-	</tr>
-<tr>
-	<td class="line-count">256</td>
-	<td class="line-coverage cline-yes">11</td>
-	<td class="text">    Report.call(this);</td>
-	</tr>
-<tr>
-	<td class="line-count">257</td>
-	<td class="line-coverage cline-yes">11</td>
-	<td class="text">    this.opts = opts || {};</td>
-	</tr>
-<tr>
-	<td class="line-count">258</td>
-	<td class="line-coverage cline-yes">11</td>
-	<td class="text">    this.opts.dir = this.opts.dir || path.resolve(process.cwd(), 'html-report');</td>
-	</tr>
-<tr>
-	<td class="line-count">259</td>
-	<td class="line-coverage cline-yes">11</td>
-	<td class="text">    this.opts.sourceStore = this.opts.sourceStore || Store.create('fslookup');</td>
-	</tr>
-<tr>
-	<td class="line-count">260</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">}</td>
-	</tr>
-<tr>
-	<td class="line-count">261</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">262</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">HtmlReport.TYPE = 'html';</td>
-	</tr>
-<tr>
-	<td class="line-count">263</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">util.inherits(HtmlReport, Report);</td>
-	</tr>
-<tr>
-	<td class="line-count">264</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">265</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">Report.mix(HtmlReport, {</td>
-	</tr>
-<tr>
-	<td class="line-count">266</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">267</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    getPathHtml: function (node, linkMapper) {</td>
-	</tr>
-<tr>
-	<td class="line-count">268</td>
-	<td class="line-coverage cline-yes">83</td>
-	<td class="text">        var parent = node.parent,</td>
-	</tr>
-<tr>
-	<td class="line-count">269</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            nodePath = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">270</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            linkPath = [],</td>
-	</tr>
-<tr>
-	<td class="line-count">271</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            i;</td>
-	</tr>
-<tr>
-	<td class="line-count">272</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">273</td>
-	<td class="line-coverage cline-yes">83</td>
-	<td class="text">        while (parent) {</td>
-	</tr>
-<tr>
-	<td class="line-count">274</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">            nodePath.push(parent);</td>
-	</tr>
-<tr>
-	<td class="line-count">275</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">            parent = parent.parent;</td>
-	</tr>
-<tr>
-	<td class="line-count">276</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">277</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">278</td>
-	<td class="line-coverage cline-yes">83</td>
-	<td class="text">        for (i = 0; i &lt; nodePath.length; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">279</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">            linkPath.push('&lt;a href="' + linkMapper.ancestor(node, i + 1) + '"&gt;'</td>
-	</tr>
-<tr>
-	<td class="line-count">280</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                + (nodePath[i].relativeName || 'All files') + '&lt;/a&gt;');</td>
-	</tr>
-<tr>
-	<td class="line-count">281</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        }</td>
-	</tr>
-<tr>
-	<td class="line-count">282</td>
-	<td class="line-coverage cline-yes">83</td>
-	<td class="text">        linkPath.reverse();</td>
-	</tr>
-<tr>
-	<td class="line-count">283</td>
-	<td class="line-coverage cline-yes">83</td>
-	<td class="text">        return linkPath.length &gt; 0 ? linkPath.join(' &amp;#187; ') + ' &amp;#187; '</td>
-	</tr>
-<tr>
-	<td class="line-count">284</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            + node.displayShortName() : '';</td>
-	</tr>
-<tr>
-	<td class="line-count">285</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">286</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">287</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeDetailPage: function (writer, node, linkMapper, templateData, fileCoverage, metrics) {</td>
-	</tr>
-<tr>
-	<td class="line-count">288</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        var opts = this.opts,</td>
-	</tr>
-<tr>
-	<td class="line-count">289</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            sourceStore = opts.sourceStore,</td>
-	</tr>
-<tr>
-	<td class="line-count">290</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            sourceText = sourceStore.get(fileCoverage.path),</td>
-	</tr>
-<tr>
-	<td class="line-count">291</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            code = sourceText.split(/\r?\n/),</td>
-	</tr>
-<tr>
-	<td class="line-count">292</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            count = 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">293</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">            structured = code.map(function (str) { count += 1; return { line: count, covered: null, text: new InsertionText(str, true) }; }),</td>
-	</tr>
-<tr>
-	<td class="line-count">294</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            lineNum = 0;</td>
-	</tr>
-<tr>
-	<td class="line-count">295</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">296</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        structured.unshift({ line: 0, covered: null, text: new InsertionText("") });</td>
-	</tr>
-<tr>
-	<td class="line-count">297</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">298</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        templateData.metrics = metrics;</td>
-	</tr>
-<tr>
-	<td class="line-count">299</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        templateData.reportClass = getReportClass(templateData.metrics.statements);</td>
-	</tr>
-<tr>
-	<td class="line-count">300</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });</td>
-	</tr>
-<tr>
-	<td class="line-count">301</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        writer.write(headerTemplate(templateData));</td>
-	</tr>
-<tr>
-	<td class="line-count">302</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        writer.write('&lt;pre&gt;&lt;table class="coverage"&gt;\n');</td>
-	</tr>
-<tr>
-	<td class="line-count">303</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">304</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        annotateLines(fileCoverage, structured);</td>
-	</tr>
-<tr>
-	<td class="line-count">305</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        //note: order is important, since statements typically result in spanning the whole line and doing branches late</td>
-	</tr>
-<tr>
-	<td class="line-count">306</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        //causes mismatched tags</td>
-	</tr>
-<tr>
-	<td class="line-count">307</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        annotateBranches(fileCoverage, structured);</td>
-	</tr>
-<tr>
-	<td class="line-count">308</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        annotateFunctions(fileCoverage, structured);</td>
-	</tr>
-<tr>
-	<td class="line-count">309</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        annotateStatements(fileCoverage, structured);</td>
-	</tr>
-<tr>
-	<td class="line-count">310</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">311</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        structured.shift();</td>
-	</tr>
-<tr>
-	<td class="line-count">312</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        structured.forEach(function (item) {</td>
-	</tr>
-<tr>
-	<td class="line-count">313</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">            lineNum += 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">314</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">            item.executionCount = fileCoverage.l ? fileCoverage.l[lineNum] || null : <span class="branch-1 cbranch-no">null;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">315</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">            item.text = customEscape(item.text);</td>
-	</tr>
-<tr>
-	<td class="line-count">316</td>
-	<td class="line-coverage cline-yes">453</td>
-	<td class="text">            writer.write(detailTemplate(item));</td>
-	</tr>
-<tr>
-	<td class="line-count">317</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">318</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        writer.write('&lt;/table&gt;&lt;/pre&gt;\n');</td>
-	</tr>
-<tr>
-	<td class="line-count">319</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">        writer.write(footerTemplate(templateData));</td>
-	</tr>
-<tr>
-	<td class="line-count">320</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">321</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">322</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeIndexPage: function (writer, node, linkMapper, templateData) {</td>
-	</tr>
-<tr>
-	<td class="line-count">323</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        var children = Array.prototype.slice.apply(node.children);</td>
-	</tr>
-<tr>
-	<td class="line-count">324</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">325</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        children.sort(function (a, b) {</td>
-	</tr>
-<tr>
-	<td class="line-count">326</td>
-	<td class="line-coverage cline-yes">31</td>
-	<td class="text">            return a.name &lt; b.name ? -1 : <span class="branch-1 cbranch-no">1;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">327</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">328</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">329</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        templateData.metrics = node.metrics;</td>
-	</tr>
-<tr>
-	<td class="line-count">330</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        templateData.reportClass = getReportClass(node.metrics.statements);</td>
-	</tr>
-<tr>
-	<td class="line-count">331</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });</td>
-	</tr>
-<tr>
-	<td class="line-count">332</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">333</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        writer.write(headerTemplate(templateData));</td>
-	</tr>
-<tr>
-	<td class="line-count">334</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        writer.write(summaryTableHeader);</td>
-	</tr>
-<tr>
-	<td class="line-count">335</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        children.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">336</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">            var metrics = child.metrics,</td>
-	</tr>
-<tr>
-	<td class="line-count">337</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                reportClasses = {</td>
-	</tr>
-<tr>
-	<td class="line-count">338</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    statements: getReportClass(metrics.statements),</td>
-	</tr>
-<tr>
-	<td class="line-count">339</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    lines: getReportClass(metrics.lines),</td>
-	</tr>
-<tr>
-	<td class="line-count">340</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    functions: getReportClass(metrics.functions),</td>
-	</tr>
-<tr>
-	<td class="line-count">341</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    branches: getReportClass(metrics.branches)</td>
-	</tr>
-<tr>
-	<td class="line-count">342</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                },</td>
-	</tr>
-<tr>
-	<td class="line-count">343</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                data = {</td>
-	</tr>
-<tr>
-	<td class="line-count">344</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    metrics: metrics,</td>
-	</tr>
-<tr>
-	<td class="line-count">345</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    reportClasses: reportClasses,</td>
-	</tr>
-<tr>
-	<td class="line-count">346</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    file: child.displayShortName(),</td>
-	</tr>
-<tr>
-	<td class="line-count">347</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    output: linkMapper.fromParent(child)</td>
-	</tr>
-<tr>
-	<td class="line-count">348</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                };</td>
-	</tr>
-<tr>
-	<td class="line-count">349</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">            writer.write(summaryLineTemplate(data) + '\n');</td>
-	</tr>
-<tr>
-	<td class="line-count">350</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">351</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        writer.write(summaryTableFooter);</td>
-	</tr>
-<tr>
-	<td class="line-count">352</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        writer.write(footerTemplate(templateData));</td>
-	</tr>
-<tr>
-	<td class="line-count">353</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">354</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">355</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeFiles: function (writer, node, dir, linkMapper, templateData, collector) {</td>
-	</tr>
-<tr>
-	<td class="line-count">356</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        var that = this,</td>
-	</tr>
-<tr>
-	<td class="line-count">357</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            indexFile = path.resolve(dir, 'index.html'),</td>
-	</tr>
-<tr>
-	<td class="line-count">358</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            childFile;</td>
-	</tr>
-<tr>
-	<td class="line-count">359</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        mkdirp.sync(dir);</td>
-	</tr>
-<tr>
-	<td class="line-count">360</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        templateData.entity = node.name || 'All files';</td>
-	</tr>
-<tr>
-	<td class="line-count">361</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        if (this.opts.verbose) { console.error('Writing ' + indexFile); }</td>
-	</tr>
-<tr>
-	<td class="line-count">362</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        writer.writeFile(indexFile, function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">363</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">            that.writeIndexPage(writer, node, linkMapper, templateData);</td>
-	</tr>
-<tr>
-	<td class="line-count">364</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">365</td>
-	<td class="line-coverage cline-yes">42</td>
-	<td class="text">        node.children.forEach(function (child) {</td>
-	</tr>
-<tr>
-	<td class="line-count">366</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">            if (child.kind === 'dir') {</td>
-	</tr>
-<tr>
-	<td class="line-count">367</td>
-	<td class="line-coverage cline-yes">32</td>
-	<td class="text">                that.writeFiles(writer, child, path.resolve(dir, child.relativeName), linkMapper, templateData, collector);</td>
-	</tr>
-<tr>
-	<td class="line-count">368</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">369</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">                childFile = path.resolve(dir, child.relativeName + '.html');</td>
-	</tr>
-<tr>
-	<td class="line-count">370</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">                if (that.opts.verbose) { console.error('Writing ' + childFile); }</td>
-	</tr>
-<tr>
-	<td class="line-count">371</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">                templateData.entity = child.name;</td>
-	</tr>
-<tr>
-	<td class="line-count">372</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">                writer.writeFile(childFile, function () {</td>
-	</tr>
-<tr>
-	<td class="line-count">373</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">                    that.writeDetailPage(writer, child, linkMapper, templateData, collector.fileCoverageFor(child.fullPath()), child.metrics);</td>
-	</tr>
-<tr>
-	<td class="line-count">374</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                });</td>
-	</tr>
-<tr>
-	<td class="line-count">375</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            }</td>
-	</tr>
-<tr>
-	<td class="line-count">376</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">377</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    },</td>
-	</tr>
-<tr>
-	<td class="line-count">378</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">379</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    writeReport: function (collector, sync) {</td>
-	</tr>
-<tr>
-	<td class="line-count">380</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">        var opts = this.opts,</td>
-	</tr>
-<tr>
-	<td class="line-count">381</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            dir = opts.dir,</td>
-	</tr>
-<tr>
-	<td class="line-count">382</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            dt = new Date().toString(),</td>
-	</tr>
-<tr>
-	<td class="line-count">383</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            summarizer = new TreeSummarizer(),</td>
-	</tr>
-<tr>
-	<td class="line-count">384</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            linkMapper = {</td>
-	</tr>
-<tr>
-	<td class="line-count">385</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                fromParent: function (node) {</td>
-	</tr>
-<tr>
-	<td class="line-count">386</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">                    var i = 0,</td>
-	</tr>
-<tr>
-	<td class="line-count">387</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        relativeName = node.relativeName,</td>
-	</tr>
-<tr>
-	<td class="line-count">388</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        ch;</td>
-	</tr>
-<tr>
-	<td class="line-count">389</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">                    <span class="missing-if-branch">I</span>if (SEP !== '/') {</td>
-	</tr>
-<tr>
-	<td class="line-count">390</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                        relativeName = '';</span></td>
-	</tr>
-<tr>
-	<td class="line-count">391</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                        for (i = 0; i &lt; node.relativeName.length; i += 1) {</span></td>
-	</tr>
-<tr>
-	<td class="line-count">392</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                            ch = node.relativeName.charAt(i);</span></td>
-	</tr>
-<tr>
-	<td class="line-count">393</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                            if (ch === SEP) {</span></td>
-	</tr>
-<tr>
-	<td class="line-count">394</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                                relativeName += '/';</span></td>
-	</tr>
-<tr>
-	<td class="line-count">395</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            } else {</td>
-	</tr>
-<tr>
-	<td class="line-count">396</td>
-	<td class="line-coverage cline-no"></td>
-	<td class="text"><span class="cstat-no">                                relativeName += ch;</span></td>
-	</tr>
-<tr>
-	<td class="line-count">397</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                            }</td>
-	</tr>
-<tr>
-	<td class="line-count">398</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        }</td>
-	</tr>
-<tr>
-	<td class="line-count">399</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">400</td>
-	<td class="line-coverage cline-yes">73</td>
-	<td class="text">                    return node.kind === 'dir' ? relativeName + 'index.html' : relativeName + '.html';</td>
-	</tr>
-<tr>
-	<td class="line-count">401</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                },</td>
-	</tr>
-<tr>
-	<td class="line-count">402</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                ancestor: function (node, num) {</td>
-	</tr>
-<tr>
-	<td class="line-count">403</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">                    var href = '',</td>
-	</tr>
-<tr>
-	<td class="line-count">404</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        separated,</td>
-	</tr>
-<tr>
-	<td class="line-count">405</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        levels,</td>
-	</tr>
-<tr>
-	<td class="line-count">406</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        i,</td>
-	</tr>
-<tr>
-	<td class="line-count">407</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        j;</td>
-	</tr>
-<tr>
-	<td class="line-count">408</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">                    for (i = 0; i &lt; num; i += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">409</td>
-	<td class="line-coverage cline-yes">155</td>
-	<td class="text">                        separated = node.relativeName.split(SEP);</td>
-	</tr>
-<tr>
-	<td class="line-count">410</td>
-	<td class="line-coverage cline-yes">155</td>
-	<td class="text">                        levels = separated.length - 1;</td>
-	</tr>
-<tr>
-	<td class="line-count">411</td>
-	<td class="line-coverage cline-yes">155</td>
-	<td class="text">                        for (j = 0; j &lt; levels; j += 1) {</td>
-	</tr>
-<tr>
-	<td class="line-count">412</td>
-	<td class="line-coverage cline-yes">95</td>
-	<td class="text">                            href += '../';</td>
-	</tr>
-<tr>
-	<td class="line-count">413</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                        }</td>
-	</tr>
-<tr>
-	<td class="line-count">414</td>
-	<td class="line-coverage cline-yes">155</td>
-	<td class="text">                        node = node.parent;</td>
-	</tr>
-<tr>
-	<td class="line-count">415</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                    }</td>
-	</tr>
-<tr>
-	<td class="line-count">416</td>
-	<td class="line-coverage cline-yes">114</td>
-	<td class="text">                    return href + 'index.html';</td>
-	</tr>
-<tr>
-	<td class="line-count">417</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">                }</td>
-	</tr>
-<tr>
-	<td class="line-count">418</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            },</td>
-	</tr>
-<tr>
-	<td class="line-count">419</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            writer = new FileWriter(sync),</td>
-	</tr>
-<tr>
-	<td class="line-count">420</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">            tree;</td>
-	</tr>
-<tr>
-	<td class="line-count">421</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">422</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">        collector.files().forEach(function (key) {</td>
-	</tr>
-<tr>
-	<td class="line-count">423</td>
-	<td class="line-coverage cline-yes">41</td>
-	<td class="text">            summarizer.addFileCoverageSummary(key, utils.summarizeFileCoverage(collector.fileCoverageFor(key)));</td>
-	</tr>
-<tr>
-	<td class="line-count">424</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        });</td>
-	</tr>
-<tr>
-	<td class="line-count">425</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">        tree = summarizer.getTreeSummary();</td>
-	</tr>
-<tr>
-	<td class="line-count">426</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">        //console.log(JSON.stringify(tree.root, undefined, 4));</td>
-	</tr>
-<tr>
-	<td class="line-count">427</td>
-	<td class="line-coverage cline-yes">10</td>
-	<td class="text">        this.writeFiles(writer, tree.root, dir, linkMapper, { datetime: dt }, collector);</td>
-	</tr>
-<tr>
-	<td class="line-count">428</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">    }</td>
-	</tr>
-<tr>
-	<td class="line-count">429</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text">});</td>
-	</tr>
-<tr>
-	<td class="line-count">430</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">431</td>
-	<td class="line-coverage cline-yes">39</td>
-	<td class="text">module.exports = HtmlReport;</td>
-	</tr>
-<tr>
-	<td class="line-count">432</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
-<tr>
-	<td class="line-count">433</td>
-	<td class="line-coverage cline-neutral"></td>
-	<td class="text"></td>
-	</tr>
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">122</span>
+<span class="cline-any cline-yes">122</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">545</span>
+<span class="cline-any cline-yes">377</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-yes">23</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23</span>
+<span class="cline-any cline-yes">23</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">70</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">411</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">411</span>
+<span class="cline-any cline-yes">411</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91</span>
+<span class="cline-any cline-yes">125</span>
+<span class="cline-any cline-yes">125</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91</span>
+<span class="cline-any cline-yes">125</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91</span>
+<span class="cline-any cline-yes">91</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">34</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-yes">350</span>
+<span class="cline-any cline-yes">350</span>
+<span class="cline-any cline-yes">350</span>
+<span class="cline-any cline-yes">218</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">350</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">125</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">180</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+/*jslint nomen: true */
+var handlebars = require('handlebars'),
+    path = require('path'),
+    SEP = path.sep || '/',
+    fs = require('fs'),
+    util = require('util'),
+    mkdirp = require('mkdirp'),
+    FileWriter = require('../util/file-writer'),
+    Report = require('./index'),
+    Store = require('../store'),
+    InsertionText = require('../util/insertion-text'),
+    TreeSummarizer = require('../util/tree-summarizer'),
+    utils = require('../object-utils'),
+    templateFor = function (name) { return handlebars.compile(fs.readFileSync(path.resolve(__dirname, 'templates', name + '.txt'), 'utf8')); },
+    headerTemplate = templateFor('head'),
+    footerTemplate = templateFor('foot'),
+    pathTemplate = handlebars.compile('&lt;div class="path"&gt;{{{html}}}&lt;/div&gt;'),
+    detailTemplate = handlebars.compile([
+        '&lt;tr&gt;',
+        '&lt;td class="line-count"&gt;{{#show_lines}}{{maxLines}}{{/show_lines}}&lt;/td&gt;',
+        '&lt;td class="line-coverage"&gt;{{#show_line_execution_counts fileCoverage}}{{maxLines}}{{/show_line_execution_counts}}&lt;/td&gt;',
+        '&lt;td class="text"&gt;&lt;pre class="prettyprint lang-js"&gt;{{#show_code structured}}{{/show_code}}&lt;/pre&gt;&lt;/td&gt;',
+        '&lt;/tr&gt;\n'
+    ].join('')),
+    summaryTableHeader = [
+        '&lt;div class="coverage-summary"&gt;',
+        '&lt;table&gt;',
+        '&lt;thead&gt;',
+        '&lt;tr&gt;',
+        '   &lt;th data-col="file" data-fmt="html" data-html="true" class="file"&gt;File&lt;/th&gt;',
+        '   &lt;th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"&gt;&lt;/th&gt;',
+        '   &lt;th data-col="statements" data-type="number" data-fmt="pct" class="pct"&gt;Statements&lt;/th&gt;',
+        '   &lt;th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',
+        '   &lt;th data-col="branches" data-type="number" data-fmt="pct" class="pct"&gt;Branches&lt;/th&gt;',
+        '   &lt;th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',
+        '   &lt;th data-col="functions" data-type="number" data-fmt="pct" class="pct"&gt;Functions&lt;/th&gt;',
+        '   &lt;th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',
+        '   &lt;th data-col="lines" data-type="number" data-fmt="pct" class="pct"&gt;Lines&lt;/th&gt;',
+        '   &lt;th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"&gt;&lt;/th&gt;',
+        '&lt;/tr&gt;',
+        '&lt;/thead&gt;',
+        '&lt;tbody&gt;'
+    ].join('\n'),
+    summaryLineTemplate = handlebars.compile([
+        '&lt;tr&gt;',
+        '&lt;td class="file {{reportClasses.statements}}" data-value="{{file}}"&gt;&lt;a href="{{output}}"&gt;{{file}}&lt;/a&gt;&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.statements.pct}}" class="pic {{reportClasses.statements}}"&gt;{{#show_picture}}{{metrics.statements.pct}}{{/show_picture}}&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.statements.pct}}" class="pct {{reportClasses.statements}}"&gt;{{metrics.statements.pct}}%&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.statements.total}}" class="abs {{reportClasses.statements}}"&gt;({{metrics.statements.covered}}&amp;nbsp;/&amp;nbsp;{{metrics.statements.total}})&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.branches.pct}}" class="pct {{reportClasses.branches}}"&gt;{{metrics.branches.pct}}%&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.branches.total}}" class="abs {{reportClasses.branches}}"&gt;({{metrics.branches.covered}}&amp;nbsp;/&amp;nbsp;{{metrics.branches.total}})&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.functions.pct}}" class="pct {{reportClasses.functions}}"&gt;{{metrics.functions.pct}}%&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.functions.total}}" class="abs {{reportClasses.functions}}"&gt;({{metrics.functions.covered}}&amp;nbsp;/&amp;nbsp;{{metrics.functions.total}})&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.lines.pct}}" class="pct {{reportClasses.lines}}"&gt;{{metrics.lines.pct}}%&lt;/td&gt;',
+        '&lt;td data-value="{{metrics.lines.total}}" class="abs {{reportClasses.lines}}"&gt;({{metrics.lines.covered}}&amp;nbsp;/&amp;nbsp;{{metrics.lines.total}})&lt;/td&gt;',
+        '&lt;/tr&gt;\n'
+    ].join('\n\t')),
+    summaryTableFooter = [
+        '&lt;/tbody&gt;',
+        '&lt;/table&gt;',
+        '&lt;/div&gt;'
+    ].join('\n'),
+    seq = 0,
+    lt = '\u0001',
+    gt = '\u0002',
+    RE_LT = /&lt;/g,
+    RE_GT = /&gt;/g,
+    RE_AMP = /&amp;/g,
+    RE_lt = /\u0001/g,
+    RE_gt = /\u0002/g;
+&nbsp;
+handlebars.registerHelper('show_picture', function (opts) {
+    var num = Number(opts.fn(this)),
+        rest,
+        cls = '';
+    <span class="missing-if-branch">E</span>if (isFinite(num)) {
+        if (num === 100) {
+            cls = ' cover-full';
+        }
+        num = Math.floor(num);
+        rest = 100 - num;
+        return '&lt;span class="cover-fill' + cls + '" style="width: ' + num + 'px;"&gt;&lt;/span&gt;'
+            + '&lt;span class="cover-empty" style="width:' + rest + 'px;"&gt;&lt;/span&gt;';
+    } else {
+<span class="cstat-no">        return '';</span>
+    }
+});
+&nbsp;
+handlebars.registerHelper('show_lines', function (opts) {
+   var maxLines = Number(opts.fn(this)),
+       i,
+       array = [];
+&nbsp;
+   for (i = 0; i &lt; maxLines; i += 1) {
+       array[i] = i + 1;
+   }
+   return array.join('\n');
+});
+&nbsp;
+handlebars.registerHelper('show_line_execution_counts', function (context, opts) {
+    var lines = context.l,
+        maxLines = Number(opts.fn(this)),
+        i,
+        lineNumber,
+        array = [],
+        covered,
+        value = '';
+&nbsp;
+    for (i = 0; i &lt; maxLines; i += 1) {
+        lineNumber = i + 1;
+        value = '&amp;nbsp;';
+        covered = 'neutral';
+        if (lines.hasOwnProperty(lineNumber)) {
+            if (lines[lineNumber] &gt; 0) {
+                covered = 'yes';
+                value = lines[lineNumber];
+            } else {
+                covered = 'no';
+            }
+        }
+        array.push('&lt;span class="cline-any cline-' + covered + '"&gt;' + value + '&lt;/span&gt;');
+    }
+    return array.join('\n');
+});
+&nbsp;
+handlebars.registerHelper('show_code', function (context, opts) {
+    var structured = context,
+        array = [];
+&nbsp;
+    structured.forEach(function (item) {
+        array.push(customEscape(item.text) || '&amp;nbsp;');
+    });
+    return array.join('\n');
+});
+&nbsp;
+function annotateLines(fileCoverage, structuredText) {
+    var lineStats = fileCoverage.l;
+    <span class="missing-if-branch">I</span>if (!lineStats) { <span class="cstat-no">return; </span>}
+    Object.keys(lineStats).forEach(function (lineNumber) {
+        var count = lineStats[lineNumber];
+        structuredText[lineNumber].covered = count &gt; 0 ? 'yes' : 'no';
+    });
+    structuredText.forEach(function (item) {
+        if (item.covered === null) {
+            item.covered = 'neutral';
+        }
+    });
+}
+&nbsp;
+function annotateStatements(fileCoverage, structuredText) {
+    var statementStats = fileCoverage.s,
+        statementMeta = fileCoverage.statementMap;
+    Object.keys(statementStats).forEach(function (stName) {
+        var count = statementStats[stName],
+            meta = statementMeta[stName],
+            type = count &gt; 0 ? 'yes' : 'no',
+            startCol = meta.start.column,
+            endCol = meta.end.column + 1,
+            startLine = meta.start.line,
+            endLine = meta.end.line,
+            openSpan = lt + 'span class="cstat-' + type + '"' + gt,
+            closeSpan = lt + '/span' + gt,
+            text;
+&nbsp;
+        if (type === 'no') {
+            if (endLine !== startLine) {
+                endLine = startLine;
+                endCol = structuredText[startLine].text.originalLength();
+            }
+            text = structuredText[startLine].text;
+            text.wrap(startCol,
+                openSpan,
+                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                closeSpan);
+        }
+    });
+}
+&nbsp;
+function annotateFunctions(fileCoverage, structuredText) {
+&nbsp;
+    var fnStats = fileCoverage.f,
+        fnMeta = fileCoverage.fnMap;
+    <span class="missing-if-branch">I</span>if (!fnStats) { <span class="cstat-no">return; </span>}
+    Object.keys(fnStats).forEach(function (fName) {
+        var count = fnStats[fName],
+            meta = fnMeta[fName],
+            type = count &gt; 0 ? 'yes' : 'no',
+            startCol = meta.loc.start.column,
+            endCol = meta.loc.end.column + 1,
+            startLine = meta.loc.start.line,
+            endLine = meta.loc.end.line,
+            openSpan = lt + 'span class="fstat-' + type + '"' + gt,
+            closeSpan = lt + '/span' + gt,
+            text;
+&nbsp;
+        if (type === 'no') {
+            <span class="missing-if-branch">I</span>if (endLine !== startLine) {
+<span class="cstat-no">                endLine = startLine;</span>
+<span class="cstat-no">                endCol = structuredText[startLine].text.originalLength();</span>
+            }
+            text = structuredText[startLine].text;
+            text.wrap(startCol,
+                openSpan,
+                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                closeSpan);
+        }
+    });
+}
+&nbsp;
+function annotateBranches(fileCoverage, structuredText) {
+    var branchStats = fileCoverage.b,
+        branchMeta = fileCoverage.branchMap;
+    <span class="missing-if-branch">I</span>if (!branchStats) { <span class="cstat-no">return; </span>}
+&nbsp;
+    Object.keys(branchStats).forEach(function (branchName) {
+        var branchArray = branchStats[branchName],
+            sumCount = branchArray.reduce(function (p, n) { return p + n; }, 0),
+            metaArray = branchMeta[branchName].locations,
+            i,
+            count,
+            meta,
+            type,
+            startCol,
+            endCol,
+            startLine,
+            endLine,
+            openSpan,
+            closeSpan,
+            text;
+&nbsp;
+        if (sumCount &gt; 0) { //only highlight if partial branches are missing
+            for (i = 0; i &lt; branchArray.length; i += 1) {
+                count = branchArray[i];
+                meta = metaArray[i];
+                type = count &gt; 0 ? 'yes' : 'no';
+                startCol = meta.start.column;
+                endCol = meta.end.column + 1;
+                startLine = meta.start.line;
+                endLine = meta.end.line;
+                openSpan = lt + 'span class="branch-' + i + ' cbranch-' + type + '"' + gt;
+                closeSpan = lt + '/span' + gt;
+&nbsp;
+                if (count === 0) { //skip branches taken
+                    <span class="missing-if-branch">I</span>if (endLine !== startLine) {
+<span class="cstat-no">                        endLine = startLine;</span>
+<span class="cstat-no">                        endCol = structuredText[startLine].text.originalLength();</span>
+                    }
+                    text = structuredText[startLine].text;
+                    if (branchMeta[branchName].type === 'if') { // and 'if' is a special case since the else branch might not be visible, being non-existent
+                        text.insertAt(startCol, lt + 'span class="missing-if-branch"' + gt + (i === 0 ? 'I' : <span class="branch-1 cbranch-no">'E')</span>  + lt + '/span' + gt, true, false);
+                    } else {
+                        text.wrap(startCol,
+                            openSpan,
+                            startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                            closeSpan);
+                    }
+                }
+            }
+        }
+    });
+}
+&nbsp;
+function customEscape(text) {
+    text = text.toString();
+    return text.replace(RE_AMP, '&amp;amp;')
+        .replace(RE_LT, '&amp;lt;')
+        .replace(RE_GT, '&amp;gt;')
+        .replace(RE_lt, '&lt;')
+        .replace(RE_gt, '&gt;');
+}
+&nbsp;
+function getReportClass(stats) {
+    var coveragePct = stats.pct,
+        identity  = 1;
+    <span class="missing-if-branch">E</span>if (coveragePct * identity === coveragePct) {
+        return coveragePct &gt;= 80 ? 'high' : coveragePct &gt;= 50 ? 'medium' : 'low';
+    } else {
+<span class="cstat-no">        return '';</span>
+    }
+}
+&nbsp;
+/**
+ * a `Report` implementation that produces HTML coverage reports.
+ *
+ * Usage
+ * -----
+ *
+ *      var report = require('istanbul').Report.create('html');
+ *
+ *
+ * @class HtmlReport
+ * @extends Report
+ * @constructor
+ * @param {Object} opts optional
+ * @param {String} [opts.dir] the directory in which to generate reports. Defaults to `./html-report`
+ */
+function HtmlReport(opts) {
+    Report.call(this);
+    this.opts = opts || {};
+    this.opts.dir = this.opts.dir || path.resolve(process.cwd(), 'html-report');
+    this.opts.sourceStore = this.opts.sourceStore || Store.create('fslookup');
+}
+&nbsp;
+HtmlReport.TYPE = 'html';
+util.inherits(HtmlReport, Report);
+&nbsp;
+Report.mix(HtmlReport, {
+&nbsp;
+    getPathHtml: function (node, linkMapper) {
+        var parent = node.parent,
+            nodePath = [],
+            linkPath = [],
+            i;
+&nbsp;
+        while (parent) {
+            nodePath.push(parent);
+            parent = parent.parent;
+        }
+&nbsp;
+        for (i = 0; i &lt; nodePath.length; i += 1) {
+            linkPath.push('&lt;a href="' + linkMapper.ancestor(node, i + 1) + '"&gt;'
+                + (nodePath[i].relativeName || 'All files') + '&lt;/a&gt;');
+        }
+        linkPath.reverse();
+        return linkPath.length &gt; 0 ? linkPath.join(' &amp;#187; ') + ' &amp;#187; '
+            + node.displayShortName() : '';
+    },
+&nbsp;
+    writeDetailPage: function (writer, node, linkMapper, templateData, fileCoverage, metrics) {
+        var opts = this.opts,
+            sourceStore = opts.sourceStore,
+            sourceText = fileCoverage.code &amp;&amp; Array.isArray(fileCoverage.code) ?
+                fileCoverage.code.join('\n') + '\n' : sourceStore.get(fileCoverage.path),
+            code = sourceText.split(/\r?\n/),
+            count = 0,
+            structured = code.map(function (str) { count += 1; return { line: count, covered: null, text: new InsertionText(str, true) }; }),
+            lineNum = 0,
+            context;
+&nbsp;
+        structured.unshift({ line: 0, covered: null, text: new InsertionText("") });
+&nbsp;
+        templateData.metrics = metrics;
+        templateData.reportClass = getReportClass(templateData.metrics.statements);
+        templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });
+        templateData.prettify = {
+            js: linkMapper.asset(node, 'prettify.js'),
+            css: linkMapper.asset(node, 'prettify.css')
+        };
+        writer.write(headerTemplate(templateData));
+        writer.write('&lt;pre&gt;&lt;table class="coverage"&gt;\n');
+&nbsp;
+        annotateLines(fileCoverage, structured);
+        //note: order is important, since statements typically result in spanning the whole line and doing branches late
+        //causes mismatched tags
+        annotateBranches(fileCoverage, structured);
+        annotateFunctions(fileCoverage, structured);
+        annotateStatements(fileCoverage, structured);
+&nbsp;
+        structured.shift();
+        context = {
+            structured: structured,
+            maxLines: structured.length,
+            fileCoverage: fileCoverage
+        };
+        writer.write(detailTemplate(context));
+        writer.write('&lt;/table&gt;&lt;/pre&gt;\n');
+        writer.write(footerTemplate(templateData));
+    },
+&nbsp;
+    writeIndexPage: function (writer, node, linkMapper, templateData) {
+        var children = Array.prototype.slice.apply(node.children);
+&nbsp;
+        children.sort(function (a, b) {
+            return a.name &lt; b.name ? -1 : <span class="branch-1 cbranch-no">1;</span>
+        });
+&nbsp;
+        templateData.metrics = node.metrics;
+        templateData.reportClass = getReportClass(node.metrics.statements);
+        templateData.pathHtml = pathTemplate({ html: this.getPathHtml(node, linkMapper) });
+&nbsp;
+        writer.write(headerTemplate(templateData));
+        writer.write(summaryTableHeader);
+        children.forEach(function (child) {
+            var metrics = child.metrics,
+                reportClasses = {
+                    statements: getReportClass(metrics.statements),
+                    lines: getReportClass(metrics.lines),
+                    functions: getReportClass(metrics.functions),
+                    branches: getReportClass(metrics.branches)
+                },
+                data = {
+                    metrics: metrics,
+                    reportClasses: reportClasses,
+                    file: child.displayShortName(),
+                    output: linkMapper.fromParent(child)
+                };
+            writer.write(summaryLineTemplate(data) + '\n');
+        });
+        writer.write(summaryTableFooter);
+        writer.write(footerTemplate(templateData));
+    },
+&nbsp;
+    writeFiles: function (writer, node, dir, linkMapper, templateData, collector) {
+        var that = this,
+            indexFile = path.resolve(dir, 'index.html'),
+            childFile;
+        mkdirp.sync(dir);
+        templateData.entity = node.name || 'All files';
+        if (this.opts.verbose) { console.error('Writing ' + indexFile); }
+        writer.writeFile(indexFile, function () {
+            that.writeIndexPage(writer, node, linkMapper, templateData);
+        });
+        node.children.forEach(function (child) {
+            if (child.kind === 'dir') {
+                that.writeFiles(writer, child, path.resolve(dir, child.relativeName), linkMapper, templateData, collector);
+            } else {
+                childFile = path.resolve(dir, child.relativeName + '.html');
+                if (that.opts.verbose) { console.error('Writing ' + childFile); }
+                templateData.entity = child.name;
+                writer.writeFile(childFile, function () {
+                    that.writeDetailPage(writer, child, linkMapper, templateData, collector.fileCoverageFor(child.fullPath()), child.metrics);
+                });
+            }
+        });
+    },
+&nbsp;
+    writeReport: function (collector, sync) {
+        var opts = this.opts,
+            dir = opts.dir,
+            dt = new Date().toString(),
+            summarizer = new TreeSummarizer(),
+            linkMapper = {
+                fromParent: function (node) {
+                    var i = 0,
+                        relativeName = node.relativeName,
+                        ch;
+                    <span class="missing-if-branch">I</span>if (SEP !== '/') {
+<span class="cstat-no">                        relativeName = '';</span>
+<span class="cstat-no">                        for (i = 0; i &lt; node.relativeName.length; i += 1) {</span>
+<span class="cstat-no">                            ch = node.relativeName.charAt(i);</span>
+<span class="cstat-no">                            if (ch === SEP) {</span>
+<span class="cstat-no">                                relativeName += '/';</span>
+                            } else {
+<span class="cstat-no">                                relativeName += ch;</span>
+                            }
+                        }
+                    }
+                    return node.kind === 'dir' ? relativeName + 'index.html' : relativeName + '.html';
+                },
+                ancestorHref: function (node, num) {
+                    var href = '',
+                        separated,
+                        levels,
+                        i,
+                        j;
+                    for (i = 0; i &lt; num; i += 1) {
+                        separated = node.relativeName.split(SEP);
+                        levels = separated.length - 1;
+                        for (j = 0; j &lt; levels; j += 1) {
+                            href += '../';
+                        }
+                        node = node.parent;
+                    }
+                    return href;
+                },
+                ancestor: function (node, num) {
+                    return this.ancestorHref(node, num) + 'index.html';
+                },
+                asset: function (node, name) {
+                    var i = 0,
+                        parent = node.parent;
+                    while (parent) { i += 1; parent = parent.parent; }
+                    return this.ancestorHref(node, i) + name;
+                }
+            },
+            writer = new FileWriter(sync),
+            that = this,
+            tree;
+&nbsp;
+        collector.files().forEach(function (key) {
+            summarizer.addFileCoverageSummary(key, utils.summarizeFileCoverage(collector.fileCoverageFor(key)));
+        });
+        tree = summarizer.getTreeSummary();
+        //copy assets to root
+        mkdirp.sync(dir);
+        fs.readdirSync(path.resolve(__dirname, '..', 'vendor')).forEach(function (f) {
+            if (that.opts.verbose) {
+                console.log('Write asset: ' + path.resolve(dir, f));
+            }
+            fs.writeFileSync(path.resolve(dir, f), fs.readFileSync(path.resolve(__dirname, '..', 'vendor', f)));
+        });
+        //console.log(JSON.stringify(tree.root, undefined, 4));
+        this.writeFiles(writer, tree.root, dir, linkMapper, { datetime: dt }, collector);
+    }
+});
+&nbsp;
+module.exports = HtmlReport;
+&nbsp;
+&nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -2401,6 +1802,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>

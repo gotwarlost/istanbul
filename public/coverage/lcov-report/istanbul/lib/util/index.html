@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/util/</title>
+    
+        <link rel='stylesheet' href='../../../prettify.css'>
+    
     <style type='text/css'>
         body, html {
             margin:0; padding: 0;
@@ -15,6 +18,7 @@
             padding: 1em;
         }
         div.header {
+            z-index: 100;
             position: fixed;
             top: 0;
             border-bottom: 1px solid #666;
@@ -50,19 +54,61 @@
         div.path { font-size: 110%; }
         div.path a:link, div.path a:visited { color: #000; }
         table.coverage { border-collapse: collapse; margin:0; padding: 0 }
-        table.coverage td { margin: 0; padding: 0; color: #111; height: 15px; }
-        table.coverage td.line-count { width: 40px; text-align: right; padding-right: 10px; }
-        table.coverage td.line-coverage { color: #777 !important; text-align: right; padding: 0 0.2em;  border-left: 1px solid #666; border-right: 1px solid #666; }
-        table.coverage td.text {}
-        table.coverage td.cline-neutral { background: #eee; }
 
-        table.coverage td.cline-yes { background: #b5d592; color: #999; }
-        table.coverage td.cline-no { background: #fc8c84; }
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
         .cstat-yes { color: #111; }
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
-        .missing-if-branch { display: inline-block; padding: 0.2em; margin-right: 0.2em; margin-left: -1.6em; background: yellow; color: #111; border: 1px solid #333; text-decoration: line-through;  }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: -30px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
 
         .entity, .metric { font-weight: bold; }
         .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
@@ -77,7 +123,8 @@
         div.coverage-summary th.abs { border-left: none !important; text-align: right; }
         div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
         div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666;  }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
         div.coverage-summary a:link { text-decoration: none; color: #000; }
         div.coverage-summary a:visited { text-decoration: none; color: #333; }
         div.coverage-summary a:hover { text-decoration: underline; }
@@ -120,6 +167,12 @@
         span.cover-full {
             border-right: none !important;
         }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
     </style>
 </head>
 <body>
@@ -162,104 +215,104 @@
 	<td class="file high" data-value="factory.js"><a href="factory.js.html">factory.js</a></td>
 	<td data-value="93.18" class="pic high"><span class="cover-fill" style="width: 93px;"></span><span class="cover-empty" style="width:7px;"></span></td>
 	<td data-value="93.18" class="pct high">93.18%</td>
-	<td data-value="44" class="abs high">(41 / 44)</td>
+	<td data-value="44" class="abs high">(41&nbsp;/&nbsp;44)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="16" class="abs high">(16 / 16)</td>
+	<td data-value="16" class="abs high">(16&nbsp;/&nbsp;16)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="10" class="abs high">(10 / 10)</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
 	<td data-value="92.86" class="pct high">92.86%</td>
-	<td data-value="42" class="abs high">(39 / 42)</td>
+	<td data-value="42" class="abs high">(39&nbsp;/&nbsp;42)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="file-matcher.js"><a href="file-matcher.js.html">file-matcher.js</a></td>
 	<td data-value="94.29" class="pic high"><span class="cover-fill" style="width: 94px;"></span><span class="cover-empty" style="width:6px;"></span></td>
 	<td data-value="94.29" class="pct high">94.29%</td>
-	<td data-value="35" class="abs high">(33 / 35)</td>
+	<td data-value="35" class="abs high">(33&nbsp;/&nbsp;35)</td>
 	<td data-value="92.86" class="pct high">92.86%</td>
-	<td data-value="28" class="abs high">(26 / 28)</td>
+	<td data-value="28" class="abs high">(26&nbsp;/&nbsp;28)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="7" class="abs high">(7 / 7)</td>
+	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="30" class="abs high">(30 / 30)</td>
+	<td data-value="30" class="abs high">(30&nbsp;/&nbsp;30)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="file-writer.js"><a href="file-writer.js.html">file-writer.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="30" class="abs high">(30 / 30)</td>
+	<td data-value="30" class="abs high">(30&nbsp;/&nbsp;30)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="10" class="abs high">(10 / 10)</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="11" class="abs high">(11 / 11)</td>
+	<td data-value="11" class="abs high">(11&nbsp;/&nbsp;11)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="28" class="abs high">(28 / 28)</td>
+	<td data-value="28" class="abs high">(28&nbsp;/&nbsp;28)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="help-formatter.js"><a href="help-formatter.js.html">help-formatter.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="7" class="abs high">(7 / 7)</td>
+	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="2" class="abs high">(2 / 2)</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="1" class="abs high">(1 / 1)</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="7" class="abs high">(7 / 7)</td>
+	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="input-error.js"><a href="input-error.js.html">input-error.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="4" class="abs high">(4 / 4)</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="0" class="abs high">(0 / 0)</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="1" class="abs high">(1 / 1)</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="4" class="abs high">(4 / 4)</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="insertion-text.js"><a href="insertion-text.js.html">insertion-text.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="50" class="abs high">(50 / 50)</td>
+	<td data-value="50" class="abs high">(50&nbsp;/&nbsp;50)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="27" class="abs high">(27 / 27)</td>
+	<td data-value="27" class="abs high">(27&nbsp;/&nbsp;27)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="9" class="abs high">(9 / 9)</td>
+	<td data-value="9" class="abs high">(9&nbsp;/&nbsp;9)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="50" class="abs high">(50 / 50)</td>
+	<td data-value="50" class="abs high">(50&nbsp;/&nbsp;50)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="meta.js"><a href="meta.js.html">meta.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="2" class="abs high">(2 / 2)</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="0" class="abs high">(0 / 0)</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="0" class="abs high">(0 / 0)</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="2" class="abs high">(2 / 2)</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="tree-summarizer.js"><a href="tree-summarizer.js.html">tree-summarizer.js</a></td>
 	<td data-value="99.02" class="pic high"><span class="cover-fill" style="width: 99px;"></span><span class="cover-empty" style="width:1px;"></span></td>
 	<td data-value="99.02" class="pct high">99.02%</td>
-	<td data-value="102" class="abs high">(101 / 102)</td>
+	<td data-value="102" class="abs high">(101&nbsp;/&nbsp;102)</td>
 	<td data-value="92.11" class="pct high">92.11%</td>
-	<td data-value="38" class="abs high">(35 / 38)</td>
+	<td data-value="38" class="abs high">(35&nbsp;/&nbsp;38)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="26" class="abs high">(26 / 26)</td>
+	<td data-value="26" class="abs high">(26&nbsp;/&nbsp;26)</td>
 	<td data-value="98.99" class="pct high">98.99%</td>
-	<td data-value="99" class="abs high">(98 / 99)</td>
+	<td data-value="99" class="abs high">(98&nbsp;/&nbsp;99)</td>
 	</tr>
 
 </tbody>
@@ -267,9 +320,12 @@
 </div>
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by istanbul at Tue Sep 11 2012 22:35:40 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
 </div>
 </body>
+
+<script src="../../../prettify.js"></script>
+
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
@@ -356,6 +412,9 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
         });
     });
 </script>
