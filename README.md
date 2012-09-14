@@ -152,6 +152,7 @@ The following third-party libraries are used by this module:
 * rimraf - https://github.com/isaacs/rimraf - dev dependency for unit tests
 * which: https://github.com/isaacs/node-which - to resolve a node command to a file for the `cover` command
 * wordwrap: https://github.com/substack/node-wordwrap - for prettier help
+* prettify: http://code.google.com/p/google-code-prettify/ - for syntax colored HTML reports. Files checked in under `lib/vendor/`
 
 Inspired by
 -----------
