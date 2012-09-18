@@ -177,6 +177,6 @@ Shout out to
 Why the funky name?
 -------------------
 
-Since all the good ones are taken. Comes from the vague association of ideas across coverage, carpet-area coverage and the country that makes good carpets.
+Since all the good ones are taken. Comes from the loose association of ideas across coverage, carpet-area coverage, the country that makes good carpets and so on...
 
 
