@@ -14,5 +14,6 @@ results
 node_modules/
 .idea/
 html-report/
+build/
 
 npm-debug.log
