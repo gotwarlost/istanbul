@@ -99,7 +99,6 @@
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
-            margin-left: -30px;
             position: relative;
             padding: 0 4px;
             background: black;
