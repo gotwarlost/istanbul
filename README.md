@@ -167,7 +167,7 @@ The following third-party libraries are used by this module:
 Inspired by
 -----------
 
-* YUI test coverage - https://github.com/yui/yuitest - the grand-daddy of JS coverage tools. This library has been specifically designed to offer an alternative to this library with an easy migration path.
+* YUI test coverage - https://github.com/yui/yuitest - the grand-daddy of JS coverage tools. Istanbul has been specifically designed to offer an alternative to this library with an easy migration path.
 * cover: https://github.com/itay/node-cover - the inspiration for the `cover` command, modeled after the `run` command in that tool. The coverage methodology used by istanbul is quite different, however
 
 Shout out to
