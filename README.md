@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.5 : make object-utils.js work on a browser as-is
 * v0.1.4 : partial fix for issue #4; add titles to missing coverage spans, remove negative margin for missing if/else indicators
 * v0.1.3 : Set the environment variable running_under_istanbul to 1 when that is the case. This allows test runners that use istanbul as a library to back off on using it when set.
 * v0.1.2 : HTML reporting cosmetics. Reports now show syntax-colored JS using `prettify`. Summary tables no longer wrap in awkward places.
