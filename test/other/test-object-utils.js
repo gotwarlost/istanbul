@@ -141,6 +141,15 @@ module.exports = {
             test.deepEqual({ total: 10, covered: 4, pct: 40 }, ret.branches);
             test.done();
         },
+        "should merge summary correctly in one call": function (test) {
+            var coverage = { foo: it.foo, 'bar': it2.foo },
+                ret = utils.summarizeCoverage(coverage);
+            test.deepEqual({ total: 8, covered: 6, pct: 75 }, ret.lines);
+            test.deepEqual({ total: 10, covered: 8, pct: 80 }, ret.statements);
+            test.deepEqual({ total: 4, covered: 2, pct: 50 }, ret.functions);
+            test.deepEqual({ total: 10, covered: 4, pct: 40 }, ret.branches);
+            test.done();
+        },
         "can merge with a blank object in first position": function (test) {
             var s1 = null,
                 s2 = utils.summarizeFileCoverage(it2.foo),
