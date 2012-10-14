@@ -38,6 +38,24 @@ module.exports = {
             test.done();
         }
     },
+    "with a windows style file path": {
+        setUp: function (cb) {
+            code = [
+                'var x = args[0] > 5 ? args[0] : "undef";',
+                'output = x;'
+            ];
+            verifier = helper.verifier("c:\\a\\b\\c\\d\\e.js", code);
+            cb();
+        },
+        "should have correct key in coverage variable": function (test) {
+            verifier.verify(test, [ 1 ], "undef", { lines: { 1: 1, 2: 1 }, branches: { 1: [ 0, 1 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
+            var coverage = verifier.getCoverage(),
+                key = Object.keys(coverage)[0];
+            test.equals("c:\\a\\b\\c\\d\\e.js", key);
+            test.done();
+        }
+
+    },
     "with junk code": {
         setUp: function (cb) {
             code = [
