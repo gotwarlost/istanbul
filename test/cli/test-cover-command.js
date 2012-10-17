@@ -54,7 +54,7 @@ module.exports = {
     },
     "should skip reporting when requested": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '--report', 'none', '--console', 'detail' ], function (results) {
+        run([ 'test/run.js', '--report', 'none', '--print', 'detail' ], function (results) {
             test.ok(results.succeeded());
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
