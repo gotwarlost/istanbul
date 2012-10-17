@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/collector.js</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">lib</a> - collector.js<span style="font-size: 80%;"> (source / <a href="collector.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-09-11</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var MemoryStore = require('./store/memory'),</span>
+<span class="lineNum">       7 </span>                :            :     utils = require('./object-utils');
+<span class="lineNum">       8 </span>                :            : 
+<span class="lineNum">       9 </span>                :            : /**
+<span class="lineNum">      10 </span>                :            :  * a mechanism to merge multiple coverage objects into one. Handles the use case
+<span class="lineNum">      11 </span>                :            :  * of overlapping coverage information for the same files in multiple coverage
+<span class="lineNum">      12 </span>                :            :  * objects and does not double-count in this situation. For example, if
+<span class="lineNum">      13 </span>                :            :  * you pass the same coverage object multiple times, the final merged object will be
+<span class="lineNum">      14 </span>                :            :  * no different that any of the objects passed in (except for execution counts).
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * The `Collector` is built for scale to handle thousands of coverage objects.
+<span class="lineNum">      17 </span>                :            :  * By default, all processing is done in memory since the common use-case is of
+<span class="lineNum">      18 </span>                :            :  * one or a few coverage objects. You can work around memory
+<span class="lineNum">      19 </span>                :            :  * issues by passing in a `Store` implementation that stores temporary computations
+<span class="lineNum">      20 </span>                :            :  * on disk (the `tmp` store, for example).
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * The `getFinalCoverage` method returns an object with merged coverage information
+<span class="lineNum">      23 </span>                :            :  * and is provided as a convenience for implementors working with coverage information
+<span class="lineNum">      24 </span>                :            :  * that can fit into memory. Reporters, in the interest of generality, should *not* use this method for
+<span class="lineNum">      25 </span>                :            :  * creating reports.
+<span class="lineNum">      26 </span>                :            :  *
+<span class="lineNum">      27 </span>                :            :  * Usage
+<span class="lineNum">      28 </span>                :            :  * -----
+<span class="lineNum">      29 </span>                :            :  *
+<span class="lineNum">      30 </span>                :            :  *      var collector = new require('istanbul').Collector();
+<span class="lineNum">      31 </span>                :            :  *
+<span class="lineNum">      32 </span>                :            :  *      files.forEach(function (f) {
+<span class="lineNum">      33 </span>                :            :  *          //each coverage object can have overlapping information about multiple files
+<span class="lineNum">      34 </span>                :            :  *          collector.add(JSON.parse(fs.readFileSync(f, 'utf8')));
+<span class="lineNum">      35 </span>                :            :  *      });
+<span class="lineNum">      36 </span>                :            :  *
+<span class="lineNum">      37 </span>                :            :  *      collector.files().forEach(function(file) {
+<span class="lineNum">      38 </span>                :            :  *          var fileCoverage = collector.fileCoverageFor(file);
+<span class="lineNum">      39 </span>                :            :  *          console.log('Coverage for ' + file + ' is:' + JSON.stringify(fileCoverage));
+<span class="lineNum">      40 </span>                :            :  *      });
+<span class="lineNum">      41 </span>                :            :  *
+<span class="lineNum">      42 </span>                :            :  *      // convenience method: do not use this when dealing with a large number of files
+<span class="lineNum">      43 </span>                :            :  *      var finalCoverage = collector.getFinalCoverage();
+<span class="lineNum">      44 </span>                :            :  *
+<span class="lineNum">      45 </span>                :            :  * @class Collector
+<span class="lineNum">      46 </span>                :            :  * @constructor
+<span class="lineNum">      47 </span>                :            :  * @param {Object} options Optional. Configuration options.
+<span class="lineNum">      48 </span>                :            :  * @param {Store} options.store - an implementation of `Store` to use for temporary
+<a name="49"><span class="lineNum">      49 </span>                :            :  *      calculations.</a>
+<span class="lineNum">      50 </span>                :            :  */
+<span class="lineNum">      51 </span>                :<span class="lineCov">         39 : function Collector(options) {</span>
+<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :     options = options || {};</span>
+<span class="lineNum">      53 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :     this.store = options.store || new MemoryStore();</span>
+<span class="lineNum">      54 </span>                :            : }
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :<span class="lineCov">         39 : Collector.prototype = {</span>
+<span class="lineNum">      57 </span>                :            :     /**
+<span class="lineNum">      58 </span>                :            :      * adds a coverage object to the collector.
+<span class="lineNum">      59 </span>                :            :      *
+<span class="lineNum">      60 </span>                :            :      * @method add
+<span class="lineNum">      61 </span>                :            :      * @param {Object} coverage the coverage object.
+<span class="lineNum">      62 </span>                :            :      * @param {String} testName Optional. The name of the test used to produce the object.
+<a name="63"><span class="lineNum">      63 </span>                :            :      *      This is currently not used.</a>
+<span class="lineNum">      64 </span>                :            :      */
+<a name="65"><span class="lineNum">      65 </span>                :            :     add: function (coverage, testName) {</a>
+<span class="lineNum">      66 </span>                :<span class="lineCov">         17 :         var store = this.store;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">         17 :         Object.keys(coverage).forEach(function (key) {</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">         62 :             var fileCoverage = coverage[key];</span>
+<span class="lineNum">      69 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 61 times"> + </span>]:<span class="lineCov">         62 :             if (store.hasKey(key)) {</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">          1 :                 store.setObject(key, utils.mergeFileCoverage(fileCoverage, store.getObject(key)));</span>
+<span class="lineNum">      71 </span>                :            :             } else {
+<span class="lineNum">      72 </span>                :<span class="lineCov">         61 :                 store.setObject(key, fileCoverage);</span>
+<span class="lineNum">      73 </span>                :            :             }
+<span class="lineNum">      74 </span>                :            :         });
+<span class="lineNum">      75 </span>                :            :     },
+<span class="lineNum">      76 </span>                :            :     /**
+<span class="lineNum">      77 </span>                :            :      * returns a list of unique file paths for which coverage information has been added.
+<span class="lineNum">      78 </span>                :            :      * @method files
+<a name="79"><span class="lineNum">      79 </span>                :            :      * @return {Array} an array of file paths for which coverage information is present.</a>
+<span class="lineNum">      80 </span>                :            :      */
+<span class="lineNum">      81 </span>                :            :     files: function () {
+<span class="lineNum">      82 </span>                :<span class="lineCov">         25 :         return this.store.keys();</span>
+<span class="lineNum">      83 </span>                :            :     },
+<span class="lineNum">      84 </span>                :            :     /**
+<span class="lineNum">      85 </span>                :            :      * return file coverage information for a single file
+<span class="lineNum">      86 </span>                :            :      * @method fileCoverageFor
+<span class="lineNum">      87 </span>                :            :      * @param {String} fileName the path for the file for which coverage information is
+<span class="lineNum">      88 </span>                :            :      *      required. Must be one of the values returned in the `files()` method.
+<a name="89"><span class="lineNum">      89 </span>                :            :      * @return {Object} the coverage information for the specified file.</a>
+<span class="lineNum">      90 </span>                :            :      */
+<span class="lineNum">      91 </span>                :            :     fileCoverageFor: function (fileName) {
+<span class="lineNum">      92 </span>                :<span class="lineCov">        131 :         var ret = this.store.getObject(fileName);</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        131 :         utils.addDerivedInfoForFile(ret);</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">        131 :         return ret;</span>
+<span class="lineNum">      95 </span>                :            :     },
+<span class="lineNum">      96 </span>                :            :     /**
+<span class="lineNum">      97 </span>                :            :      * returns file coverage information for all files. This has the same format as
+<span class="lineNum">      98 </span>                :            :      * any of the objects passed in to the `add` method. The number of keys in this
+<span class="lineNum">      99 </span>                :            :      * object will be a superset of all keys found in the objects passed to `add()`
+<span class="lineNum">     100 </span>                :            :      * @method getFinalCoverage
+<a name="101"><span class="lineNum">     101 </span>                :            :      * @return {Object} the merged coverage information</a>
+<span class="lineNum">     102 </span>                :            :      */
+<span class="lineNum">     103 </span>                :            :     getFinalCoverage: function () {
+<a name="104"><span class="lineNum">     104 </span>                :<span class="lineCov">          2 :         var ret = {},</span></a>
+<span class="lineNum">     105 </span>                :            :             that = this;
+<span class="lineNum">     106 </span>                :<span class="lineCov">          2 :         this.files().forEach(function (file) {</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">          4 :             ret[file] = that.fileCoverageFor(file);</span>
+<span class="lineNum">     108 </span>                :            :         });
+<span class="lineNum">     109 </span>                :<span class="lineCov">          2 :         return ret;</span>
+<span class="lineNum">     110 </span>                :            :     },
+<span class="lineNum">     111 </span>                :            :     /**
+<span class="lineNum">     112 </span>                :            :      * disposes this collector and reclaims temporary resources used in the
+<span class="lineNum">     113 </span>                :            :      * computation. Calls `dispose()` on the underlying store.
+<a name="114"><span class="lineNum">     114 </span>                :            :      * @method dispose</a>
+<span class="lineNum">     115 </span>                :            :      */
+<span class="lineNum">     116 </span>                :            :     dispose: function () {
+<span class="lineNum">     117 </span>                :<span class="lineCov">          2 :         this.store.dispose();</span>
+<span class="lineNum">     118 </span>                :            :     }
+<span class="lineNum">     119 </span>                :            : };
+<span class="lineNum">     120 </span>                :            : 
+<span class="lineNum">     121 </span>                :<span class="lineCov">         39 : module.exports = Collector;</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

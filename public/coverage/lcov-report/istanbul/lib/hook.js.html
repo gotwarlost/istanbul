@@ -1,0 +1,772 @@
+<!doctype html>
+<html>
+<head>
+    <title>Code coverage report for istanbul/lib/hook.js</title>
+    
+        <link rel='stylesheet' href='../../prettify.css'>
+    
+    <style type='text/css'>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: consolas, menlo, monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+    </style>
+</head>
+<body>
+<div class='header high'>
+    <h1>Code coverage report for <span class='entity'>istanbul/lib/hook.js</span></h1>
+    <h2>
+        
+        Statements: <span class='metric'>100% <small>(44 / 44)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class='metric'>95.83% <small>(23 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class='metric'>100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class='metric'>100% <small>(44 / 44)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/</a> &#187; hook.js</div>
+</div>
+<div class='body'>
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">120</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">120</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">120</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">2521</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">119</span>
+<span class="cline-any cline-yes">119</span>
+<span class="cline-any cline-yes">76</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">119</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+&nbsp;
+/**
+ * provides a mechanism to transform code in the scope of `require` or `vm.createScript`.
+ * This mechanism is general and relies on a user-supplied `matcher` function that determines when transformations should be
+ * performed and a user-supplied `transformer` function that performs the actual transform.
+ * Instrumenting code for coverage is one specific example of useful hooking.
+ *
+ * Note that both the `matcher` and `transformer` must execute synchronously.
+ *
+ * For the common case of matching filesystem paths based on inclusion/ exclusion patterns, use the `matcherFor`
+ * function in the istanbul API to get a matcher.
+ *
+ * It is up to the transformer to perform processing with side-effects, such as caching, storing the original
+ * source code to disk in case of dynamically generated scripts etc. The `Store` class can help you with this.
+ *
+ * Usage
+ * -----
+ *
+ *      var hook = require('istanbul').hook,
+ *          myMatcher = function (file) { return file.match(/foo/); },
+ *          myTransformer = function (code, file) { return 'console.log("' + file + '");' + code; };
+ *
+ *      hook.hookRequire(myMatcher, myTransformer);
+ *
+ *      var foo = require('foo'); //will now print foo's module path to console
+ *
+ * @class Hook
+ */
+/*jslint nomen: true */
+var path = require('path'),
+    fs = require('fs'),
+    Module = require('module'),
+    vm = require('vm'),
+    originalLoader = Module._extensions['.js'],
+    originalCreateScript = vm.createScript,
+    lastMatcher;
+&nbsp;
+function transformFn(matcher, transformer, verbose) {
+&nbsp;
+    return function (code, filename) {
+        var shouldHook = matcher(filename),
+            transformed,
+            changed = false;
+&nbsp;
+        if (shouldHook) {
+            if (verbose) {
+                console.error('Module load hook: transform [' + filename + ']');
+            }
+            try {
+                transformed = transformer(code, filename);
+                changed = true;
+            } catch (ex) {
+                console.error('Transformation error; return original code');
+                console.error(ex);
+                transformed = code;
+            }
+        } else {
+            transformed = code;
+        }
+        return { code: transformed, changed: changed };
+    };
+}
+&nbsp;
+function unloadRequireCache(matcher) {
+    <span class="missing-if-branch" title="else path not taken"" >E</span>if (matcher &amp;&amp; typeof require !== 'undefined' &amp;&amp; require &amp;&amp; require.cache) {
+        Object.keys(require.cache).forEach(function (filename) {
+            if (matcher(filename)) {
+                delete require.cache[filename];
+            }
+        });
+    }
+}
+/**
+ * hooks `require` to return transformed code to the node module loader.
+ * Exceptions in the transform result in the original code being used instead.
+ * @method hookRequire
+ * @static
+ * @param matcher {Function(filePath)} a function that is called with the absolute path to the file being
+ *  `require`-d. Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise
+ * @param transformer {Function(code, filePath)} a function called with the original code and the associated path of the file
+ *  from where the code was loaded. Should return the transformed code.
+ * @param options {Object} options Optional.
+ * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
+ */
+function hookRequire(matcher, transformer, options) {
+    options = options || {};
+    lastMatcher = matcher;
+    var fn = transformFn(matcher, transformer, options.verbose),
+        postLoadHook = options.postLoadHook
+            &amp;&amp; typeof options.postLoadHook === 'function' ? options.postLoadHook : null;
+&nbsp;
+    Module._extensions['.js'] = function (module, filename) {
+        var ret = fn(fs.readFileSync(filename, 'utf8'), filename);
+        if (ret.changed) {
+            module._compile(ret.code, filename);
+        } else {
+            originalLoader(module, filename);
+        }
+        if (postLoadHook) {
+            postLoadHook(filename);
+        }
+    };
+    unloadRequireCache(matcher);
+}
+/**
+ * unhook `require` to restore it to its original state. Also unloads the  modules in
+ * the `require` cache that would have matched the matcher provide in the
+ * `hookRequire` method.
+ * @method unhookRequire
+ * @static
+ */
+function unhookRequire() {
+    Module._extensions['.js'] = originalLoader;
+    unloadRequireCache(lastMatcher);
+}
+/**
+ * hooks `vm.createScript` to return transformed code out of which a `Script` object will be created.
+ * Exceptions in the transform result in the original code being used instead.
+ * @method hookCreateScript
+ * @static
+ * @param matcher {Function(filePath)} a function that is called with the filename passed to `vm.createScript`
+ *  Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise
+ * @param transformer {Function(code, filePath)} a function called with the original code and the filename passed to
+ *  `vm.createScript`. Should return the transformed code.
+ * @param options {Object} options Optional.
+ * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
+ */
+function hookCreateScript(matcher, transformer, opts) {
+    opts = opts || {};
+    var fn = transformFn(matcher, transformer, opts.verbose);
+    vm.createScript = function (code, file) {
+        var ret = fn(code, file);
+        return originalCreateScript(ret.code, file);
+    };
+}
+&nbsp;
+/**
+ * unhooks vm.createScript, restoring it to its original state.
+ * @method unhookCreateScript
+ * @static
+ */
+function unhookCreateScript() {
+    vm.createScript = originalCreateScript;
+}
+&nbsp;
+module.exports = {
+    hookRequire: hookRequire,
+    unhookRequire: unhookRequire,
+    hookCreateScript: hookCreateScript,
+    unhookCreateScript: unhookCreateScript
+};
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class='footer'>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
+</div>
+</body>
+
+<script src="../../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (prettyPrint) {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</html>
