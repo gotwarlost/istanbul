@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>ObjectUtils - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: </em>
+            <em>API Docs for: 0.0.1-12</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,10 @@
                 <li><a href="..&#x2F;classes/Report.html">Report</a></li>
             
                 <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+            
+                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
             
                 <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
             
@@ -148,10 +152,17 @@ format.</p>
  one of the sub-objects of the main coverage object as an argument. Other
  methods accept the higher level coverage object with multiple keys.</p>
 
-<h2>Usage</h2>
+<p>Works on <code>node</code> as well as the browser.</p>
+
+<h2>Usage on nodejs</h2>
 
 <pre class="code"><code class="prettyprint"> var objectUtils = require('istanbul').utils;
 </code></pre>
+
+<h2>Usage in a browser</h2>
+
+<p>Load this file using a <code>script</code> tag or other means. This will set <code>window.coverageUtils</code>
+to this module's exports.</p>
 </div>
 
 
@@ -225,6 +236,15 @@ format.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_removeDerivedInfo">removeDerivedInfo</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_summarizeCoverage">summarizeCoverage</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -310,7 +330,7 @@ format.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l58"><code>lib&#x2F;object-utils.js:58</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l67"><code>lib&#x2F;object-utils.js:67</code></a>
         
         </p>
 
@@ -399,7 +419,7 @@ format.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l30"><code>lib&#x2F;object-utils.js:30</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l39"><code>lib&#x2F;object-utils.js:39</code></a>
         
         </p>
 
@@ -486,7 +506,7 @@ it is not recomputed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l119"><code>lib&#x2F;object-utils.js:119</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l128"><code>lib&#x2F;object-utils.js:128</code></a>
         
         </p>
 
@@ -593,7 +613,7 @@ format.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l184"><code>lib&#x2F;object-utils.js:184</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l193"><code>lib&#x2F;object-utils.js:193</code></a>
         
         </p>
 
@@ -716,7 +736,7 @@ such that the execution counts are correct.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l217"><code>lib&#x2F;object-utils.js:217</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l226"><code>lib&#x2F;object-utils.js:226</code></a>
         
         </p>
 
@@ -820,7 +840,7 @@ and can accept any number of arguments.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l70"><code>lib&#x2F;object-utils.js:70</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l79"><code>lib&#x2F;object-utils.js:79</code></a>
         
         </p>
 
@@ -859,6 +879,114 @@ and can accept any number of arguments.</p>
         </div>
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_summarizeCoverage" class="method item">
+    <h3 class="name"><code>summarizeCoverage</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>coverage</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l257"><code>lib&#x2F;object-utils.js:257</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>returns the coverage summary for a single coverage object. This is
+wrapper over <code>summarizeFileCoverage</code> and <code>mergeSummaryObjects</code> for
+the common case of a single coverage object</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">coverage</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the coverage object</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    summary coverage metrics across all files in the coverage object
+                
+            </div>
+        </div>
     
 
     
@@ -913,7 +1041,7 @@ and can accept any number of arguments.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l166"><code>lib&#x2F;object-utils.js:166</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l175"><code>lib&#x2F;object-utils.js:175</code></a>
         
         </p>
 
@@ -1020,7 +1148,7 @@ to understand the format of the returned object.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l249"><code>lib&#x2F;object-utils.js:249</code></a>
+        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l274"><code>lib&#x2F;object-utils.js:274</code></a>
         
         </p>
 

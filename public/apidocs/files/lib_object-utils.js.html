@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>lib&#x2F;object-utils.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: </em>
+            <em>API Docs for: 0.0.1-12</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -64,6 +64,10 @@
                 <li><a href="..&#x2F;classes/Report.html">Report</a></li>
             
                 <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+            
+                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
             
                 <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
             
@@ -133,292 +137,325 @@
  *  one of the sub-objects of the main coverage object as an argument. Other
  *  methods accept the higher level coverage object with multiple keys.
  *
- * Usage
- * -----
+ * Works on &#x60;node&#x60; as well as the browser.
+ *
+ * Usage on nodejs
+ * ---------------
  *
  *      var objectUtils = require(&#x27;istanbul&#x27;).utils;
  *
+ * Usage in a browser
+ * ------------------
+ *
+ * Load this file using a &#x60;script&#x60; tag or other means. This will set &#x60;window.coverageUtils&#x60;
+ * to this module&#x27;s exports.
+ *
  * @class ObjectUtils
- *&#x2F;
-
-&#x2F;**
- * adds line coverage information to a file coverage object, reverse-engineering
- * it from statement coverage. The object passed in is updated in place.
- *
- * Note that if line coverage information is already present in the object,
- * it is not recomputed.
- *
- * @method addDerivedInfoForFile
  * @static
- * @param {Object} fileCoverage the coverage object for a single file
  *&#x2F;
-function addDerivedInfoForFile(fileCoverage) {
-    var statementMap = fileCoverage.statementMap,
-        statements = fileCoverage.s,
-        lineMap;
+(function (isNode) {
+    &#x2F;**
+     * adds line coverage information to a file coverage object, reverse-engineering
+     * it from statement coverage. The object passed in is updated in place.
+     *
+     * Note that if line coverage information is already present in the object,
+     * it is not recomputed.
+     *
+     * @method addDerivedInfoForFile
+     * @static
+     * @param {Object} fileCoverage the coverage object for a single file
+     *&#x2F;
+    function addDerivedInfoForFile(fileCoverage) {
+        var statementMap = fileCoverage.statementMap,
+            statements = fileCoverage.s,
+            lineMap;
 
-    if (!fileCoverage.l) {
-        fileCoverage.l = lineMap = {};
-        Object.keys(statements).forEach(function (st) {
-            var line = statementMap[st].start.line,
-                count = statements[st],
-                prevVal = lineMap[line];
-            if (typeof prevVal === &#x27;undefined&#x27; || prevVal &lt; count) {
-                lineMap[line] = count;
-            }
+        if (!fileCoverage.l) {
+            fileCoverage.l = lineMap = {};
+            Object.keys(statements).forEach(function (st) {
+                var line = statementMap[st].start.line,
+                    count = statements[st],
+                    prevVal = lineMap[line];
+                if (typeof prevVal === &#x27;undefined&#x27; || prevVal &lt; count) {
+                    lineMap[line] = count;
+                }
+            });
+        }
+    }
+    &#x2F;**
+     * adds line coverage information to all file coverage objects.
+     *
+     * @method addDerivedInfo
+     * @static
+     * @param {Object} coverage the coverage object
+     *&#x2F;
+    function addDerivedInfo(coverage) {
+        Object.keys(coverage).forEach(function (k) {
+            addDerivedInfoForFile(coverage[k]);
         });
     }
-}
-&#x2F;**
- * adds line coverage information to all file coverage objects.
- *
- * @method addDerivedInfo
- * @static
- * @param {Object} coverage the coverage object
- *&#x2F;
-function addDerivedInfo(coverage) {
-    Object.keys(coverage).forEach(function (k) {
-        addDerivedInfoForFile(coverage[k]);
-    });
-}
-&#x2F;**
- * removes line coverage information from all file coverage objects
- * @method removeDerivedInfo
- * @static
- * @param {Object} coverage the coverage object
- *&#x2F;
-function removeDerivedInfo(coverage) {
-    Object.keys(coverage).forEach(function (k) {
-        delete coverage[k].l;
-    });
-}
-
-function percent(covered, total) {
-    var tmp;
-    if (total &gt; 0) {
-        tmp = 1000 * 100 * covered &#x2F; total + 5;
-        return Math.floor(tmp &#x2F; 10) &#x2F; 100;
-    } else {
-        return 100.00;
+    &#x2F;**
+     * removes line coverage information from all file coverage objects
+     * @method removeDerivedInfo
+     * @static
+     * @param {Object} coverage the coverage object
+     *&#x2F;
+    function removeDerivedInfo(coverage) {
+        Object.keys(coverage).forEach(function (k) {
+            delete coverage[k].l;
+        });
     }
-}
 
-function computeSimpleTotals(fileCoverage, property) {
-    var stats = fileCoverage[property],
-        ret = { total: 0, covered: 0 };
-
-    Object.keys(stats).forEach(function (key) {
-        ret.total += 1;
-        if (stats[key]) {
-            ret.covered += 1;
+    function percent(covered, total) {
+        var tmp;
+        if (total &gt; 0) {
+            tmp = 1000 * 100 * covered &#x2F; total + 5;
+            return Math.floor(tmp &#x2F; 10) &#x2F; 100;
+        } else {
+            return 100.00;
         }
-    });
-    ret.pct = percent(ret.covered, ret.total);
-    return ret;
-}
+    }
 
-function computeBranchTotals(fileCoverage) {
-    var stats = fileCoverage.b,
-        ret = { total: 0, covered: 0 };
+    function computeSimpleTotals(fileCoverage, property) {
+        var stats = fileCoverage[property],
+            ret = { total: 0, covered: 0 };
 
-    Object.keys(stats).forEach(function (key) {
-        var branches = stats[key],
-            covered = branches.filter(function (num) { return num &gt; 0; });
-        ret.total += branches.length;
-        ret.covered += covered.length;
-    });
-    ret.pct = percent(ret.covered, ret.total);
-    return ret;
-}
-&#x2F;**
- * returns a blank summary metrics object. A metrics object has the following
- * format.
- *
- *      {
- *          lines: lineMetrics,
- *          statements: statementMetrics,
- *          functions: functionMetrics,
- *          branches: branchMetrics
- *      }
- *
- *  Each individual metric object looks as follows:
- *
- *      {
- *          total: n,
- *          covered: m,
- *          pct: percent
- *      }
- *
- * @method blankSummary
- * @static
- * @return {Object} a blank metrics object
- *&#x2F;
-function blankSummary() {
-    return {
-        lines: {
-            total: 0,
-            covered: 0,
-            pct: &#x27;Unknown&#x27;
-        },
-        statements: {
-            total: 0,
-            covered: 0,
-            pct: &#x27;Unknown&#x27;
-        },
-        functions: {
-            total: 0,
-            covered: 0,
-            pct: &#x27;Unknown&#x27;
-        },
-        branches: {
-            total: 0,
-            covered: 0,
-            pct: &#x27;Unknown&#x27;
-        }
+        Object.keys(stats).forEach(function (key) {
+            ret.total += 1;
+            if (stats[key]) {
+                ret.covered += 1;
+            }
+        });
+        ret.pct = percent(ret.covered, ret.total);
+        return ret;
+    }
+
+    function computeBranchTotals(fileCoverage) {
+        var stats = fileCoverage.b,
+            ret = { total: 0, covered: 0 };
+
+        Object.keys(stats).forEach(function (key) {
+            var branches = stats[key],
+                covered = branches.filter(function (num) { return num &gt; 0; });
+            ret.total += branches.length;
+            ret.covered += covered.length;
+        });
+        ret.pct = percent(ret.covered, ret.total);
+        return ret;
+    }
+    &#x2F;**
+     * returns a blank summary metrics object. A metrics object has the following
+     * format.
+     *
+     *      {
+     *          lines: lineMetrics,
+     *          statements: statementMetrics,
+     *          functions: functionMetrics,
+     *          branches: branchMetrics
+     *      }
+     *
+     *  Each individual metric object looks as follows:
+     *
+     *      {
+     *          total: n,
+     *          covered: m,
+     *          pct: percent
+     *      }
+     *
+     * @method blankSummary
+     * @static
+     * @return {Object} a blank metrics object
+     *&#x2F;
+    function blankSummary() {
+        return {
+            lines: {
+                total: 0,
+                covered: 0,
+                pct: &#x27;Unknown&#x27;
+            },
+            statements: {
+                total: 0,
+                covered: 0,
+                pct: &#x27;Unknown&#x27;
+            },
+            functions: {
+                total: 0,
+                covered: 0,
+                pct: &#x27;Unknown&#x27;
+            },
+            branches: {
+                total: 0,
+                covered: 0,
+                pct: &#x27;Unknown&#x27;
+            }
+        };
+    }
+    &#x2F;**
+     * returns the summary metrics given the coverage object for a single file. See &#x60;blankSummary()&#x60;
+     * to understand the format of the returned object.
+     *
+     * @method summarizeFileCoverage
+     * @static
+     * @param {Object} fileCoverage the coverage object for a single file.
+     * @return {Object} the summary metrics for the file
+     *&#x2F;
+    function summarizeFileCoverage(fileCoverage) {
+        var ret = blankSummary();
+        addDerivedInfoForFile(fileCoverage);
+        ret.lines = computeSimpleTotals(fileCoverage, &#x27;l&#x27;);
+        ret.functions = computeSimpleTotals(fileCoverage, &#x27;f&#x27;);
+        ret.statements = computeSimpleTotals(fileCoverage, &#x27;s&#x27;);
+        ret.branches = computeBranchTotals(fileCoverage);
+        return ret;
+    }
+    &#x2F;**
+     * merges two instances of file coverage objects *for the same file*
+     * such that the execution counts are correct.
+     *
+     * @method mergeFileCoverage
+     * @static
+     * @param {Object} first the first file coverage object for a given file
+     * @param {Object} second the second file coverage object for the same file
+     * @return {Object} an object that is a result of merging the two. Note that
+     *      the input objects are not changed in any way.
+     *&#x2F;
+    function mergeFileCoverage(first, second) {
+        var ret = JSON.parse(JSON.stringify(first)),
+            i;
+
+        delete ret.l; &#x2F;&#x2F;remove derived info
+
+        Object.keys(second.s).forEach(function (k) {
+            ret.s[k] += second.s[k];
+        });
+        Object.keys(second.f).forEach(function (k) {
+            ret.f[k] += second.f[k];
+        });
+        Object.keys(second.b).forEach(function (k) {
+            var retArray = ret.b[k],
+                secondArray = second.b[k];
+            for (i = 0; i &lt; retArray.length; i += 1) {
+                retArray[i] += secondArray[i];
+            }
+        });
+
+        return ret;
+    }
+    &#x2F;**
+     * merges multiple summary metrics objects by summing up the &#x60;totals&#x60; and
+     * &#x60;covered&#x60; fields and recomputing the percentages. This function is generic
+     * and can accept any number of arguments.
+     *
+     * @method mergeSummaryObjects
+     * @static
+     * @param {Object} summary... multiple summary metrics objects
+     * @return {Object} the merged summary metrics
+     *&#x2F;
+    function mergeSummaryObjects() {
+        var ret = blankSummary(),
+            args = Array.prototype.slice.call(arguments),
+            keys = [&#x27;lines&#x27;, &#x27;statements&#x27;, &#x27;branches&#x27;, &#x27;functions&#x27;],
+            increment = function (obj) {
+                if (obj) {
+                    keys.forEach(function (key) {
+                        ret[key].total += obj[key].total;
+                        ret[key].covered += obj[key].covered;
+                    });
+                }
+            };
+        args.forEach(function (arg) {
+            increment(arg);
+        });
+        keys.forEach(function (key) {
+            ret[key].pct = percent(ret[key].covered, ret[key].total);
+        });
+
+        return ret;
+    }
+    &#x2F;**
+     * returns the coverage summary for a single coverage object. This is
+     * wrapper over &#x60;summarizeFileCoverage&#x60; and &#x60;mergeSummaryObjects&#x60; for
+     * the common case of a single coverage object
+     * @method summarizeCoverage
+     * @static
+     * @param {Object} coverage  the coverage object
+     * @return {Object} summary coverage metrics across all files in the coverage object
+     *&#x2F;
+    function summarizeCoverage(coverage) {
+        var fileSummary = [];
+        Object.keys(coverage).forEach(function (key) {
+            fileSummary.push(summarizeFileCoverage(coverage[key]));
+        });
+        return mergeSummaryObjects.apply(null, fileSummary);
+    }
+
+    &#x2F;**
+     * makes the coverage object generated by this library yuitest_coverage compatible.
+     * Note that this transformation is lossy since the returned object will not have
+     * statement and branch coverage.
+     *
+     * @method toYUICoverage
+     * @static
+     * @param {Object} coverage The &#x60;istanbul&#x60; coverage object
+     * @return {Object} a coverage object in &#x60;yuitest_coverage&#x60; format.
+     *&#x2F;
+    function toYUICoverage(coverage) {
+        var ret = {};
+
+        addDerivedInfo(coverage);
+
+        Object.keys(coverage).forEach(function (k) {
+            var fileCoverage = coverage[k],
+                lines = fileCoverage.l,
+                functions = fileCoverage.f,
+                fnMap = fileCoverage.fnMap,
+                o;
+
+            o = ret[k] = {
+                lines: {},
+                calledLines: 0,
+                coveredLines: 0,
+                functions: {},
+                calledFunctions: 0,
+                coveredFunctions: 0
+            };
+            Object.keys(lines).forEach(function (k) {
+                o.lines[k] = lines[k];
+                o.coveredLines += 1;
+                if (lines[k] &gt; 0) {
+                    o.calledLines += 1;
+                }
+            });
+            Object.keys(functions).forEach(function (k) {
+                var name = fnMap[k].name + &#x27;:&#x27; + fnMap[k].line;
+                o.functions[name] = functions[k];
+                o.coveredFunctions += 1;
+                if (functions[k] &gt; 0) {
+                    o.calledFunctions += 1;
+                }
+            });
+        });
+        return ret;
+    }
+
+    var exportables = {
+        addDerivedInfo: addDerivedInfo,
+        addDerivedInfoForFile: addDerivedInfoForFile,
+        removeDerivedInfo: removeDerivedInfo,
+        blankSummary: blankSummary,
+        summarizeFileCoverage: summarizeFileCoverage,
+        summarizeCoverage: summarizeCoverage,
+        mergeFileCoverage: mergeFileCoverage,
+        mergeSummaryObjects: mergeSummaryObjects,
+        toYUICoverage: toYUICoverage
     };
-}
-&#x2F;**
- * returns the summary metrics given the coverage object for a single file. See &#x60;blankSummary()&#x60;
- * to understand the format of the returned object.
- *
- * @method summarizeFileCoverage
- * @static
- * @param {Object} fileCoverage the coverage object for a single file.
- * @return {Object} the summary metrics for the file
- *&#x2F;
-function summarizeFileCoverage(fileCoverage) {
-    var ret = blankSummary();
-    addDerivedInfoForFile(fileCoverage);
-    ret.lines = computeSimpleTotals(fileCoverage, &#x27;l&#x27;);
-    ret.functions = computeSimpleTotals(fileCoverage, &#x27;f&#x27;);
-    ret.statements = computeSimpleTotals(fileCoverage, &#x27;s&#x27;);
-    ret.branches = computeBranchTotals(fileCoverage);
-    return ret;
-}
-&#x2F;**
- * merges two instances of file coverage objects *for the same file*
- * such that the execution counts are correct.
- *
- * @method mergeFileCoverage
- * @static
- * @param {Object} first the first file coverage object for a given file
- * @param {Object} second the second file coverage object for the same file
- * @return {Object} an object that is a result of merging the two. Note that
- *      the input objects are not changed in any way.
- *&#x2F;
-function mergeFileCoverage(first, second) {
-    var ret = JSON.parse(JSON.stringify(first)),
-        i;
 
-    delete ret.l; &#x2F;&#x2F;remove derived info
-
-    Object.keys(second.s).forEach(function (k) {
-        ret.s[k] += second.s[k];
-    });
-    Object.keys(second.f).forEach(function (k) {
-        ret.f[k] += second.f[k];
-    });
-    Object.keys(second.b).forEach(function (k) {
-        var retArray = ret.b[k],
-            secondArray = second.b[k];
-        for (i = 0; i &lt; retArray.length; i += 1) {
-            retArray[i] += secondArray[i];
-        }
-    });
-
-    return ret;
-}
-&#x2F;**
- * merges multiple summary metrics objects by summing up the &#x60;totals&#x60; and
- * &#x60;covered&#x60; fields and recomputing the percentages. This function is generic
- * and can accept any number of arguments.
- *
- * @method mergeSummaryObjects
- * @static
- * @param {Object} summary... multiple summary metrics objects
- * @return {Object} the merged summary metrics
- *&#x2F;
-function mergeSummaryObjects() {
-    var ret = blankSummary(),
-        args = Array.prototype.slice.call(arguments),
-        keys = [&#x27;lines&#x27;, &#x27;statements&#x27;, &#x27;branches&#x27;, &#x27;functions&#x27;],
-        increment = function (obj) {
-            if (obj) {
-                keys.forEach(function (key) {
-                    ret[key].total += obj[key].total;
-                    ret[key].covered += obj[key].covered;
-                });
-            }
-        };
-    args.forEach(function (arg) {
-        increment(arg);
-    });
-    keys.forEach(function (key) {
-        ret[key].pct = percent(ret[key].covered, ret[key].total);
-    });
-
-    return ret;
-}
-
-&#x2F;**
- * makes the coverage object generated by this library yuitest_coverage compatible.
- * Note that this transformation is lossy since the returned object will not have
- * statement and branch coverage.
- *
- * @method toYUICoverage
- * @static
- * @param {Object} coverage The &#x60;istanbul&#x60; coverage object
- * @return {Object} a coverage object in &#x60;yuitest_coverage&#x60; format.
- *&#x2F;
-function toYUICoverage(coverage) {
-    var ret = {};
-
-    addDerivedInfo(coverage);
-
-    Object.keys(coverage).forEach(function (k) {
-        var fileCoverage = coverage[k],
-            lines = fileCoverage.l,
-            functions = fileCoverage.f,
-            fnMap = fileCoverage.fnMap,
-            o;
-
-        o = ret[k] = {
-            lines: {},
-            calledLines: 0,
-            coveredLines: 0,
-            functions: {},
-            calledFunctions: 0,
-            coveredFunctions: 0
-        };
-        Object.keys(lines).forEach(function (k) {
-            o.lines[k] = lines[k];
-            o.coveredLines += 1;
-            if (lines[k] &gt; 0) {
-                o.calledLines += 1;
-            }
-        });
-        Object.keys(functions).forEach(function (k) {
-            var name = fnMap[k].name + &#x27;:&#x27; + fnMap[k].line;
-            o.functions[name] = functions[k];
-            o.coveredFunctions += 1;
-            if (functions[k] &gt; 0) {
-                o.calledFunctions += 1;
-            }
-        });
-    });
-    return ret;
-}
-
-module.exports = {
-    addDerivedInfo: addDerivedInfo,
-    addDerivedInfoForFile: addDerivedInfoForFile,
-    removeDerivedInfo: removeDerivedInfo,
-    blankSummary: blankSummary,
-    summarizeFileCoverage: summarizeFileCoverage,
-    mergeFileCoverage: mergeFileCoverage,
-    mergeSummaryObjects: mergeSummaryObjects,
-    toYUICoverage: toYUICoverage
-};
+    if (isNode) {
+        module.exports = exportables;
+    } else {
+        window.coverageUtils = exportables;
+    }
+}(typeof module !== &#x27;undefined&#x27; &amp;&amp; typeof module.exports !== &#x27;undefined&#x27; &amp;&amp; typeof exports !== &#x27;undefined&#x27;));
 
 
     </pre>

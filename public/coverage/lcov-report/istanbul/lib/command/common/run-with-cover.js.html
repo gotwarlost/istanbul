@@ -99,7 +99,6 @@
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
-            margin-left: -30px;
             position: relative;
             padding: 0 4px;
             background: black;
@@ -180,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>istanbul/lib/command/common/run-with-cover.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>96.15% <small>(50 / 52)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>91.94% <small>(57 / 62)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>89.29% <small>(25 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>87.1% <small>(27 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>98.04% <small>(50 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>93.44% <small>(57 / 61)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/command/common/</a> &#187; run-with-cover.js</div>
@@ -336,7 +335,24 @@
 138
 139
 140
-141</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -358,6 +374,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">40</span>
 <span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -390,6 +407,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -413,6 +431,7 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
@@ -424,6 +443,20 @@
 <span class="cline-any cline-yes">19</span>
 <span class="cline-any cline-yes">19</span>
 <span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -462,8 +495,8 @@
 <span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -504,6 +537,7 @@ function usage(arg0, command) {
             formatOption('--[no-]default-excludes', 'apply default excludes [ **/node_modules/**, **/test/**, **/tests/** ], defaults to true'),
             formatOption('--report &lt;report-type&gt;', 'report type, one of html, lcov, lcovonly, none, defaults to lcov (= lcov.info + HTML)'),
             formatOption('--dir &lt;report-dir&gt;', 'report directory, defaults to ./coverage'),
+            formatOption('--print &lt;type&gt;', 'type of report to print to console, one of summary (default), detail, both or none'),
             formatOption('--verbose, -v', 'verbose mode')
         ].join('\n\n') + '\n');
     console.error('\n');
@@ -518,7 +552,8 @@ function run(args, commandName, enableHooks) {
             dir: path,
             verbose: Boolean,
             yui: Boolean,
-            'default-excludes': Boolean
+            'default-excludes': Boolean,
+            print: String
         },
         opts = nopt(config, { v : '--verbose' }, args, 0),
         cmdAndArgs = opts.argv.remain,
@@ -526,7 +561,7 @@ function run(args, commandName, enableHooks) {
         cmdArgs,
         reportingDir,
         reportClassName,
-        report,
+        reports = [],
         runFn,
         excludes;
 &nbsp;
@@ -552,6 +587,7 @@ function run(args, commandName, enableHooks) {
         if (opts.verbose) {
             console.log('Running: ' + process.argv.join(' '));
         }
+        process.env.running_under_istanbul=1;
         Module.runMain(cmd, null, true);
     };
 &nbsp;
@@ -563,7 +599,21 @@ function run(args, commandName, enableHooks) {
         reportingDir = opts.dir || path.resolve(process.cwd(), 'coverage');
         mkdirp.sync(reportingDir);
         reportClassName = opts.report || DEFAULT_REPORT_FORMAT;
-        report = Report.create(reportClassName, { dir: reportingDir });
+        reports.push(Report.create(reportClassName, { dir: reportingDir }));
+        <span class="missing-if-branch" title="else path not taken"" >E</span>if (opts.print !== 'none') {
+            switch (opts.print) {
+            case 'detail':
+                reports.push(Report.create('text'));
+                break;
+            case 'both':
+<span class="cstat-no" title="statement not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >                reports.push(Report.create('text'));</span></span>
+<span class="cstat-no" title="statement not covered" >                reports.push(Report.create('text-summary'));</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+            default:
+                reports.push(Report.create('text-summary'));
+                break;
+            }
+        }
 &nbsp;
         matcherFor({
             root: opts.root || process.cwd(),
@@ -571,15 +621,15 @@ function run(args, commandName, enableHooks) {
             excludes: excludes
         },
             function (err, matchFn) {
-                <span class="missing-if-branch">I</span>if (err) { <span class="cstat-no">throw err; </span>}
+                <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) { <span class="cstat-no" title="statement not covered" >throw err; </span>}
 &nbsp;
                 var coverageVar = '$$cov_' + new Date().getTime() + '$$',
                     instrumenter = new Instrumenter({ coverageVariable: coverageVar }),
                     transformer = instrumenter.instrumentSync.bind(instrumenter),
                     hookOpts = { verbose: opts.verbose };
 &nbsp;
-                <span class="missing-if-branch">I</span>if (opts.yui) { //EXPERIMENTAL code: do not rely on this in anyway until the docs say it is allowed
-<span class="cstat-no">                    hookOpts.postLoadHook = require('../../util/yui-load-hook').getPostLoadHook(matchFn, transformer, opts.verbose);</span>
+                <span class="missing-if-branch" title="if path not taken"" >I</span>if (opts.yui) { //EXPERIMENTAL code: do not rely on this in anyway until the docs say it is allowed
+<span class="cstat-no" title="statement not covered" >                    hookOpts.postLoadHook = require('../../util/yui-load-hook').getPostLoadHook(matchFn, transformer, opts.verbose);</span>
                 }
                 hook.hookRequire(matchFn, transformer, hookOpts);
                 process.once('exit', function () {
@@ -599,11 +649,11 @@ function run(args, commandName, enableHooks) {
                     fs.writeFileSync(file, JSON.stringify(cov), 'utf8');
                     collector = new Collector();
                     collector.add(cov);
-                    <span class="missing-if-branch">E</span>if (report) {
-                        console.log('Writing coverage reports at [' + reportingDir + ']');
-                        report.writeReport(collector, true);
-                    }
+                    console.log('Writing coverage reports at [' + reportingDir + ']');
                     console.log('=============================================================================');
+                    reports.forEach(function (report) {
+                        report.writeReport(collector, true);
+                    });
                 });
                 runFn();
             });
@@ -621,7 +671,7 @@ module.exports = {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
 </div>
 </body>
 

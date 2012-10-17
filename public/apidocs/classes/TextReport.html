@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>LcovReport - The Istanbul API</title>
+    <title>TextReport - The Istanbul API</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -112,7 +112,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>LcovReport Class</h1>
+                        <h1>TextReport Class</h1>
 <div class="box meta">
     
 
@@ -124,7 +124,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_report_lcov.js.html#l13"><code>lib&#x2F;report&#x2F;lcov.js:13</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;lib_report_text.js.html#l18"><code>lib&#x2F;report&#x2F;text.js:18</code></a>
         </div>
     
 
@@ -140,20 +140,19 @@
 
 
 <div class="box intro">
-    <p>a <code>Report</code> implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.
-The name and behavior of this report is designed to ease migration for projects that currently use <code>yuitest_coverage</code></p>
+    <p>a <code>Report</code> implementation that produces text output in a detailed table.</p>
 
 <h2>Usage</h2>
 
-<pre class="code"><code class="prettyprint"> var report = require('istanbul').Report.create('lcov');
+<pre class="code"><code class="prettyprint"> var report = require('istanbul').Report.create('text');
 </code></pre>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_LcovReport" class="method item">
-    <h3 class="name"><code>LcovReport</code></h3>
+        <div id="method_TextReport" class="method item">
+    <h3 class="name"><code>TextReport</code></h3>
 
     
         <div class="args">
@@ -194,7 +193,7 @@ The name and behavior of this report is designed to ease migration for projects 
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_report_lcov.js.html#l13"><code>lib&#x2F;report&#x2F;lcov.js:13</code></a>
+        <a href="..&#x2F;files&#x2F;lib_report_text.js.html#l18"><code>lib&#x2F;report&#x2F;text.js:18</code></a>
         
         </p>
 
@@ -237,7 +236,36 @@ The name and behavior of this report is designed to ease migration for projects 
                                 
 
                                 <div class="param-description">
-                                    <p>the directory in which to the <code>lcov.info</code> file. HTML files are written in a subdirectory called <code>lcov-report</code>. Defaults to <code>process.cwd()</code></p>
+                                    <p>the directory in which to the text coverage report will be written, when writing to a file</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[file]</code>
+                                    <span class="type">String</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>the filename for the report. When omitted, the report is written to console</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[maxcols]</code>
+                                    <span class="type">Number</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>the max column width of the report. By default, the width of the report is adjusted based on the length of the paths
+             to be reported.</p>
                                 </div>
 
                                 

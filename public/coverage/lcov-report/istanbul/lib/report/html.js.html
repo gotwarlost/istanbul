@@ -99,7 +99,6 @@
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
-            margin-left: -30px;
             position: relative;
             padding: 0 4px;
             background: black;
@@ -180,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>istanbul/lib/report/html.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>92.42% <small>(183 / 198)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>92.5% <small>(185 / 200)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>83.33% <small>(75 / 90)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>82.61% <small>(76 / 92)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(36 / 36)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(37 / 37)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>93.68% <small>(178 / 190)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>93.75% <small>(180 / 192)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/report/</a> &#187; html.js</div>
@@ -699,7 +698,13 @@
 501
 502
 503
-504</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+504
+505
+506
+507
+508
+509
+510</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -840,6 +845,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
 <span class="cline-any cline-yes">45</span>
 <span class="cline-any cline-yes">45</span>
 <span class="cline-any cline-yes">45</span>
@@ -954,6 +963,8 @@
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1282,7 +1293,7 @@ handlebars.registerHelper('show_picture', function (opts) {
     var num = Number(opts.fn(this)),
         rest,
         cls = '';
-    <span class="missing-if-branch">E</span>if (isFinite(num)) {
+    <span class="missing-if-branch" title="else path not taken"" >E</span>if (isFinite(num)) {
         if (num === 100) {
             cls = ' cover-full';
         }
@@ -1291,7 +1302,7 @@ handlebars.registerHelper('show_picture', function (opts) {
         return '&lt;span class="cover-fill' + cls + '" style="width: ' + num + 'px;"&gt;&lt;/span&gt;'
             + '&lt;span class="cover-empty" style="width:' + rest + 'px;"&gt;&lt;/span&gt;';
     } else {
-<span class="cstat-no">        return '';</span>
+<span class="cstat-no" title="statement not covered" >        return '';</span>
     }
 });
 &nbsp;
@@ -1342,9 +1353,13 @@ handlebars.registerHelper('show_code', function (context, opts) {
     return array.join('\n');
 });
 &nbsp;
+function title(str) {
+    return ' title="' + str + '" ';
+}
+&nbsp;
 function annotateLines(fileCoverage, structuredText) {
     var lineStats = fileCoverage.l;
-    <span class="missing-if-branch">I</span>if (!lineStats) { <span class="cstat-no">return; </span>}
+    <span class="missing-if-branch" title="if path not taken"" >I</span>if (!lineStats) { <span class="cstat-no" title="statement not covered" >return; </span>}
     Object.keys(lineStats).forEach(function (lineNumber) {
         var count = lineStats[lineNumber];
         structuredText[lineNumber].covered = count &gt; 0 ? 'yes' : 'no';
@@ -1367,7 +1382,7 @@ function annotateStatements(fileCoverage, structuredText) {
             endCol = meta.end.column + 1,
             startLine = meta.start.line,
             endLine = meta.end.line,
-            openSpan = lt + 'span class="cstat-' + type + '"' + gt,
+            openSpan = lt + 'span class="cstat-no"' + title('statement not covered') + gt,
             closeSpan = lt + '/span' + gt,
             text;
 &nbsp;
@@ -1379,7 +1394,7 @@ function annotateStatements(fileCoverage, structuredText) {
             text = structuredText[startLine].text;
             text.wrap(startCol,
                 openSpan,
-                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                startLine === endLine ? endCol : <span class="branch-1 cbranch-no" title="branch not covered" >text.originalLength(),</span>
                 closeSpan);
         }
     });
@@ -1389,7 +1404,7 @@ function annotateFunctions(fileCoverage, structuredText) {
 &nbsp;
     var fnStats = fileCoverage.f,
         fnMeta = fileCoverage.fnMap;
-    <span class="missing-if-branch">I</span>if (!fnStats) { <span class="cstat-no">return; </span>}
+    <span class="missing-if-branch" title="if path not taken"" >I</span>if (!fnStats) { <span class="cstat-no" title="statement not covered" >return; </span>}
     Object.keys(fnStats).forEach(function (fName) {
         var count = fnStats[fName],
             meta = fnMeta[fName],
@@ -1398,19 +1413,19 @@ function annotateFunctions(fileCoverage, structuredText) {
             endCol = meta.loc.end.column + 1,
             startLine = meta.loc.start.line,
             endLine = meta.loc.end.line,
-            openSpan = lt + 'span class="fstat-' + type + '"' + gt,
+            openSpan = lt + 'span class="fstat-no"' + title('function not covered') + gt,
             closeSpan = lt + '/span' + gt,
             text;
 &nbsp;
         if (type === 'no') {
-            <span class="missing-if-branch">I</span>if (endLine !== startLine) {
-<span class="cstat-no">                endLine = startLine;</span>
-<span class="cstat-no">                endCol = structuredText[startLine].text.originalLength();</span>
+            <span class="missing-if-branch" title="if path not taken"" >I</span>if (endLine !== startLine) {
+<span class="cstat-no" title="statement not covered" >                endLine = startLine;</span>
+<span class="cstat-no" title="statement not covered" >                endCol = structuredText[startLine].text.originalLength();</span>
             }
             text = structuredText[startLine].text;
             text.wrap(startCol,
                 openSpan,
-                startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                startLine === endLine ? endCol : <span class="branch-1 cbranch-no" title="branch not covered" >text.originalLength(),</span>
                 closeSpan);
         }
     });
@@ -1419,7 +1434,7 @@ function annotateFunctions(fileCoverage, structuredText) {
 function annotateBranches(fileCoverage, structuredText) {
     var branchStats = fileCoverage.b,
         branchMeta = fileCoverage.branchMap;
-    <span class="missing-if-branch">I</span>if (!branchStats) { <span class="cstat-no">return; </span>}
+    <span class="missing-if-branch" title="if path not taken"" >I</span>if (!branchStats) { <span class="cstat-no" title="statement not covered" >return; </span>}
 &nbsp;
     Object.keys(branchStats).forEach(function (branchName) {
         var branchArray = branchStats[branchName],
@@ -1446,21 +1461,23 @@ function annotateBranches(fileCoverage, structuredText) {
                 endCol = meta.end.column + 1;
                 startLine = meta.start.line;
                 endLine = meta.end.line;
-                openSpan = lt + 'span class="branch-' + i + ' cbranch-' + type + '"' + gt;
+                openSpan = lt + 'span class="branch-' + i + ' cbranch-no"' + title('branch not covered') + gt;
                 closeSpan = lt + '/span' + gt;
 &nbsp;
                 if (count === 0) { //skip branches taken
-                    <span class="missing-if-branch">I</span>if (endLine !== startLine) {
-<span class="cstat-no">                        endLine = startLine;</span>
-<span class="cstat-no">                        endCol = structuredText[startLine].text.originalLength();</span>
+                    <span class="missing-if-branch" title="if path not taken"" >I</span>if (endLine !== startLine) {
+<span class="cstat-no" title="statement not covered" >                        endLine = startLine;</span>
+<span class="cstat-no" title="statement not covered" >                        endCol = structuredText[startLine].text.originalLength();</span>
                     }
                     text = structuredText[startLine].text;
                     if (branchMeta[branchName].type === 'if') { // and 'if' is a special case since the else branch might not be visible, being non-existent
-                        text.insertAt(startCol, lt + 'span class="missing-if-branch"' + gt + (i === 0 ? 'I' : <span class="branch-1 cbranch-no">'E')</span>  + lt + '/span' + gt, true, false);
+                        text.insertAt(startCol, lt + 'span class="missing-if-branch"' +
+                            title((i === 0 ? 'if' : <span class="branch-1 cbranch-no" title="branch not covered" >'else')</span> + ' path not taken"') + gt +
+                            (i === 0 ? 'I' : <span class="branch-1 cbranch-no" title="branch not covered" >'E')</span>  + lt + '/span' + gt, true, false);
                     } else {
                         text.wrap(startCol,
                             openSpan,
-                            startLine === endLine ? endCol : <span class="branch-1 cbranch-no">text.originalLength(),</span>
+                            startLine === endLine ? endCol : <span class="branch-1 cbranch-no" title="branch not covered" >text.originalLength(),</span>
                             closeSpan);
                     }
                 }
@@ -1481,10 +1498,10 @@ function customEscape(text) {
 function getReportClass(stats) {
     var coveragePct = stats.pct,
         identity  = 1;
-    <span class="missing-if-branch">E</span>if (coveragePct * identity === coveragePct) {
+    <span class="missing-if-branch" title="else path not taken"" >E</span>if (coveragePct * identity === coveragePct) {
         return coveragePct &gt;= 80 ? 'high' : coveragePct &gt;= 50 ? 'medium' : 'low';
     } else {
-<span class="cstat-no">        return '';</span>
+<span class="cstat-no" title="statement not covered" >        return '';</span>
     }
 }
 &nbsp;
@@ -1580,7 +1597,7 @@ Report.mix(HtmlReport, {
         var children = Array.prototype.slice.apply(node.children);
 &nbsp;
         children.sort(function (a, b) {
-            return a.name &lt; b.name ? -1 : <span class="branch-1 cbranch-no">1;</span>
+            return a.name &lt; b.name ? -1 : <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
         });
 &nbsp;
         templateData.metrics = node.metrics;
@@ -1643,14 +1660,14 @@ Report.mix(HtmlReport, {
                     var i = 0,
                         relativeName = node.relativeName,
                         ch;
-                    <span class="missing-if-branch">I</span>if (SEP !== '/') {
-<span class="cstat-no">                        relativeName = '';</span>
-<span class="cstat-no">                        for (i = 0; i &lt; node.relativeName.length; i += 1) {</span>
-<span class="cstat-no">                            ch = node.relativeName.charAt(i);</span>
-<span class="cstat-no">                            if (ch === SEP) {</span>
-<span class="cstat-no">                                relativeName += '/';</span>
+                    <span class="missing-if-branch" title="if path not taken"" >I</span>if (SEP !== '/') {
+<span class="cstat-no" title="statement not covered" >                        relativeName = '';</span>
+<span class="cstat-no" title="statement not covered" >                        for (i = 0; i &lt; node.relativeName.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                            ch = node.relativeName.charAt(i);</span>
+<span class="cstat-no" title="statement not covered" >                            if (ch === SEP) {</span>
+<span class="cstat-no" title="statement not covered" >                                relativeName += '/';</span>
                             } else {
-<span class="cstat-no">                                relativeName += ch;</span>
+<span class="cstat-no" title="statement not covered" >                                relativeName += ch;</span>
                             }
                         }
                     }
@@ -1710,7 +1727,7 @@ module.exports = HtmlReport;
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Sep 14 2012 12:48:44 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
 </div>
 </body>
 

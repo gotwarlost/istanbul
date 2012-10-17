@@ -13,6 +13,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "ObjectUtils",
         "Report",
         "Store",
+        "TextReport",
+        "TextSummaryReport",
         "TmpStore"
     ],
     "modules": [

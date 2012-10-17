@@ -1,7 +1,8 @@
 {
     "project": {
         "name": "The Istanbul API",
-        "description": "The Istanbul API: a code coverage library"
+        "description": "The Istanbul API: a code coverage library",
+        "version": "0.0.1-12"
     },
     "files": {
         "lib/report/html.js": {
@@ -36,6 +37,24 @@
             "modules": {},
             "classes": {
                 "LcovOnlyReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/text-summary.js": {
+            "name": "lib/report/text-summary.js",
+            "modules": {},
+            "classes": {
+                "TextSummaryReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/text.js": {
+            "name": "lib/report/text.js",
+            "modules": {},
+            "classes": {
+                "TextReport": 1
             },
             "fors": {},
             "namespaces": {}
@@ -133,6 +152,8 @@
                 "Report": 1,
                 "LcovReport": 1,
                 "LcovOnlyReport": 1,
+                "TextSummaryReport": 1,
+                "TextReport": 1,
                 "LookupStore": 1,
                 "Store": 1,
                 "MemoryStore": 1,
@@ -162,7 +183,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/html.js",
-            "line": 240,
+            "line": 293,
             "description": "a `Report` implementation that produces HTML coverage reports.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('html');",
             "extends": "Report",
             "is_constructor": 1,
@@ -259,6 +280,84 @@
                             "name": "dir",
                             "description": "the directory in which to the `lcov.info` file. Defaults to `process.cwd()`",
                             "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "TextSummaryReport": {
+            "name": "TextSummaryReport",
+            "shortname": "TextSummaryReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/text-summary.js",
+            "line": 13,
+            "description": "a `Report` implementation that produces text output for overall coverage in summary format.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text-summary');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the text coverage report will be written, when writing to a file",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "file",
+                            "description": "the filename for the report. When omitted, the report is written to console",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "TextReport": {
+            "name": "TextReport",
+            "shortname": "TextReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/text.js",
+            "line": 18,
+            "description": "a `Report` implementation that produces text output in a detailed table.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the text coverage report will be written, when writing to a file",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "file",
+                            "description": "the filename for the report. When omitted, the report is written to console",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "maxcols",
+                            "description": "the max column width of the report. By default, the width of the report is adjusted based on the length of the paths\n             to be reported.",
+                            "type": "Number",
                             "optional": true
                         }
                     ]
@@ -465,7 +564,8 @@
             "module": "istanbul",
             "file": "lib/object-utils.js",
             "line": 6,
-            "description": "utility methods to process coverage objects. A coverage object has the following\nformat.\n\n     {\n         \"/path/to/file1.js\": { file1 coverage },\n         \"/path/to/file2.js\": { file2 coverage }\n     }\n\n The internals of the file coverage object are intentionally not documented since\n it is not a public interface.\n\n *Note:* When a method of this module has the word `File` in it, it will accept\n one of the sub-objects of the main coverage object as an argument. Other\n methods accept the higher level coverage object with multiple keys.\n\nUsage\n-----\n\n     var objectUtils = require('istanbul').utils;"
+            "description": "utility methods to process coverage objects. A coverage object has the following\nformat.\n\n     {\n         \"/path/to/file1.js\": { file1 coverage },\n         \"/path/to/file2.js\": { file2 coverage }\n     }\n\n The internals of the file coverage object are intentionally not documented since\n it is not a public interface.\n\n *Note:* When a method of this module has the word `File` in it, it will accept\n one of the sub-objects of the main coverage object as an argument. Other\n methods accept the higher level coverage object with multiple keys.\n\nWorks on `node` as well as the browser.\n\nUsage on nodejs\n---------------\n\n     var objectUtils = require('istanbul').utils;\n\nUsage in a browser\n------------------\n\nLoad this file using a `script` tag or other means. This will set `window.coverageUtils`\nto this module's exports.",
+            "static": 1
         },
         "API": {
             "name": "API",
@@ -905,7 +1005,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 30,
+            "line": 39,
             "description": "adds line coverage information to a file coverage object, reverse-engineering\nit from statement coverage. The object passed in is updated in place.\n\nNote that if line coverage information is already present in the object,\nit is not recomputed.",
             "itemtype": "method",
             "name": "addDerivedInfoForFile",
@@ -921,7 +1021,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 58,
+            "line": 67,
             "description": "adds line coverage information to all file coverage objects.",
             "itemtype": "method",
             "name": "addDerivedInfo",
@@ -937,7 +1037,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 70,
+            "line": 79,
             "description": "removes line coverage information from all file coverage objects",
             "itemtype": "method",
             "name": "removeDerivedInfo",
@@ -953,7 +1053,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 119,
+            "line": 128,
             "description": "returns a blank summary metrics object. A metrics object has the following\nformat.\n\n     {\n         lines: lineMetrics,\n         statements: statementMetrics,\n         functions: functionMetrics,\n         branches: branchMetrics\n     }\n\n Each individual metric object looks as follows:\n\n     {\n         total: n,\n         covered: m,\n         pct: percent\n     }",
             "itemtype": "method",
             "name": "blankSummary",
@@ -966,7 +1066,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 166,
+            "line": 175,
             "description": "returns the summary metrics given the coverage object for a single file. See `blankSummary()`\nto understand the format of the returned object.",
             "itemtype": "method",
             "name": "summarizeFileCoverage",
@@ -986,7 +1086,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 184,
+            "line": 193,
             "description": "merges two instances of file coverage objects *for the same file*\nsuch that the execution counts are correct.",
             "itemtype": "method",
             "name": "mergeFileCoverage",
@@ -1011,7 +1111,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 217,
+            "line": 226,
             "description": "merges multiple summary metrics objects by summing up the `totals` and\n`covered` fields and recomputing the percentages. This function is generic\nand can accept any number of arguments.",
             "itemtype": "method",
             "name": "mergeSummaryObjects",
@@ -1031,7 +1131,27 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 249,
+            "line": 257,
+            "description": "returns the coverage summary for a single coverage object. This is\nwrapper over `summarizeFileCoverage` and `mergeSummaryObjects` for\nthe common case of a single coverage object",
+            "itemtype": "method",
+            "name": "summarizeCoverage",
+            "static": 1,
+            "params": [
+                {
+                    "name": "coverage",
+                    "description": "the coverage object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "summary coverage metrics across all files in the coverage object",
+                "type": "Object"
+            },
+            "class": "ObjectUtils"
+        },
+        {
+            "file": "lib/object-utils.js",
+            "line": 274,
             "description": "makes the coverage object generated by this library yuitest_coverage compatible.\nNote that this transformation is lossy since the returned object will not have\nstatement and branch coverage.",
             "itemtype": "method",
             "name": "toYUICoverage",

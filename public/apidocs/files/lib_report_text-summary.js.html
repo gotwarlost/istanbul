@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;report&#x2F;index.js - The Istanbul API</title>
+    <title>lib&#x2F;report&#x2F;text-summary.js - The Istanbul API</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -112,7 +112,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;report&#x2F;index.js</h1>
+                        <h1 class="file-heading">File: lib&#x2F;report&#x2F;text-summary.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -121,62 +121,74 @@
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  *&#x2F;
 
-&#x2F;*jslint nomen: true *&#x2F;
-var Factory = require(&#x27;..&#x2F;util&#x2F;factory&#x27;),
-    factory = new Factory(&#x27;report&#x27;, __dirname, false);
+var path = require(&#x27;path&#x27;),
+    mkdirp = require(&#x27;mkdirp&#x27;),
+    fs = require(&#x27;fs&#x27;),
+    util = require(&#x27;util&#x27;),
+    utils = require(&#x27;..&#x2F;object-utils&#x27;),
+    Report = require(&#x27;.&#x2F;index&#x27;);
+
 &#x2F;**
- * abstract report class for producing coverage reports.
+ * a &#x60;Report&#x60; implementation that produces text output for overall coverage in summary format.
  *
  * Usage
  * -----
  *
- *      var Report = require(&#x27;istanbul&#x27;).Report,
- *          report = Report.create(&#x27;html&#x27;),
- *          collector = new require(&#x27;istanbul&#x27;).Collector;
+ *      var report = require(&#x27;istanbul&#x27;).Report.create(&#x27;text-summary&#x27;);
  *
- *      collector.add(coverageObject);
- *      report.writeReport(collector);
- *
- * @class Report
+ * @class TextSummaryReport
+ * @extends Report
  * @constructor
- * @protected
- * @param {Object} options Optional. The options supported by a specific store implementation.
+ * @param {Object} opts optional
+ * @param {String} [opts.dir] the directory in which to the text coverage report will be written, when writing to a file
+ * @param {String} [opts.file] the filename for the report. When omitted, the report is written to console
  *&#x2F;
-function Report(options) {}
-&#x2F;&#x2F;add register, create, mix, loadAll, getStoreList as class methods
-factory.bindClassMethods(Report);
+function TextSummaryReport(opts) {
+    Report.call(this);
+    opts = opts || {};
+    this.dir = opts.dir || process.cwd();
+    this.file = opts.file;
+}
 
-&#x2F;**
- * registers a new report implementation.
- * @method register
- * @static
- * @param {Function} constructor the constructor function for the report. This function must have a
- *  &#x60;TYPE&#x60; property of type String, that will be used in &#x60;Report.create()&#x60;
- *&#x2F;
-&#x2F;**
- * returns a report implementation of the specified type.
- * @method create
- * @static
- * @param {String} type the type of report to create
- * @param {Object} opts Optional. Options specific to the report implementation
- * @return {Report} a new store of the specified type
- *&#x2F;
+TextSummaryReport.TYPE = &#x27;text-summary&#x27;;
 
-Report.prototype = {
-    &#x2F;**
-     * writes the report for a set of coverage objects added to a collector.
-     * @method writeReport
-     * @param {Collector} collector the collector for getting the set of files and coverage
-     * @param {Boolean} sync true if reports must be written synchronously, false if they can be written using asynchronous means (e.g. stream.write)
-     *&#x2F;
+function lineForKey(summary, key) {
+    var metrics = summary[key];
+    key = key.substring(0, 1).toUpperCase() + key.substring(1);
+    if (key.length &lt; 12) { key += &#x27;                   &#x27;.substring(0, 12 - key.length); }
+    return [ key , &#x27;:&#x27;, metrics.pct + &#x27;%&#x27;, &#x27;(&#x27;, metrics.covered + &#x27;&#x2F;&#x27; + metrics.total, &#x27;)&#x27;].join(&#x27; &#x27;);
+}
+
+Report.mix(TextSummaryReport, {
     writeReport: function (collector, sync) {
-        throw new Error(&#x27;writeReport: must be overridden&#x27;);
+        var summaries = [],
+            finalSummary,
+            lines = [],
+            text;
+        collector.files().forEach(function (file) {
+            summaries.push(utils.summarizeFileCoverage(collector.fileCoverageFor(file)));
+        });
+        finalSummary = utils.mergeSummaryObjects.apply(null, summaries);
+        lines.push(&#x27;&#x27;);
+        lines.push(&#x27;=============================== Coverage summary ===============================&#x27;);
+        lines.push.apply(lines, [
+            lineForKey(finalSummary, &#x27;statements&#x27;),
+            lineForKey(finalSummary, &#x27;branches&#x27;),
+            lineForKey(finalSummary, &#x27;functions&#x27;),
+            lineForKey(finalSummary, &#x27;lines&#x27;)
+        ]);
+        lines.push(&#x27;================================================================================&#x27;);
+        text = lines.join(&#x27;\n&#x27;);
+        if (this.file) {
+            mkdirp.sync(this.dir);
+            fs.writeFileSync(path.join(this.dir, this.file), text, &#x27;utf8&#x27;);
+        } else {
+            console.log(text);
+        }
     }
-};
+});
 
-module.exports = Report;
-
-
+module.exports = TextSummaryReport;
 
     </pre>
 </div>
