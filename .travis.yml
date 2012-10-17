@@ -8,3 +8,5 @@ branches:
   except:
     - gh-pages
 
+script:
+    - npm test --cover
