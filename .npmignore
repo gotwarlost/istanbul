@@ -1,5 +1,6 @@
 .npmignore
 .gitignore
+generate-pages.sh
 .travis.yml
 *.tar
 *.tgz
