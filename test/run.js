@@ -81,13 +81,18 @@ function runTests(pat, forceCover) {
                 }
                 var Collector = require('../lib/collector'),
                     collector = new Collector(),
-                    reporter = require('../lib/report').create('lcov', { dir: coverageDir });
+                    Report = require('../lib/report'),
+                    reporter = Report.create('lcov', { dir: coverageDir }),
+                    summary = Report.create('text-summary'),
+                    detail = Report.create('text');
                 fs.readdirSync(coverageDir).forEach(function (file) {
                     if (file.indexOf('cov') === 0 && file.indexOf('.json') > 0) {
                         collector.add(JSON.parse(fs.readFileSync(path.resolve(coverageDir, file), 'utf8')));
                     }
                 });
                 reporter.writeReport(collector, true);
+                detail.writeReport(collector, true);
+                summary.writeReport(collector, true);
             });
         }
     });
