@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.8 : Fix issue #11.
 * v0.1.7 : Add text summary and detailed reporting available as --print [summary|detail|both|none]. summary is the default if nothing specified.
 * v0.1.6 : Handle backslashes in the file path correctly in emitted code. Fixes #9. Thanks to @nowamasa for bug report and fix
 * v0.1.5 : make object-utils.js work on a browser as-is
