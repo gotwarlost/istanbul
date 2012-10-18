@@ -1,6 +1,6 @@
 var path = require('path'),
     fs = require('fs'),
-    istanbul = require('../..'),
+    istanbul = require('istanbul'),
     hook = istanbul.hook,
     Instrumenter = istanbul.Instrumenter,
     Collector = istanbul.Collector,
