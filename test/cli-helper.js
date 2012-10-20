@@ -191,7 +191,7 @@ if (require.main === module) { //we are running ourselves under self-cover
         fullArgs.push.apply(fullArgs, args);
         customHook(process.env.LAZY_HOOK, function () {
             console.error('Running command using CLI object:' + JSON.stringify({ cmd: command, args: args }));
-            require('../lib/cli').runCommand(fullArgs);
+            require('../lib/cli').runToCompletion(fullArgs);
         });
     }());
 }

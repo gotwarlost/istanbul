@@ -15,13 +15,14 @@ module.exports = {
     },
     "should run help for all commands without any barfs": function (test) {
         var cmdList = Command.getCommandList(),
-            help = Command.create('help');
-        help.run([]);
-        help.run(['foobar']);
-        help.run(['foobar', 'foobar', 'foobar']);
+            help = Command.create('help'),
+            handler = function (err) { test.ok(!err); };
+        help.run([], handler);
+        help.run(['foobar'], handler);
+        help.run(['foobar', 'foobar', 'foobar'], handler);
         cmdList.forEach(function (name) {
             if (name !== 'help') {
-                help.run([ name ]);
+                help.run([ name ], handler);
             }
         });
         test.done();
