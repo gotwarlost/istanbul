@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.10 : Fix to issue #12. Do not install `uncaughtException` handler and pass input error back to CLI using a callback as opposed to throwing.
 * v0.1.9 : Attempt to create reporting directory again just before writing coverage in addition to initial creation
 * v0.1.8 : Fix issue #11.
 * v0.1.7 : Add text summary and detailed reporting available as --print [summary|detail|both|none]. summary is the default if nothing specified.
