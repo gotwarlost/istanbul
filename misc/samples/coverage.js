@@ -83,7 +83,7 @@ function getCollector() {
     } else {
         console.error('No global coverage found for the node process');
     }
-    return collector();
+    return collector;
 }
 /**
  * adds coverage to the collector for browser test cases
@@ -94,19 +94,43 @@ function addCoverage(coverageObject) {
     collector.add(coverageObject);
 }
 /**
+ * returns the merged coverage for the collector
+ */
+function getFinalCoverage() {
+    return getCollector().getFinalCoverage();
+}
+
+/**
+ * writes reports for an array of JSON files representing partial coverage information
+ * @method writeReportsFor
+ * @param fileList array of file names containing partial coverage objects
+ * @param dir the output directory for reports
+ */
+function writeReportsFor(fileList, dir) {
+    var collector = new Collector();
+    fileList.forEach(function (file) {
+        var coverage = JSON.parse(fs.readFileSync(file, 'utf8'));
+        collector.addCoverage(coverage);
+    });
+    writeReportsInternal(dir, collector);
+}
+
+/**
  * writes reports for everything accumulated by the collector
  * @method writeReports
  * @param dir the output directory for reports
  */
 function writeReports(dir) {
+    writeReportsInternal(dir, getCollector());
+}
+
+function writeReportsInternal(dir, collector) {
     dir = dir || process.cwd();
     var reports = [
         Report.create('lcov', { dir: dir }),
         Report.create('text'),
         Report.create('text-summary')
-    ],
-        collector = getCollector();
-
+    ];
     reports.forEach(function (report) { report.writeReport(collector, true); })
 }
 /**
