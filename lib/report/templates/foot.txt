@@ -93,7 +93,7 @@
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
-            if (prettyPrint) {
+            if (typeof prettyPrint === 'function') {
                 prettyPrint();
             }
         });
