@@ -4,8 +4,11 @@ generate-pages.sh
 .travis.yml
 *.tar
 *.tgz
-*.md
+*.log
 misc/
 build/
 public/
 yuidoc.json
+.idea/
+html-report/
+
