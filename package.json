@@ -12,6 +12,7 @@
     ],
     "preferGlobal": true,
     "scripts": {
+        "pretest": "jshint --config ./node_modules/yui-lint/jshint.json lib/*js lib/command/*js lib/report/*js lib/store/*js lib/util/*js",
         "test": "test/run.js",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
@@ -32,7 +33,9 @@
     },
     "devDependencies": {
         "rimraf": "*",
-        "nodeunit": "*"
+        "nodeunit": "*",
+        "jshint": "*",
+        "yui-lint": "*"
     },
     "TODO": [
         "Need a legend for the HTML report + some explanation on how branch coverage is shown",
