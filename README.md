@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.13 : Internal jshint cleanup, no features or fixes
 * v0.1.12 : Give npm the README that was getting inadvertently excluded
 * v0.1.11 : Merge pull request #14 for HTML tweaks. Thanks @davglass. Add @davglass and @nowamasa as contributors in `package.json`
 * v0.1.10 : Fix to issue #12. Do not install `uncaughtException` handler and pass input error back to CLI using a callback as opposed to throwing.
