@@ -1,6 +1,7 @@
 /*jslint nomen: true */
 var path = require('path'),
     fs = require('fs'),
+    util = require('util'),
     cp = require('child_process'),
     Module = require('module'),
     originalLoader = Module._extensions['.js'],
@@ -8,7 +9,7 @@ var path = require('path'),
     MAIN_FILE = path.resolve(__dirname, '..', 'lib', 'cli.js'),
     DEFAULT_CWD = path.resolve(__dirname, 'cli', 'sample-project'),
     COVER_ROOT = path.resolve(__dirname, '..'),
-    EXCLUDES = [ '**/node_modules/**', '**/test/** '],
+    EXCLUDES = [ '**/node_modules/**', '**/test/**', '**/yui-load-hook.js'],
     COVER_VAR = '$$selfcover$$',
     seq = 0,
     OPTS = {
@@ -143,6 +144,10 @@ function customHook(lazyHook, callback) {
                     file = path.resolve(common.getCoverageDir(), process.env.COVERAGE_FILE);
                     fs.writeFileSync(file, JSON.stringify(global[COVER_VAR], undefined, 4), 'utf8');
                 }
+            });
+            process.on('uncaughtException', function (ex) {
+                util.error(ex);
+                process.exit(1);
             });
         };
 

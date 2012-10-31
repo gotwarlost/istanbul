@@ -14,6 +14,7 @@
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json lib/*js lib/command/*js lib/report/*js lib/store/*js lib/util/*js",
         "test": "test/run.js",
+	"posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
     "bin": {

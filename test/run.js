@@ -67,6 +67,8 @@ function runTests(pat, forceCover) {
                 '**/node_modules/**',
                 '--x',
                 '**/test/**',
+                '--x',
+                '**/yui-load-hook.js',
                 path.resolve(__dirname, 'run-junit.js'),
                 '--',
                 pat || ''
