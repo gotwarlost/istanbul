@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.14 : Expose the experimental YUI load hook in the interface
 * v0.1.13 : Internal jshint cleanup, no features or fixes
 * v0.1.12 : Give npm the README that was getting inadvertently excluded
 * v0.1.11 : Merge pull request #14 for HTML tweaks. Thanks @davglass. Add @davglass and @nowamasa as contributors in `package.json`

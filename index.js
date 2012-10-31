@@ -102,7 +102,9 @@ module.exports = {
      * @property {String} VERSION
      * @static
      */
-    VERSION: meta.VERSION
+    VERSION: meta.VERSION,
+    //undocumented
+    _yuiLoadHook: require('./lib/util/yui-load-hook').getPostLoadHook
 };
 
 

@@ -8,6 +8,7 @@ module.exports = {
         test.ok(main.Report);
         test.ok(main.hook);
         test.ok(main.utils);
+        test.ok(main._yuiLoadHook && typeof main._yuiLoadHook === 'function');
         test.done();
     }
 };
