@@ -145,10 +145,6 @@ function customHook(lazyHook, callback) {
                     fs.writeFileSync(file, JSON.stringify(global[COVER_VAR], undefined, 4), 'utf8');
                 }
             });
-            process.on('uncaughtException', function (ex) {
-                util.error(ex);
-                process.exit(1);
-            });
         };
 
     require('../lib/util/file-matcher').matcherFor({ root : COVER_ROOT, excludes: EXCLUDES, includes: [ '**/*.js'] }, function (err, matcher) {
