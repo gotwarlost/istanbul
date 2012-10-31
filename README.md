@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.15 : Add the 'check-coverage' command so that Istanbul can be used as a posttest script to enforce minimum coverage
 * v0.1.14 : Expose the experimental YUI load hook in the interface
 * v0.1.13 : Internal jshint cleanup, no features or fixes
 * v0.1.12 : Give npm the README that was getting inadvertently excluded
