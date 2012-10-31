@@ -1,14 +1,17 @@
 var main = require('../../index');
 
+
 module.exports = {
     "xface": function (test) {
-        test.ok(main.Instrumenter);
-        test.ok(main.Store);
-        test.ok(main.Collector);
-        test.ok(main.Report);
-        test.ok(main.hook);
-        test.ok(main.utils);
-        test.ok(main._yuiLoadHook && typeof main._yuiLoadHook === 'function');
+        [ 'Instrumenter', 'Store', 'Collector', 'Report', '_yuiLoadHook'].forEach(function (key) {
+            test.ok(main[key] && typeof main[key] === 'function', key + ' was not exported as a function!');
+        });
+        [ 'hook', 'utils' ].forEach(function (key) {
+            test.ok(main[key] && typeof main[key] === 'object', key + ' was not exported as an object!');
+        });
+        [ 'assetsDir'].forEach(function (key) {
+            test.ok(main[key] && typeof main[key] === 'string', key + ' was not exported as a string!');
+        });
         test.done();
     }
 };

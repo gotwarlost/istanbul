@@ -17,6 +17,7 @@ var path = require('path'),
     Report = require('./lib/report'),
     meta = require('./lib/util/meta');
 
+//register our standard plaugins
 require('./lib/register-plugins');
 
 /**
@@ -104,7 +105,11 @@ module.exports = {
      */
     VERSION: meta.VERSION,
     //undocumented
-    _yuiLoadHook: require('./lib/util/yui-load-hook').getPostLoadHook
+    _yuiLoadHook: require('./lib/util/yui-load-hook').getPostLoadHook,
+    //undocumented
+    TreeSummarizer: require('./lib/util/tree-summarizer'),
+    //undocumented
+    assetsDir: path.resolve(__dirname, 'lib', 'vendor')
 };
 
 
