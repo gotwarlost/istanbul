@@ -15,6 +15,7 @@ module.exports = {
             cb();
         },
         tearDown: function (cb) {
+            hook.unloadRequireCache(matcher);
             require('module')._extensions['.js'] = currentHook;
             cb();
         },

@@ -59,6 +59,7 @@ function runTests(pat, forceCover) {
             args = [
                 path.resolve(__dirname, '..', 'lib', 'cli.js'),
                 'cover',
+                '--self-test',
                 '--dir',
                 coverageDir,
                 '--report',
