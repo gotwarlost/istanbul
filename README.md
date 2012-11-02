@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.18 : Add option to hook in non-destructive mode; i.e. the require cache is not unloaded when hooking
 * v0.1.17 : Export some more objects; undocumented for now
 * v0.1.16 : Fix npm keywords for istanbul which expects an array of strings but was being fed a single string with keywords instead
 * v0.1.15 : Add the 'check-coverage' command so that Istanbul can be used as a posttest script to enforce minimum coverage
