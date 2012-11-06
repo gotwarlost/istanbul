@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.20 : Fix HTML/ lcov report interface to be more customizable for middleware needs
 * v0.1.19 : make all hooking non-destructive in that already loaded modules are never reloaded.
 Add self-test mode so that already loaded istanbul modules can be unloaded prior to hooking.
 * v0.1.18 : Add option to hook in non-destructive mode; i.e. the require cache is not unloaded when hooking
