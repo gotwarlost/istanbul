@@ -1,4 +1,5 @@
 lib-cov
+.DS_Store
 *.seed
 *.log
 *.csv
