@@ -133,6 +133,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
+* v0.1.22 : Add signature attribute to cobertura method tags to fix NPE by the Hudson publisher
 * v0.1.21 : Add cobertura XML report format; exprimental for now
 * v0.1.20 : Fix HTML/ lcov report interface to be more customizable for middleware needs
 * v0.1.19 : make all hooking non-destructive in that already loaded modules are never reloaded.
