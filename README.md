@@ -56,26 +56,36 @@ The command line
 
 gives you detailed help on all commands.
 
-    Usage: istanbul help <command>
+Usage: istanbul help <command>
 
-    Available commands are:
+Available commands are:
 
-          cover   transparently adds coverage information to a node command. Saves
-                  coverage.json and reports at the end of execution
+      check-coverage
+              checks overall coverage against thresholds from coverage JSON
+              files. Exits 1 if thresholds are not met, 0 otherwise
 
-          help    shows help
 
-          instrument
-                  instruments a file or a directory tree and writes the
-                  instrumented code to the desired output location
+      cover   transparently adds coverage information to a node command. Saves
+              coverage.json and reports at the end of execution
 
-          report  writes reports for coverage JSON objects produced in a previous
-                  run
 
-          test    cover a node command only when npm_config_coverage is set. Use in
-                  an `npm test` script for conditional coverage
+      help    shows help
 
-    Command names can be abbreviated as long as the abbreviation is unambiguous
+
+      instrument
+              instruments a file or a directory tree and writes the
+              instrumented code to the desired output location
+
+
+      report  writes reports for coverage JSON objects produced in a previous
+              run
+
+
+      test    cover a node command only when npm_config_coverage is set. Use in
+              an `npm test` script for conditional coverage
+
+
+Command names can be abbreviated as long as the abbreviation is unambiguous
 
 The `cover` command
 -------------------
@@ -123,7 +133,16 @@ Instruments a single JS file or an entire directory tree and produces an output 
 The `report` command
 -------------------
 
-Writes reports using `coverage*.json` files as the source of coverage information. Reports are available in HTML and LCOV formats. Additional report formats may be plugged in at the library level.
+Writes reports using `coverage*.json` files as the source of coverage information. Reports are available in the following formats:
+
+* html - produces a bunch of HTML files with annotated source code
+* lcovonly - produces an lcov.info file
+* lcov - produces html + lcov files. This is the default format
+* cobertura - produces a cobertura-coverage.xml file for easy Hudson integration
+* text-summary - produces a compact text summary of coverage, typically to console
+* text - produces a detailed text table with coverage for all files
+
+Additional report formats may be plugged in at the library level.
 
 Library usage
 -------------
@@ -134,6 +153,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.23</td><td>Add ability to save a baseline coverage file for the instrument command. Fixes issue #19</td></tr>
 <tr><td>v0.1.22</td><td>Add signature attribute to cobertura method tags to fix NPE by the Hudson publisher</td></tr>
 <tr><td>v0.1.21</td><td>Add cobertura XML report format; exprimental for now</td></tr>
 <tr><td>v0.1.20</td><td>Fix HTML/ lcov report interface to be more customizable for middleware needs</td></tr>
