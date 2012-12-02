@@ -78,6 +78,15 @@ module.exports = {
             test.done();
         });
     },
+    "should save baseline coverage when requested": function (test) {
+        var covFile = path.resolve(OUTPUT_DIR, 'cov.json');
+        run([ 'lib/foo.js', '--save-baseline', '--baseline-file=' + covFile ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(existsSync(covFile));
+            test.ok(results.grepOutput(/Saving baseline coverage at/));
+            test.done();
+        });
+    },
     "should barf on no args": function (test) {
         run([], function (results) {
             test.ok(!results.succeeded());

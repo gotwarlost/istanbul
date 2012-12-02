@@ -21,7 +21,7 @@
         "istanbul": "./lib/cli.js"
     },
     "dependencies": {
-        "esprima": "0.9.x",
+        "esprima": "1.0.x",
         "escodegen": "0.0.x",
         "handlebars": "1.0.x",
         "mkdirp": "0.3.x",
