@@ -31,17 +31,17 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">27</td>
             <td class="headerCovTableEntry">29</td>
-            <td class="headerCovTableEntryHi">93.1 %</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryHi">90.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -77,69 +77,71 @@
 <span class="lineNum">       6 </span>                :            :  */
 <span class="lineNum">       7 </span>                :            : 
 <span class="lineNum">       8 </span>                :            : 
-<span class="lineNum">       9 </span>                :<span class="lineCov">         38 : var path = require('path'),</span>
-<span class="lineNum">      10 </span>                :            :     hook = require('./hook'),
-<span class="lineNum">      11 </span>                :            :     Command = require('./command'),
-<span class="lineNum">      12 </span>                :            :     inputError = require('./util/input-error'),
-<span class="lineNum">      13 </span>                :            :     Store = require('./store'),
-<span class="lineNum">      14 </span>                :            :     Report = require('./report');
-<span class="lineNum">      15 </span>                :            : 
-<a name="16"><span class="lineNum">      16 </span>                :<span class="lineCov">         38 : require('./register-plugins');</span></a>
+<span class="lineNum">       9 </span>                :<span class="lineCov">         50 : var Command = require('./command'),</span>
+<span class="lineNum">      10 </span>                :            :     inputError = require('./util/input-error'),
+<span class="lineNum">      11 </span>                :            :     exit = process.exit; //hold a reference to original process.exit so that we are not affected even when a test changes it
+<span class="lineNum">      12 </span>                :            : 
+<a name="13"><span class="lineNum">      13 </span>                :<span class="lineCov">         50 : require('./register-plugins');</span></a>
+<span class="lineNum">      14 </span>                :            : 
+<span class="lineNum">      15 </span>                :<span class="lineCov">         50 : function findCommandPosition(args) {</span>
+<span class="lineNum">      16 </span>                :<span class="lineCov">         50 :     var i;</span>
 <span class="lineNum">      17 </span>                :            : 
-<span class="lineNum">      18 </span>                :<span class="lineCov">         38 : function findCommandPosition(args) {</span>
-<span class="lineNum">      19 </span>                :<span class="lineCov">         38 :     var i;</span>
-<span class="lineNum">      20 </span>                :            : 
-<span class="lineNum">      21 </span>                :<span class="lineCov">         38 :     for (i = 0; i &lt; args.length; i += 1) {</span>
-<span class="lineNum">      22 </span>        [<span class="branchCov" title="Branch 0 was taken 36 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">         38 :         if (args[i].charAt(0) !== '-') {</span>
-<span class="lineNum">      23 </span>                :<span class="lineCov">         36 :             return i;</span>
-<span class="lineNum">      24 </span>                :            :         }
-<span class="lineNum">      25 </span>                :            :     }
+<span class="lineNum">      18 </span>                :<span class="lineCov">         50 :     for (i = 0; i &lt; args.length; i += 1) {</span>
+<span class="lineNum">      19 </span>        [<span class="branchCov" title="Branch 0 was taken 48 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">         50 :         if (args[i].charAt(0) !== '-') {</span>
+<span class="lineNum">      20 </span>                :<span class="lineCov">         48 :             return i;</span>
+<span class="lineNum">      21 </span>                :            :         }
+<span class="lineNum">      22 </span>                :            :     }
+<span class="lineNum">      23 </span>                :            : 
+<span class="lineNum">      24 </span>                :<span class="lineCov">          2 :     return -1;</span>
+<a name="25"><span class="lineNum">      25 </span>                :            : }</a>
 <span class="lineNum">      26 </span>                :            : 
-<span class="lineNum">      27 </span>                :<span class="lineCov">          2 :     return -1;</span>
-<a name="28"><span class="lineNum">      28 </span>                :            : }</a>
-<span class="lineNum">      29 </span>                :            : 
-<span class="lineNum">      30 </span>                :<span class="lineCov">         38 : process.once('uncaughtException', function (ex) {</span>
-<span class="lineNum">      31 </span>        [<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         10 :     console.error(ex.message || ex);</span>
-<span class="lineNum">      32 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span>]:<span class="lineCov">         10 :     if (!ex.inputError) {</span>
-<span class="lineNum">      33 </span>                :<span class="lineCov">          1 :         console.error(ex.stack);</span>
-<span class="lineNum">      34 </span>                :            :     } else {
-<span class="lineNum">      35 </span>                :<span class="lineCov">          9 :         console.error('Try &quot;istanbul help&quot; for usage');</span>
+<span class="lineNum">      27 </span>                :<span class="lineCov">         50 : function errHandler (ex) {</span>
+<span class="lineNum">      28 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span>]:<span class="lineCov">         20 :     if (!ex) { return; }</span>
+<span class="lineNum">      29 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span>]:<span class="lineCov">          9 :     if (!ex.inputError) {</span>
+<span class="lineNum">      30 </span>                :<span class="lineNoCov">          0 :         throw ex; // turn it into an uncaught exception</span>
+<span class="lineNum">      31 </span>                :            :     } else {
+<span class="lineNum">      32 </span>                :            :         //don't print nasty traces but still exit(1)
+<span class="lineNum">      33 </span>                :<span class="lineCov">          9 :         console.error(ex.message);</span>
+<span class="lineNum">      34 </span>                :<span class="lineCov">          9 :         console.error('Try &quot;istanbul help&quot; for usage');</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">          9 :         exit(1);</span>
 <span class="lineNum">      36 </span>                :            :     }
-<span class="lineNum">      37 </span>                :<span class="lineCov">         10 :     process.exit(1);</span>
-<a name="38"><span class="lineNum">      38 </span>                :            : });</a>
-<span class="lineNum">      39 </span>                :            : 
-<span class="lineNum">      40 </span>                :<span class="lineCov">         38 : function runCommand(args) {</span>
-<span class="lineNum">      41 </span>                :<span class="lineCov">         38 :     var pos = findCommandPosition(args),</span>
-<span class="lineNum">      42 </span>                :            :         command,
-<span class="lineNum">      43 </span>                :            :         commandArgs,
-<span class="lineNum">      44 </span>                :            :         opts,
-<span class="lineNum">      45 </span>                :            :         commandObject;
-<span class="lineNum">      46 </span>                :            : 
-<span class="lineNum">      47 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 36 times"> + </span>]:<span class="lineCov">         38 :     if (pos &lt; 0) {</span>
-<span class="lineNum">      48 </span>                :<span class="lineCov">          2 :         throw inputError.create('Need a command to run');</span>
-<span class="lineNum">      49 </span>                :            :     }
-<span class="lineNum">      50 </span>                :            : 
-<span class="lineNum">      51 </span>                :<span class="lineCov">         36 :     commandArgs = args.slice(0, pos);</span>
-<span class="lineNum">      52 </span>                :<span class="lineCov">         36 :     command = args[pos];</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">         36 :     commandArgs.push.apply(commandArgs, args.slice(pos + 1));</span>
-<span class="lineNum">      54 </span>                :            : 
-<span class="lineNum">      55 </span>                :<span class="lineCov">         36 :     try {</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">         36 :         commandObject = Command.create(command);</span>
-<span class="lineNum">      57 </span>                :            :     } catch (ex) {
-<span class="lineNum">      58 </span>                :<span class="lineCov">          1 :         throw inputError.create(ex.message);</span>
-<span class="lineNum">      59 </span>                :            :     }
-<span class="lineNum">      60 </span>                :<span class="lineCov">         35 :     commandObject.run(commandArgs);</span>
-<span class="lineNum">      61 </span>                :            : }
-<span class="lineNum">      62 </span>                :            : 
-<span class="lineNum">      63 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>]:<span class="lineCov">         38 : if (require.main === module) {</span>
-<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :     var args = Array.prototype.slice.call(process.argv, 2);</span>
-<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :     runCommand(args);</span>
-<span class="lineNum">      66 </span>                :            : }
-<span class="lineNum">      67 </span>                :            : 
-<span class="lineNum">      68 </span>                :<span class="lineCov">         38 : module.exports = {</span>
-<span class="lineNum">      69 </span>                :            :     runCommand: runCommand
-<span class="lineNum">      70 </span>                :            : };
-<span class="lineNum">      71 </span>                :            : 
+<a name="37"><span class="lineNum">      37 </span>                :            : }</a>
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :<span class="lineCov">         50 : function runCommand(args, callback) {</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">         50 :     var pos = findCommandPosition(args),</span>
+<span class="lineNum">      41 </span>                :            :         command,
+<span class="lineNum">      42 </span>                :            :         commandArgs,
+<span class="lineNum">      43 </span>                :            :         commandObject;
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 48 times"> + </span>]:<span class="lineCov">         50 :     if (pos &lt; 0) {</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">          2 :         return callback(inputError.create('Need a command to run'));</span>
+<span class="lineNum">      47 </span>                :            :     }
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :<span class="lineCov">         48 :     commandArgs = args.slice(0, pos);</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">         48 :     command = args[pos];</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">         48 :     commandArgs.push.apply(commandArgs, args.slice(pos + 1));</span>
+<span class="lineNum">      52 </span>                :            : 
+<span class="lineNum">      53 </span>                :<span class="lineCov">         48 :     try {</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">         48 :         commandObject = Command.create(command);</span>
+<span class="lineNum">      55 </span>                :            :     } catch (ex) {
+<span class="lineNum">      56 </span>                :<span class="lineCov">          1 :         errHandler(inputError.create(ex.message));</span>
+<span class="lineNum">      57 </span>                :            :     }
+<span class="lineNum">      58 </span>                :<span class="lineCov">         47 :     commandObject.run(commandArgs, errHandler);</span>
+<a name="59"><span class="lineNum">      59 </span>                :            : }</a>
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>                :<span class="lineCov">         50 : function runToCompletion(args) {</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">         50 :     runCommand(args, errHandler);</span>
+<span class="lineNum">      63 </span>                :            : }
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 50 times"> + </span>]:<span class="lineCov">         50 : if (require.main === module) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :     var args = Array.prototype.slice.call(process.argv, 2);</span>
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :     runToCompletion(args);</span>
+<span class="lineNum">      68 </span>                :            : }
+<span class="lineNum">      69 </span>                :            : 
+<span class="lineNum">      70 </span>                :<span class="lineCov">         50 : module.exports = {</span>
+<span class="lineNum">      71 </span>                :            :     runToCompletion: runToCompletion
+<span class="lineNum">      72 </span>                :            : };
+<span class="lineNum">      73 </span>                :            : 
 </pre>
       </td>
     </tr>

@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">31</td>
-            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntry">32</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -74,7 +74,7 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var nopt = require('nopt'),</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var nopt = require('nopt'),</span>
 <span class="lineNum">       7 </span>                :            :     Report = require('../report'),
 <span class="lineNum">       8 </span>                :            :     path = require('path'),
 <span class="lineNum">       9 </span>                :            :     fs = require('fs'),
@@ -85,21 +85,21 @@
 <span class="lineNum">      14 </span>                :            :     util = require('util'),
 <a name="15"><span class="lineNum">      15 </span>                :            :     Command = require('./index');</a>
 <span class="lineNum">      16 </span>                :            : 
-<span class="lineNum">      17 </span>                :<span class="lineCov">         39 : function ReportCommand() {</span>
+<span class="lineNum">      17 </span>                :<span class="lineCov">         51 : function ReportCommand() {</span>
 <span class="lineNum">      18 </span>                :<span class="lineCov">         10 :     Command.call(this);</span>
 <span class="lineNum">      19 </span>                :            : }
 <span class="lineNum">      20 </span>                :            : 
-<span class="lineNum">      21 </span>                :<span class="lineCov">         39 : ReportCommand.TYPE = 'report';</span>
-<span class="lineNum">      22 </span>                :<span class="lineCov">         39 : util.inherits(ReportCommand, Command);</span>
+<span class="lineNum">      21 </span>                :<span class="lineCov">         51 : ReportCommand.TYPE = 'report';</span>
+<span class="lineNum">      22 </span>                :<span class="lineCov">         51 : util.inherits(ReportCommand, Command);</span>
 <a name="23"><span class="lineNum">      23 </span>                :            : </a>
-<span class="lineNum">      24 </span>                :<span class="lineCov">         39 : Command.mix(ReportCommand, {</span>
+<span class="lineNum">      24 </span>                :<span class="lineCov">         51 : Command.mix(ReportCommand, {</span>
 <span class="lineNum">      25 </span>                :            :     synopsis: function () {
 <span class="lineNum">      26 </span>                :<span class="lineCov">          5 :         return &quot;writes reports for coverage JSON objects produced in a previous run&quot;;</span>
 <a name="27"><span class="lineNum">      27 </span>                :            :     },</a>
 <span class="lineNum">      28 </span>                :            : 
 <span class="lineNum">      29 </span>                :            :     usage: function () {
-<span class="lineNum">      30 </span>                :<span class="lineCov">          2 :         console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; [ &lt;format&gt; [&lt;include-pattern&gt;] ]\n\nOptions are:\n\n'</span>
-<span class="lineNum">      31 </span>                :            :             + [
+<span class="lineNum">      30 </span>                :<span class="lineCov">          2 :         console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; [ &lt;format&gt; [&lt;include-pattern&gt;] ]\n\nOptions are:\n\n' +</span>
+<span class="lineNum">      31 </span>                :            :             [
 <span class="lineNum">      32 </span>                :            :                 formatOption('--root &lt;input-directory&gt;', 'The input root directory for finding coverage files'),
 <span class="lineNum">      33 </span>                :            :                 formatOption('--dir &lt;report-directory&gt;', 'The output directory where files will be written. This defaults to ./coverage/'),
 <span class="lineNum">      34 </span>                :            :                 formatOption('--verbose, -v', 'verbose mode')
@@ -108,62 +108,64 @@
 <span class="lineNum">      37 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
 <span class="lineNum">      38 </span>                :            : 
 <span class="lineNum">      39 </span>                :<span class="lineCov">          2 :         console.error('&lt;format&gt; is one of html, lcovonly or lcov (html + lcovonly). Default is lcov');</span>
-<span class="lineNum">      40 </span>                :<span class="lineCov">          2 :         console.error('&lt;include-pattern&gt; is a fileset pattern that can be used to select one or move coverage files for merged reporting. This defaults to &quot;**/coverage*.json&quot;');</span>
-<span class="lineNum">      41 </span>                :            : 
-<span class="lineNum">      42 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
-<a name="43"><span class="lineNum">      43 </span>                :            :     },</a>
-<span class="lineNum">      44 </span>                :            : 
-<span class="lineNum">      45 </span>                :            :     run: function (args) {
-<span class="lineNum">      46 </span>                :            : 
-<span class="lineNum">      47 </span>                :<span class="lineCov">          4 :         var config = {</span>
-<span class="lineNum">      48 </span>                :            :                 root: path,
-<span class="lineNum">      49 </span>                :            :                 dir: path,
-<span class="lineNum">      50 </span>                :            :                 verbose: Boolean
-<span class="lineNum">      51 </span>                :            :             },
-<span class="lineNum">      52 </span>                :            :             opts = nopt(config, { v : '--verbose' }, args, 0),
-<span class="lineNum">      53 </span>                :            :             fmtAndArgs = opts.argv.remain,
-<span class="lineNum">      54 </span>                :            :             fmt = 'lcov',
-<span class="lineNum">      55 </span>                :            :             includePattern = '**/coverage*.json',
-<span class="lineNum">      56 </span>                :            :             reporter,
-<span class="lineNum">      57 </span>                :            :             root,
-<span class="lineNum">      58 </span>                :            :             collector = new Collector();
-<span class="lineNum">      59 </span>                :            : 
-<span class="lineNum">      60 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          4 :         if (fmtAndArgs.length &gt; 0) {</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">          3 :             fmt = fmtAndArgs[0];</span>
-<span class="lineNum">      62 </span>                :            :         }
-<span class="lineNum">      63 </span>                :            : 
-<span class="lineNum">      64 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          4 :         if (fmtAndArgs.length &gt; 1) {</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">          1 :             includePattern = fmtAndArgs[1];</span>
-<span class="lineNum">      66 </span>                :            :         }
-<span class="lineNum">      67 </span>                :            : 
-<span class="lineNum">      68 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">          4 :         opts.dir = opts.dir || path.resolve(process.cwd(), 'coverage');</span>
-<span class="lineNum">      69 </span>                :            : 
-<span class="lineNum">      70 </span>                :<span class="lineCov">          4 :         try {</span>
-<span class="lineNum">      71 </span>                :<span class="lineCov">          4 :             reporter = Report.create(fmt, opts);</span>
-<span class="lineNum">      72 </span>                :            :         } catch (ex) {
-<span class="lineNum">      73 </span>                :<span class="lineCov">          1 :             throw inputError.create('Invalid report format [' + fmt + ']');</span>
-<span class="lineNum">      74 </span>                :            :         }
-<span class="lineNum">      75 </span>                :            : 
-<span class="lineNum">      76 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :         root = opts.root || process.cwd();</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">          3 :         filesFor({</span>
-<a name="78"><span class="lineNum">      78 </span>                :            :             root: root,</a>
-<span class="lineNum">      79 </span>                :            :             includes: [ includePattern ]
-<a name="80"><span class="lineNum">      80 </span>                :            :         }, function (err, files) {</a>
-<span class="lineNum">      81 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :             if (err) { throw err; }</span>
-<span class="lineNum">      82 </span>                :<span class="lineCov">          3 :             files.forEach(function (file) {</span>
-<span class="lineNum">      83 </span>                :<span class="lineCov">          2 :                 var coverageObject =  JSON.parse(fs.readFileSync(file, 'utf8'));</span>
-<span class="lineNum">      84 </span>                :<span class="lineCov">          2 :                 collector.add(coverageObject);</span>
-<span class="lineNum">      85 </span>                :            :             });
-<span class="lineNum">      86 </span>                :<span class="lineCov">          3 :             console.log('Using reporter [' + fmt + ']');</span>
-<span class="lineNum">      87 </span>                :<span class="lineCov">          3 :             reporter.writeReport(collector);</span>
-<span class="lineNum">      88 </span>                :<span class="lineCov">          3 :             console.log('Done');</span>
-<span class="lineNum">      89 </span>                :            :         });
-<span class="lineNum">      90 </span>                :            :     }
-<span class="lineNum">      91 </span>                :            : });
-<span class="lineNum">      92 </span>                :            : 
-<span class="lineNum">      93 </span>                :<span class="lineCov">         39 : module.exports = ReportCommand;</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">          2 :         console.error('&lt;include-pattern&gt; is a fileset pattern that can be used to select one or more coverage files ' +</span>
+<span class="lineNum">      41 </span>                :            :             'for merged reporting. This defaults to &quot;**/coverage*.json&quot;');
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
+<a name="44"><span class="lineNum">      44 </span>                :            :     },</a>
+<span class="lineNum">      45 </span>                :            : 
+<span class="lineNum">      46 </span>                :            :     run: function (args, callback) {
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :<span class="lineCov">          4 :         var config = {</span>
+<span class="lineNum">      49 </span>                :            :                 root: path,
+<span class="lineNum">      50 </span>                :            :                 dir: path,
+<span class="lineNum">      51 </span>                :            :                 verbose: Boolean
+<span class="lineNum">      52 </span>                :            :             },
+<span class="lineNum">      53 </span>                :            :             opts = nopt(config, { v : '--verbose' }, args, 0),
+<span class="lineNum">      54 </span>                :            :             fmtAndArgs = opts.argv.remain,
+<span class="lineNum">      55 </span>                :            :             fmt = 'lcov',
+<span class="lineNum">      56 </span>                :            :             includePattern = '**/coverage*.json',
+<span class="lineNum">      57 </span>                :            :             reporter,
+<span class="lineNum">      58 </span>                :            :             root,
+<span class="lineNum">      59 </span>                :            :             collector = new Collector();
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          4 :         if (fmtAndArgs.length &gt; 0) {</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">          3 :             fmt = fmtAndArgs[0];</span>
+<span class="lineNum">      63 </span>                :            :         }
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          4 :         if (fmtAndArgs.length &gt; 1) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">          1 :             includePattern = fmtAndArgs[1];</span>
+<span class="lineNum">      67 </span>                :            :         }
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>        [<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">          4 :         opts.dir = opts.dir || path.resolve(process.cwd(), 'coverage');</span>
+<span class="lineNum">      70 </span>                :            : 
+<span class="lineNum">      71 </span>                :<span class="lineCov">          4 :         try {</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">          4 :             reporter = Report.create(fmt, opts);</span>
+<span class="lineNum">      73 </span>                :            :         } catch (ex) {
+<span class="lineNum">      74 </span>                :<span class="lineCov">          1 :             return callback(inputError.create('Invalid report format [' + fmt + ']'));</span>
+<span class="lineNum">      75 </span>                :            :         }
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :         root = opts.root || process.cwd();</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">          3 :         filesFor({</span>
+<a name="79"><span class="lineNum">      79 </span>                :            :             root: root,</a>
+<span class="lineNum">      80 </span>                :            :             includes: [ includePattern ]
+<a name="81"><span class="lineNum">      81 </span>                :            :         }, function (err, files) {</a>
+<span class="lineNum">      82 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :             if (err) { throw err; }</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">          3 :             files.forEach(function (file) {</span>
+<span class="lineNum">      84 </span>                :<span class="lineCov">          2 :                 var coverageObject =  JSON.parse(fs.readFileSync(file, 'utf8'));</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">          2 :                 collector.add(coverageObject);</span>
+<span class="lineNum">      86 </span>                :            :             });
+<span class="lineNum">      87 </span>                :<span class="lineCov">          3 :             console.log('Using reporter [' + fmt + ']');</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">          3 :             reporter.writeReport(collector);</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">          3 :             console.log('Done');</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">          3 :             return callback();</span>
+<span class="lineNum">      91 </span>                :            :         });
+<span class="lineNum">      92 </span>                :            :     }
+<span class="lineNum">      93 </span>                :            : });
 <span class="lineNum">      94 </span>                :            : 
-<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      95 </span>                :<span class="lineCov">         51 : module.exports = ReportCommand;</span>
+<span class="lineNum">      96 </span>                :            : 
+<span class="lineNum">      97 </span>                :            : 
 </pre>
       </td>
     </tr>

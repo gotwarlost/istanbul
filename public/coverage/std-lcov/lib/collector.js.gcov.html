@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -74,7 +74,7 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var MemoryStore = require('./store/memory'),</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var MemoryStore = require('./store/memory'),</span>
 <span class="lineNum">       7 </span>                :            :     utils = require('./object-utils');
 <span class="lineNum">       8 </span>                :            : 
 <span class="lineNum">       9 </span>                :            : /**
@@ -119,12 +119,12 @@
 <span class="lineNum">      48 </span>                :            :  * @param {Store} options.store - an implementation of `Store` to use for temporary
 <a name="49"><span class="lineNum">      49 </span>                :            :  *      calculations.</a>
 <span class="lineNum">      50 </span>                :            :  */
-<span class="lineNum">      51 </span>                :<span class="lineCov">         39 : function Collector(options) {</span>
-<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :     options = options || {};</span>
-<span class="lineNum">      53 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :     this.store = options.store || new MemoryStore();</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">         51 : function Collector(options) {</span>
+<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 24 times"> + </span>]:<span class="lineCov">         24 :     options = options || {};</span>
+<span class="lineNum">      53 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 24 times"> + </span>]:<span class="lineCov">         24 :     this.store = options.store || new MemoryStore();</span>
 <span class="lineNum">      54 </span>                :            : }
 <span class="lineNum">      55 </span>                :            : 
-<span class="lineNum">      56 </span>                :<span class="lineCov">         39 : Collector.prototype = {</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">         51 : Collector.prototype = {</span>
 <span class="lineNum">      57 </span>                :            :     /**
 <span class="lineNum">      58 </span>                :            :      * adds a coverage object to the collector.
 <span class="lineNum">      59 </span>                :            :      *
@@ -133,14 +133,14 @@
 <span class="lineNum">      62 </span>                :            :      * @param {String} testName Optional. The name of the test used to produce the object.
 <a name="63"><span class="lineNum">      63 </span>                :            :      *      This is currently not used.</a>
 <span class="lineNum">      64 </span>                :            :      */
-<a name="65"><span class="lineNum">      65 </span>                :            :     add: function (coverage, testName) {</a>
-<span class="lineNum">      66 </span>                :<span class="lineCov">         17 :         var store = this.store;</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">         17 :         Object.keys(coverage).forEach(function (key) {</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">         62 :             var fileCoverage = coverage[key];</span>
-<span class="lineNum">      69 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 61 times"> + </span>]:<span class="lineCov">         62 :             if (store.hasKey(key)) {</span>
+<a name="65"><span class="lineNum">      65 </span>                :            :     add: function (coverage /*, testName */) {</a>
+<span class="lineNum">      66 </span>                :<span class="lineCov">         22 :         var store = this.store;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">         22 :         Object.keys(coverage).forEach(function (key) {</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">         79 :             var fileCoverage = coverage[key];</span>
+<span class="lineNum">      69 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 78 times"> + </span>]:<span class="lineCov">         79 :             if (store.hasKey(key)) {</span>
 <span class="lineNum">      70 </span>                :<span class="lineCov">          1 :                 store.setObject(key, utils.mergeFileCoverage(fileCoverage, store.getObject(key)));</span>
 <span class="lineNum">      71 </span>                :            :             } else {
-<span class="lineNum">      72 </span>                :<span class="lineCov">         61 :                 store.setObject(key, fileCoverage);</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">         78 :                 store.setObject(key, fileCoverage);</span>
 <span class="lineNum">      73 </span>                :            :             }
 <span class="lineNum">      74 </span>                :            :         });
 <span class="lineNum">      75 </span>                :            :     },
@@ -150,7 +150,7 @@
 <a name="79"><span class="lineNum">      79 </span>                :            :      * @return {Array} an array of file paths for which coverage information is present.</a>
 <span class="lineNum">      80 </span>                :            :      */
 <span class="lineNum">      81 </span>                :            :     files: function () {
-<span class="lineNum">      82 </span>                :<span class="lineCov">         25 :         return this.store.keys();</span>
+<span class="lineNum">      82 </span>                :<span class="lineCov">         36 :         return this.store.keys();</span>
 <span class="lineNum">      83 </span>                :            :     },
 <span class="lineNum">      84 </span>                :            :     /**
 <span class="lineNum">      85 </span>                :            :      * return file coverage information for a single file
@@ -160,9 +160,9 @@
 <a name="89"><span class="lineNum">      89 </span>                :            :      * @return {Object} the coverage information for the specified file.</a>
 <span class="lineNum">      90 </span>                :            :      */
 <span class="lineNum">      91 </span>                :            :     fileCoverageFor: function (fileName) {
-<span class="lineNum">      92 </span>                :<span class="lineCov">        131 :         var ret = this.store.getObject(fileName);</span>
-<span class="lineNum">      93 </span>                :<span class="lineCov">        131 :         utils.addDerivedInfoForFile(ret);</span>
-<span class="lineNum">      94 </span>                :<span class="lineCov">        131 :         return ret;</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">        184 :         var ret = this.store.getObject(fileName);</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        184 :         utils.addDerivedInfoForFile(ret);</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">        184 :         return ret;</span>
 <span class="lineNum">      95 </span>                :            :     },
 <span class="lineNum">      96 </span>                :            :     /**
 <span class="lineNum">      97 </span>                :            :      * returns file coverage information for all files. This has the same format as
@@ -172,12 +172,12 @@
 <a name="101"><span class="lineNum">     101 </span>                :            :      * @return {Object} the merged coverage information</a>
 <span class="lineNum">     102 </span>                :            :      */
 <span class="lineNum">     103 </span>                :            :     getFinalCoverage: function () {
-<a name="104"><span class="lineNum">     104 </span>                :<span class="lineCov">          2 :         var ret = {},</span></a>
+<a name="104"><span class="lineNum">     104 </span>                :<span class="lineCov">          4 :         var ret = {},</span></a>
 <span class="lineNum">     105 </span>                :            :             that = this;
-<span class="lineNum">     106 </span>                :<span class="lineCov">          2 :         this.files().forEach(function (file) {</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">          4 :             ret[file] = that.fileCoverageFor(file);</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">          4 :         this.files().forEach(function (file) {</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">          8 :             ret[file] = that.fileCoverageFor(file);</span>
 <span class="lineNum">     108 </span>                :            :         });
-<span class="lineNum">     109 </span>                :<span class="lineCov">          2 :         return ret;</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">          4 :         return ret;</span>
 <span class="lineNum">     110 </span>                :            :     },
 <span class="lineNum">     111 </span>                :            :     /**
 <span class="lineNum">     112 </span>                :            :      * disposes this collector and reclaims temporary resources used in the
@@ -189,7 +189,7 @@
 <span class="lineNum">     118 </span>                :            :     }
 <span class="lineNum">     119 </span>                :            : };
 <span class="lineNum">     120 </span>                :            : 
-<span class="lineNum">     121 </span>                :<span class="lineCov">         39 : module.exports = Collector;</span>
+<span class="lineNum">     121 </span>                :<span class="lineCov">         51 : module.exports = Collector;</span>
 </pre>
       </td>
     </tr>

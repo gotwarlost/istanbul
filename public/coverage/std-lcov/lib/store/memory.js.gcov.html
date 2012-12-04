@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -74,7 +74,7 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var util = require('util'),</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var util = require('util'),</span>
 <span class="lineNum">       7 </span>                :            :     Store = require('./index');
 <span class="lineNum">       8 </span>                :            : 
 <span class="lineNum">       9 </span>                :            : /**
@@ -90,32 +90,32 @@
 <span class="lineNum">      19 </span>                :            :  * @extends Store
 <a name="20"><span class="lineNum">      20 </span>                :            :  * @constructor</a>
 <span class="lineNum">      21 </span>                :            :  */
-<span class="lineNum">      22 </span>                :<span class="lineCov">         39 : function MemoryStore() {</span>
-<span class="lineNum">      23 </span>                :<span class="lineCov">         19 :     Store.call(this);</span>
-<span class="lineNum">      24 </span>                :<span class="lineCov">         19 :     this.map = {};</span>
+<span class="lineNum">      22 </span>                :<span class="lineCov">         51 : function MemoryStore() {</span>
+<span class="lineNum">      23 </span>                :<span class="lineCov">         25 :     Store.call(this);</span>
+<span class="lineNum">      24 </span>                :<span class="lineCov">         25 :     this.map = {};</span>
 <span class="lineNum">      25 </span>                :            : }
 <span class="lineNum">      26 </span>                :            : 
-<span class="lineNum">      27 </span>                :<span class="lineCov">         39 : MemoryStore.TYPE = 'memory';</span>
-<span class="lineNum">      28 </span>                :<span class="lineCov">         39 : util.inherits(MemoryStore, Store);</span>
+<span class="lineNum">      27 </span>                :<span class="lineCov">         51 : MemoryStore.TYPE = 'memory';</span>
+<span class="lineNum">      28 </span>                :<span class="lineCov">         51 : util.inherits(MemoryStore, Store);</span>
 <a name="29"><span class="lineNum">      29 </span>                :            : </a>
-<span class="lineNum">      30 </span>                :<span class="lineCov">         39 : Store.mix(MemoryStore, {</span>
+<span class="lineNum">      30 </span>                :<span class="lineCov">         51 : Store.mix(MemoryStore, {</span>
 <span class="lineNum">      31 </span>                :            :     set: function (key, contents) {
-<span class="lineNum">      32 </span>                :<span class="lineCov">         64 :         this.map[key] = contents;</span>
+<span class="lineNum">      32 </span>                :<span class="lineCov">         81 :         this.map[key] = contents;</span>
 <a name="33"><span class="lineNum">      33 </span>                :            :     },</a>
 <span class="lineNum">      34 </span>                :            : 
 <span class="lineNum">      35 </span>                :            :     get: function (key) {
-<span class="lineNum">      36 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 134 times"> + </span>]:<span class="lineCov">        135 :         if (!this.hasKey(key)) {</span>
+<span class="lineNum">      36 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 187 times"> + </span>]:<span class="lineCov">        188 :         if (!this.hasKey(key)) {</span>
 <span class="lineNum">      37 </span>                :<span class="lineCov">          1 :             throw new Error('Unable to find entry for [' + key + ']');</span>
 <span class="lineNum">      38 </span>                :            :         }
-<span class="lineNum">      39 </span>                :<span class="lineCov">        134 :         return this.map[key];</span>
+<span class="lineNum">      39 </span>                :<span class="lineCov">        187 :         return this.map[key];</span>
 <a name="40"><span class="lineNum">      40 </span>                :            :     },</a>
 <span class="lineNum">      41 </span>                :            : 
 <span class="lineNum">      42 </span>                :            :     hasKey: function (key) {
-<span class="lineNum">      43 </span>                :<span class="lineCov">        200 :         return this.map.hasOwnProperty(key);</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">        270 :         return this.map.hasOwnProperty(key);</span>
 <a name="44"><span class="lineNum">      44 </span>                :            :     },</a>
 <span class="lineNum">      45 </span>                :            : 
 <span class="lineNum">      46 </span>                :            :     keys: function () {
-<span class="lineNum">      47 </span>                :<span class="lineCov">         29 :         return Object.keys(this.map);</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">         40 :         return Object.keys(this.map);</span>
 <a name="48"><span class="lineNum">      48 </span>                :            :     },</a>
 <span class="lineNum">      49 </span>                :            : 
 <span class="lineNum">      50 </span>                :            :     dispose: function () {
@@ -123,7 +123,7 @@
 <span class="lineNum">      52 </span>                :            :     }
 <span class="lineNum">      53 </span>                :            : });
 <span class="lineNum">      54 </span>                :            : 
-<span class="lineNum">      55 </span>                :<span class="lineCov">         39 : module.exports = MemoryStore;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">         51 : module.exports = MemoryStore;</span>
 </pre>
       </td>
     </tr>

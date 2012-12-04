@@ -31,18 +31,18 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">224</td>
-            <td class="headerCovTableEntry">226</td>
-            <td class="headerCovTableEntryHi">99.1 %</td>
+            <td class="headerCovTableEntry">225</td>
+            <td class="headerCovTableEntry">229</td>
+            <td class="headerCovTableEntryHi">98.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">45</td>
-            <td class="headerCovTableEntry">46</td>
-            <td class="headerCovTableEntryHi">97.8 %</td>
+            <td class="headerCovTableEntry">47</td>
+            <td class="headerCovTableEntryHi">95.7 %</td>
           </tr>
           <tr>
             <td></td>
@@ -109,108 +109,108 @@
 <a name="38"><span class="lineNum">      38 </span>                :            :     }</a>
 <span class="lineNum">      39 </span>                :            : 
 <span class="lineNum">      40 </span>                :<span class="lineCov">          2 :     function generateTrackerVar(filename, omitSuffix) {</span>
-<span class="lineNum">      41 </span>                :<span class="lineCov">        171 :         var hash, suffix;</span>
-<span class="lineNum">      42 </span>        [<span class="branchCov" title="Branch 0 was taken 140 times"> + </span><span class="branchCov" title="Branch 1 was taken 31 times"> + </span>]:<span class="lineCov">        171 :         if (crypto !== null) {</span>
-<span class="lineNum">      43 </span>                :<span class="lineCov">        140 :             hash = crypto.createHash('md5');</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">        140 :             hash.update(filename);</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">        140 :             suffix = hash.digest('base64');</span>
+<span class="lineNum">      41 </span>                :<span class="lineCov">        182 :         var hash, suffix;</span>
+<span class="lineNum">      42 </span>        [<span class="branchCov" title="Branch 0 was taken 146 times"> + </span><span class="branchCov" title="Branch 1 was taken 36 times"> + </span>]:<span class="lineCov">        182 :         if (crypto !== null) {</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">        146 :             hash = crypto.createHash('md5');</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">        146 :             hash.update(filename);</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">        146 :             suffix = hash.digest('base64');</span>
 <span class="lineNum">      46 </span>                :            :             //trim trailing equal signs, turn identifier unsafe chars to safe ones + =&gt; _ and / =&gt; $
-<span class="lineNum">      47 </span>                :<span class="lineCov">        140 :             suffix = suffix.replace(new RegExp('=', 'g'), '')</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">        146 :             suffix = suffix.replace(new RegExp('=', 'g'), '')</span>
 <span class="lineNum">      48 </span>                :            :                 .replace(new RegExp('\\+', 'g'), '_')
 <span class="lineNum">      49 </span>                :            :                 .replace(new RegExp('/', 'g'), '$');
 <span class="lineNum">      50 </span>                :            :         } else {
-<span class="lineNum">      51 </span>                :            :             /*jslint nomen: true */
-<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 31 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         31 :             window.__cov_seq = window.__cov_seq || 0;</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">         31 :             window.__cov_seq += 1;</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">         31 :             suffix = window.__cov_seq;</span>
-<span class="lineNum">      55 </span>                :            :         }
-<span class="lineNum">      56 </span>        [<span class="branchCov" title="Branch 0 was taken 63 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>]:<span class="lineCov">        171 :         return '__cov_' + (omitSuffix ? '' : suffix);</span>
-<a name="57"><span class="lineNum">      57 </span>                :            :     }</a>
-<span class="lineNum">      58 </span>                :            : 
-<span class="lineNum">      59 </span>                :<span class="lineCov">          2 :     function pushAll(ary, thing) {</span>
-<span class="lineNum">      60 </span>        [<span class="branchCov" title="Branch 0 was taken 14657 times"> + </span><span class="branchCov" title="Branch 1 was taken 3149 times"> + </span>]:<span class="lineCov">      17806 :         if (!isArray(thing)) {</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">      14657 :             thing = [ thing ];</span>
-<span class="lineNum">      62 </span>                :            :         }
-<span class="lineNum">      63 </span>                :<span class="lineCov">      17806 :         Array.prototype.push.apply(ary, thing);</span>
-<span class="lineNum">      64 </span>                :            :     }
-<span class="lineNum">      65 </span>                :            : 
-<span class="lineNum">      66 </span>                :<span class="lineCov">          2 :     SYNTAX = {</span>
-<span class="lineNum">      67 </span>                :            :         ArrayExpression: [ 'elements' ],
-<span class="lineNum">      68 </span>                :            :         AssignmentExpression: ['left', 'right'],
-<span class="lineNum">      69 </span>                :            :         BinaryExpression: ['left', 'right' ],
-<span class="lineNum">      70 </span>                :            :         BlockStatement: [ 'body' ],
-<span class="lineNum">      71 </span>                :            :         BreakStatement: [ 'label' ],
-<span class="lineNum">      72 </span>                :            :         CallExpression: [ 'callee', 'arguments'],
-<span class="lineNum">      73 </span>                :            :         CatchClause: ['param', 'body'],
-<span class="lineNum">      74 </span>                :            :         ConditionalExpression: [ 'test', 'consequent', 'alternate' ],
-<span class="lineNum">      75 </span>                :            :         ContinueStatement: [ 'label' ],
-<span class="lineNum">      76 </span>                :            :         DebuggerStatement: [ ],
-<span class="lineNum">      77 </span>                :            :         DoWhileStatement: [ 'test', 'body' ],
-<span class="lineNum">      78 </span>                :            :         EmptyStatement: [],
-<span class="lineNum">      79 </span>                :            :         ExpressionStatement: [ 'expression'],
-<span class="lineNum">      80 </span>                :            :         ForInStatement: [ 'left', 'right', 'body' ],
-<span class="lineNum">      81 </span>                :            :         ForStatement: ['init', 'test', 'update', 'body' ],
-<span class="lineNum">      82 </span>                :            :         FunctionDeclaration: ['id', 'params', 'body'],
-<span class="lineNum">      83 </span>                :            :         FunctionExpression: ['id', 'params', 'defaults', 'body'],
-<span class="lineNum">      84 </span>                :            :         Identifier: [],
-<span class="lineNum">      85 </span>                :            :         IfStatement: ['test', 'consequent', 'alternate'],
-<span class="lineNum">      86 </span>                :            :         LabeledStatement: ['label', 'body'],
-<span class="lineNum">      87 </span>                :            :         Literal: [],
-<span class="lineNum">      88 </span>                :            :         LogicalExpression: [ 'left', 'right' ],
-<span class="lineNum">      89 </span>                :            :         MemberExpression: ['object', 'property'],
-<span class="lineNum">      90 </span>                :            :         NewExpression: ['callee', 'arguments'],
-<span class="lineNum">      91 </span>                :            :         ObjectExpression: [ 'properties' ],
-<span class="lineNum">      92 </span>                :            :         Program: [ 'body' ],
-<span class="lineNum">      93 </span>                :            :         Property: [ 'key', 'value'],
-<span class="lineNum">      94 </span>                :            :         ReturnStatement: ['argument'],
-<span class="lineNum">      95 </span>                :            :         SequenceExpression: ['expressions'],
-<span class="lineNum">      96 </span>                :            :         SwitchCase: [ 'test', 'consequent' ],
-<span class="lineNum">      97 </span>                :            :         SwitchStatement: ['discriminant', 'cases' ],
-<span class="lineNum">      98 </span>                :            :         ThisExpression: [],
-<span class="lineNum">      99 </span>                :            :         ThrowStatement: ['argument'],
-<span class="lineNum">     100 </span>                :            :         TryStatement: [ 'block', 'handlers', 'finalizer' ],
-<span class="lineNum">     101 </span>                :            :         UnaryExpression: ['argument'],
-<span class="lineNum">     102 </span>                :            :         UpdateExpression: [ 'argument' ],
-<span class="lineNum">     103 </span>                :            :         VariableDeclaration: [ 'declarations' ],
-<span class="lineNum">     104 </span>                :            :         VariableDeclarator: [ 'id', 'init' ],
-<span class="lineNum">     105 </span>                :            :         WhileStatement: [ 'test', 'body' ],
-<span class="lineNum">     106 </span>                :            :         WithStatement: [ 'object', 'body' ]
-<span class="lineNum">     107 </span>                :            : 
-<span class="lineNum">     108 </span>                :            :     };
-<span class="lineNum">     109 </span>                :            : 
-<span class="lineNum">     110 </span>                :<span class="lineCov">          2 :     for (nodeType in SYNTAX) {</span>
-<span class="lineNum">     111 </span>        [<span class="branchCov" title="Branch 0 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         80 :         if (SYNTAX.hasOwnProperty(nodeType)) {</span>
-<span class="lineNum">     112 </span>                :<span class="lineCov">         80 :             SYNTAX[nodeType] = { name: nodeType, children: SYNTAX[nodeType] };</span>
-<span class="lineNum">     113 </span>                :            :         }
-<span class="lineNum">     114 </span>                :            :     }
-<a name="115"><span class="lineNum">     115 </span>                :            : </a>
-<a name="116"><span class="lineNum">     116 </span>                :<span class="lineCov">          2 :     astgen = {</span></a>
-<a name="117"><span class="lineNum">     117 </span>                :<span class="lineCov">      10418 :         variable: function (name) { return { type: SYNTAX.Identifier.name, name: name }; },</span></a>
-<a name="118"><span class="lineNum">     118 </span>                :<span class="lineCov">       5209 :         stringLiteral: function (str) { return { type: SYNTAX.Literal.name, value: String(str) }; },</span></a>
-<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">       1447 :         numericLiteral: function (num) { return { type: SYNTAX.Literal.name, value: Number(num) }; },</span></a>
-<a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">       4652 :         statement: function (contents) { return { type: SYNTAX.ExpressionStatement.name, expression: contents }; },</span></a>
-<a name="121"><span class="lineNum">     121 </span>                :<span class="lineCov">       5209 :         dot: function (obj, field) { return { type: SYNTAX.MemberExpression.name, computed: false, object: obj, property: field }; },</span></a>
-<a name="122"><span class="lineNum">     122 </span>                :<span class="lineCov">       6656 :         subscript: function (obj, sub) { return { type: SYNTAX.MemberExpression.name, computed: true, object: obj, property: sub }; },</span></a>
-<span class="lineNum">     123 </span>                :<span class="lineCov">       5209 :         postIncrement: function (obj) { return { type: SYNTAX.UpdateExpression.name, operator: '++', prefix: false, argument: obj }; },</span>
-<span class="lineNum">     124 </span>                :<span class="lineCov">        557 :         sequence: function (one, two) { return { type: SYNTAX.SequenceExpression.name, expressions: [one, two] }; }</span>
-<a name="125"><span class="lineNum">     125 </span>                :            :     };</a>
-<span class="lineNum">     126 </span>                :            : 
-<span class="lineNum">     127 </span>                :<span class="lineCov">          2 :     function Walker(walkMap, scope, debug) {</span>
-<span class="lineNum">     128 </span>                :<span class="lineCov">        110 :         this.walkMap = walkMap;</span>
-<span class="lineNum">     129 </span>                :<span class="lineCov">        110 :         this.scope = scope;</span>
-<span class="lineNum">     130 </span>                :<span class="lineCov">        110 :         this.debug = debug;</span>
-<span class="lineNum">     131 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>]:<span class="lineCov">        110 :         if (this.debug) {</span>
-<span class="lineNum">     132 </span>                :<span class="lineCov">          2 :             this.level = 0;</span>
-<span class="lineNum">     133 </span>                :<span class="lineCov">          2 :             this.seq = true;</span>
-<span class="lineNum">     134 </span>                :            :         }
-<a name="135"><span class="lineNum">     135 </span>                :            :     }</a>
-<span class="lineNum">     136 </span>                :            : 
-<span class="lineNum">     137 </span>                :<span class="lineCov">          2 :     function defaultWalker(node, walker) {</span>
-<span class="lineNum">     138 </span>                :            : 
-<span class="lineNum">     139 </span>                :<span class="lineCov">      49276 :         var type = node.type,</span>
-<span class="lineNum">     140 </span>                :            :             children = SYNTAX[type].children,
-<span class="lineNum">     141 </span>        [<span class="branchCov" title="Branch 0 was taken 49276 times"> + </span><span class="branchCov" title="Branch 1 was taken 17865 times"> + </span>]:            :             applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name, // don't run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
-<span class="lineNum">     142 </span>        [<span class="branchCov" title="Branch 0 was taken 31577 times"> + </span><span class="branchCov" title="Branch 1 was taken 17699 times"> + </span>]:            :             walkerFn = applyCustomWalker ? walker.walkMap[type] : null,
+<span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 36 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         36 :             window.__cov_seq = window.__cov_seq || 0;</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">         36 :             window.__cov_seq += 1;</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">         36 :             suffix = window.__cov_seq;</span>
+<span class="lineNum">      54 </span>                :            :         }
+<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 73 times"> + </span><span class="branchCov" title="Branch 1 was taken 109 times"> + </span>]:<span class="lineCov">        182 :         return '__cov_' + (omitSuffix ? '' : suffix);</span>
+<a name="56"><span class="lineNum">      56 </span>                :            :     }</a>
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :<span class="lineCov">          2 :     function pushAll(ary, thing) {</span>
+<span class="lineNum">      59 </span>        [<span class="branchCov" title="Branch 0 was taken 22527 times"> + </span><span class="branchCov" title="Branch 1 was taken 4868 times"> + </span>]:<span class="lineCov">      27395 :         if (!isArray(thing)) {</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">      22527 :             thing = [ thing ];</span>
+<span class="lineNum">      61 </span>                :            :         }
+<span class="lineNum">      62 </span>                :<span class="lineCov">      27395 :         Array.prototype.push.apply(ary, thing);</span>
+<span class="lineNum">      63 </span>                :            :     }
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>                :<span class="lineCov">          2 :     SYNTAX = {</span>
+<span class="lineNum">      66 </span>                :            :         ArrayExpression: [ 'elements' ],
+<span class="lineNum">      67 </span>                :            :         AssignmentExpression: ['left', 'right'],
+<span class="lineNum">      68 </span>                :            :         BinaryExpression: ['left', 'right' ],
+<span class="lineNum">      69 </span>                :            :         BlockStatement: [ 'body' ],
+<span class="lineNum">      70 </span>                :            :         BreakStatement: [ 'label' ],
+<span class="lineNum">      71 </span>                :            :         CallExpression: [ 'callee', 'arguments'],
+<span class="lineNum">      72 </span>                :            :         CatchClause: ['param', 'body'],
+<span class="lineNum">      73 </span>                :            :         ConditionalExpression: [ 'test', 'consequent', 'alternate' ],
+<span class="lineNum">      74 </span>                :            :         ContinueStatement: [ 'label' ],
+<span class="lineNum">      75 </span>                :            :         DebuggerStatement: [ ],
+<span class="lineNum">      76 </span>                :            :         DoWhileStatement: [ 'test', 'body' ],
+<span class="lineNum">      77 </span>                :            :         EmptyStatement: [],
+<span class="lineNum">      78 </span>                :            :         ExpressionStatement: [ 'expression'],
+<span class="lineNum">      79 </span>                :            :         ForInStatement: [ 'left', 'right', 'body' ],
+<span class="lineNum">      80 </span>                :            :         ForStatement: ['init', 'test', 'update', 'body' ],
+<span class="lineNum">      81 </span>                :            :         FunctionDeclaration: ['id', 'params', 'body'],
+<span class="lineNum">      82 </span>                :            :         FunctionExpression: ['id', 'params', 'defaults', 'body'],
+<span class="lineNum">      83 </span>                :            :         Identifier: [],
+<span class="lineNum">      84 </span>                :            :         IfStatement: ['test', 'consequent', 'alternate'],
+<span class="lineNum">      85 </span>                :            :         LabeledStatement: ['label', 'body'],
+<span class="lineNum">      86 </span>                :            :         Literal: [],
+<span class="lineNum">      87 </span>                :            :         LogicalExpression: [ 'left', 'right' ],
+<span class="lineNum">      88 </span>                :            :         MemberExpression: ['object', 'property'],
+<span class="lineNum">      89 </span>                :            :         NewExpression: ['callee', 'arguments'],
+<span class="lineNum">      90 </span>                :            :         ObjectExpression: [ 'properties' ],
+<span class="lineNum">      91 </span>                :            :         Program: [ 'body' ],
+<span class="lineNum">      92 </span>                :            :         Property: [ 'key', 'value'],
+<span class="lineNum">      93 </span>                :            :         ReturnStatement: ['argument'],
+<span class="lineNum">      94 </span>                :            :         SequenceExpression: ['expressions'],
+<span class="lineNum">      95 </span>                :            :         SwitchCase: [ 'test', 'consequent' ],
+<span class="lineNum">      96 </span>                :            :         SwitchStatement: ['discriminant', 'cases' ],
+<span class="lineNum">      97 </span>                :            :         ThisExpression: [],
+<span class="lineNum">      98 </span>                :            :         ThrowStatement: ['argument'],
+<span class="lineNum">      99 </span>                :            :         TryStatement: [ 'block', 'handlers', 'finalizer' ],
+<span class="lineNum">     100 </span>                :            :         UnaryExpression: ['argument'],
+<span class="lineNum">     101 </span>                :            :         UpdateExpression: [ 'argument' ],
+<span class="lineNum">     102 </span>                :            :         VariableDeclaration: [ 'declarations' ],
+<span class="lineNum">     103 </span>                :            :         VariableDeclarator: [ 'id', 'init' ],
+<span class="lineNum">     104 </span>                :            :         WhileStatement: [ 'test', 'body' ],
+<span class="lineNum">     105 </span>                :            :         WithStatement: [ 'object', 'body' ]
+<span class="lineNum">     106 </span>                :            : 
+<span class="lineNum">     107 </span>                :            :     };
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :<span class="lineCov">          2 :     for (nodeType in SYNTAX) {</span>
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         80 :         if (SYNTAX.hasOwnProperty(nodeType)) {</span>
+<span class="lineNum">     111 </span>                :<span class="lineCov">         80 :             SYNTAX[nodeType] = { name: nodeType, children: SYNTAX[nodeType] };</span>
+<span class="lineNum">     112 </span>                :            :         }
+<span class="lineNum">     113 </span>                :            :     }
+<a name="114"><span class="lineNum">     114 </span>                :            : </a>
+<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">          2 :     astgen = {</span></a>
+<a name="116"><span class="lineNum">     116 </span>                :<span class="lineCov">      15854 :         variable: function (name) { return { type: SYNTAX.Identifier.name, name: name }; },</span></a>
+<a name="117"><span class="lineNum">     117 </span>                :<span class="lineCov">       7927 :         stringLiteral: function (str) { return { type: SYNTAX.Literal.name, value: String(str) }; },</span></a>
+<a name="118"><span class="lineNum">     118 </span>                :<span class="lineCov">       2249 :         numericLiteral: function (num) { return { type: SYNTAX.Literal.name, value: Number(num) }; },</span></a>
+<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">       7054 :         statement: function (contents) { return { type: SYNTAX.ExpressionStatement.name, expression: contents }; },</span></a>
+<a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">       7927 :         dot: function (obj, field) { return { type: SYNTAX.MemberExpression.name, computed: false, object: obj, property: field }; },</span></a>
+<a name="121"><span class="lineNum">     121 </span>                :<span class="lineCov">      10176 :         subscript: function (obj, sub) { return { type: SYNTAX.MemberExpression.name, computed: true, object: obj, property: sub }; },</span></a>
+<span class="lineNum">     122 </span>                :<span class="lineCov">       7927 :         postIncrement: function (obj) { return { type: SYNTAX.UpdateExpression.name, operator: '++', prefix: false, argument: obj }; },</span>
+<span class="lineNum">     123 </span>                :<span class="lineCov">        873 :         sequence: function (one, two) { return { type: SYNTAX.SequenceExpression.name, expressions: [one, two] }; }</span>
+<a name="124"><span class="lineNum">     124 </span>                :            :     };</a>
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :<span class="lineCov">          2 :     function Walker(walkMap, scope, debug) {</span>
+<span class="lineNum">     127 </span>                :<span class="lineCov">        111 :         this.walkMap = walkMap;</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">        111 :         this.scope = scope;</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">        111 :         this.debug = debug;</span>
+<span class="lineNum">     130 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 109 times"> + </span>]:<span class="lineCov">        111 :         if (this.debug) {</span>
+<span class="lineNum">     131 </span>                :<span class="lineCov">          2 :             this.level = 0;</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">          2 :             this.seq = true;</span>
+<span class="lineNum">     133 </span>                :            :         }
+<a name="134"><span class="lineNum">     134 </span>                :            :     }</a>
+<span class="lineNum">     135 </span>                :            : 
+<span class="lineNum">     136 </span>                :<span class="lineCov">          2 :     function defaultWalker(node, walker) {</span>
+<span class="lineNum">     137 </span>                :            : 
+<span class="lineNum">     138 </span>                :<span class="lineCov">      72942 :         var type = node.type,</span>
+<span class="lineNum">     139 </span>                :            :             children = SYNTAX[type].children,
+<span class="lineNum">     140 </span>                :            :             // don't run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
+<span class="lineNum">     141 </span>        [<span class="branchCov" title="Branch 0 was taken 72942 times"> + </span><span class="branchCov" title="Branch 1 was taken 26641 times"> + </span>]:            :             applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name,
+<span class="lineNum">     142 </span>        [<span class="branchCov" title="Branch 0 was taken 46478 times"> + </span><span class="branchCov" title="Branch 1 was taken 26464 times"> + </span>]:            :             walkerFn = applyCustomWalker ? walker.walkMap[type] : null,
 <span class="lineNum">     143 </span>                :            :             i,
 <span class="lineNum">     144 </span>                :            :             j,
 <span class="lineNum">     145 </span>                :            :             walkFnIndex,
@@ -219,535 +219,556 @@
 <span class="lineNum">     148 </span>                :            :             ret = node,
 <span class="lineNum">     149 </span>                :            :             childArray,
 <span class="lineNum">     150 </span>                :            :             childElement,
-<span class="lineNum">     151 </span>                :            :             tmpNode,
-<span class="lineNum">     152 </span>                :            :             pathElement,
-<span class="lineNum">     153 </span>                :            :             assignNode,
-<span class="lineNum">     154 </span>                :            :             isLast;
-<span class="lineNum">     155 </span>                :            : 
-<span class="lineNum">     156 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 49276 times"> + </span>]:<span class="lineCov">      49276 :         if (node.walking) { throw new Error('Infinite regress: Custom walkers may NOT call walker.walk(node)'); }</span>
-<span class="lineNum">     157 </span>                :<span class="lineCov">      49276 :         node.walking = true;</span>
-<span class="lineNum">     158 </span>        [<span class="branchCov" title="Branch 0 was taken 662 times"> + </span><span class="branchCov" title="Branch 1 was taken 48614 times"> + </span>]:<span class="lineCov">      49276 :         if (isArray(walkerFn)) {</span>
-<span class="lineNum">     159 </span>                :<span class="lineCov">        662 :             for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {</span>
-<span class="lineNum">     160 </span>                :<span class="lineCov">       1826 :                 isLast = walkFnIndex === walkerFn.length - 1;</span>
-<span class="lineNum">     161 </span>        [<span class="branchCov" title="Branch 0 was taken 1826 times"> + </span><span class="branchCov" title="Branch 1 was taken 1826 times"> + </span>]:<span class="lineCov">       1826 :                 ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;</span>
-<span class="lineNum">     162 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1826 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 1826 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1826 :                 if (ret.type !== type &amp;&amp; !isLast) { throw new Error('Only the last walker is allowed to change the node type: [type was: ' + type + ' ]'); }</span>
-<span class="lineNum">     163 </span>                :            :             }
-<span class="lineNum">     164 </span>                :            :         } else {
-<span class="lineNum">     165 </span>        [<span class="branchCov" title="Branch 0 was taken 3258 times"> + </span><span class="branchCov" title="Branch 1 was taken 45356 times"> + </span>]:<span class="lineCov">      48614 :             if (walkerFn) {</span>
-<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 0 was taken 3258 times"> + </span><span class="branchCov" title="Branch 1 was taken 3258 times"> + </span>]:<span class="lineCov">       3258 :                 ret = walker.walk(node, walkerFn) || ret;</span>
-<span class="lineNum">     167 </span>                :            :             }
-<span class="lineNum">     168 </span>                :            :         }
-<span class="lineNum">     169 </span>                :            : 
-<span class="lineNum">     170 </span>                :<span class="lineCov">      49276 :         for (i = 0; i &lt; children.length; i += 1) {</span>
-<span class="lineNum">     171 </span>                :<span class="lineCov">      44820 :             childType = children[i];</span>
-<span class="lineNum">     172 </span>                :<span class="lineCov">      44820 :             childNode = node[childType];</span>
-<span class="lineNum">     173 </span>[<span class="branchCov" title="Branch 0 was taken 43436 times"> + </span><span class="branchCov" title="Branch 1 was taken 1384 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 44820 times"> + </span><span class="branchCov" title="Branch 1 was taken 43513 times"> + </span>]:<span class="lineCov">      44820 :             if (childNode &amp;&amp; !childNode.skipWalk) {</span>
-<span class="lineNum">     174 </span>                :<span class="lineCov">      43436 :                 pathElement = { node: node, property: childType };</span>
-<span class="lineNum">     175 </span>        [<span class="branchCov" title="Branch 0 was taken 5831 times"> + </span><span class="branchCov" title="Branch 1 was taken 37605 times"> + </span>]:<span class="lineCov">      43436 :                 if (isArray(childNode)) {</span>
-<span class="lineNum">     176 </span>                :<span class="lineCov">       5831 :                     childArray = [];</span>
-<span class="lineNum">     177 </span>                :<span class="lineCov">       5831 :                     for (j = 0; j &lt; childNode.length; j += 1) {</span>
-<span class="lineNum">     178 </span>                :<span class="lineCov">      11503 :                         childElement = childNode[j];</span>
-<span class="lineNum">     179 </span>                :<span class="lineCov">      11503 :                         pathElement.index = j;</span>
-<span class="lineNum">     180 </span>        [<span class="branchCov" title="Branch 0 was taken 11503 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      11503 :                         assignNode = walker.walk(childElement, null, pathElement) || childElement;</span>
-<span class="lineNum">     181 </span>        [<span class="branchCov" title="Branch 0 was taken 3149 times"> + </span><span class="branchCov" title="Branch 1 was taken 8354 times"> + </span>]:<span class="lineCov">      11503 :                         if (isArray(assignNode.prepend)) {</span>
-<span class="lineNum">     182 </span>                :<span class="lineCov">       3149 :                             pushAll(childArray, assignNode.prepend);</span>
-<span class="lineNum">     183 </span>                :<span class="lineCov">       3149 :                             delete assignNode.prepend;</span>
-<span class="lineNum">     184 </span>                :            :                         }
-<span class="lineNum">     185 </span>                :<span class="lineCov">      11503 :                         pushAll(childArray, assignNode);</span>
-<span class="lineNum">     186 </span>                :            :                     }
-<span class="lineNum">     187 </span>                :<span class="lineCov">       5831 :                     node[childType] = childArray;</span>
-<span class="lineNum">     188 </span>                :            :                 } else {
-<span class="lineNum">     189 </span>        [<span class="branchCov" title="Branch 0 was taken 37605 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      37605 :                     assignNode = walker.walk(childNode, null, pathElement) || childNode;</span>
-<span class="lineNum">     190 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 37605 times"> + </span>]:<span class="lineCov">      37605 :                     if (isArray(assignNode.prepend)) {</span>
-<span class="lineNum">     191 </span>                :<span class="lineNoCov">          0 :                         throw new Error('Internal error: attempt to prepend statements in disallowed (non-array) context');</span>
-<span class="lineNum">     192 </span>                :            :                         /* if this should be allowed, this is how to solve it
-<span class="lineNum">     193 </span>                :            :                         tmpNode = { type: 'BlockStatement', body: [] };
-<span class="lineNum">     194 </span>                :            :                         pushAll(tmpNode.body, assignNode.prepend);
-<span class="lineNum">     195 </span>                :            :                         pushAll(tmpNode.body, assignNode);
-<span class="lineNum">     196 </span>                :            :                         node[childType] = tmpNode;
-<span class="lineNum">     197 </span>                :            :                         delete assignNode.prepend;
-<span class="lineNum">     198 </span>                :            :                         */
-<span class="lineNum">     199 </span>                :            :                     } else {
-<span class="lineNum">     200 </span>                :<span class="lineCov">      37605 :                         node[childType] = assignNode;</span>
-<span class="lineNum">     201 </span>                :            :                     }
-<span class="lineNum">     202 </span>                :            :                 }
-<span class="lineNum">     203 </span>                :            :             }
-<span class="lineNum">     204 </span>                :            :         }
-<span class="lineNum">     205 </span>                :            : 
-<span class="lineNum">     206 </span>                :<span class="lineCov">      49276 :         delete node.walking;</span>
-<span class="lineNum">     207 </span>                :<span class="lineCov">      49276 :         return ret;</span>
-<span class="lineNum">     208 </span>                :            :     }
-<a name="209"><span class="lineNum">     209 </span>                :            : </a>
-<span class="lineNum">     210 </span>                :<span class="lineCov">          2 :     Walker.prototype = {</span>
-<span class="lineNum">     211 </span>                :            :         startWalk: function (node) {
-<span class="lineNum">     212 </span>                :<span class="lineCov">        168 :             this.path = [];</span>
-<span class="lineNum">     213 </span>                :<span class="lineCov">        168 :             this.walk(node);</span>
-<a name="214"><span class="lineNum">     214 </span>                :            :         },</a>
-<span class="lineNum">     215 </span>                :            : 
-<span class="lineNum">     216 </span>                :            :         walk: function (node, walkFn, pathElement) {
-<span class="lineNum">     217 </span>                :<span class="lineCov">      54360 :             var ret, i, seq, prefix;</span>
-<span class="lineNum">     218 </span>                :            : 
-<span class="lineNum">     219 </span>        [<span class="branchCov" title="Branch 0 was taken 54360 times"> + </span><span class="branchCov" title="Branch 1 was taken 49276 times"> + </span>]:<span class="lineCov">      54360 :             walkFn = walkFn || defaultWalker;</span>
-<span class="lineNum">     220 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 54352 times"> + </span>]:<span class="lineCov">      54360 :             if (this.debug) {</span>
-<span class="lineNum">     221 </span>                :<span class="lineCov">          8 :                 this.seq += 1;</span>
-<span class="lineNum">     222 </span>                :<span class="lineCov">          8 :                 this.level += 1;</span>
-<span class="lineNum">     223 </span>                :<span class="lineCov">          8 :                 seq = this.seq;</span>
-<span class="lineNum">     224 </span>                :<span class="lineCov">          8 :                 prefix = '';</span>
-<span class="lineNum">     225 </span>                :<span class="lineCov">         27 :                 for (i = 0; i &lt; this.level; i += 1) { prefix += '    '; }</span>
-<span class="lineNum">     226 </span>                :<span class="lineCov">          8 :                 console.log(prefix + 'Enter (' + seq + '):' + node.type);</span>
-<span class="lineNum">     227 </span>                :            :             }
-<span class="lineNum">     228 </span>        [<span class="branchCov" title="Branch 0 was taken 49108 times"> + </span><span class="branchCov" title="Branch 1 was taken 5252 times"> + </span>]:<span class="lineCov">      54360 :             if (pathElement) { this.path.push(pathElement); }</span>
-<span class="lineNum">     229 </span>                :<span class="lineCov">      54360 :             ret = walkFn.call(this.scope, node, this);</span>
-<span class="lineNum">     230 </span>        [<span class="branchCov" title="Branch 0 was taken 49108 times"> + </span><span class="branchCov" title="Branch 1 was taken 5252 times"> + </span>]:<span class="lineCov">      54360 :             if (pathElement) { this.path.pop(); }</span>
-<span class="lineNum">     231 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 54352 times"> + </span>]:<span class="lineCov">      54360 :             if (this.debug) {</span>
-<span class="lineNum">     232 </span>                :<span class="lineCov">          8 :                 this.level -= 1;</span>
-<span class="lineNum">     233 </span>                :<span class="lineCov">          8 :                 console.log(prefix + 'Return (' + seq + '):' + node.type);</span>
-<span class="lineNum">     234 </span>                :            :             }
-<span class="lineNum">     235 </span>                :<span class="lineCov">      54360 :             return ret;</span>
-<a name="236"><span class="lineNum">     236 </span>                :            :         },</a>
-<span class="lineNum">     237 </span>                :            : 
-<span class="lineNum">     238 </span>                :            :         startLineForNode: function (node) {
-<span class="lineNum">     239 </span>        [<span class="branchCov" title="Branch 0 was taken 1317 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1317 :             return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : null;</span>
-<span class="lineNum">         </span>     [<span class="branchCov" title="Branch 0 was taken 1317 times"> + </span><span class="branchCov" title="Branch 1 was taken 1317 times"> + </span><span class="branchCov" title="Branch 2 was taken 1317 times"> + </span>]
-<a name="240"><span class="lineNum">     240 </span>                :            :         },</a>
-<span class="lineNum">     241 </span>                :            : 
-<span class="lineNum">     242 </span>                :            :         parent: function () {
-<span class="lineNum">     243 </span>        [<span class="branchCov" title="Branch 0 was taken 3339 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3339 :             return this.path.length &gt; 0 ? this.path[this.path.length - 1] : null;</span>
-<a name="244"><span class="lineNum">     244 </span>                :            :         },</a>
-<span class="lineNum">     245 </span>                :            : 
-<span class="lineNum">     246 </span>                :            :         isLabeled: function () {
-<span class="lineNum">     247 </span>                :<span class="lineCov">       3154 :             var el = this.parent();</span>
-<span class="lineNum">     248 </span>        [<span class="branchCov" title="Branch 0 was taken 3154 times"> + </span><span class="branchCov" title="Branch 1 was taken 3154 times"> + </span>]:<span class="lineCov">       3154 :             return el &amp;&amp; el.node.type === SYNTAX.LabeledStatement.name;</span>
-<span class="lineNum">     249 </span>                :            :         }
-<span class="lineNum">     250 </span>                :            :     };
-<span class="lineNum">     251 </span>                :            : 
-<span class="lineNum">     252 </span>                :            :     /**
-<span class="lineNum">     253 </span>                :            :      * mechanism to instrument code for coverage. It uses the `esprima` and
-<span class="lineNum">     254 </span>                :            :      * `escodegen` libraries for JS parsing and code generation respectively.
-<span class="lineNum">     255 </span>                :            :      *
-<span class="lineNum">     256 </span>                :            :      * Works on `node` as well as the browser.
-<span class="lineNum">     257 </span>                :            :      *
-<span class="lineNum">     258 </span>                :            :      * Usage on nodejs
-<span class="lineNum">     259 </span>                :            :      * ---------------
-<span class="lineNum">     260 </span>                :            :      *
-<span class="lineNum">     261 </span>                :            :      *      var instrumenter = new require('istanbul').Instrumenter(),
-<span class="lineNum">     262 </span>                :            :      *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
-<span class="lineNum">     263 </span>                :            :      *
-<span class="lineNum">     264 </span>                :            :      * Usage in a browser
-<span class="lineNum">     265 </span>                :            :      * ------------------
-<span class="lineNum">     266 </span>                :            :      *
-<span class="lineNum">     267 </span>                :            :      * Load `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.
-<span class="lineNum">     268 </span>                :            :      *
-<span class="lineNum">     269 </span>                :            :      * Create an instrumenter object as:
-<span class="lineNum">     270 </span>                :            :      *
-<span class="lineNum">     271 </span>                :            :      *      var instrumenter = new Instrumenter(),
-<span class="lineNum">     272 </span>                :            :      *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
-<span class="lineNum">     273 </span>                :            :      *
-<span class="lineNum">     274 </span>                :            :      * Aside from demonstration purposes, it is unclear why you would want to instrument code in a browser.
-<span class="lineNum">     275 </span>                :            :      *
-<span class="lineNum">     276 </span>                :            :      * @class Instrumenter
-<span class="lineNum">     277 </span>                :            :      * @constructor
-<span class="lineNum">     278 </span>                :            :      * @param {Object} options Optional. Configuration options.
-<span class="lineNum">     279 </span>                :            :      * @param {String} [options.coverageVariable] the global variable name to use for
-<span class="lineNum">     280 </span>                :            :      *      tracking coverage. Defaults to `__coverage__`
-<span class="lineNum">     281 </span>                :            :      * @param {Boolean} [options.embedSource] whether to embed the source code of every
-<span class="lineNum">     282 </span>                :            :      *      file as an array in the file coverage object for that file. Defaults to `false`
-<span class="lineNum">     283 </span>                :            :      * @param {Boolean} [options.noCompact] emit readable code when set. Defaults to `false`
-<span class="lineNum">     284 </span>                :            :      * @param {Boolean} [options.noAutoWrap] do not automatically wrap the source in
-<span class="lineNum">     285 </span>                :            :      *      an anonymous function before covering it. By default, code is wrapped in
-<span class="lineNum">     286 </span>                :            :      *      an anonymous function before it is parsed. This is done because
-<span class="lineNum">     287 </span>                :            :      *      some nodejs libraries have `return` statements outside of
-<span class="lineNum">     288 </span>                :            :      *      a function which is technically invalid Javascript and causes the parser to fail.
-<span class="lineNum">     289 </span>                :            :      *      This construct, however, works correctly in node since module loading
-<span class="lineNum">     290 </span>                :            :      *      is done in the context of an anonymous function.
-<span class="lineNum">     291 </span>                :            :      *
-<span class="lineNum">     292 </span>                :            :      * Note that the semantics of the code *returned* by the instrumenter does not change in any way.
-<span class="lineNum">     293 </span>                :            :      * The function wrapper is &quot;unwrapped&quot; before the instrumented code is generated.
-<span class="lineNum">     294 </span>                :            :      * @param {Object} [options.codeGenerationOptions] an object that is directly passed to the `escodegen`
-<span class="lineNum">     295 </span>                :            :      *      library as configuration for code generation. The `noCompact` setting is not honored when this
-<span class="lineNum">     296 </span>                :            :      *      option is specified
-<span class="lineNum">     297 </span>                :            :      * @param {Boolean} [options.debug] assist in debugging. Currently, the only effect of
-<span class="lineNum">     298 </span>                :            :      *      setting this option is a pretty-print of the coverage variable. Defaults to `false`
-<span class="lineNum">     299 </span>                :            :      * @param {Boolean} [options.walkDebug] assist in debugging of the AST walker used by this class.
-<a name="300"><span class="lineNum">     300 </span>                :            :      *</a>
-<span class="lineNum">     301 </span>                :            :      */
-<span class="lineNum">     302 </span>                :<span class="lineCov">          2 :     function Instrumenter(options) {</span>
-<span class="lineNum">     303 </span>        [<span class="branchCov" title="Branch 0 was taken 110 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">        110 :         this.opts = options || {</span>
-<span class="lineNum">     304 </span>                :            :             debug: false,
-<span class="lineNum">     305 </span>                :            :             walkDebug: false,
-<span class="lineNum">     306 </span>                :            :             coverageVariable: '__coverage__',
-<span class="lineNum">     307 </span>                :            :             codeGenerationOptions: undefined,
-<span class="lineNum">     308 </span>                :            :             noAutoWrap: false,
-<span class="lineNum">     309 </span>                :            :             noCompact: false,
-<span class="lineNum">     310 </span>                :            :             embedSource: false
-<span class="lineNum">     311 </span>                :            :         };
-<span class="lineNum">     312 </span>                :            : 
-<span class="lineNum">     313 </span>                :<span class="lineCov">        110 :         this.walker = new Walker({</span>
-<span class="lineNum">     314 </span>                :            :             ExpressionStatement: this.coverStatement,
-<span class="lineNum">     315 </span>                :            :             BreakStatement: this.coverStatement,
-<span class="lineNum">     316 </span>                :            :             ContinueStatement: this.coverStatement,
-<span class="lineNum">     317 </span>                :            :             DebuggerStatement: this.coverStatement,
-<span class="lineNum">     318 </span>                :            :             ReturnStatement: this.coverStatement,
-<span class="lineNum">     319 </span>                :            :             ThrowStatement: this.coverStatement,
-<span class="lineNum">     320 </span>                :            :             TryStatement: this.coverStatement,
-<span class="lineNum">     321 </span>                :            :             VariableDeclaration: this.coverStatement,
-<span class="lineNum">     322 </span>                :            :             IfStatement: [ this.ifBlockConverter, this.ifBranchInjector, this.coverStatement ],
-<span class="lineNum">     323 </span>                :            :             ForStatement: [ this.skipInit, this.loopBlockConverter, this.coverStatement ],
-<span class="lineNum">     324 </span>                :            :             ForInStatement: [ this.skipLeft, this.loopBlockConverter, this.coverStatement ],
-<span class="lineNum">     325 </span>                :            :             WhileStatement: [ this.loopBlockConverter, this.coverStatement ],
-<span class="lineNum">     326 </span>                :            :             DoWhileStatement: [ this.loopBlockConverter, this.coverStatement ],
-<span class="lineNum">     327 </span>                :            :             SwitchStatement: [ this.switchBranchInjector, this.coverStatement ],
-<span class="lineNum">     328 </span>                :            :             WithStatement: this.coverStatement,
-<span class="lineNum">     329 </span>                :            :             FunctionDeclaration: [ this.coverFunction, this.coverStatement ],
-<span class="lineNum">     330 </span>                :            :             FunctionExpression: this.coverFunction,
-<span class="lineNum">     331 </span>                :            :             LabeledStatement: this.coverStatement,
-<span class="lineNum">     332 </span>                :            :             ConditionalExpression: this.conditionalBranchInjector,
-<span class="lineNum">     333 </span>                :            :             LogicalExpression: this.logicalExpressionBranchInjector
-<span class="lineNum">     334 </span>                :            :         }, this, this.opts.walkDebug);
-<span class="lineNum">     335 </span>                :            : 
-<span class="lineNum">     336 </span>                :            :         //unit testing purposes only
-<span class="lineNum">     337 </span>[<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 110 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        110 :         if (this.opts.backdoor &amp;&amp; this.opts.backdoor.omitTrackerSuffix) {</span>
-<span class="lineNum">     338 </span>                :<span class="lineCov">          2 :             this.omitTrackerSuffix = true;</span>
-<span class="lineNum">     339 </span>                :            :         }
-<span class="lineNum">     340 </span>                :            :     }
-<span class="lineNum">     341 </span>                :            : 
-<span class="lineNum">     342 </span>                :<span class="lineCov">          2 :     Instrumenter.prototype = {</span>
-<span class="lineNum">     343 </span>                :            :         /**
-<span class="lineNum">     344 </span>                :            :          * synchronous instrumentation method. Throws when illegal code is passed to it
-<span class="lineNum">     345 </span>                :            :          * @method instrumentSync
-<span class="lineNum">     346 </span>                :            :          * @param {String} code the code to be instrumented as a String
-<span class="lineNum">     347 </span>                :            :          * @param {String} filename Optional. The name of the file from which
-<span class="lineNum">     348 </span>                :            :          *  the code was read. A temporary filename is generated when not specified.
-<span class="lineNum">     349 </span>                :            :          *  Not specifying a filename is only useful for unit tests and demonstrations
-<a name="350"><span class="lineNum">     350 </span>                :            :          *  of this library.</a>
-<span class="lineNum">     351 </span>                :            :          */
-<span class="lineNum">     352 </span>                :            :         instrumentSync: function (code, filename) {
-<span class="lineNum">     353 </span>                :<span class="lineCov">        171 :             var codegenOptions,</span>
-<span class="lineNum">     354 </span>                :            :                 program;
-<span class="lineNum">     355 </span>        [<span class="branchCov" title="Branch 0 was taken 171 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        171 :             filename = filename || String(new Date().getTime()) + '.js';</span>
-<span class="lineNum">     356 </span>                :<span class="lineCov">        171 :             this.coverState = {</span>
-<span class="lineNum">     357 </span>                :            :                 path: filename,
-<span class="lineNum">     358 </span>                :            :                 s: {},
-<span class="lineNum">     359 </span>                :            :                 b: {},
-<span class="lineNum">     360 </span>                :            :                 f: {},
-<span class="lineNum">     361 </span>                :            :                 fnMap: {},
-<span class="lineNum">     362 </span>                :            :                 statementMap: {},
-<span class="lineNum">     363 </span>                :            :                 branchMap: {}
-<span class="lineNum">     364 </span>                :            :             };
-<span class="lineNum">     365 </span>                :<span class="lineCov">        171 :             this.currentState = {</span>
-<span class="lineNum">     366 </span>                :            :                 trackerVar: generateTrackerVar(filename, this.omitTrackerSuffix),
-<span class="lineNum">     367 </span>                :            :                 func: 0,
-<span class="lineNum">     368 </span>                :            :                 branch: 0,
-<span class="lineNum">     369 </span>                :            :                 variable: 0,
-<span class="lineNum">     370 </span>                :            :                 statement: 0
-<span class="lineNum">     371 </span>                :            :             };
-<span class="lineNum">     372 </span>                :            : 
-<span class="lineNum">     373 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 170 times"> + </span>]:<span class="lineCov">        171 :             if (typeof code !== 'string') { throw new Error('Code must be string'); } //protect from users accidentally passing in a Buffer object instead</span>
-<span class="lineNum">     374 </span>        [<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchCov" title="Branch 1 was taken 164 times"> + </span>]:<span class="lineCov">        170 :             if (code.charAt(0) === '#') { //shebang, 'comment' it out, won't affect syntax tree locations for things we care about</span>
-<span class="lineNum">     375 </span>                :<span class="lineCov">          6 :                 code = '//' + code;</span>
-<span class="lineNum">     376 </span>                :            :             }
-<span class="lineNum">     377 </span>        [<span class="branchCov" title="Branch 0 was taken 167 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">        170 :             if (!this.opts.noAutoWrap) {</span>
-<span class="lineNum">     378 </span>                :<span class="lineCov">        167 :                 code = LEADER_WRAP + code + TRAILER_WRAP;</span>
-<span class="lineNum">     379 </span>                :            :             }
-<span class="lineNum">     380 </span>                :<span class="lineCov">        170 :             program = ESP.parse(code, { loc: true });</span>
-<span class="lineNum">     381 </span>        [<span class="branchCov" title="Branch 0 was taken 166 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        168 :             if (!this.opts.noAutoWrap) {</span>
-<span class="lineNum">     382 </span>                :<span class="lineCov">        166 :                 program = { type: SYNTAX.Program.name, body: program.body[0].expression.callee.body.body };</span>
-<span class="lineNum">     383 </span>                :            :             }
-<span class="lineNum">     384 </span>                :<span class="lineCov">        168 :             this.walker.startWalk(program);</span>
-<span class="lineNum">     385 </span>        [<span class="branchCov" title="Branch 0 was taken 168 times"> + </span><span class="branchCov" title="Branch 1 was taken 168 times"> + </span>]:<span class="lineCov">        168 :             codegenOptions = this.opts.codeGenerationOptions || { format: { compact: !this.opts.noCompact }};</span>
-<span class="lineNum">     386 </span>                :            :             //console.log(JSON.stringify(program, undefined, 2));
-<span class="lineNum">     387 </span>                :<span class="lineCov">        168 :             return this.getPreamble(code) + '\n' + ESPGEN.generate(program, codegenOptions) + '\n';</span>
-<span class="lineNum">     388 </span>                :            :         },
-<span class="lineNum">     389 </span>                :            :         /**
-<span class="lineNum">     390 </span>                :            :          * Callback based instrumentation. Note that this still executes synchronously in the same process tick
-<span class="lineNum">     391 </span>                :            :          * and calls back immediately. It only provides the options for callback style error handling as
-<span class="lineNum">     392 </span>                :            :          * opposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`
-<span class="lineNum">     393 </span>                :            :          *
-<span class="lineNum">     394 </span>                :            :          * @method instrument
-<span class="lineNum">     395 </span>                :            :          * @param {String} code the code to be instrumented as a String
-<span class="lineNum">     396 </span>                :            :          * @param {String} filename Optional. The name of the file from which
-<span class="lineNum">     397 </span>                :            :          *  the code was read. A temporary filename is generated when not specified.
-<span class="lineNum">     398 </span>                :            :          *  Not specifying a filename is only useful for unit tests and demonstrations
-<span class="lineNum">     399 </span>                :            :          *  of this library.
-<a name="400"><span class="lineNum">     400 </span>                :            :          * @param {Function(err, instrumentedCode)} callback - the callback function</a>
-<span class="lineNum">     401 </span>                :            :          */
-<span class="lineNum">     402 </span>                :            :         instrument: function (code, filename, callback) {
-<span class="lineNum">     403 </span>                :            : 
-<span class="lineNum">     404 </span>[<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 105 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 107 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        107 :             if (!callback &amp;&amp; typeof filename === 'function') {</span>
-<span class="lineNum">     405 </span>                :<span class="lineCov">          2 :                 callback = filename;</span>
-<span class="lineNum">     406 </span>                :<span class="lineCov">          2 :                 filename = null;</span>
-<span class="lineNum">     407 </span>                :            :             }
-<span class="lineNum">     408 </span>                :<span class="lineCov">        107 :             try {</span>
-<span class="lineNum">     409 </span>                :<span class="lineCov">        107 :                 callback(null, this.instrumentSync(code, filename));</span>
-<span class="lineNum">     410 </span>                :            :             } catch (ex) {
-<span class="lineNum">     411 </span>                :<span class="lineCov">          2 :                 callback(ex);</span>
-<span class="lineNum">     412 </span>                :            :             }
-<a name="413"><span class="lineNum">     413 </span>                :            :         },</a>
-<span class="lineNum">     414 </span>                :            : 
-<a name="415"><span class="lineNum">     415 </span>                :            :         fixColumnPositions: function (coverState) {</a>
-<span class="lineNum">     416 </span>                :<span class="lineCov">        166 :             var offset = LEADER_WRAP.length,</span>
-<span class="lineNum">     417 </span>                :            :                 fixer = function (loc) {
-<span class="lineNum">     418 </span>        [<span class="branchCov" title="Branch 0 was taken 238 times"> + </span><span class="branchCov" title="Branch 1 was taken 4963 times"> + </span>]:<span class="lineCov">       5201 :                     if (loc.start.line === 1) {</span>
-<span class="lineNum">     419 </span>                :<span class="lineCov">        238 :                         loc.start.column -= offset;</span>
-<span class="lineNum">     420 </span>                :            :                     }
-<span class="lineNum">     421 </span>        [<span class="branchCov" title="Branch 0 was taken 222 times"> + </span><span class="branchCov" title="Branch 1 was taken 4979 times"> + </span>]:<span class="lineCov">       5201 :                     if (loc.end.line === 1) {</span>
-<span class="lineNum">     422 </span>                :<span class="lineCov">        222 :                         loc.end.column -= offset;</span>
-<span class="lineNum">     423 </span>                :            :                     }
-<span class="lineNum">     424 </span>                :            :                 },
-<span class="lineNum">     425 </span>                :            :                 k,
-<span class="lineNum">     426 </span>                :            :                 obj,
-<span class="lineNum">     427 </span>                :            :                 i,
-<span class="lineNum">     428 </span>                :            :                 locations;
-<span class="lineNum">     429 </span>                :            : 
-<span class="lineNum">     430 </span>                :<span class="lineCov">        166 :             obj = coverState.statementMap;</span>
-<span class="lineNum">     431 </span>                :<span class="lineCov">        166 :             for (k in obj) {</span>
-<span class="lineNum">     432 </span>        [<span class="branchCov" title="Branch 0 was taken 3150 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3150 :                 if (obj.hasOwnProperty(k)) { fixer(obj[k]); }</span>
-<span class="lineNum">     433 </span>                :            :             }
-<span class="lineNum">     434 </span>                :<span class="lineCov">        166 :             obj = coverState.fnMap;</span>
-<span class="lineNum">     435 </span>                :<span class="lineCov">        166 :             for (k in obj) {</span>
-<span class="lineNum">     436 </span>        [<span class="branchCov" title="Branch 0 was taken 608 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        608 :                 if (obj.hasOwnProperty(k)) { fixer(obj[k].loc); }</span>
-<span class="lineNum">     437 </span>                :            :             }
-<span class="lineNum">     438 </span>                :<span class="lineCov">        166 :             obj = coverState.branchMap;</span>
-<span class="lineNum">     439 </span>                :<span class="lineCov">        166 :             for (k in obj) {</span>
-<span class="lineNum">     440 </span>        [<span class="branchCov" title="Branch 0 was taken 707 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        707 :                 if (obj.hasOwnProperty(k)) {</span>
-<span class="lineNum">     441 </span>                :<span class="lineCov">        707 :                     locations = obj[k].locations;</span>
-<span class="lineNum">     442 </span>                :<span class="lineCov">        707 :                     for (i = 0; i &lt; locations.length; i += 1) {</span>
-<span class="lineNum">     443 </span>                :<span class="lineCov">       1443 :                         fixer(locations[i]);</span>
-<span class="lineNum">     444 </span>                :            :                     }
-<span class="lineNum">     445 </span>                :            :                 }
+<span class="lineNum">     151 </span>                :            :             pathElement,
+<span class="lineNum">     152 </span>                :            :             assignNode,
+<span class="lineNum">     153 </span>                :            :             isLast;
+<span class="lineNum">     154 </span>                :            : 
+<span class="lineNum">     155 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 72942 times"> + </span>]:<span class="lineCov">      72942 :         if (node.walking) { throw new Error('Infinite regress: Custom walkers may NOT call walker.walk(node)'); }</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">      72942 :         node.walking = true;</span>
+<span class="lineNum">     157 </span>        [<span class="branchCov" title="Branch 0 was taken 1074 times"> + </span><span class="branchCov" title="Branch 1 was taken 71868 times"> + </span>]:<span class="lineCov">      72942 :         if (isArray(walkerFn)) {</span>
+<span class="lineNum">     158 </span>                :<span class="lineCov">       1074 :             for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {</span>
+<span class="lineNum">     159 </span>                :<span class="lineCov">       2946 :                 isLast = walkFnIndex === walkerFn.length - 1;</span>
+<span class="lineNum">     160 </span>        [<span class="branchCov" title="Branch 0 was taken 2946 times"> + </span><span class="branchCov" title="Branch 1 was taken 2946 times"> + </span>]:<span class="lineCov">       2946 :                 ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;</span>
+<span class="lineNum">     161 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2946 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 2946 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2946 :                 if (ret.type !== type &amp;&amp; !isLast) {</span>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :                     throw new Error('Only the last walker is allowed to change the node type: [type was: ' + type + ' ]');</span>
+<span class="lineNum">     163 </span>                :            :                 }
+<span class="lineNum">     164 </span>                :            :             }
+<span class="lineNum">     165 </span>                :            :         } else {
+<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 0 was taken 4827 times"> + </span><span class="branchCov" title="Branch 1 was taken 67041 times"> + </span>]:<span class="lineCov">      71868 :             if (walkerFn) {</span>
+<span class="lineNum">     167 </span>        [<span class="branchCov" title="Branch 0 was taken 4827 times"> + </span><span class="branchCov" title="Branch 1 was taken 4827 times"> + </span>]:<span class="lineCov">       4827 :                 ret = walker.walk(node, walkerFn) || ret;</span>
+<span class="lineNum">     168 </span>                :            :             }
+<span class="lineNum">     169 </span>                :            :         }
+<span class="lineNum">     170 </span>                :            : 
+<span class="lineNum">     171 </span>                :<span class="lineCov">      72942 :         for (i = 0; i &lt; children.length; i += 1) {</span>
+<span class="lineNum">     172 </span>                :<span class="lineCov">      65854 :             childType = children[i];</span>
+<span class="lineNum">     173 </span>                :<span class="lineCov">      65854 :             childNode = node[childType];</span>
+<span class="lineNum">     174 </span>[<span class="branchCov" title="Branch 0 was taken 64691 times"> + </span><span class="branchCov" title="Branch 1 was taken 1163 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 65854 times"> + </span><span class="branchCov" title="Branch 1 was taken 64828 times"> + </span>]:<span class="lineCov">      65854 :             if (childNode &amp;&amp; !childNode.skipWalk) {</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">      64691 :                 pathElement = { node: node, property: childType };</span>
+<span class="lineNum">     176 </span>        [<span class="branchCov" title="Branch 0 was taken 9582 times"> + </span><span class="branchCov" title="Branch 1 was taken 55109 times"> + </span>]:<span class="lineCov">      64691 :                 if (isArray(childNode)) {</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">       9582 :                     childArray = [];</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">       9582 :                     for (j = 0; j &lt; childNode.length; j += 1) {</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">      17654 :                         childElement = childNode[j];</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">      17654 :                         pathElement.index = j;</span>
+<span class="lineNum">     181 </span>        [<span class="branchCov" title="Branch 0 was taken 17654 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      17654 :                         assignNode = walker.walk(childElement, null, pathElement) || childElement;</span>
+<span class="lineNum">     182 </span>        [<span class="branchCov" title="Branch 0 was taken 4868 times"> + </span><span class="branchCov" title="Branch 1 was taken 12786 times"> + </span>]:<span class="lineCov">      17654 :                         if (isArray(assignNode.prepend)) {</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">       4868 :                             pushAll(childArray, assignNode.prepend);</span>
+<span class="lineNum">     184 </span>                :<span class="lineCov">       4868 :                             delete assignNode.prepend;</span>
+<span class="lineNum">     185 </span>                :            :                         }
+<span class="lineNum">     186 </span>                :<span class="lineCov">      17654 :                         pushAll(childArray, assignNode);</span>
+<span class="lineNum">     187 </span>                :            :                     }
+<span class="lineNum">     188 </span>                :<span class="lineCov">       9582 :                     node[childType] = childArray;</span>
+<span class="lineNum">     189 </span>                :            :                 } else {
+<span class="lineNum">     190 </span>        [<span class="branchCov" title="Branch 0 was taken 55109 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      55109 :                     assignNode = walker.walk(childNode, null, pathElement) || childNode;</span>
+<span class="lineNum">     191 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 55109 times"> + </span>]:<span class="lineCov">      55109 :                     if (isArray(assignNode.prepend)) {</span>
+<span class="lineNum">     192 </span>                :<span class="lineNoCov">          0 :                         throw new Error('Internal error: attempt to prepend statements in disallowed (non-array) context');</span>
+<span class="lineNum">     193 </span>                :            :                         /* if this should be allowed, this is how to solve it
+<span class="lineNum">     194 </span>                :            :                         tmpNode = { type: 'BlockStatement', body: [] };
+<span class="lineNum">     195 </span>                :            :                         pushAll(tmpNode.body, assignNode.prepend);
+<span class="lineNum">     196 </span>                :            :                         pushAll(tmpNode.body, assignNode);
+<span class="lineNum">     197 </span>                :            :                         node[childType] = tmpNode;
+<span class="lineNum">     198 </span>                :            :                         delete assignNode.prepend;
+<span class="lineNum">     199 </span>                :            :                         */
+<span class="lineNum">     200 </span>                :            :                     } else {
+<span class="lineNum">     201 </span>                :<span class="lineCov">      55109 :                         node[childType] = assignNode;</span>
+<span class="lineNum">     202 </span>                :            :                     }
+<span class="lineNum">     203 </span>                :            :                 }
+<span class="lineNum">     204 </span>                :            :             }
+<span class="lineNum">     205 </span>                :            :         }
+<span class="lineNum">     206 </span>                :            : 
+<span class="lineNum">     207 </span>                :<span class="lineCov">      72942 :         delete node.walking;</span>
+<span class="lineNum">     208 </span>                :<span class="lineCov">      72942 :         return ret;</span>
+<span class="lineNum">     209 </span>                :            :     }
+<a name="210"><span class="lineNum">     210 </span>                :            : </a>
+<span class="lineNum">     211 </span>                :<span class="lineCov">          2 :     Walker.prototype = {</span>
+<span class="lineNum">     212 </span>                :            :         startWalk: function (node) {
+<span class="lineNum">     213 </span>                :<span class="lineCov">        179 :             this.path = [];</span>
+<span class="lineNum">     214 </span>                :<span class="lineCov">        179 :             this.walk(node);</span>
+<a name="215"><span class="lineNum">     215 </span>                :            :         },</a>
+<span class="lineNum">     216 </span>                :            : 
+<span class="lineNum">     217 </span>                :            :         walk: function (node, walkFn, pathElement) {
+<span class="lineNum">     218 </span>                :<span class="lineCov">      80715 :             var ret, i, seq, prefix;</span>
+<span class="lineNum">     219 </span>                :            : 
+<span class="lineNum">     220 </span>        [<span class="branchCov" title="Branch 0 was taken 80715 times"> + </span><span class="branchCov" title="Branch 1 was taken 72942 times"> + </span>]:<span class="lineCov">      80715 :             walkFn = walkFn || defaultWalker;</span>
+<span class="lineNum">     221 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 80707 times"> + </span>]:<span class="lineCov">      80715 :             if (this.debug) {</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">          8 :                 this.seq += 1;</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">          8 :                 this.level += 1;</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">          8 :                 seq = this.seq;</span>
+<span class="lineNum">     225 </span>                :<span class="lineCov">          8 :                 prefix = '';</span>
+<span class="lineNum">     226 </span>                :<span class="lineCov">         27 :                 for (i = 0; i &lt; this.level; i += 1) { prefix += '    '; }</span>
+<span class="lineNum">     227 </span>                :<span class="lineCov">          8 :                 console.log(prefix + 'Enter (' + seq + '):' + node.type);</span>
+<span class="lineNum">     228 </span>                :            :             }
+<span class="lineNum">     229 </span>        [<span class="branchCov" title="Branch 0 was taken 72763 times"> + </span><span class="branchCov" title="Branch 1 was taken 7952 times"> + </span>]:<span class="lineCov">      80715 :             if (pathElement) { this.path.push(pathElement); }</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">      80715 :             ret = walkFn.call(this.scope, node, this);</span>
+<span class="lineNum">     231 </span>        [<span class="branchCov" title="Branch 0 was taken 72763 times"> + </span><span class="branchCov" title="Branch 1 was taken 7952 times"> + </span>]:<span class="lineCov">      80715 :             if (pathElement) { this.path.pop(); }</span>
+<span class="lineNum">     232 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 80707 times"> + </span>]:<span class="lineCov">      80715 :             if (this.debug) {</span>
+<span class="lineNum">     233 </span>                :<span class="lineCov">          8 :                 this.level -= 1;</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">          8 :                 console.log(prefix + 'Return (' + seq + '):' + node.type);</span>
+<span class="lineNum">     235 </span>                :            :             }
+<span class="lineNum">     236 </span>                :<span class="lineCov">      80715 :             return ret;</span>
+<a name="237"><span class="lineNum">     237 </span>                :            :         },</a>
+<span class="lineNum">     238 </span>                :            : 
+<span class="lineNum">     239 </span>                :            :         startLineForNode: function (node) {
+<span class="lineNum">     240 </span>        [<span class="branchCov" title="Branch 0 was taken 1905 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1905 :             return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : null;</span>
+<span class="lineNum">         </span>     [<span class="branchCov" title="Branch 0 was taken 1905 times"> + </span><span class="branchCov" title="Branch 1 was taken 1905 times"> + </span><span class="branchCov" title="Branch 2 was taken 1905 times"> + </span>]
+<a name="241"><span class="lineNum">     241 </span>                :            :         },</a>
+<span class="lineNum">     242 </span>                :            : 
+<span class="lineNum">     243 </span>                :            :         parent: function () {
+<span class="lineNum">     244 </span>        [<span class="branchCov" title="Branch 0 was taken 5190 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       5190 :             return this.path.length &gt; 0 ? this.path[this.path.length - 1] : null;</span>
+<a name="245"><span class="lineNum">     245 </span>                :            :         },</a>
+<span class="lineNum">     246 </span>                :            : 
+<span class="lineNum">     247 </span>                :            :         isLabeled: function () {
+<span class="lineNum">     248 </span>                :<span class="lineCov">       4873 :             var el = this.parent();</span>
+<span class="lineNum">     249 </span>        [<span class="branchCov" title="Branch 0 was taken 4873 times"> + </span><span class="branchCov" title="Branch 1 was taken 4873 times"> + </span>]:<span class="lineCov">       4873 :             return el &amp;&amp; el.node.type === SYNTAX.LabeledStatement.name;</span>
+<span class="lineNum">     250 </span>                :            :         }
+<span class="lineNum">     251 </span>                :            :     };
+<span class="lineNum">     252 </span>                :            : 
+<span class="lineNum">     253 </span>                :            :     /**
+<span class="lineNum">     254 </span>                :            :      * mechanism to instrument code for coverage. It uses the `esprima` and
+<span class="lineNum">     255 </span>                :            :      * `escodegen` libraries for JS parsing and code generation respectively.
+<span class="lineNum">     256 </span>                :            :      *
+<span class="lineNum">     257 </span>                :            :      * Works on `node` as well as the browser.
+<span class="lineNum">     258 </span>                :            :      *
+<span class="lineNum">     259 </span>                :            :      * Usage on nodejs
+<span class="lineNum">     260 </span>                :            :      * ---------------
+<span class="lineNum">     261 </span>                :            :      *
+<span class="lineNum">     262 </span>                :            :      *      var instrumenter = new require('istanbul').Instrumenter(),
+<span class="lineNum">     263 </span>                :            :      *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+<span class="lineNum">     264 </span>                :            :      *
+<span class="lineNum">     265 </span>                :            :      * Usage in a browser
+<span class="lineNum">     266 </span>                :            :      * ------------------
+<span class="lineNum">     267 </span>                :            :      *
+<span class="lineNum">     268 </span>                :            :      * Load `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.
+<span class="lineNum">     269 </span>                :            :      *
+<span class="lineNum">     270 </span>                :            :      * Create an instrumenter object as:
+<span class="lineNum">     271 </span>                :            :      *
+<span class="lineNum">     272 </span>                :            :      *      var instrumenter = new Instrumenter(),
+<span class="lineNum">     273 </span>                :            :      *          changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+<span class="lineNum">     274 </span>                :            :      *
+<span class="lineNum">     275 </span>                :            :      * Aside from demonstration purposes, it is unclear why you would want to instrument code in a browser.
+<span class="lineNum">     276 </span>                :            :      *
+<span class="lineNum">     277 </span>                :            :      * @class Instrumenter
+<span class="lineNum">     278 </span>                :            :      * @constructor
+<span class="lineNum">     279 </span>                :            :      * @param {Object} options Optional. Configuration options.
+<span class="lineNum">     280 </span>                :            :      * @param {String} [options.coverageVariable] the global variable name to use for
+<span class="lineNum">     281 </span>                :            :      *      tracking coverage. Defaults to `__coverage__`
+<span class="lineNum">     282 </span>                :            :      * @param {Boolean} [options.embedSource] whether to embed the source code of every
+<span class="lineNum">     283 </span>                :            :      *      file as an array in the file coverage object for that file. Defaults to `false`
+<span class="lineNum">     284 </span>                :            :      * @param {Boolean} [options.noCompact] emit readable code when set. Defaults to `false`
+<span class="lineNum">     285 </span>                :            :      * @param {Boolean} [options.noAutoWrap] do not automatically wrap the source in
+<span class="lineNum">     286 </span>                :            :      *      an anonymous function before covering it. By default, code is wrapped in
+<span class="lineNum">     287 </span>                :            :      *      an anonymous function before it is parsed. This is done because
+<span class="lineNum">     288 </span>                :            :      *      some nodejs libraries have `return` statements outside of
+<span class="lineNum">     289 </span>                :            :      *      a function which is technically invalid Javascript and causes the parser to fail.
+<span class="lineNum">     290 </span>                :            :      *      This construct, however, works correctly in node since module loading
+<span class="lineNum">     291 </span>                :            :      *      is done in the context of an anonymous function.
+<span class="lineNum">     292 </span>                :            :      *
+<span class="lineNum">     293 </span>                :            :      * Note that the semantics of the code *returned* by the instrumenter does not change in any way.
+<span class="lineNum">     294 </span>                :            :      * The function wrapper is &quot;unwrapped&quot; before the instrumented code is generated.
+<span class="lineNum">     295 </span>                :            :      * @param {Object} [options.codeGenerationOptions] an object that is directly passed to the `escodegen`
+<span class="lineNum">     296 </span>                :            :      *      library as configuration for code generation. The `noCompact` setting is not honored when this
+<span class="lineNum">     297 </span>                :            :      *      option is specified
+<span class="lineNum">     298 </span>                :            :      * @param {Boolean} [options.debug] assist in debugging. Currently, the only effect of
+<span class="lineNum">     299 </span>                :            :      *      setting this option is a pretty-print of the coverage variable. Defaults to `false`
+<span class="lineNum">     300 </span>                :            :      * @param {Boolean} [options.walkDebug] assist in debugging of the AST walker used by this class.
+<a name="301"><span class="lineNum">     301 </span>                :            :      *</a>
+<span class="lineNum">     302 </span>                :            :      */
+<span class="lineNum">     303 </span>                :<span class="lineCov">          2 :     function Instrumenter(options) {</span>
+<span class="lineNum">     304 </span>        [<span class="branchCov" title="Branch 0 was taken 111 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">        111 :         this.opts = options || {</span>
+<span class="lineNum">     305 </span>                :            :             debug: false,
+<span class="lineNum">     306 </span>                :            :             walkDebug: false,
+<span class="lineNum">     307 </span>                :            :             coverageVariable: '__coverage__',
+<span class="lineNum">     308 </span>                :            :             codeGenerationOptions: undefined,
+<span class="lineNum">     309 </span>                :            :             noAutoWrap: false,
+<span class="lineNum">     310 </span>                :            :             noCompact: false,
+<span class="lineNum">     311 </span>                :            :             embedSource: false
+<span class="lineNum">     312 </span>                :            :         };
+<span class="lineNum">     313 </span>                :            : 
+<span class="lineNum">     314 </span>                :<span class="lineCov">        111 :         this.walker = new Walker({</span>
+<span class="lineNum">     315 </span>                :            :             ExpressionStatement: this.coverStatement,
+<span class="lineNum">     316 </span>                :            :             BreakStatement: this.coverStatement,
+<span class="lineNum">     317 </span>                :            :             ContinueStatement: this.coverStatement,
+<span class="lineNum">     318 </span>                :            :             DebuggerStatement: this.coverStatement,
+<span class="lineNum">     319 </span>                :            :             ReturnStatement: this.coverStatement,
+<span class="lineNum">     320 </span>                :            :             ThrowStatement: this.coverStatement,
+<span class="lineNum">     321 </span>                :            :             TryStatement: this.coverStatement,
+<span class="lineNum">     322 </span>                :            :             VariableDeclaration: this.coverStatement,
+<span class="lineNum">     323 </span>                :            :             IfStatement: [ this.ifBlockConverter, this.ifBranchInjector, this.coverStatement ],
+<span class="lineNum">     324 </span>                :            :             ForStatement: [ this.skipInit, this.loopBlockConverter, this.coverStatement ],
+<span class="lineNum">     325 </span>                :            :             ForInStatement: [ this.skipLeft, this.loopBlockConverter, this.coverStatement ],
+<span class="lineNum">     326 </span>                :            :             WhileStatement: [ this.loopBlockConverter, this.coverStatement ],
+<span class="lineNum">     327 </span>                :            :             DoWhileStatement: [ this.loopBlockConverter, this.coverStatement ],
+<span class="lineNum">     328 </span>                :            :             SwitchStatement: [ this.switchBranchInjector, this.coverStatement ],
+<span class="lineNum">     329 </span>                :            :             WithStatement: this.coverStatement,
+<span class="lineNum">     330 </span>                :            :             FunctionDeclaration: [ this.coverFunction, this.coverStatement ],
+<span class="lineNum">     331 </span>                :            :             FunctionExpression: this.coverFunction,
+<span class="lineNum">     332 </span>                :            :             LabeledStatement: this.coverStatement,
+<span class="lineNum">     333 </span>                :            :             ConditionalExpression: this.conditionalBranchInjector,
+<span class="lineNum">     334 </span>                :            :             LogicalExpression: this.logicalExpressionBranchInjector
+<span class="lineNum">     335 </span>                :            :         }, this, this.opts.walkDebug);
+<span class="lineNum">     336 </span>                :            : 
+<span class="lineNum">     337 </span>                :            :         //unit testing purposes only
+<span class="lineNum">     338 </span>[<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 109 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 111 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        111 :         if (this.opts.backdoor &amp;&amp; this.opts.backdoor.omitTrackerSuffix) {</span>
+<span class="lineNum">     339 </span>                :<span class="lineCov">          2 :             this.omitTrackerSuffix = true;</span>
+<span class="lineNum">     340 </span>                :            :         }
+<span class="lineNum">     341 </span>                :            :     }
+<span class="lineNum">     342 </span>                :            : 
+<span class="lineNum">     343 </span>                :<span class="lineCov">          2 :     Instrumenter.prototype = {</span>
+<span class="lineNum">     344 </span>                :            :         /**
+<span class="lineNum">     345 </span>                :            :          * synchronous instrumentation method. Throws when illegal code is passed to it
+<span class="lineNum">     346 </span>                :            :          * @method instrumentSync
+<span class="lineNum">     347 </span>                :            :          * @param {String} code the code to be instrumented as a String
+<span class="lineNum">     348 </span>                :            :          * @param {String} filename Optional. The name of the file from which
+<span class="lineNum">     349 </span>                :            :          *  the code was read. A temporary filename is generated when not specified.
+<span class="lineNum">     350 </span>                :            :          *  Not specifying a filename is only useful for unit tests and demonstrations
+<a name="351"><span class="lineNum">     351 </span>                :            :          *  of this library.</a>
+<span class="lineNum">     352 </span>                :            :          */
+<span class="lineNum">     353 </span>                :            :         instrumentSync: function (code, filename) {
+<span class="lineNum">     354 </span>                :<span class="lineCov">        182 :             var codegenOptions,</span>
+<span class="lineNum">     355 </span>                :            :                 program;
+<span class="lineNum">     356 </span>        [<span class="branchCov" title="Branch 0 was taken 182 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        182 :             filename = filename || String(new Date().getTime()) + '.js';</span>
+<span class="lineNum">     357 </span>                :<span class="lineCov">        182 :             this.coverState = {</span>
+<span class="lineNum">     358 </span>                :            :                 path: filename,
+<span class="lineNum">     359 </span>                :            :                 s: {},
+<span class="lineNum">     360 </span>                :            :                 b: {},
+<span class="lineNum">     361 </span>                :            :                 f: {},
+<span class="lineNum">     362 </span>                :            :                 fnMap: {},
+<span class="lineNum">     363 </span>                :            :                 statementMap: {},
+<span class="lineNum">     364 </span>                :            :                 branchMap: {}
+<span class="lineNum">     365 </span>                :            :             };
+<span class="lineNum">     366 </span>                :<span class="lineCov">        182 :             this.currentState = {</span>
+<span class="lineNum">     367 </span>                :            :                 trackerVar: generateTrackerVar(filename, this.omitTrackerSuffix),
+<span class="lineNum">     368 </span>                :            :                 func: 0,
+<span class="lineNum">     369 </span>                :            :                 branch: 0,
+<span class="lineNum">     370 </span>                :            :                 variable: 0,
+<span class="lineNum">     371 </span>                :            :                 statement: 0
+<span class="lineNum">     372 </span>                :            :             };
+<span class="lineNum">     373 </span>                :            : 
+<span class="lineNum">     374 </span>                :            :             //protect from users accidentally passing in a Buffer object instead
+<span class="lineNum">     375 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 181 times"> + </span>]:<span class="lineCov">        182 :             if (typeof code !== 'string') { throw new Error('Code must be string'); }</span>
+<span class="lineNum">     376 </span>        [<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchCov" title="Branch 1 was taken 175 times"> + </span>]:<span class="lineCov">        181 :             if (code.charAt(0) === '#') { //shebang, 'comment' it out, won't affect syntax tree locations for things we care about</span>
+<span class="lineNum">     377 </span>                :<span class="lineCov">          6 :                 code = '//' + code;</span>
+<span class="lineNum">     378 </span>                :            :             }
+<span class="lineNum">     379 </span>        [<span class="branchCov" title="Branch 0 was taken 178 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">        181 :             if (!this.opts.noAutoWrap) {</span>
+<span class="lineNum">     380 </span>                :<span class="lineCov">        178 :                 code = LEADER_WRAP + code + TRAILER_WRAP;</span>
+<span class="lineNum">     381 </span>                :            :             }
+<span class="lineNum">     382 </span>                :<span class="lineCov">        181 :             program = ESP.parse(code, { loc: true });</span>
+<span class="lineNum">     383 </span>        [<span class="branchCov" title="Branch 0 was taken 177 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        179 :             if (!this.opts.noAutoWrap) {</span>
+<span class="lineNum">     384 </span>                :<span class="lineCov">        177 :                 program = { type: SYNTAX.Program.name, body: program.body[0].expression.callee.body.body };</span>
+<span class="lineNum">     385 </span>                :            :             }
+<span class="lineNum">     386 </span>                :<span class="lineCov">        179 :             this.walker.startWalk(program);</span>
+<span class="lineNum">     387 </span>        [<span class="branchCov" title="Branch 0 was taken 179 times"> + </span><span class="branchCov" title="Branch 1 was taken 179 times"> + </span>]:<span class="lineCov">        179 :             codegenOptions = this.opts.codeGenerationOptions || { format: { compact: !this.opts.noCompact }};</span>
+<span class="lineNum">     388 </span>                :            :             //console.log(JSON.stringify(program, undefined, 2));
+<span class="lineNum">     389 </span>                :<span class="lineCov">        179 :             return this.getPreamble(code) + '\n' + ESPGEN.generate(program, codegenOptions) + '\n';</span>
+<span class="lineNum">     390 </span>                :            :         },
+<span class="lineNum">     391 </span>                :            :         /**
+<span class="lineNum">     392 </span>                :            :          * Callback based instrumentation. Note that this still executes synchronously in the same process tick
+<span class="lineNum">     393 </span>                :            :          * and calls back immediately. It only provides the options for callback style error handling as
+<span class="lineNum">     394 </span>                :            :          * opposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`
+<span class="lineNum">     395 </span>                :            :          *
+<span class="lineNum">     396 </span>                :            :          * @method instrument
+<span class="lineNum">     397 </span>                :            :          * @param {String} code the code to be instrumented as a String
+<span class="lineNum">     398 </span>                :            :          * @param {String} filename Optional. The name of the file from which
+<span class="lineNum">     399 </span>                :            :          *  the code was read. A temporary filename is generated when not specified.
+<span class="lineNum">     400 </span>                :            :          *  Not specifying a filename is only useful for unit tests and demonstrations
+<span class="lineNum">     401 </span>                :            :          *  of this library.
+<a name="402"><span class="lineNum">     402 </span>                :            :          * @param {Function(err, instrumentedCode)} callback - the callback function</a>
+<span class="lineNum">     403 </span>                :            :          */
+<span class="lineNum">     404 </span>                :            :         instrument: function (code, filename, callback) {
+<span class="lineNum">     405 </span>                :            : 
+<span class="lineNum">     406 </span>[<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 106 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 108 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        108 :             if (!callback &amp;&amp; typeof filename === 'function') {</span>
+<span class="lineNum">     407 </span>                :<span class="lineCov">          2 :                 callback = filename;</span>
+<span class="lineNum">     408 </span>                :<span class="lineCov">          2 :                 filename = null;</span>
+<span class="lineNum">     409 </span>                :            :             }
+<span class="lineNum">     410 </span>                :<span class="lineCov">        108 :             try {</span>
+<span class="lineNum">     411 </span>                :<span class="lineCov">        108 :                 callback(null, this.instrumentSync(code, filename));</span>
+<span class="lineNum">     412 </span>                :            :             } catch (ex) {
+<span class="lineNum">     413 </span>                :<span class="lineCov">          2 :                 callback(ex);</span>
+<span class="lineNum">     414 </span>                :            :             }
+<span class="lineNum">     415 </span>                :            :         },
+<span class="lineNum">     416 </span>                :            :         /**
+<span class="lineNum">     417 </span>                :            :          * returns the file coverage object for the code that was instrumented
+<span class="lineNum">     418 </span>                :            :          * just before calling this method. Note that this represents a
+<span class="lineNum">     419 </span>                :            :          * &quot;zero-coverage&quot; object which is not even representative of the code
+<span class="lineNum">     420 </span>                :            :          * being loaded in node or a browser (which would increase the statement
+<span class="lineNum">     421 </span>                :            :          * counts for mainline code).
+<span class="lineNum">     422 </span>                :            :          * @return {Object} a &quot;zero-coverage&quot; file coverage object for the code last instrumented
+<a name="423"><span class="lineNum">     423 </span>                :            :          * by this instrumenter</a>
+<span class="lineNum">     424 </span>                :            :          */
+<span class="lineNum">     425 </span>                :            :         lastFileCoverage: function () {
+<a name="426"><span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 :             return this.coverState;</span></a>
+<span class="lineNum">     427 </span>                :            :         },
+<a name="428"><span class="lineNum">     428 </span>                :            :         fixColumnPositions: function (coverState) {</a>
+<span class="lineNum">     429 </span>                :<span class="lineCov">        177 :             var offset = LEADER_WRAP.length,</span>
+<span class="lineNum">     430 </span>                :            :                 fixer = function (loc) {
+<span class="lineNum">     431 </span>        [<span class="branchCov" title="Branch 0 was taken 1931 times"> + </span><span class="branchCov" title="Branch 1 was taken 5988 times"> + </span>]:<span class="lineCov">       7919 :                     if (loc.start.line === 1) {</span>
+<span class="lineNum">     432 </span>                :<span class="lineCov">       1931 :                         loc.start.column -= offset;</span>
+<span class="lineNum">     433 </span>                :            :                     }
+<span class="lineNum">     434 </span>        [<span class="branchCov" title="Branch 0 was taken 1915 times"> + </span><span class="branchCov" title="Branch 1 was taken 6004 times"> + </span>]:<span class="lineCov">       7919 :                     if (loc.end.line === 1) {</span>
+<span class="lineNum">     435 </span>                :<span class="lineCov">       1915 :                         loc.end.column -= offset;</span>
+<span class="lineNum">     436 </span>                :            :                     }
+<span class="lineNum">     437 </span>                :            :                 },
+<span class="lineNum">     438 </span>                :            :                 k,
+<span class="lineNum">     439 </span>                :            :                 obj,
+<span class="lineNum">     440 </span>                :            :                 i,
+<span class="lineNum">     441 </span>                :            :                 locations;
+<span class="lineNum">     442 </span>                :            : 
+<span class="lineNum">     443 </span>                :<span class="lineCov">        177 :             obj = coverState.statementMap;</span>
+<span class="lineNum">     444 </span>                :<span class="lineCov">        177 :             for (k in obj) {</span>
+<span class="lineNum">     445 </span>        [<span class="branchCov" title="Branch 0 was taken 4869 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       4869 :                 if (obj.hasOwnProperty(k)) { fixer(obj[k]); }</span>
 <span class="lineNum">     446 </span>                :            :             }
-<a name="447"><span class="lineNum">     447 </span>                :            :         },</a>
-<span class="lineNum">     448 </span>                :            : 
-<span class="lineNum">     449 </span>                :            :         getPreamble: function (sourceCode) {
-<span class="lineNum">     450 </span>        [<span class="branchCov" title="Branch 0 was taken 168 times"> + </span><span class="branchCov" title="Branch 1 was taken 64 times"> + </span>]:<span class="lineCov">        168 :             var varName = this.opts.coverageVariable || '__coverage__',</span>
-<span class="lineNum">     451 </span>                :            :                 file = this.coverState.path,
-<a name="452"><span class="lineNum">     452 </span>                :            :                 tracker = this.currentState.trackerVar,</a>
-<a name="453"><span class="lineNum">     453 </span>                :            :                 coverState,</a>
-<span class="lineNum">     454 </span>                :            :                 replacer = function (s) { //return replacements using the function to ensure that the replacement is treated like a dumb string and not as a string with RE replacement patterns
-<span class="lineNum">     455 </span>                :<span class="lineCov">       1680 :                     return function () { return s; };</span>
-<span class="lineNum">     456 </span>                :            :                 },
-<span class="lineNum">     457 </span>                :            :                 code;
-<span class="lineNum">     458 </span>        [<span class="branchCov" title="Branch 0 was taken 166 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        168 :             if (!this.opts.noAutoWrap) {</span>
-<span class="lineNum">     459 </span>                :<span class="lineCov">        166 :                 this.fixColumnPositions(this.coverState);</span>
-<span class="lineNum">     460 </span>                :            :             }
-<span class="lineNum">     461 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 167 times"> + </span>]:<span class="lineCov">        168 :             if (this.opts.embedSource) {</span>
-<span class="lineNum">     462 </span>                :<span class="lineCov">          1 :                 this.coverState.code = sourceCode.split(/\n/);</span>
-<span class="lineNum">     463 </span>                :            :             }
-<span class="lineNum">     464 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 167 times"> + </span>]:<span class="lineCov">        168 :             coverState = this.opts.debug ? JSON.stringify(this.coverState, undefined, 4) : JSON.stringify(this.coverState);</span>
-<span class="lineNum">     465 </span>                :<span class="lineCov">        168 :             code = [</span>
-<span class="lineNum">     466 </span>                :            :                 &quot;if (typeof %GLOBAL% === 'undefined') { %GLOBAL% = {}; }&quot;,
-<span class="lineNum">     467 </span>                :            :                 &quot;if (!%GLOBAL%['%FILE%']) {&quot;,
-<span class="lineNum">     468 </span>                :            :                 &quot;   %GLOBAL%['%FILE%'] = %OBJECT%;&quot;,
-<span class="lineNum">     469 </span>                :            :                 &quot;}&quot;,
-<span class="lineNum">     470 </span>                :            :                 &quot;var %VAR% = %GLOBAL%['%FILE%'];&quot;
-<span class="lineNum">     471 </span>                :            :             ].join(&quot;\n&quot;)
-<span class="lineNum">     472 </span>                :            :                 .replace(/%VAR%/g, replacer(tracker))
-<span class="lineNum">     473 </span>                :            :                 .replace(/%GLOBAL%/g, replacer(varName))
-<span class="lineNum">     474 </span>                :            :                 .replace(/%FILE%/g, replacer(file))
-<span class="lineNum">     475 </span>                :            :                 .replace(/%OBJECT%/g, replacer(coverState));
-<span class="lineNum">     476 </span>                :<span class="lineCov">        168 :             return code;</span>
-<a name="477"><span class="lineNum">     477 </span>                :            :         },</a>
-<span class="lineNum">     478 </span>                :            : 
-<span class="lineNum">     479 </span>                :            :         convertToBlock: function (node) {
-<span class="lineNum">     480 </span>        [<span class="branchCov" title="Branch 0 was taken 295 times"> + </span><span class="branchCov" title="Branch 1 was taken 646 times"> + </span>]:<span class="lineCov">        941 :             if (!node) {</span>
-<span class="lineNum">     481 </span>                :<span class="lineCov">        295 :                 return { type: 'BlockStatement', body: [] };</span>
-<span class="lineNum">     482 </span>        [<span class="branchCov" title="Branch 0 was taken 521 times"> + </span><span class="branchCov" title="Branch 1 was taken 125 times"> + </span>]:<span class="lineCov">        646 :             } else if (node.type === 'BlockStatement') {</span>
-<span class="lineNum">     483 </span>                :<span class="lineCov">        521 :                 return node;</span>
-<span class="lineNum">     484 </span>                :            :             } else {
-<span class="lineNum">     485 </span>                :<span class="lineCov">        125 :                 return { type: 'BlockStatement', body: [ node ] };</span>
-<span class="lineNum">     486 </span>                :            :             }
-<a name="487"><span class="lineNum">     487 </span>                :            :         },</a>
-<span class="lineNum">     488 </span>                :            : 
-<span class="lineNum">     489 </span>                :            :         ifBlockConverter: function (node) {
-<span class="lineNum">     490 </span>                :<span class="lineCov">        424 :             node.consequent = this.convertToBlock(node.consequent);</span>
-<span class="lineNum">     491 </span>                :<span class="lineCov">        424 :             node.alternate = this.convertToBlock(node.alternate);</span>
+<span class="lineNum">     447 </span>                :<span class="lineCov">        177 :             obj = coverState.fnMap;</span>
+<span class="lineNum">     448 </span>                :<span class="lineCov">        177 :             for (k in obj) {</span>
+<span class="lineNum">     449 </span>        [<span class="branchCov" title="Branch 0 was taken 805 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        805 :                 if (obj.hasOwnProperty(k)) { fixer(obj[k].loc); }</span>
+<span class="lineNum">     450 </span>                :            :             }
+<span class="lineNum">     451 </span>                :<span class="lineCov">        177 :             obj = coverState.branchMap;</span>
+<span class="lineNum">     452 </span>                :<span class="lineCov">        177 :             for (k in obj) {</span>
+<span class="lineNum">     453 </span>        [<span class="branchCov" title="Branch 0 was taken 1098 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1098 :                 if (obj.hasOwnProperty(k)) {</span>
+<span class="lineNum">     454 </span>                :<span class="lineCov">       1098 :                     locations = obj[k].locations;</span>
+<span class="lineNum">     455 </span>                :<span class="lineCov">       1098 :                     for (i = 0; i &lt; locations.length; i += 1) {</span>
+<span class="lineNum">     456 </span>                :<span class="lineCov">       2245 :                         fixer(locations[i]);</span>
+<span class="lineNum">     457 </span>                :            :                     }
+<span class="lineNum">     458 </span>                :            :                 }
+<span class="lineNum">     459 </span>                :            :             }
+<a name="460"><span class="lineNum">     460 </span>                :            :         },</a>
+<span class="lineNum">     461 </span>                :            : 
+<span class="lineNum">     462 </span>                :            :         getPreamble: function (sourceCode) {
+<span class="lineNum">     463 </span>        [<span class="branchCov" title="Branch 0 was taken 179 times"> + </span><span class="branchCov" title="Branch 1 was taken 74 times"> + </span>]:<span class="lineCov">        179 :             var varName = this.opts.coverageVariable || '__coverage__',</span>
+<span class="lineNum">     464 </span>                :            :                 file = this.coverState.path.replace(/\\/g, '\\\\'),
+<span class="lineNum">     465 </span>                :            :                 tracker = this.currentState.trackerVar,
+<span class="lineNum">     466 </span>                :            :                 coverState,
+<a name="467"><span class="lineNum">     467 </span>                :            :                 // return replacements using the function to ensure that the replacement is</a>
+<a name="468"><span class="lineNum">     468 </span>                :            :                 // treated like a dumb string and not as a string with RE replacement patterns</a>
+<span class="lineNum">     469 </span>                :            :                 replacer = function (s) {
+<span class="lineNum">     470 </span>                :<span class="lineCov">       1790 :                     return function () { return s; };</span>
+<span class="lineNum">     471 </span>                :            :                 },
+<span class="lineNum">     472 </span>                :            :                 code;
+<span class="lineNum">     473 </span>        [<span class="branchCov" title="Branch 0 was taken 177 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">        179 :             if (!this.opts.noAutoWrap) {</span>
+<span class="lineNum">     474 </span>                :<span class="lineCov">        177 :                 this.fixColumnPositions(this.coverState);</span>
+<span class="lineNum">     475 </span>                :            :             }
+<span class="lineNum">     476 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 178 times"> + </span>]:<span class="lineCov">        179 :             if (this.opts.embedSource) {</span>
+<span class="lineNum">     477 </span>                :<span class="lineCov">          1 :                 this.coverState.code = sourceCode.split(/\n/);</span>
+<span class="lineNum">     478 </span>                :            :             }
+<span class="lineNum">     479 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 178 times"> + </span>]:<span class="lineCov">        179 :             coverState = this.opts.debug ? JSON.stringify(this.coverState, undefined, 4) : JSON.stringify(this.coverState);</span>
+<span class="lineNum">     480 </span>                :<span class="lineCov">        179 :             code = [</span>
+<span class="lineNum">     481 </span>                :            :                 &quot;if (typeof %GLOBAL% === 'undefined') { %GLOBAL% = {}; }&quot;,
+<span class="lineNum">     482 </span>                :            :                 &quot;if (!%GLOBAL%['%FILE%']) {&quot;,
+<span class="lineNum">     483 </span>                :            :                 &quot;   %GLOBAL%['%FILE%'] = %OBJECT%;&quot;,
+<span class="lineNum">     484 </span>                :            :                 &quot;}&quot;,
+<span class="lineNum">     485 </span>                :            :                 &quot;var %VAR% = %GLOBAL%['%FILE%'];&quot;
+<span class="lineNum">     486 </span>                :            :             ].join(&quot;\n&quot;)
+<span class="lineNum">     487 </span>                :            :                 .replace(/%VAR%/g, replacer(tracker))
+<span class="lineNum">     488 </span>                :            :                 .replace(/%GLOBAL%/g, replacer(varName))
+<span class="lineNum">     489 </span>                :            :                 .replace(/%FILE%/g, replacer(file))
+<span class="lineNum">     490 </span>                :            :                 .replace(/%OBJECT%/g, replacer(coverState));
+<span class="lineNum">     491 </span>                :<span class="lineCov">        179 :             return code;</span>
 <a name="492"><span class="lineNum">     492 </span>                :            :         },</a>
 <span class="lineNum">     493 </span>                :            : 
-<span class="lineNum">     494 </span>                :            :         loopBlockConverter: function (node) {
-<span class="lineNum">     495 </span>                :<span class="lineCov">         93 :             node.body = this.convertToBlock(node.body);</span>
-<a name="496"><span class="lineNum">     496 </span>                :            :         },</a>
-<span class="lineNum">     497 </span>                :            : 
-<span class="lineNum">     498 </span>                :            :         statementName: function (location) {
-<span class="lineNum">     499 </span>                :<span class="lineCov">       3154 :             var sName;</span>
-<span class="lineNum">     500 </span>                :<span class="lineCov">       3154 :             this.currentState.statement += 1;</span>
-<span class="lineNum">     501 </span>                :<span class="lineCov">       3154 :             sName = this.currentState.statement;</span>
-<span class="lineNum">     502 </span>                :<span class="lineCov">       3154 :             this.coverState.statementMap[sName] = location;</span>
-<span class="lineNum">     503 </span>                :<span class="lineCov">       3154 :             this.coverState.s[sName] = 0;</span>
-<span class="lineNum">     504 </span>                :<span class="lineCov">       3154 :             return sName;</span>
-<a name="505"><span class="lineNum">     505 </span>                :            :         },</a>
-<span class="lineNum">     506 </span>                :            : 
-<span class="lineNum">     507 </span>                :            :         skipInit: function (node, walker) {
-<span class="lineNum">     508 </span>        [<span class="branchCov" title="Branch 0 was taken 60 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         61 :             if (node.init) {</span>
-<span class="lineNum">     509 </span>                :<span class="lineCov">         60 :                 node.init.skipWalk = true;</span>
-<span class="lineNum">     510 </span>                :            :             }
+<span class="lineNum">     494 </span>                :            :         convertToBlock: function (node) {
+<span class="lineNum">     495 </span>        [<span class="branchCov" title="Branch 0 was taken 463 times"> + </span><span class="branchCov" title="Branch 1 was taken 1018 times"> + </span>]:<span class="lineCov">       1481 :             if (!node) {</span>
+<span class="lineNum">     496 </span>                :<span class="lineCov">        463 :                 return { type: 'BlockStatement', body: [] };</span>
+<span class="lineNum">     497 </span>        [<span class="branchCov" title="Branch 0 was taken 893 times"> + </span><span class="branchCov" title="Branch 1 was taken 125 times"> + </span>]:<span class="lineCov">       1018 :             } else if (node.type === 'BlockStatement') {</span>
+<span class="lineNum">     498 </span>                :<span class="lineCov">        893 :                 return node;</span>
+<span class="lineNum">     499 </span>                :            :             } else {
+<span class="lineNum">     500 </span>                :<span class="lineCov">        125 :                 return { type: 'BlockStatement', body: [ node ] };</span>
+<span class="lineNum">     501 </span>                :            :             }
+<a name="502"><span class="lineNum">     502 </span>                :            :         },</a>
+<span class="lineNum">     503 </span>                :            : 
+<span class="lineNum">     504 </span>                :            :         ifBlockConverter: function (node) {
+<span class="lineNum">     505 </span>                :<span class="lineCov">        658 :             node.consequent = this.convertToBlock(node.consequent);</span>
+<span class="lineNum">     506 </span>                :<span class="lineCov">        658 :             node.alternate = this.convertToBlock(node.alternate);</span>
+<a name="507"><span class="lineNum">     507 </span>                :            :         },</a>
+<span class="lineNum">     508 </span>                :            : 
+<span class="lineNum">     509 </span>                :            :         loopBlockConverter: function (node) {
+<span class="lineNum">     510 </span>                :<span class="lineCov">        165 :             node.body = this.convertToBlock(node.body);</span>
 <a name="511"><span class="lineNum">     511 </span>                :            :         },</a>
 <span class="lineNum">     512 </span>                :            : 
-<span class="lineNum">     513 </span>                :            :         skipLeft: function (node, walker) {
-<span class="lineNum">     514 </span>                :<span class="lineCov">         17 :             node.left.skipWalk = true;</span>
-<a name="515"><span class="lineNum">     515 </span>                :            :         },</a>
-<span class="lineNum">     516 </span>                :            : 
-<span class="lineNum">     517 </span>                :            :         coverStatement: function (node, walker) {
-<span class="lineNum">     518 </span>                :<span class="lineCov">       3154 :             var sName,</span>
-<span class="lineNum">     519 </span>                :            :                 incrStatementCount;
-<span class="lineNum">     520 </span>                :            : 
-<span class="lineNum">     521 </span>                :<span class="lineCov">       3154 :             sName = this.statementName(node.loc);</span>
-<span class="lineNum">     522 </span>                :<span class="lineCov">       3154 :             incrStatementCount = astgen.statement(</span>
-<span class="lineNum">     523 </span>                :            :                 astgen.postIncrement(
-<span class="lineNum">     524 </span>                :            :                     astgen.subscript(
-<span class="lineNum">     525 </span>                :            :                         astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('s')),
-<span class="lineNum">     526 </span>                :            :                         astgen.stringLiteral(sName)
-<span class="lineNum">     527 </span>                :            :                     )
-<span class="lineNum">     528 </span>                :            :                 )
-<span class="lineNum">     529 </span>                :            :             );
-<span class="lineNum">     530 </span>                :<span class="lineCov">       3154 :             this.splice(incrStatementCount, node, walker);</span>
-<a name="531"><span class="lineNum">     531 </span>                :            :         },</a>
-<span class="lineNum">     532 </span>                :            : 
-<span class="lineNum">     533 </span>                :            :         splice: function (statements, node, walker) {
-<span class="lineNum">     534 </span>        [<span class="branchCov" title="Branch 0 was taken 5 times"> + </span><span class="branchCov" title="Branch 1 was taken 3149 times"> + </span>]:<span class="lineCov">       3154 :             var targetNode = walker.isLabeled() ? walker.parent().node : node;</span>
-<span class="lineNum">     535 </span>        [<span class="branchCov" title="Branch 0 was taken 3154 times"> + </span><span class="branchCov" title="Branch 1 was taken 3149 times"> + </span>]:<span class="lineCov">       3154 :             targetNode.prepend = targetNode.prepend || [];</span>
-<span class="lineNum">     536 </span>                :<span class="lineCov">       3154 :             pushAll(targetNode.prepend, statements);</span>
-<a name="537"><span class="lineNum">     537 </span>                :            :         },</a>
-<span class="lineNum">     538 </span>                :            : 
-<span class="lineNum">     539 </span>                :            :         functionName: function (node, line, location) {
-<span class="lineNum">     540 </span>                :<span class="lineCov">        608 :             this.currentState.func += 1;</span>
-<span class="lineNum">     541 </span>                :<span class="lineCov">        608 :             var id = this.currentState.func,</span>
-<span class="lineNum">     542 </span>        [<span class="branchCov" title="Branch 0 was taken 131 times"> + </span><span class="branchCov" title="Branch 1 was taken 477 times"> + </span>]:            :                 name = node.id ? node.id.name : '(anonymous_' + id + ')';
-<span class="lineNum">     543 </span>                :<span class="lineCov">        608 :             this.coverState.fnMap[id] = { name: name, line: line, loc: location };</span>
-<span class="lineNum">     544 </span>                :<span class="lineCov">        608 :             this.coverState.f[id] = 0;</span>
-<span class="lineNum">     545 </span>                :<span class="lineCov">        608 :             return id;</span>
+<span class="lineNum">     513 </span>                :            :         statementName: function (location) {
+<span class="lineNum">     514 </span>                :<span class="lineCov">       4873 :             var sName;</span>
+<span class="lineNum">     515 </span>                :<span class="lineCov">       4873 :             this.currentState.statement += 1;</span>
+<span class="lineNum">     516 </span>                :<span class="lineCov">       4873 :             sName = this.currentState.statement;</span>
+<span class="lineNum">     517 </span>                :<span class="lineCov">       4873 :             this.coverState.statementMap[sName] = location;</span>
+<span class="lineNum">     518 </span>                :<span class="lineCov">       4873 :             this.coverState.s[sName] = 0;</span>
+<span class="lineNum">     519 </span>                :<span class="lineCov">       4873 :             return sName;</span>
+<a name="520"><span class="lineNum">     520 </span>                :            :         },</a>
+<span class="lineNum">     521 </span>                :            : 
+<span class="lineNum">     522 </span>                :            :         skipInit: function (node /*, walker */) {
+<span class="lineNum">     523 </span>        [<span class="branchCov" title="Branch 0 was taken 120 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">        123 :             if (node.init) {</span>
+<span class="lineNum">     524 </span>                :<span class="lineCov">        120 :                 node.init.skipWalk = true;</span>
+<span class="lineNum">     525 </span>                :            :             }
+<a name="526"><span class="lineNum">     526 </span>                :            :         },</a>
+<span class="lineNum">     527 </span>                :            : 
+<span class="lineNum">     528 </span>                :            :         skipLeft: function (node /*, walker */) {
+<span class="lineNum">     529 </span>                :<span class="lineCov">         17 :             node.left.skipWalk = true;</span>
+<a name="530"><span class="lineNum">     530 </span>                :            :         },</a>
+<span class="lineNum">     531 </span>                :            : 
+<span class="lineNum">     532 </span>                :            :         coverStatement: function (node, walker) {
+<span class="lineNum">     533 </span>                :<span class="lineCov">       4873 :             var sName,</span>
+<span class="lineNum">     534 </span>                :            :                 incrStatementCount;
+<span class="lineNum">     535 </span>                :            : 
+<span class="lineNum">     536 </span>                :<span class="lineCov">       4873 :             sName = this.statementName(node.loc);</span>
+<span class="lineNum">     537 </span>                :<span class="lineCov">       4873 :             incrStatementCount = astgen.statement(</span>
+<span class="lineNum">     538 </span>                :            :                 astgen.postIncrement(
+<span class="lineNum">     539 </span>                :            :                     astgen.subscript(
+<span class="lineNum">     540 </span>                :            :                         astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('s')),
+<span class="lineNum">     541 </span>                :            :                         astgen.stringLiteral(sName)
+<span class="lineNum">     542 </span>                :            :                     )
+<span class="lineNum">     543 </span>                :            :                 )
+<span class="lineNum">     544 </span>                :            :             );
+<span class="lineNum">     545 </span>                :<span class="lineCov">       4873 :             this.splice(incrStatementCount, node, walker);</span>
 <a name="546"><span class="lineNum">     546 </span>                :            :         },</a>
 <span class="lineNum">     547 </span>                :            : 
-<span class="lineNum">     548 </span>                :            :         coverFunction: function (node, walker) {
-<span class="lineNum">     549 </span>                :<span class="lineCov">        608 :             var id = this.functionName(node, walker.startLineForNode(node), { start: node.loc.start, end: { line: node.body.loc.start.line, column: node.body.loc.start.column } }),</span>
-<span class="lineNum">     550 </span>                :            :                 body = node.body,
-<span class="lineNum">     551 </span>                :            :                 blockBody = body.body;
-<span class="lineNum">     552 </span>                :<span class="lineCov">        608 :             blockBody.unshift(</span>
-<span class="lineNum">     553 </span>                :            :                 astgen.statement(
-<span class="lineNum">     554 </span>                :            :                     astgen.postIncrement(
-<span class="lineNum">     555 </span>                :            :                         astgen.subscript(
-<span class="lineNum">     556 </span>                :            :                             astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('f')),
-<span class="lineNum">     557 </span>                :            :                             astgen.stringLiteral(id)
-<span class="lineNum">     558 </span>                :            :                         )
-<span class="lineNum">     559 </span>                :            :                     )
-<span class="lineNum">     560 </span>                :            :                 )
-<span class="lineNum">     561 </span>                :            :             );
-<a name="562"><span class="lineNum">     562 </span>                :            :         },</a>
-<span class="lineNum">     563 </span>                :            : 
-<span class="lineNum">     564 </span>                :            :         branchName: function (type, startLine, pathLocations) {
-<span class="lineNum">     565 </span>                :<span class="lineCov">        709 :             var bName,</span>
-<span class="lineNum">     566 </span>                :            :                 paths = [],
-<span class="lineNum">     567 </span>                :            :                 locations = [],
-<span class="lineNum">     568 </span>                :            :                 i;
-<span class="lineNum">     569 </span>                :<span class="lineCov">        709 :             this.currentState.branch += 1;</span>
-<span class="lineNum">     570 </span>                :<span class="lineCov">        709 :             bName = this.currentState.branch;</span>
-<span class="lineNum">     571 </span>                :<span class="lineCov">        709 :             for (i = 0; i &lt; pathLocations.length; i += 1) {</span>
-<span class="lineNum">     572 </span>                :<span class="lineCov">       1447 :                 paths.push(0);</span>
-<span class="lineNum">     573 </span>                :<span class="lineCov">       1447 :                 locations.push(pathLocations[i]);</span>
-<span class="lineNum">     574 </span>                :            :             }
-<span class="lineNum">     575 </span>                :<span class="lineCov">        709 :             this.coverState.b[bName] = paths;</span>
-<span class="lineNum">     576 </span>                :<span class="lineCov">        709 :             this.coverState.branchMap[bName] = { line: startLine, type: type, locations: locations };</span>
-<span class="lineNum">     577 </span>                :<span class="lineCov">        709 :             return bName;</span>
-<a name="578"><span class="lineNum">     578 </span>                :            :         },</a>
-<span class="lineNum">     579 </span>                :            : 
-<span class="lineNum">     580 </span>                :            :         branchIncrementExprAst: function (varName, branchIndex, down) {
-<span class="lineNum">     581 </span>                :<span class="lineCov">       1447 :             var ret = astgen.postIncrement(</span>
-<span class="lineNum">     582 </span>                :            :                 astgen.subscript(
-<span class="lineNum">     583 </span>                :            :                     astgen.subscript(
-<span class="lineNum">     584 </span>                :            :                         astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('b')),
-<span class="lineNum">     585 </span>                :            :                         astgen.stringLiteral(varName)
-<span class="lineNum">     586 </span>                :            :                     ),
-<span class="lineNum">     587 </span>                :            :                     astgen.numericLiteral(branchIndex)
-<span class="lineNum">     588 </span>                :            :                 ),
-<span class="lineNum">     589 </span>                :            :                 down
-<span class="lineNum">     590 </span>                :            :             );
-<span class="lineNum">     591 </span>                :<span class="lineCov">       1447 :             return ret;</span>
-<a name="592"><span class="lineNum">     592 </span>                :            :         },</a>
-<span class="lineNum">     593 </span>                :            : 
-<span class="lineNum">     594 </span>                :            :         locationsForNodes: function (nodes) {
-<span class="lineNum">     595 </span>                :<span class="lineCov">        285 :             var ret = [],</span>
-<span class="lineNum">     596 </span>                :            :                 i;
-<span class="lineNum">     597 </span>                :<span class="lineCov">        285 :             for (i = 0; i &lt; nodes.length; i += 1) {</span>
-<span class="lineNum">     598 </span>                :<span class="lineCov">        599 :                 ret.push(nodes[i].loc);</span>
-<span class="lineNum">     599 </span>                :            :             }
-<span class="lineNum">     600 </span>                :<span class="lineCov">        285 :             return ret;</span>
-<a name="601"><span class="lineNum">     601 </span>                :            :         },</a>
-<span class="lineNum">     602 </span>                :            : 
-<span class="lineNum">     603 </span>                :            :         ifBranchInjector: function (node, walker) {
-<span class="lineNum">     604 </span>                :<span class="lineCov">        424 :             var line = node.loc.start.line,</span>
-<span class="lineNum">     605 </span>                :            :                 col = node.loc.start.column,
-<span class="lineNum">     606 </span>                :            :                 start = { line: line, column: col },
-<span class="lineNum">     607 </span>                :            :                 end = { line: line, column: col },
-<span class="lineNum">     608 </span>                :            :                 bName = this.branchName('if', walker.startLineForNode(node), [
-<span class="lineNum">     609 </span>                :            :                     { start: start, end: end },
-<span class="lineNum">     610 </span>                :            :                     { start: start, end: end }
-<span class="lineNum">     611 </span>                :            :                 ]),
-<span class="lineNum">     612 </span>                :            :                 thenBody = node.consequent.body,
-<span class="lineNum">     613 </span>                :            :                 elseBody = node.alternate.body;
-<span class="lineNum">     614 </span>                :<span class="lineCov">        424 :             thenBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 0)));</span>
-<span class="lineNum">     615 </span>                :<span class="lineCov">        424 :             elseBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 1)));</span>
-<a name="616"><span class="lineNum">     616 </span>                :            :         },</a>
-<span class="lineNum">     617 </span>                :            : 
-<span class="lineNum">     618 </span>                :            :         switchBranchInjector: function (node, walker) {
-<span class="lineNum">     619 </span>                :<span class="lineCov">         16 :             var cases = node.cases,</span>
-<span class="lineNum">     620 </span>                :            :                 bName,
-<span class="lineNum">     621 </span>                :            :                 i;
-<span class="lineNum">     622 </span>                :            : 
-<span class="lineNum">     623 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 15 times"> + </span>]:<span class="lineCov">         16 :             if (!cases) {</span>
-<span class="lineNum">     624 </span>                :<span class="lineCov">          1 :                 return;</span>
-<span class="lineNum">     625 </span>                :            :             }
-<span class="lineNum">     626 </span>                :<span class="lineCov">         15 :             bName = this.branchName('switch', walker.startLineForNode(node), this.locationsForNodes(cases));</span>
-<span class="lineNum">     627 </span>                :<span class="lineCov">         15 :             for (i = 0; i &lt; cases.length; i += 1) {</span>
-<span class="lineNum">     628 </span>                :<span class="lineCov">         42 :                 cases[i].consequent.unshift(astgen.statement(this.branchIncrementExprAst(bName, i)));</span>
-<span class="lineNum">     629 </span>                :            :             }
-<a name="630"><span class="lineNum">     630 </span>                :            :         },</a>
-<span class="lineNum">     631 </span>                :            : 
-<span class="lineNum">     632 </span>                :            :         conditionalBranchInjector: function (node, walker) {
-<span class="lineNum">     633 </span>                :<span class="lineCov">        107 :             var bName = this.branchName('cond-expr', walker.startLineForNode(node), this.locationsForNodes([ node.consequent, node.alternate ])),</span>
-<span class="lineNum">     634 </span>                :            :                 ast1 = this.branchIncrementExprAst(bName, 0),
-<span class="lineNum">     635 </span>                :            :                 ast2 = this.branchIncrementExprAst(bName, 1);
-<span class="lineNum">     636 </span>                :            : 
-<span class="lineNum">     637 </span>                :<span class="lineCov">        107 :             node.consequent = astgen.sequence(ast1, node.consequent);</span>
-<span class="lineNum">     638 </span>                :<span class="lineCov">        107 :             node.alternate = astgen.sequence(ast2, node.alternate);</span>
-<a name="639"><span class="lineNum">     639 </span>                :            :         },</a>
+<span class="lineNum">     548 </span>                :            :         splice: function (statements, node, walker) {
+<span class="lineNum">     549 </span>        [<span class="branchCov" title="Branch 0 was taken 5 times"> + </span><span class="branchCov" title="Branch 1 was taken 4868 times"> + </span>]:<span class="lineCov">       4873 :             var targetNode = walker.isLabeled() ? walker.parent().node : node;</span>
+<span class="lineNum">     550 </span>        [<span class="branchCov" title="Branch 0 was taken 4873 times"> + </span><span class="branchCov" title="Branch 1 was taken 4868 times"> + </span>]:<span class="lineCov">       4873 :             targetNode.prepend = targetNode.prepend || [];</span>
+<span class="lineNum">     551 </span>                :<span class="lineCov">       4873 :             pushAll(targetNode.prepend, statements);</span>
+<a name="552"><span class="lineNum">     552 </span>                :            :         },</a>
+<span class="lineNum">     553 </span>                :            : 
+<span class="lineNum">     554 </span>                :            :         functionName: function (node, line, location) {
+<span class="lineNum">     555 </span>                :<span class="lineCov">        805 :             this.currentState.func += 1;</span>
+<span class="lineNum">     556 </span>                :<span class="lineCov">        805 :             var id = this.currentState.func,</span>
+<span class="lineNum">     557 </span>        [<span class="branchCov" title="Branch 0 was taken 231 times"> + </span><span class="branchCov" title="Branch 1 was taken 574 times"> + </span>]:            :                 name = node.id ? node.id.name : '(anonymous_' + id + ')';
+<span class="lineNum">     558 </span>                :<span class="lineCov">        805 :             this.coverState.fnMap[id] = { name: name, line: line, loc: location };</span>
+<span class="lineNum">     559 </span>                :<span class="lineCov">        805 :             this.coverState.f[id] = 0;</span>
+<span class="lineNum">     560 </span>                :<span class="lineCov">        805 :             return id;</span>
+<a name="561"><span class="lineNum">     561 </span>                :            :         },</a>
+<span class="lineNum">     562 </span>                :            : 
+<span class="lineNum">     563 </span>                :            :         coverFunction: function (node, walker) {
+<span class="lineNum">     564 </span>                :<span class="lineCov">        805 :             var id = this.functionName(node, walker.startLineForNode(node), {</span>
+<span class="lineNum">     565 </span>                :            :                     start: node.loc.start,
+<span class="lineNum">     566 </span>                :            :                     end: { line: node.body.loc.start.line, column: node.body.loc.start.column }
+<span class="lineNum">     567 </span>                :            :                 }),
+<span class="lineNum">     568 </span>                :            :                 body = node.body,
+<span class="lineNum">     569 </span>                :            :                 blockBody = body.body;
+<span class="lineNum">     570 </span>                :<span class="lineCov">        805 :             blockBody.unshift(</span>
+<span class="lineNum">     571 </span>                :            :                 astgen.statement(
+<span class="lineNum">     572 </span>                :            :                     astgen.postIncrement(
+<span class="lineNum">     573 </span>                :            :                         astgen.subscript(
+<span class="lineNum">     574 </span>                :            :                             astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('f')),
+<span class="lineNum">     575 </span>                :            :                             astgen.stringLiteral(id)
+<span class="lineNum">     576 </span>                :            :                         )
+<span class="lineNum">     577 </span>                :            :                     )
+<span class="lineNum">     578 </span>                :            :                 )
+<span class="lineNum">     579 </span>                :            :             );
+<a name="580"><span class="lineNum">     580 </span>                :            :         },</a>
+<span class="lineNum">     581 </span>                :            : 
+<span class="lineNum">     582 </span>                :            :         branchName: function (type, startLine, pathLocations) {
+<span class="lineNum">     583 </span>                :<span class="lineCov">       1100 :             var bName,</span>
+<span class="lineNum">     584 </span>                :            :                 paths = [],
+<span class="lineNum">     585 </span>                :            :                 locations = [],
+<span class="lineNum">     586 </span>                :            :                 i;
+<span class="lineNum">     587 </span>                :<span class="lineCov">       1100 :             this.currentState.branch += 1;</span>
+<span class="lineNum">     588 </span>                :<span class="lineCov">       1100 :             bName = this.currentState.branch;</span>
+<span class="lineNum">     589 </span>                :<span class="lineCov">       1100 :             for (i = 0; i &lt; pathLocations.length; i += 1) {</span>
+<span class="lineNum">     590 </span>                :<span class="lineCov">       2249 :                 paths.push(0);</span>
+<span class="lineNum">     591 </span>                :<span class="lineCov">       2249 :                 locations.push(pathLocations[i]);</span>
+<span class="lineNum">     592 </span>                :            :             }
+<span class="lineNum">     593 </span>                :<span class="lineCov">       1100 :             this.coverState.b[bName] = paths;</span>
+<span class="lineNum">     594 </span>                :<span class="lineCov">       1100 :             this.coverState.branchMap[bName] = { line: startLine, type: type, locations: locations };</span>
+<span class="lineNum">     595 </span>                :<span class="lineCov">       1100 :             return bName;</span>
+<a name="596"><span class="lineNum">     596 </span>                :            :         },</a>
+<span class="lineNum">     597 </span>                :            : 
+<span class="lineNum">     598 </span>                :            :         branchIncrementExprAst: function (varName, branchIndex, down) {
+<span class="lineNum">     599 </span>                :<span class="lineCov">       2249 :             var ret = astgen.postIncrement(</span>
+<span class="lineNum">     600 </span>                :            :                 astgen.subscript(
+<span class="lineNum">     601 </span>                :            :                     astgen.subscript(
+<span class="lineNum">     602 </span>                :            :                         astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable('b')),
+<span class="lineNum">     603 </span>                :            :                         astgen.stringLiteral(varName)
+<span class="lineNum">     604 </span>                :            :                     ),
+<span class="lineNum">     605 </span>                :            :                     astgen.numericLiteral(branchIndex)
+<span class="lineNum">     606 </span>                :            :                 ),
+<span class="lineNum">     607 </span>                :            :                 down
+<span class="lineNum">     608 </span>                :            :             );
+<span class="lineNum">     609 </span>                :<span class="lineCov">       2249 :             return ret;</span>
+<a name="610"><span class="lineNum">     610 </span>                :            :         },</a>
+<span class="lineNum">     611 </span>                :            : 
+<span class="lineNum">     612 </span>                :            :         locationsForNodes: function (nodes) {
+<span class="lineNum">     613 </span>                :<span class="lineCov">        442 :             var ret = [],</span>
+<span class="lineNum">     614 </span>                :            :                 i;
+<span class="lineNum">     615 </span>                :<span class="lineCov">        442 :             for (i = 0; i &lt; nodes.length; i += 1) {</span>
+<span class="lineNum">     616 </span>                :<span class="lineCov">        933 :                 ret.push(nodes[i].loc);</span>
+<span class="lineNum">     617 </span>                :            :             }
+<span class="lineNum">     618 </span>                :<span class="lineCov">        442 :             return ret;</span>
+<a name="619"><span class="lineNum">     619 </span>                :            :         },</a>
+<span class="lineNum">     620 </span>                :            : 
+<span class="lineNum">     621 </span>                :            :         ifBranchInjector: function (node, walker) {
+<span class="lineNum">     622 </span>                :<span class="lineCov">        658 :             var line = node.loc.start.line,</span>
+<span class="lineNum">     623 </span>                :            :                 col = node.loc.start.column,
+<span class="lineNum">     624 </span>                :            :                 start = { line: line, column: col },
+<span class="lineNum">     625 </span>                :            :                 end = { line: line, column: col },
+<span class="lineNum">     626 </span>                :            :                 bName = this.branchName('if', walker.startLineForNode(node), [
+<span class="lineNum">     627 </span>                :            :                     { start: start, end: end },
+<span class="lineNum">     628 </span>                :            :                     { start: start, end: end }
+<span class="lineNum">     629 </span>                :            :                 ]),
+<span class="lineNum">     630 </span>                :            :                 thenBody = node.consequent.body,
+<span class="lineNum">     631 </span>                :            :                 elseBody = node.alternate.body;
+<span class="lineNum">     632 </span>                :<span class="lineCov">        658 :             thenBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 0)));</span>
+<span class="lineNum">     633 </span>                :<span class="lineCov">        658 :             elseBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 1)));</span>
+<a name="634"><span class="lineNum">     634 </span>                :            :         },</a>
+<span class="lineNum">     635 </span>                :            : 
+<span class="lineNum">     636 </span>                :            :         switchBranchInjector: function (node, walker) {
+<span class="lineNum">     637 </span>                :<span class="lineCov">         22 :             var cases = node.cases,</span>
+<span class="lineNum">     638 </span>                :            :                 bName,
+<span class="lineNum">     639 </span>                :            :                 i;
 <span class="lineNum">     640 </span>                :            : 
-<span class="lineNum">     641 </span>                :            :         logicalExpressionBranchInjector: function (node, walker) {
-<span class="lineNum">     642 </span>                :<span class="lineCov">        180 :             var parent = walker.parent(),</span>
-<span class="lineNum">     643 </span>                :            :                 leaves = [],
-<span class="lineNum">     644 </span>                :            :                 bName,
-<span class="lineNum">     645 </span>                :            :                 tuple,
-<span class="lineNum">     646 </span>                :            :                 i;
-<span class="lineNum">     647 </span>                :            : 
-<span class="lineNum">     648 </span>[<span class="branchCov" title="Branch 0 was taken 17 times"> + </span><span class="branchCov" title="Branch 1 was taken 163 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :             if (parent &amp;&amp; parent.node.type === SYNTAX.LogicalExpression.name) {</span>
-<span class="lineNum">     649 </span>                :            :                 //already covered
-<span class="lineNum">     650 </span>                :<span class="lineCov">         17 :                 return;</span>
-<span class="lineNum">     651 </span>                :            :             }
-<a name="652"><span class="lineNum">     652 </span>                :            : </a>
-<span class="lineNum">     653 </span>                :<span class="lineCov">        163 :             this.findLeaves(node, leaves);</span>
-<span class="lineNum">     654 </span>                :<span class="lineCov">        343 :             bName = this.branchName('binary-expr', walker.startLineForNode(node), this.locationsForNodes(leaves.map(function (item) { return item.node; })));</span>
-<span class="lineNum">     655 </span>                :<span class="lineCov">        163 :             for (i = 0; i &lt; leaves.length; i += 1) {</span>
-<span class="lineNum">     656 </span>                :<span class="lineCov">        343 :                 tuple = leaves[i];</span>
-<span class="lineNum">     657 </span>                :<span class="lineCov">        343 :                 tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);</span>
-<span class="lineNum">     658 </span>                :            :             }
-<a name="659"><span class="lineNum">     659 </span>                :            :         },</a>
-<span class="lineNum">     660 </span>                :            : 
-<span class="lineNum">     661 </span>                :            :         findLeaves: function (node, accumulator, parent, property) {
-<span class="lineNum">     662 </span>        [<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchCov" title="Branch 1 was taken 343 times"> + </span>]:<span class="lineCov">        523 :             if (node.type === SYNTAX.LogicalExpression.name) {</span>
-<span class="lineNum">     663 </span>                :<span class="lineCov">        180 :                 this.findLeaves(node.left, accumulator, node, 'left');</span>
-<span class="lineNum">     664 </span>                :<span class="lineCov">        180 :                 this.findLeaves(node.right, accumulator, node, 'right');</span>
-<span class="lineNum">     665 </span>                :            :             } else {
-<span class="lineNum">     666 </span>                :<span class="lineCov">        343 :                 accumulator.push({ node: node, parent: parent, property: property });</span>
-<span class="lineNum">     667 </span>                :            :             }
-<span class="lineNum">     668 </span>                :            :         }
-<span class="lineNum">     669 </span>                :            :     };
+<span class="lineNum">     641 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 21 times"> + </span>]:<span class="lineCov">         22 :             if (!cases) {</span>
+<span class="lineNum">     642 </span>                :<span class="lineCov">          1 :                 return;</span>
+<span class="lineNum">     643 </span>                :            :             }
+<span class="lineNum">     644 </span>                :<span class="lineCov">         21 :             bName = this.branchName('switch', walker.startLineForNode(node), this.locationsForNodes(cases));</span>
+<span class="lineNum">     645 </span>                :<span class="lineCov">         21 :             for (i = 0; i &lt; cases.length; i += 1) {</span>
+<span class="lineNum">     646 </span>                :<span class="lineCov">         60 :                 cases[i].consequent.unshift(astgen.statement(this.branchIncrementExprAst(bName, i)));</span>
+<span class="lineNum">     647 </span>                :            :             }
+<a name="648"><span class="lineNum">     648 </span>                :            :         },</a>
+<span class="lineNum">     649 </span>                :            : 
+<span class="lineNum">     650 </span>                :            :         conditionalBranchInjector: function (node, walker) {
+<span class="lineNum">     651 </span>                :<span class="lineCov">        140 :             var bName = this.branchName('cond-expr', walker.startLineForNode(node), this.locationsForNodes([ node.consequent, node.alternate ])),</span>
+<span class="lineNum">     652 </span>                :            :                 ast1 = this.branchIncrementExprAst(bName, 0),
+<span class="lineNum">     653 </span>                :            :                 ast2 = this.branchIncrementExprAst(bName, 1);
+<span class="lineNum">     654 </span>                :            : 
+<span class="lineNum">     655 </span>                :<span class="lineCov">        140 :             node.consequent = astgen.sequence(ast1, node.consequent);</span>
+<span class="lineNum">     656 </span>                :<span class="lineCov">        140 :             node.alternate = astgen.sequence(ast2, node.alternate);</span>
+<a name="657"><span class="lineNum">     657 </span>                :            :         },</a>
+<span class="lineNum">     658 </span>                :            : 
+<span class="lineNum">     659 </span>                :            :         logicalExpressionBranchInjector: function (node, walker) {
+<span class="lineNum">     660 </span>                :<span class="lineCov">        312 :             var parent = walker.parent(),</span>
+<span class="lineNum">     661 </span>                :            :                 leaves = [],
+<span class="lineNum">     662 </span>                :            :                 bName,
+<span class="lineNum">     663 </span>                :            :                 tuple,
+<span class="lineNum">     664 </span>                :            :                 i;
+<span class="lineNum">     665 </span>                :            : 
+<span class="lineNum">     666 </span>[<span class="branchCov" title="Branch 0 was taken 31 times"> + </span><span class="branchCov" title="Branch 1 was taken 281 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 312 times"> + </span><span class="branchCov" title="Branch 1 was taken 312 times"> + </span>]:<span class="lineCov">        312 :             if (parent &amp;&amp; parent.node.type === SYNTAX.LogicalExpression.name) {</span>
+<span class="lineNum">     667 </span>                :            :                 //already covered
+<span class="lineNum">     668 </span>                :<span class="lineCov">         31 :                 return;</span>
+<span class="lineNum">     669 </span>                :            :             }
 <span class="lineNum">     670 </span>                :            : 
-<span class="lineNum">     671 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :     if (isNode) {</span>
-<span class="lineNum">     672 </span>                :<span class="lineCov">          1 :         module.exports = Instrumenter;</span>
-<span class="lineNum">     673 </span>                :            :     } else {
-<span class="lineNum">     674 </span>                :<span class="lineCov">          1 :         window.Instrumenter = Instrumenter;</span>
-<span class="lineNum">     675 </span>                :            :     }
-<span class="lineNum">     676 </span>                :            : 
-<span class="lineNum">     677 </span>     [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchCov" title="Branch 2 was taken 1 time"> + </span>]:            : }(typeof module !== 'undefined' &amp;&amp; typeof module.exports !== 'undefined' &amp;&amp; typeof exports !== 'undefined'));
-<span class="lineNum">     678 </span>                :            : 
+<span class="lineNum">     671 </span>                :<span class="lineCov">        281 :             this.findLeaves(node, leaves);</span>
+<a name="672"><span class="lineNum">     672 </span>                :<span class="lineCov">        281 :             bName = this.branchName('binary-expr',</span></a>
+<span class="lineNum">     673 </span>                :            :                 walker.startLineForNode(node),
+<span class="lineNum">     674 </span>                :<span class="lineCov">        593 :                 this.locationsForNodes(leaves.map(function (item) { return item.node; }))</span>
+<span class="lineNum">     675 </span>                :            :             );
+<span class="lineNum">     676 </span>                :<span class="lineCov">        281 :             for (i = 0; i &lt; leaves.length; i += 1) {</span>
+<span class="lineNum">     677 </span>                :<span class="lineCov">        593 :                 tuple = leaves[i];</span>
+<span class="lineNum">     678 </span>                :<span class="lineCov">        593 :                 tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);</span>
+<span class="lineNum">     679 </span>                :            :             }
+<a name="680"><span class="lineNum">     680 </span>                :            :         },</a>
+<span class="lineNum">     681 </span>                :            : 
+<span class="lineNum">     682 </span>                :            :         findLeaves: function (node, accumulator, parent, property) {
+<span class="lineNum">     683 </span>        [<span class="branchCov" title="Branch 0 was taken 312 times"> + </span><span class="branchCov" title="Branch 1 was taken 593 times"> + </span>]:<span class="lineCov">        905 :             if (node.type === SYNTAX.LogicalExpression.name) {</span>
+<span class="lineNum">     684 </span>                :<span class="lineCov">        312 :                 this.findLeaves(node.left, accumulator, node, 'left');</span>
+<span class="lineNum">     685 </span>                :<span class="lineCov">        312 :                 this.findLeaves(node.right, accumulator, node, 'right');</span>
+<span class="lineNum">     686 </span>                :            :             } else {
+<span class="lineNum">     687 </span>                :<span class="lineCov">        593 :                 accumulator.push({ node: node, parent: parent, property: property });</span>
+<span class="lineNum">     688 </span>                :            :             }
+<span class="lineNum">     689 </span>                :            :         }
+<span class="lineNum">     690 </span>                :            :     };
+<span class="lineNum">     691 </span>                :            : 
+<span class="lineNum">     692 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :     if (isNode) {</span>
+<span class="lineNum">     693 </span>                :<span class="lineCov">          1 :         module.exports = Instrumenter;</span>
+<span class="lineNum">     694 </span>                :            :     } else {
+<span class="lineNum">     695 </span>                :<span class="lineCov">          1 :         window.Instrumenter = Instrumenter;</span>
+<span class="lineNum">     696 </span>                :            :     }
+<span class="lineNum">     697 </span>                :            : 
+<span class="lineNum">     698 </span>     [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchCov" title="Branch 2 was taken 1 time"> + </span>]:            : }(typeof module !== 'undefined' &amp;&amp; typeof module.exports !== 'undefined' &amp;&amp; typeof exports !== 'undefined'));
+<span class="lineNum">     699 </span>                :            : 
 </pre>
       </td>
     </tr>

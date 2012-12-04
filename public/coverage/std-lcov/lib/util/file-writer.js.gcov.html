@@ -31,17 +31,17 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">28</td>
-            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntry">31</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -74,59 +74,66 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<a name="6"><span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var fs = require('fs');</span></a>
-<span class="lineNum">       7 </span>                :            : 
-<span class="lineNum">       8 </span>                :<span class="lineCov">         39 : function FileWriter(sync) {</span>
-<span class="lineNum">       9 </span>                :<span class="lineCov">         29 :     this.writing = false;</span>
-<span class="lineNum">      10 </span>        [<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         29 :     this.start = sync ? this.startSync : this.startAsync;</span>
-<span class="lineNum">      11 </span>        [<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         29 :     this.write = sync ? this.writeSync : this.writeAsync;</span>
-<span class="lineNum">      12 </span>        [<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         29 :     this.end = sync ? this.endSync : this.endAsync;</span>
-<span class="lineNum">      13 </span>                :            : }
-<a name="14"><span class="lineNum">      14 </span>                :            : </a>
-<span class="lineNum">      15 </span>                :<span class="lineCov">         39 : FileWriter.prototype = {</span>
-<span class="lineNum">      16 </span>                :            :     writeFile: function (file, callback) {
-<span class="lineNum">      17 </span>                :<span class="lineCov">         85 :         this.start(file);</span>
-<span class="lineNum">      18 </span>                :<span class="lineCov">         85 :         callback(this);</span>
-<a name="19"><span class="lineNum">      19 </span>                :<span class="lineCov">         85 :         this.end();</span></a>
-<span class="lineNum">      20 </span>                :            :     },
-<span class="lineNum">      21 </span>                :            :     println: function (str) {
-<span class="lineNum">      22 </span>                :<span class="lineCov">        449 :         this.write(str);</span>
-<a name="23"><span class="lineNum">      23 </span>                :<span class="lineCov">        449 :         this.write('\n');</span></a>
-<span class="lineNum">      24 </span>                :            :     },
-<span class="lineNum">      25 </span>                :            :     startSync: function (fileName) {
-<span class="lineNum">      26 </span>                :<span class="lineCov">         80 :         this.doStart();</span>
-<span class="lineNum">      27 </span>                :<span class="lineCov">         79 :         this.contents = '';</span>
-<a name="28"><span class="lineNum">      28 </span>                :<span class="lineCov">         79 :         this.filename = fileName;</span></a>
-<span class="lineNum">      29 </span>                :            :     },
-<span class="lineNum">      30 </span>                :            :     writeSync: function (str) {
-<a name="31"><span class="lineNum">      31 </span>                :<span class="lineCov">       1508 :         this.contents += str;</span></a>
-<span class="lineNum">      32 </span>                :            :     },
-<span class="lineNum">      33 </span>                :            :     endSync: function () {
-<span class="lineNum">      34 </span>                :<span class="lineCov">         79 :         this.doEnd();</span>
-<a name="35"><span class="lineNum">      35 </span>                :<span class="lineCov">         78 :         fs.writeFileSync(this.filename, this.contents, 'utf8');</span></a>
-<span class="lineNum">      36 </span>                :            :     },
-<span class="lineNum">      37 </span>                :            :     startAsync: function (fileName) {
-<span class="lineNum">      38 </span>                :<span class="lineCov">         22 :         this.doStart();</span>
-<a name="39"><span class="lineNum">      39 </span>                :<span class="lineCov">         21 :         this.stream = fs.createWriteStream(fileName);</span></a>
-<span class="lineNum">      40 </span>                :            :     },
-<span class="lineNum">      41 </span>                :            :     writeAsync: function (str) {
-<a name="42"><span class="lineNum">      42 </span>                :<span class="lineCov">        260 :         this.stream.write(str);</span></a>
-<span class="lineNum">      43 </span>                :            :     },
-<span class="lineNum">      44 </span>                :            :     endAsync: function () {
-<span class="lineNum">      45 </span>                :<span class="lineCov">         21 :         this.doEnd();</span>
-<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">         20 :         this.stream.end();</span></a>
-<span class="lineNum">      47 </span>                :            :     },
-<span class="lineNum">      48 </span>                :            :     doStart: function () {
-<span class="lineNum">      49 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 100 times"> + </span>]:<span class="lineCov">        102 :         if (this.writing) { throw new Error('Attempt to start a new file before ending the previous one'); }</span>
-<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">        100 :         this.writing = true;</span></a>
-<span class="lineNum">      51 </span>                :            :     },
-<span class="lineNum">      52 </span>                :            :     doEnd : function () {
-<span class="lineNum">      53 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 98 times"> + </span>]:<span class="lineCov">        100 :         if (!this.writing) { throw new Error('Attempt to end a file without starting it'); }</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">         98 :         this.writing = false;</span>
-<span class="lineNum">      55 </span>                :            :     }
-<span class="lineNum">      56 </span>                :            : };
-<span class="lineNum">      57 </span>                :            : 
-<span class="lineNum">      58 </span>                :<span class="lineCov">         39 : module.exports = FileWriter;</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var path = require('path'),</span>
+<span class="lineNum">       7 </span>                :            :     fs = require('fs'),
+<a name="8"><span class="lineNum">       8 </span>                :            :     mkdirp = require('mkdirp');</a>
+<span class="lineNum">       9 </span>                :            : 
+<span class="lineNum">      10 </span>                :<span class="lineCov">         51 : function FileWriter(sync) {</span>
+<span class="lineNum">      11 </span>                :<span class="lineCov">         32 :     this.writing = false;</span>
+<span class="lineNum">      12 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         32 :     this.start = sync ? this.startSync : this.startAsync;</span>
+<span class="lineNum">      13 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         32 :     this.write = sync ? this.writeSync : this.writeAsync;</span>
+<span class="lineNum">      14 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">         32 :     this.end = sync ? this.endSync : this.endAsync;</span>
+<span class="lineNum">      15 </span>                :            : }
+<a name="16"><span class="lineNum">      16 </span>                :            : </a>
+<span class="lineNum">      17 </span>                :<span class="lineCov">         51 : FileWriter.prototype = {</span>
+<span class="lineNum">      18 </span>                :            :     copyFile: function (source, dest) {
+<span class="lineNum">      19 </span>                :<span class="lineCov">         22 :         mkdirp.sync(path.dirname(dest));</span>
+<a name="20"><span class="lineNum">      20 </span>                :<span class="lineCov">         22 :         fs.writeFileSync(dest, fs.readFileSync(source));</span></a>
+<span class="lineNum">      21 </span>                :            :     },
+<span class="lineNum">      22 </span>                :            :     writeFile: function (file, callback) {
+<span class="lineNum">      23 </span>                :<span class="lineCov">        106 :         this.start(file);</span>
+<span class="lineNum">      24 </span>                :<span class="lineCov">        106 :         callback(this);</span>
+<a name="25"><span class="lineNum">      25 </span>                :<span class="lineCov">        106 :         this.end();</span></a>
+<span class="lineNum">      26 </span>                :            :     },
+<span class="lineNum">      27 </span>                :            :     println: function (str) {
+<span class="lineNum">      28 </span>                :<span class="lineCov">        573 :         this.write(str);</span>
+<a name="29"><span class="lineNum">      29 </span>                :<span class="lineCov">        573 :         this.write('\n');</span></a>
+<span class="lineNum">      30 </span>                :            :     },
+<span class="lineNum">      31 </span>                :            :     startSync: function (fileName) {
+<span class="lineNum">      32 </span>                :<span class="lineCov">         90 :         this.doStart(fileName);</span>
+<span class="lineNum">      33 </span>                :<span class="lineCov">         89 :         this.contents = '';</span>
+<a name="34"><span class="lineNum">      34 </span>                :<span class="lineCov">         89 :         this.filename = fileName;</span></a>
+<span class="lineNum">      35 </span>                :            :     },
+<span class="lineNum">      36 </span>                :            :     writeSync: function (str) {
+<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">       1465 :         this.contents += str;</span></a>
+<span class="lineNum">      38 </span>                :            :     },
+<span class="lineNum">      39 </span>                :            :     endSync: function () {
+<span class="lineNum">      40 </span>                :<span class="lineCov">         89 :         this.doEnd();</span>
+<a name="41"><span class="lineNum">      41 </span>                :<span class="lineCov">         88 :         fs.writeFileSync(this.filename, this.contents, 'utf8');</span></a>
+<span class="lineNum">      42 </span>                :            :     },
+<span class="lineNum">      43 </span>                :            :     startAsync: function (fileName) {
+<span class="lineNum">      44 </span>                :<span class="lineCov">         22 :         this.doStart(fileName);</span>
+<a name="45"><span class="lineNum">      45 </span>                :<span class="lineCov">         21 :         this.stream = fs.createWriteStream(fileName);</span></a>
+<span class="lineNum">      46 </span>                :            :     },
+<span class="lineNum">      47 </span>                :            :     writeAsync: function (str) {
+<a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">        182 :         this.stream.write(str);</span></a>
+<span class="lineNum">      49 </span>                :            :     },
+<span class="lineNum">      50 </span>                :            :     endAsync: function () {
+<span class="lineNum">      51 </span>                :<span class="lineCov">         21 :         this.doEnd();</span>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">         20 :         this.stream.end();</span></a>
+<span class="lineNum">      53 </span>                :            :     },
+<span class="lineNum">      54 </span>                :            :     doStart: function (fileName) {
+<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 110 times"> + </span>]:<span class="lineCov">        112 :         if (this.writing) { throw new Error('Attempt to start a new file before ending the previous one'); }</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        110 :         this.writing = true;</span>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">        110 :         mkdirp.sync(path.dirname(fileName));</span></a>
+<span class="lineNum">      58 </span>                :            :     },
+<span class="lineNum">      59 </span>                :            :     doEnd : function () {
+<span class="lineNum">      60 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>]:<span class="lineCov">        110 :         if (!this.writing) { throw new Error('Attempt to end a file without starting it'); }</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">        108 :         this.writing = false;</span>
+<span class="lineNum">      62 </span>                :            :     }
+<span class="lineNum">      63 </span>                :            : };
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>                :<span class="lineCov">         51 : module.exports = FileWriter;</span>
 </pre>
       </td>
     </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -74,14 +74,14 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var util = require('util'),</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var util = require('util'),</span>
 <span class="lineNum">       7 </span>                :            :     path = require('path'),
 <span class="lineNum">       8 </span>                :            :     os = require('os'),
 <span class="lineNum">       9 </span>                :            :     fs = require('fs'),
 <span class="lineNum">      10 </span>                :            :     mkdirp = require('mkdirp'),
 <a name="11"><span class="lineNum">      11 </span>                :            :     Store = require('./index');</a>
 <span class="lineNum">      12 </span>                :            : 
-<span class="lineNum">      13 </span>                :<span class="lineCov">         39 : function makeTempDir() {</span>
+<span class="lineNum">      13 </span>                :<span class="lineCov">         51 : function makeTempDir() {</span>
 <span class="lineNum">      14 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :     var dir = path.join(os.tmpDir ? os.tmpDir() : (process.env.TMPDIR || '/tmp'), 'ts' + new Date().getTime());</span>
 <span class="lineNum">      15 </span>                :<span class="lineCov">          1 :     mkdirp.sync(dir);</span>
 <span class="lineNum">      16 </span>                :<span class="lineCov">          1 :     return dir;</span>
@@ -102,7 +102,7 @@
 <span class="lineNum">      31 </span>                :            :  *      is created under `os.tmpDir()`
 <a name="32"><span class="lineNum">      32 </span>                :            :  * @constructor</a>
 <span class="lineNum">      33 </span>                :            :  */
-<span class="lineNum">      34 </span>                :<span class="lineCov">         39 : function TmpStore(opts) {</span>
+<span class="lineNum">      34 </span>                :<span class="lineCov">         51 : function TmpStore(opts) {</span>
 <span class="lineNum">      35 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :     opts = opts || {};</span>
 <span class="lineNum">      36 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :     this.tmp = opts.tmp || makeTempDir();</span>
 <span class="lineNum">      37 </span>                :<span class="lineCov">          1 :     this.map = {};</span>
@@ -110,10 +110,10 @@
 <span class="lineNum">      39 </span>                :<span class="lineCov">          1 :     this.prefix = 't' + new Date().getTime() + '-';</span>
 <span class="lineNum">      40 </span>                :            : }
 <span class="lineNum">      41 </span>                :            : 
-<span class="lineNum">      42 </span>                :<span class="lineCov">         39 : TmpStore.TYPE = 'tmp';</span>
-<span class="lineNum">      43 </span>                :<span class="lineCov">         39 : util.inherits(TmpStore, Store);</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">         51 : TmpStore.TYPE = 'tmp';</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">         51 : util.inherits(TmpStore, Store);</span>
 <a name="44"><span class="lineNum">      44 </span>                :            : </a>
-<span class="lineNum">      45 </span>                :<span class="lineCov">         39 : Store.mix(TmpStore, {</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">         51 : Store.mix(TmpStore, {</span>
 <span class="lineNum">      46 </span>                :            :     generateTmpFileName: function () {
 <span class="lineNum">      47 </span>                :<span class="lineCov">          2 :         this.seq += 1;</span>
 <span class="lineNum">      48 </span>                :<span class="lineCov">          2 :         return this.prefix + this.seq + '.tmp';</span>
@@ -148,7 +148,7 @@
 <span class="lineNum">      77 </span>                :            :     }
 <span class="lineNum">      78 </span>                :            : });
 <span class="lineNum">      79 </span>                :            : 
-<span class="lineNum">      80 </span>                :<span class="lineCov">         39 : module.exports = TmpStore;</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">         51 : module.exports = TmpStore;</span>
 </pre>
       </td>
     </tr>

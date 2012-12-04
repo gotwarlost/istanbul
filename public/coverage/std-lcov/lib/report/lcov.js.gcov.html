@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -74,30 +74,30 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var path = require('path'),</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var path = require('path'),</span>
 <span class="lineNum">       7 </span>                :            :     mkdirp = require('mkdirp'),
-<span class="lineNum">       8 </span>                :            :     util = require('util'),
-<span class="lineNum">       9 </span>                :            :     Report = require('./index'),
-<span class="lineNum">      10 </span>                :            :     LcovOnlyReport = require('./lcovonly'),
-<span class="lineNum">      11 </span>                :            :     HtmlReport = require('./html');
-<span class="lineNum">      12 </span>                :            : 
-<span class="lineNum">      13 </span>                :            : /**
-<span class="lineNum">      14 </span>                :            :  * a `Report` implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.
-<span class="lineNum">      15 </span>                :            :  * The name and behavior of this report is designed to ease migration for projects that currently use `yuitest_coverage`
-<span class="lineNum">      16 </span>                :            :  *
-<span class="lineNum">      17 </span>                :            :  * Usage
-<span class="lineNum">      18 </span>                :            :  * -----
-<span class="lineNum">      19 </span>                :            :  *
-<span class="lineNum">      20 </span>                :            :  *      var report = require('istanbul').Report.create('lcov');
+<span class="lineNum">       8 </span>                :            :     Report = require('./index'),
+<span class="lineNum">       9 </span>                :            :     LcovOnlyReport = require('./lcovonly'),
+<span class="lineNum">      10 </span>                :            :     HtmlReport = require('./html');
+<span class="lineNum">      11 </span>                :            : 
+<span class="lineNum">      12 </span>                :            : /**
+<span class="lineNum">      13 </span>                :            :  * a `Report` implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.
+<span class="lineNum">      14 </span>                :            :  * The name and behavior of this report is designed to ease migration for projects that currently use `yuitest_coverage`
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * Usage
+<span class="lineNum">      17 </span>                :            :  * -----
+<span class="lineNum">      18 </span>                :            :  *
+<span class="lineNum">      19 </span>                :            :  *      var report = require('istanbul').Report.create('lcov');
+<span class="lineNum">      20 </span>                :            :  *
 <span class="lineNum">      21 </span>                :            :  *
-<span class="lineNum">      22 </span>                :            :  *
-<span class="lineNum">      23 </span>                :            :  * @class LcovReport
-<span class="lineNum">      24 </span>                :            :  * @extends Report
-<span class="lineNum">      25 </span>                :            :  * @constructor
-<span class="lineNum">      26 </span>                :            :  * @param {Object} opts optional
-<a name="27"><span class="lineNum">      27 </span>                :            :  * @param {String} [opts.dir] the directory in which to the `lcov.info` file. HTML files are written in a subdirectory called `lcov-report`. Defaults to `process.cwd()`</a>
+<span class="lineNum">      22 </span>                :            :  * @class LcovReport
+<span class="lineNum">      23 </span>                :            :  * @extends Report
+<span class="lineNum">      24 </span>                :            :  * @constructor
+<span class="lineNum">      25 </span>                :            :  * @param {Object} opts optional
+<span class="lineNum">      26 </span>                :            :  * @param {String} [opts.dir] the directory in which to the `lcov.info` file.
+<a name="27"><span class="lineNum">      27 </span>                :            :  *  HTML files are written in a subdirectory called `lcov-report`. Defaults to `process.cwd()`</a>
 <span class="lineNum">      28 </span>                :            :  */
-<span class="lineNum">      29 </span>                :<span class="lineCov">         39 : function LcovReport(opts) {</span>
+<span class="lineNum">      29 </span>                :<span class="lineCov">         51 : function LcovReport(opts) {</span>
 <span class="lineNum">      30 </span>                :<span class="lineCov">          8 :     Report.call(this);</span>
 <span class="lineNum">      31 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          8 :     opts = opts || {};</span>
 <span class="lineNum">      32 </span>        [<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          8 :     var baseDir = path.resolve(opts.dir || process.cwd()),</span>
@@ -108,16 +108,16 @@
 <span class="lineNum">      37 </span>                :<span class="lineCov">          8 :     this.html = new HtmlReport({ dir: htmlDir });</span>
 <span class="lineNum">      38 </span>                :            : }
 <span class="lineNum">      39 </span>                :            : 
-<span class="lineNum">      40 </span>                :<span class="lineCov">         39 : LcovReport.TYPE = 'lcov';</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">         51 : LcovReport.TYPE = 'lcov';</span>
 <a name="41"><span class="lineNum">      41 </span>                :            : </a>
-<span class="lineNum">      42 </span>                :<span class="lineCov">         39 : Report.mix(LcovReport, {</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">         51 : Report.mix(LcovReport, {</span>
 <span class="lineNum">      43 </span>                :            :     writeReport: function (collector, sync) {
 <span class="lineNum">      44 </span>                :<span class="lineCov">          7 :         this.lcov.writeReport(collector, sync);</span>
 <span class="lineNum">      45 </span>                :<span class="lineCov">          7 :         this.html.writeReport(collector, sync);</span>
 <span class="lineNum">      46 </span>                :            :     }
 <span class="lineNum">      47 </span>                :            : });
 <span class="lineNum">      48 </span>                :            : 
-<span class="lineNum">      49 </span>                :<span class="lineCov">         39 : module.exports = LcovReport;</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">         51 : module.exports = LcovReport;</span>
 </pre>
       </td>
     </tr>

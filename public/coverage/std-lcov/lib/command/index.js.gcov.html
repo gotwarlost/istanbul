@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -74,35 +74,34 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :            : /*jslint nomen: true */
-<span class="lineNum">       7 </span>                :<span class="lineCov">         39 : var Factory = require('../util/factory'),</span>
-<a name="8"><span class="lineNum">       8 </span>                :            :     factory = new Factory('command', __dirname, true);</a>
-<span class="lineNum">       9 </span>                :            : 
-<span class="lineNum">      10 </span>                :<span class="lineCov">         39 : function Command() {}</span>
-<span class="lineNum">      11 </span>                :            : // add register, create, mix, loadAll, getCommandList, resolveCommandName to the Command object
-<span class="lineNum">      12 </span>                :<span class="lineCov">         39 : factory.bindClassMethods(Command);</span>
-<a name="13"><span class="lineNum">      13 </span>                :            : </a>
-<span class="lineNum">      14 </span>                :<span class="lineCov">         39 : Command.prototype = {</span>
-<span class="lineNum">      15 </span>                :            :     toolName: function () {
-<span class="lineNum">      16 </span>                :<span class="lineCov">         16 :         return require('../util/meta').NAME;</span>
-<a name="17"><span class="lineNum">      17 </span>                :            :     },</a>
-<span class="lineNum">      18 </span>                :            : 
-<span class="lineNum">      19 </span>                :            :     type: function () {
-<a name="20"><span class="lineNum">      20 </span>                :<span class="lineCov">         33 :         return this.constructor.TYPE;</span></a>
-<span class="lineNum">      21 </span>                :            :     },
-<span class="lineNum">      22 </span>                :            :     synopsis: function () {
-<a name="23"><span class="lineNum">      23 </span>                :<span class="lineNoCov">          0 :         return &quot;the developer has not written a one-line summary of the &quot; + this.type() + &quot; command&quot;;</span></a>
-<span class="lineNum">      24 </span>                :            :     },
-<span class="lineNum">      25 </span>                :            :     usage: function () {
-<a name="26"><span class="lineNum">      26 </span>                :<span class="lineNoCov">          0 :         console.error(&quot;the developer has not provided a usage for the &quot; + this.type() + &quot; command&quot;);</span></a>
-<span class="lineNum">      27 </span>                :            :     },
-<span class="lineNum">      28 </span>                :            :     run: function (args) {
-<span class="lineNum">      29 </span>                :<span class="lineNoCov">          0 :         throw new Error(&quot;run: must be overridden for the &quot; + this.type() + &quot; command&quot;);</span>
-<span class="lineNum">      30 </span>                :            :     }
-<span class="lineNum">      31 </span>                :            : };
-<span class="lineNum">      32 </span>                :            : 
-<span class="lineNum">      33 </span>                :<span class="lineCov">         39 : module.exports = Command;</span>
-<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var Factory = require('../util/factory'),</span>
+<a name="7"><span class="lineNum">       7 </span>                :            :     factory = new Factory('command', __dirname, true);</a>
+<span class="lineNum">       8 </span>                :            : 
+<span class="lineNum">       9 </span>                :<span class="lineCov">         51 : function Command() {}</span>
+<span class="lineNum">      10 </span>                :            : // add register, create, mix, loadAll, getCommandList, resolveCommandName to the Command object
+<span class="lineNum">      11 </span>                :<span class="lineCov">         51 : factory.bindClassMethods(Command);</span>
+<a name="12"><span class="lineNum">      12 </span>                :            : </a>
+<span class="lineNum">      13 </span>                :<span class="lineCov">         51 : Command.prototype = {</span>
+<span class="lineNum">      14 </span>                :            :     toolName: function () {
+<span class="lineNum">      15 </span>                :<span class="lineCov">         18 :         return require('../util/meta').NAME;</span>
+<a name="16"><span class="lineNum">      16 </span>                :            :     },</a>
+<span class="lineNum">      17 </span>                :            : 
+<span class="lineNum">      18 </span>                :            :     type: function () {
+<a name="19"><span class="lineNum">      19 </span>                :<span class="lineCov">         45 :         return this.constructor.TYPE;</span></a>
+<span class="lineNum">      20 </span>                :            :     },
+<span class="lineNum">      21 </span>                :            :     synopsis: function () {
+<a name="22"><span class="lineNum">      22 </span>                :<span class="lineNoCov">          0 :         return &quot;the developer has not written a one-line summary of the &quot; + this.type() + &quot; command&quot;;</span></a>
+<span class="lineNum">      23 </span>                :            :     },
+<span class="lineNum">      24 </span>                :            :     usage: function () {
+<a name="25"><span class="lineNum">      25 </span>                :<span class="lineNoCov">          0 :         console.error(&quot;the developer has not provided a usage for the &quot; + this.type() + &quot; command&quot;);</span></a>
+<span class="lineNum">      26 </span>                :            :     },
+<span class="lineNum">      27 </span>                :            :     run: function (args, callback) {
+<span class="lineNum">      28 </span>                :<span class="lineNoCov">          0 :         return callback(new Error(&quot;run: must be overridden for the &quot; + this.type() + &quot; command&quot;));</span>
+<span class="lineNum">      29 </span>                :            :     }
+<span class="lineNum">      30 </span>                :            : };
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :<span class="lineCov">         51 : module.exports = Command;</span>
+<span class="lineNum">      33 </span>                :            : 
 </pre>
       </td>
     </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -101,7 +101,7 @@
 <span class="lineNum">      30 </span>                :<span class="lineCov">          7 :     fileset(includes.join(' '), excludes.join(' '), opts, function (err, files) {</span>
 <a name="31"><span class="lineNum">      31 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 7 times"> + </span>]:<span class="lineCov">          7 :         if (err) { return callback(err); }</span></a>
 <span class="lineNum">      32 </span>        [<span class="branchCov" title="Branch 0 was taken 5 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          7 :         if (!relative) {</span>
-<span class="lineNum">      33 </span>                :<span class="lineCov">        349 :             files = files.map(function (file) { return path.resolve(root, file); });</span>
+<span class="lineNum">      33 </span>                :<span class="lineCov">        397 :             files = files.map(function (file) { return path.resolve(root, file); });</span>
 <span class="lineNum">      34 </span>                :            :         }
 <span class="lineNum">      35 </span>                :<span class="lineCov">          7 :         callback(err, files);</span>
 <span class="lineNum">      36 </span>                :            :     });
@@ -119,7 +119,7 @@
 <span class="lineNum">      48 </span>                :<span class="lineCov">          4 :     filesFor(options, function (err, files) {</span>
 <a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          4 :         var fileMap = {};</span></a>
 <a name="50"><span class="lineNum">      50 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">          4 :         if (err) { return callback(err); }</span></a>
-<span class="lineNum">      51 </span>                :<span class="lineCov">        234 :         files.forEach(function (file) { fileMap[file] = true; });</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">        266 :         files.forEach(function (file) { fileMap[file] = true; });</span>
 <span class="lineNum">      52 </span>                :<span class="lineCov">         10 :         return callback(null, function (file) { return fileMap[file]; });</span>
 <span class="lineNum">      53 </span>                :            :     });
 <span class="lineNum">      54 </span>                :            : }

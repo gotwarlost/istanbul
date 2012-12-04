@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/report/text-summary.js</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/report</a> - text-summary.js<span style="font-size: 80%;"> (source / <a href="text-summary.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntryHi">92.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-12-04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var path = require('path'),</span>
+<span class="lineNum">       7 </span>                :            :     mkdirp = require('mkdirp'),
+<span class="lineNum">       8 </span>                :            :     fs = require('fs'),
+<span class="lineNum">       9 </span>                :            :     utils = require('../object-utils'),
+<span class="lineNum">      10 </span>                :            :     Report = require('./index');
+<span class="lineNum">      11 </span>                :            : 
+<span class="lineNum">      12 </span>                :            : /**
+<span class="lineNum">      13 </span>                :            :  * a `Report` implementation that produces text output for overall coverage in summary format.
+<span class="lineNum">      14 </span>                :            :  *
+<span class="lineNum">      15 </span>                :            :  * Usage
+<span class="lineNum">      16 </span>                :            :  * -----
+<span class="lineNum">      17 </span>                :            :  *
+<span class="lineNum">      18 </span>                :            :  *      var report = require('istanbul').Report.create('text-summary');
+<span class="lineNum">      19 </span>                :            :  *
+<span class="lineNum">      20 </span>                :            :  * @class TextSummaryReport
+<span class="lineNum">      21 </span>                :            :  * @extends Report
+<span class="lineNum">      22 </span>                :            :  * @constructor
+<span class="lineNum">      23 </span>                :            :  * @param {Object} opts optional
+<span class="lineNum">      24 </span>                :            :  * @param {String} [opts.dir] the directory in which to the text coverage report will be written, when writing to a file
+<a name="25"><span class="lineNum">      25 </span>                :            :  * @param {String} [opts.file] the filename for the report. When omitted, the report is written to console</a>
+<span class="lineNum">      26 </span>                :            :  */
+<span class="lineNum">      27 </span>                :<span class="lineCov">         51 : function TextSummaryReport(opts) {</span>
+<span class="lineNum">      28 </span>                :<span class="lineCov">         27 :     Report.call(this);</span>
+<span class="lineNum">      29 </span>        [<span class="branchCov" title="Branch 0 was taken 27 times"> + </span><span class="branchCov" title="Branch 1 was taken 27 times"> + </span>]:<span class="lineCov">         27 :     opts = opts || {};</span>
+<span class="lineNum">      30 </span>        [<span class="branchCov" title="Branch 0 was taken 27 times"> + </span><span class="branchCov" title="Branch 1 was taken 27 times"> + </span>]:<span class="lineCov">         27 :     this.dir = opts.dir || process.cwd();</span>
+<span class="lineNum">      31 </span>                :<span class="lineCov">         27 :     this.file = opts.file;</span>
+<span class="lineNum">      32 </span>                :            : }
+<span class="lineNum">      33 </span>                :            : 
+<a name="34"><span class="lineNum">      34 </span>                :<span class="lineCov">         51 : TextSummaryReport.TYPE = 'text-summary';</span></a>
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :<span class="lineCov">         51 : function lineForKey(summary, key) {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">         20 :     var metrics = summary[key];</span>
+<span class="lineNum">      38 </span>                :<span class="lineCov">         20 :     key = key.substring(0, 1).toUpperCase() + key.substring(1);</span>
+<span class="lineNum">      39 </span>        [<span class="branchCov" title="Branch 0 was taken 20 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         20 :     if (key.length &lt; 12) { key += '                   '.substring(0, 12 - key.length); }</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">         20 :     return [ key , ':', metrics.pct + '%', '(', metrics.covered + '/' + metrics.total, ')'].join(' ');</span>
+<span class="lineNum">      41 </span>                :            : }
+<a name="42"><span class="lineNum">      42 </span>                :            : </a>
+<span class="lineNum">      43 </span>                :<span class="lineCov">         51 : Report.mix(TextSummaryReport, {</span>
+<span class="lineNum">      44 </span>                :            :     writeReport: function (collector /*, sync */) {
+<span class="lineNum">      45 </span>                :<span class="lineCov">          5 :         var summaries = [],</span>
+<span class="lineNum">      46 </span>                :            :             finalSummary,
+<a name="47"><span class="lineNum">      47 </span>                :            :             lines = [],</a>
+<span class="lineNum">      48 </span>                :            :             text;
+<span class="lineNum">      49 </span>                :<span class="lineCov">          5 :         collector.files().forEach(function (file) {</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">         21 :             summaries.push(utils.summarizeFileCoverage(collector.fileCoverageFor(file)));</span>
+<span class="lineNum">      51 </span>                :            :         });
+<span class="lineNum">      52 </span>                :<span class="lineCov">          5 :         finalSummary = utils.mergeSummaryObjects.apply(null, summaries);</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">          5 :         lines.push('');</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">          5 :         lines.push('=============================== Coverage summary ===============================');</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">          5 :         lines.push.apply(lines, [</span>
+<span class="lineNum">      56 </span>                :            :             lineForKey(finalSummary, 'statements'),
+<span class="lineNum">      57 </span>                :            :             lineForKey(finalSummary, 'branches'),
+<span class="lineNum">      58 </span>                :            :             lineForKey(finalSummary, 'functions'),
+<span class="lineNum">      59 </span>                :            :             lineForKey(finalSummary, 'lines')
+<span class="lineNum">      60 </span>                :            :         ]);
+<span class="lineNum">      61 </span>                :<span class="lineCov">          5 :         lines.push('================================================================================');</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">          5 :         text = lines.join('\n');</span>
+<span class="lineNum">      63 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 5 times"> + </span>]:<span class="lineCov">          5 :         if (this.file) {</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :             mkdirp.sync(this.dir);</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :             fs.writeFileSync(path.join(this.dir, this.file), text, 'utf8');</span>
+<span class="lineNum">      66 </span>                :            :         } else {
+<span class="lineNum">      67 </span>                :<span class="lineCov">          5 :             console.log(text);</span>
+<span class="lineNum">      68 </span>                :            :         }
+<span class="lineNum">      69 </span>                :            :     }
+<span class="lineNum">      70 </span>                :            : });
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineCov">         51 : module.exports = TextSummaryReport;</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

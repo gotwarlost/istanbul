@@ -31,17 +31,17 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">50</td>
-            <td class="headerCovTableEntry">51</td>
-            <td class="headerCovTableEntryHi">98.0 %</td>
+            <td class="headerCovTableEntry">60</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntryHi">92.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -49,9 +49,9 @@
             <td></td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntry">25</td>
             <td class="headerCovTableEntry">28</td>
-            <td class="headerCovTableEntryMed">89.3 %</td>
+            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntryMed">84.8 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -73,13 +73,13 @@
 <span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
-<span class="lineNum">       5 </span>                :<span class="lineCov">         39 : var Module = require('module'),</span>
+<span class="lineNum">       5 </span>                :<span class="lineCov">         51 : var Module = require('module'),</span>
 <span class="lineNum">       6 </span>                :            :     path = require('path'),
 <span class="lineNum">       7 </span>                :            :     fs = require('fs'),
 <span class="lineNum">       8 </span>                :            :     nopt = require('nopt'),
 <span class="lineNum">       9 </span>                :            :     which = require('which'),
 <span class="lineNum">      10 </span>                :            :     mkdirp = require('mkdirp'),
-<span class="lineNum">      11 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchCov" title="Branch 1 was taken 39 times"> + </span>]:            :     existsSync = fs.existsSync || path.existsSync,
+<span class="lineNum">      11 </span>        [<span class="branchCov" title="Branch 0 was taken 51 times"> + </span><span class="branchCov" title="Branch 1 was taken 51 times"> + </span>]:            :     existsSync = fs.existsSync || path.existsSync,
 <span class="lineNum">      12 </span>                :            :     inputError = require('../../util/input-error'),
 <span class="lineNum">      13 </span>                :            :     matcherFor = require('../../util/file-matcher').matcherFor,
 <span class="lineNum">      14 </span>                :            :     Instrumenter = require('../../instrumenter'),
@@ -89,7 +89,7 @@
 <span class="lineNum">      18 </span>                :            :     Report = require('../../report'),
 <a name="19"><span class="lineNum">      19 </span>                :            :     DEFAULT_REPORT_FORMAT = 'lcov';</a>
 <span class="lineNum">      20 </span>                :            : 
-<span class="lineNum">      21 </span>                :<span class="lineCov">         39 : function usage(arg0, command) {</span>
+<span class="lineNum">      21 </span>                :<span class="lineCov">         51 : function usage(arg0, command) {</span>
 <span class="lineNum">      22 </span>                :<span class="lineCov">          4 :     console.error('\nUsage: ' + arg0 + ' ' + command + ' [&lt;options&gt;] &lt;executable-js-file-or-command&gt; [-- &lt;arguments-to-jsfile&gt;]\n\nOptions are:\n\n'</span>
 <span class="lineNum">      23 </span>                :            :         + [
 <span class="lineNum">      24 </span>                :            :             formatOption('--root &lt;path&gt; ', 'the root path to look for files to instrument, defaults to .'),
@@ -97,118 +97,141 @@
 <span class="lineNum">      26 </span>                :            :             formatOption('--[no-]default-excludes', 'apply default excludes [ **/node_modules/**, **/test/**, **/tests/** ], defaults to true'),
 <span class="lineNum">      27 </span>                :            :             formatOption('--report &lt;report-type&gt;', 'report type, one of html, lcov, lcovonly, none, defaults to lcov (= lcov.info + HTML)'),
 <span class="lineNum">      28 </span>                :            :             formatOption('--dir &lt;report-dir&gt;', 'report directory, defaults to ./coverage'),
-<span class="lineNum">      29 </span>                :            :             formatOption('--verbose, -v', 'verbose mode')
-<span class="lineNum">      30 </span>                :            :         ].join('\n\n') + '\n');
-<span class="lineNum">      31 </span>                :<span class="lineCov">          4 :     console.error('\n');</span>
-<a name="32"><span class="lineNum">      32 </span>                :            : }</a>
-<span class="lineNum">      33 </span>                :            : 
-<span class="lineNum">      34 </span>                :<span class="lineCov">         39 : function run(args, commandName, enableHooks) {</span>
-<span class="lineNum">      35 </span>                :            : 
-<span class="lineNum">      36 </span>                :<span class="lineCov">         21 :     var config = {</span>
-<span class="lineNum">      37 </span>                :            :             root: path,
-<span class="lineNum">      38 </span>                :            :             x: [Array, String],
-<span class="lineNum">      39 </span>                :            :             report: String,
-<span class="lineNum">      40 </span>                :            :             dir: path,
-<span class="lineNum">      41 </span>                :            :             verbose: Boolean,
-<span class="lineNum">      42 </span>                :            :             yui: Boolean,
-<span class="lineNum">      43 </span>                :            :             'default-excludes': Boolean
-<span class="lineNum">      44 </span>                :            :         },
-<span class="lineNum">      45 </span>                :            :         opts = nopt(config, { v : '--verbose' }, args, 0),
-<span class="lineNum">      46 </span>                :            :         cmdAndArgs = opts.argv.remain,
-<span class="lineNum">      47 </span>                :            :         cmd,
-<span class="lineNum">      48 </span>                :            :         cmdArgs,
-<span class="lineNum">      49 </span>                :            :         reportingDir,
-<span class="lineNum">      50 </span>                :            :         reportClassName,
-<span class="lineNum">      51 </span>                :            :         report,
-<span class="lineNum">      52 </span>                :            :         runFn,
-<span class="lineNum">      53 </span>                :            :         excludes;
-<span class="lineNum">      54 </span>                :            : 
-<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 20 times"> + </span>]:<span class="lineCov">         21 :     if (cmdAndArgs.length === 0) {</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">          1 :         throw inputError.create('Need a filename argument for the ' + commandName + ' command!');</span>
-<span class="lineNum">      57 </span>                :            :     }
-<span class="lineNum">      58 </span>                :            : 
-<span class="lineNum">      59 </span>                :<span class="lineCov">         20 :     cmd = cmdAndArgs.shift();</span>
-<span class="lineNum">      60 </span>                :<span class="lineCov">         20 :     cmdArgs = cmdAndArgs;</span>
+<span class="lineNum">      29 </span>                :            :             formatOption('--print &lt;type&gt;', 'type of report to print to console, one of summary (default), detail, both or none'),
+<span class="lineNum">      30 </span>                :            :             formatOption('--verbose, -v', 'verbose mode')
+<span class="lineNum">      31 </span>                :            :         ].join('\n\n') + '\n');
+<span class="lineNum">      32 </span>                :<span class="lineCov">          4 :     console.error('\n');</span>
+<a name="33"><span class="lineNum">      33 </span>                :            : }</a>
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :<span class="lineCov">         51 : function run(args, commandName, enableHooks, callback) {</span>
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :<span class="lineCov">         31 :     var config = {</span>
+<span class="lineNum">      38 </span>                :            :             root: path,
+<span class="lineNum">      39 </span>                :            :             x: [Array, String],
+<span class="lineNum">      40 </span>                :            :             report: String,
+<span class="lineNum">      41 </span>                :            :             dir: path,
+<span class="lineNum">      42 </span>                :            :             verbose: Boolean,
+<span class="lineNum">      43 </span>                :            :             yui: Boolean,
+<span class="lineNum">      44 </span>                :            :             'default-excludes': Boolean,
+<span class="lineNum">      45 </span>                :            :             print: String,
+<span class="lineNum">      46 </span>                :            :             'self-test': Boolean
+<span class="lineNum">      47 </span>                :            :         },
+<span class="lineNum">      48 </span>                :            :         opts = nopt(config, { v : '--verbose' }, args, 0),
+<span class="lineNum">      49 </span>                :            :         cmdAndArgs = opts.argv.remain,
+<span class="lineNum">      50 </span>                :            :         cmd,
+<span class="lineNum">      51 </span>                :            :         cmdArgs,
+<span class="lineNum">      52 </span>                :            :         reportingDir,
+<span class="lineNum">      53 </span>                :            :         reportClassName,
+<span class="lineNum">      54 </span>                :            :         reports = [],
+<span class="lineNum">      55 </span>                :            :         runFn,
+<span class="lineNum">      56 </span>                :            :         excludes;
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">         31 :     if (cmdAndArgs.length === 0) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">          1 :         return callback(inputError.create('Need a filename argument for the ' + commandName + ' command!'));</span>
+<span class="lineNum">      60 </span>                :            :     }
 <span class="lineNum">      61 </span>                :            : 
-<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 19 times"> + </span>]:<span class="lineCov">         20 :     if (!existsSync(cmd)) {</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">          1 :         try {</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">          1 :             cmd = which.sync(cmd);</span>
-<span class="lineNum">      65 </span>                :            :         } catch (ex) {
-<span class="lineNum">      66 </span>                :<span class="lineCov">          1 :             throw inputError.create('Unable to resolve file [' + cmd + ']');</span>
-<span class="lineNum">      67 </span>                :            :         }
-<span class="lineNum">      68 </span>                :            :     } else {
-<span class="lineNum">      69 </span>                :<span class="lineCov">         19 :         cmd = path.resolve(cmd);</span>
-<a name="70"><span class="lineNum">      70 </span>                :            :     }</a>
-<span class="lineNum">      71 </span>                :            : 
-<span class="lineNum">      72 </span>                :<span class="lineCov">         19 :     runFn = function () {</span>
-<span class="lineNum">      73 </span>                :<span class="lineCov">         19 :         process.argv = [&quot;node&quot;, cmd].concat(cmdArgs);</span>
-<span class="lineNum">      74 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         19 :         if (opts.verbose) {</span>
-<span class="lineNum">      75 </span>                :<span class="lineCov">          1 :             console.log('Running: ' + process.argv.join(' '));</span>
-<span class="lineNum">      76 </span>                :            :         }
-<span class="lineNum">      77 </span>                :<span class="lineCov">         19 :         Module.runMain(cmd, null, true);</span>
-<span class="lineNum">      78 </span>                :            :     };
-<span class="lineNum">      79 </span>                :            : 
-<span class="lineNum">      80 </span>[<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 0 was taken 19 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         19 :     excludes = typeof opts['default-excludes'] === 'undefined' || opts['default-excludes'] ?</span>
-<span class="lineNum">      81 </span>                :            :             [ '**/node_modules/**', '**/test/**', '**/tests/**' ] : [];
-<span class="lineNum">      82 </span>                :<span class="lineCov">         19 :     excludes.push.apply(excludes, opts.x);</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">         30 :     cmd = cmdAndArgs.shift();</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">         30 :     cmdArgs = cmdAndArgs;</span>
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 29 times"> + </span>]:<span class="lineCov">         30 :     if (!existsSync(cmd)) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">          1 :         try {</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">          1 :             cmd = which.sync(cmd);</span>
+<span class="lineNum">      68 </span>                :            :         } catch (ex) {
+<span class="lineNum">      69 </span>                :<span class="lineCov">          1 :             return callback(inputError.create('Unable to resolve file [' + cmd + ']'));</span>
+<span class="lineNum">      70 </span>                :            :         }
+<span class="lineNum">      71 </span>                :            :     } else {
+<span class="lineNum">      72 </span>                :<span class="lineCov">         29 :         cmd = path.resolve(cmd);</span>
+<a name="73"><span class="lineNum">      73 </span>                :            :     }</a>
+<span class="lineNum">      74 </span>                :            : 
+<span class="lineNum">      75 </span>                :<span class="lineCov">         29 :     runFn = function () {</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">         29 :         process.argv = [&quot;node&quot;, cmd].concat(cmdArgs);</span>
+<span class="lineNum">      77 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:<span class="lineCov">         29 :         if (opts.verbose) {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">          1 :             console.log('Running: ' + process.argv.join(' '));</span>
+<span class="lineNum">      79 </span>                :            :         }
+<span class="lineNum">      80 </span>                :<span class="lineCov">         29 :         process.env.running_under_istanbul=1;</span>
+<span class="lineNum">      81 </span>                :<span class="lineCov">         29 :         Module.runMain(cmd, null, true);</span>
+<span class="lineNum">      82 </span>                :            :     };
 <span class="lineNum">      83 </span>                :            : 
-<span class="lineNum">      84 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         19 :     if (enableHooks) {</span>
-<span class="lineNum">      85 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :         reportingDir = opts.dir || path.resolve(process.cwd(), 'coverage');</span>
-<span class="lineNum">      86 </span>                :<span class="lineCov">         18 :         mkdirp.sync(reportingDir);</span>
-<span class="lineNum">      87 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 5 times"> + </span>]:<span class="lineCov">         18 :         reportClassName = opts.report || DEFAULT_REPORT_FORMAT;</span>
-<span class="lineNum">      88 </span>                :<span class="lineCov">         18 :         report = Report.create(reportClassName, { dir: reportingDir });</span>
-<span class="lineNum">      89 </span>                :            : 
-<span class="lineNum">      90 </span>                :<span class="lineCov">         18 :         matcherFor({</span>
-<span class="lineNum">      91 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:            :             root: opts.root || process.cwd(),
-<span class="lineNum">      92 </span>                :            :             includes: [ '**/*.js' ],
-<a name="93"><span class="lineNum">      93 </span>                :            :             excludes: excludes</a>
-<span class="lineNum">      94 </span>                :            :         },
-<span class="lineNum">      95 </span>                :            :             function (err, matchFn) {
-<span class="lineNum">      96 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :                 if (err) { throw err; }</span>
-<span class="lineNum">      97 </span>                :            : 
-<span class="lineNum">      98 </span>                :<span class="lineCov">         18 :                 var coverageVar = '$$cov_' + new Date().getTime() + '$$',</span>
-<span class="lineNum">      99 </span>                :            :                     instrumenter = new Instrumenter({ coverageVariable: coverageVar }),
-<span class="lineNum">     100 </span>                :            :                     transformer = instrumenter.instrumentSync.bind(instrumenter),
-<span class="lineNum">     101 </span>                :            :                     hookOpts = { verbose: opts.verbose };
-<span class="lineNum">     102 </span>                :            : 
-<span class="lineNum">     103 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :                 if (opts.yui) { //EXPERIMENTAL code: do not rely on this in anyway until the docs say it is allowed</span>
-<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :                     hookOpts.postLoadHook = require('../../util/yui-load-hook').getPostLoadHook(matchFn, transformer, opts.verbose);</span>
-<a name="105"><span class="lineNum">     105 </span>                :            :                 }</a>
-<span class="lineNum">     106 </span>                :<span class="lineCov">         18 :                 hook.hookRequire(matchFn, transformer, hookOpts);</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">         18 :                 process.once('exit', function () {</span>
-<span class="lineNum">     108 </span>                :<span class="lineCov">          7 :                     var file = path.resolve(reportingDir, 'coverage.json'),</span>
-<span class="lineNum">     109 </span>                :            :                         collector,
-<span class="lineNum">     110 </span>                :            :                         cov;
-<span class="lineNum">     111 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">          7 :                     if (typeof global[coverageVar] === 'undefined') {</span>
-<span class="lineNum">     112 </span>                :<span class="lineCov">          1 :                         console.error('No coverage information was collected, exit without writing coverage information');</span>
-<span class="lineNum">     113 </span>                :<span class="lineCov">          1 :                         return;</span>
-<span class="lineNum">     114 </span>                :            :                     } else {
-<span class="lineNum">     115 </span>                :<span class="lineCov">          6 :                         cov = global[coverageVar];</span>
-<span class="lineNum">     116 </span>                :            :                     }
-<span class="lineNum">     117 </span>                :            :                     //important: there is no event loop at this point
-<span class="lineNum">     118 </span>                :            :                     //everything that happens in this exit handler MUST be synchronous
-<span class="lineNum">     119 </span>                :<span class="lineCov">          6 :                     console.log('=============================================================================');</span>
-<span class="lineNum">     120 </span>                :<span class="lineCov">          6 :                     console.log('Writing coverage object [' + file + ']');</span>
-<span class="lineNum">     121 </span>                :<span class="lineCov">          6 :                     fs.writeFileSync(file, JSON.stringify(cov), 'utf8');</span>
-<span class="lineNum">     122 </span>                :<span class="lineCov">          6 :                     collector = new Collector();</span>
-<span class="lineNum">     123 </span>                :<span class="lineCov">          6 :                     collector.add(cov);</span>
-<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          6 :                     if (report) {</span>
-<span class="lineNum">     125 </span>                :<span class="lineCov">          6 :                         console.log('Writing coverage reports at [' + reportingDir + ']');</span>
-<span class="lineNum">     126 </span>                :<span class="lineCov">          6 :                         report.writeReport(collector, true);</span>
-<span class="lineNum">     127 </span>                :            :                     }
-<span class="lineNum">     128 </span>                :<span class="lineCov">          6 :                     console.log('=============================================================================');</span>
-<span class="lineNum">     129 </span>                :            :                 });
-<span class="lineNum">     130 </span>                :<span class="lineCov">         18 :                 runFn();</span>
-<span class="lineNum">     131 </span>                :            :             });
-<span class="lineNum">     132 </span>                :            :     } else {
-<span class="lineNum">     133 </span>                :<span class="lineCov">          1 :         runFn();</span>
-<span class="lineNum">     134 </span>                :            :     }
-<span class="lineNum">     135 </span>                :            : }
-<span class="lineNum">     136 </span>                :            : 
-<span class="lineNum">     137 </span>                :<span class="lineCov">         39 : module.exports = {</span>
-<span class="lineNum">     138 </span>                :            :     run: run,
-<span class="lineNum">     139 </span>                :            :     usage: usage
-<span class="lineNum">     140 </span>                :            : };
+<span class="lineNum">      84 </span>[<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>][<span class="branchCov" title="Branch 0 was taken 29 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         29 :     excludes = typeof opts['default-excludes'] === 'undefined' || opts['default-excludes'] ?</span>
+<span class="lineNum">      85 </span>                :            :             [ '**/node_modules/**', '**/test/**', '**/tests/**' ] : [];
+<span class="lineNum">      86 </span>                :<span class="lineCov">         29 :     excludes.push.apply(excludes, opts.x);</span>
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         29 :     if (enableHooks) {</span>
+<span class="lineNum">      89 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:<span class="lineCov">         28 :         reportingDir = opts.dir || path.resolve(process.cwd(), 'coverage');</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">         28 :         mkdirp.sync(reportingDir); //ensure we fail early if we cannot do this</span>
+<span class="lineNum">      91 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 5 times"> + </span>]:<span class="lineCov">         28 :         reportClassName = opts.report || DEFAULT_REPORT_FORMAT;</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">         28 :         reports.push(Report.create(reportClassName, { dir: reportingDir }));</span>
+<span class="lineNum">      93 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         28 :         if (opts.print !== 'none') {</span>
+<span class="lineNum">      94 </span>     [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 27 times"> + </span>]:<span class="lineCov">         28 :             switch (opts.print) {</span>
+<span class="lineNum">      95 </span>                :            :             case 'detail':
+<span class="lineNum">      96 </span>                :<span class="lineCov">          1 :                 reports.push(Report.create('text'));</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">      98 </span>                :            :             case 'both':
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :                 reports.push(Report.create('text'));</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :                 reports.push(Report.create('text-summary'));</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     102 </span>                :            :             default:
+<span class="lineNum">     103 </span>                :<span class="lineCov">         27 :                 reports.push(Report.create('text-summary'));</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">         27 :                 break;</span>
+<span class="lineNum">     105 </span>                :            :             }
+<span class="lineNum">     106 </span>                :            :         }
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineCov">         28 :         matcherFor({</span>
+<span class="lineNum">     109 </span>        [<span class="branchCov" title="Branch 0 was taken 28 times"> + </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:            :             root: opts.root || process.cwd(),
+<span class="lineNum">     110 </span>                :            :             includes: [ '**/*.js' ],
+<a name="111"><span class="lineNum">     111 </span>                :            :             excludes: excludes</a>
+<span class="lineNum">     112 </span>                :            :         },
+<span class="lineNum">     113 </span>                :            :             function (err, matchFn) {
+<span class="lineNum">     114 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:<span class="lineCov">         28 :                 if (err) { return callback(err); }</span>
+<span class="lineNum">     115 </span>                :            : 
+<span class="lineNum">     116 </span>                :<span class="lineCov">         28 :                 var coverageVar = '$$cov_' + new Date().getTime() + '$$',</span>
+<span class="lineNum">     117 </span>                :            :                     instrumenter = new Instrumenter({ coverageVariable: coverageVar }),
+<span class="lineNum">     118 </span>                :            :                     transformer = instrumenter.instrumentSync.bind(instrumenter),
+<span class="lineNum">     119 </span>                :            :                     hookOpts = { verbose: opts.verbose };
+<span class="lineNum">     120 </span>                :            : 
+<span class="lineNum">     121 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:<span class="lineCov">         28 :                 if (opts.yui) { //EXPERIMENTAL code: do not rely on this in anyway until the docs say it is allowed</span>
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :                     hookOpts.postLoadHook = require('../../util/yui-load-hook').getPostLoadHook(matchFn, transformer, opts.verbose);</span>
+<span class="lineNum">     123 </span>                :            :                 }
+<span class="lineNum">     124 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 28 times"> + </span>]:<span class="lineCov">         28 :                 if (opts['self-test']) {</span>
+<span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 :                     hook.unloadRequireCache(matchFn);</span>
+<a name="126"><span class="lineNum">     126 </span>                :            :                 }</a>
+<span class="lineNum">     127 </span>                :<span class="lineCov">         28 :                 hook.hookRequire(matchFn, transformer, hookOpts);</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">         28 :                 process.once('exit', function () {</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">          7 :                     var file = path.resolve(reportingDir, 'coverage.json'),</span>
+<span class="lineNum">     130 </span>                :            :                         collector,
+<span class="lineNum">     131 </span>                :            :                         cov;
+<span class="lineNum">     132 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">          7 :                     if (typeof global[coverageVar] === 'undefined') {</span>
+<span class="lineNum">     133 </span>                :<span class="lineCov">          1 :                         console.error('No coverage information was collected, exit without writing coverage information');</span>
+<span class="lineNum">     134 </span>                :<span class="lineCov">          1 :                         return;</span>
+<span class="lineNum">     135 </span>                :            :                     } else {
+<span class="lineNum">     136 </span>                :<span class="lineCov">          6 :                         cov = global[coverageVar];</span>
+<span class="lineNum">     137 </span>                :            :                     }
+<span class="lineNum">     138 </span>                :            :                     //important: there is no event loop at this point
+<span class="lineNum">     139 </span>                :            :                     //everything that happens in this exit handler MUST be synchronous
+<span class="lineNum">     140 </span>                :<span class="lineCov">          6 :                     mkdirp.sync(reportingDir); //yes, do this again since some test runners could clean the dir initially created</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">          6 :                     console.log('=============================================================================');</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">          6 :                     console.log('Writing coverage object [' + file + ']');</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">          6 :                     fs.writeFileSync(file, JSON.stringify(cov), 'utf8');</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">          6 :                     collector = new Collector();</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">          6 :                     collector.add(cov);</span>
+<a name="146"><span class="lineNum">     146 </span>                :<span class="lineCov">          6 :                     console.log('Writing coverage reports at [' + reportingDir + ']');</span></a>
+<span class="lineNum">     147 </span>                :<span class="lineCov">          6 :                     console.log('=============================================================================');</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">          6 :                     reports.forEach(function (report) {</span>
+<span class="lineNum">     149 </span>                :<span class="lineCov">         12 :                         report.writeReport(collector, true);</span>
+<span class="lineNum">     150 </span>                :            :                     });
+<span class="lineNum">     151 </span>                :<span class="lineCov">          6 :                     return callback();</span>
+<span class="lineNum">     152 </span>                :            :                 });
+<span class="lineNum">     153 </span>                :<span class="lineCov">         28 :                 runFn();</span>
+<span class="lineNum">     154 </span>                :            :             });
+<span class="lineNum">     155 </span>                :            :     } else {
+<span class="lineNum">     156 </span>                :<span class="lineCov">          1 :         runFn();</span>
+<span class="lineNum">     157 </span>                :            :     }
+<span class="lineNum">     158 </span>                :            : }
+<span class="lineNum">     159 </span>                :            : 
+<span class="lineNum">     160 </span>                :<span class="lineCov">         51 : module.exports = {</span>
+<span class="lineNum">     161 </span>                :            :     run: run,
+<span class="lineNum">     162 </span>                :            :     usage: usage
+<span class="lineNum">     163 </span>                :            : };
 </pre>
       </td>
     </tr>

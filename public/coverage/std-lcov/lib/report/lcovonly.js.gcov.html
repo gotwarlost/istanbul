@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -49,8 +49,8 @@
             <td></td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -74,89 +74,86 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <span class="lineNum">       4 </span>                :            :  */
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : var path = require('path'),</span>
-<span class="lineNum">       7 </span>                :            :     fs = require('fs'),
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var path = require('path'),</span>
+<span class="lineNum">       7 </span>                :            :     Writer = require('../util/file-writer'),
 <span class="lineNum">       8 </span>                :            :     util = require('util'),
-<span class="lineNum">       9 </span>                :            :     Report = require('./index'),
-<span class="lineNum">      10 </span>                :            :     Store = require('../store'),
-<span class="lineNum">      11 </span>                :            :     Writer = require('../util/file-writer'),
-<span class="lineNum">      12 </span>                :            :     utils = require('../object-utils');
-<span class="lineNum">      13 </span>                :            : 
-<span class="lineNum">      14 </span>                :            : /**
-<span class="lineNum">      15 </span>                :            :  * a `Report` implementation that produces an LCOV coverage file from coverage objects.
-<span class="lineNum">      16 </span>                :            :  *
-<span class="lineNum">      17 </span>                :            :  * Usage
-<span class="lineNum">      18 </span>                :            :  * -----
-<span class="lineNum">      19 </span>                :            :  *
-<span class="lineNum">      20 </span>                :            :  *      var report = require('istanbul').Report.create('lcovonly');
-<span class="lineNum">      21 </span>                :            :  *
-<span class="lineNum">      22 </span>                :            :  *
-<span class="lineNum">      23 </span>                :            :  * @class LcovOnlyReport
-<span class="lineNum">      24 </span>                :            :  * @extends Report
-<span class="lineNum">      25 </span>                :            :  * @constructor
-<span class="lineNum">      26 </span>                :            :  * @param {Object} opts optional
-<a name="27"><span class="lineNum">      27 </span>                :            :  * @param {String} [opts.dir] the directory in which to the `lcov.info` file. Defaults to `process.cwd()`</a>
-<span class="lineNum">      28 </span>                :            :  */
-<span class="lineNum">      29 </span>                :<span class="lineCov">         39 : function LcovOnlyReport(opts) {</span>
-<span class="lineNum">      30 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         12 :     this.opts = opts || {};</span>
-<span class="lineNum">      31 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         12 :     this.opts.dir = this.opts.dir || process.cwd();</span>
-<span class="lineNum">      32 </span>                :            : }
-<span class="lineNum">      33 </span>                :<span class="lineCov">         39 : LcovOnlyReport.TYPE = 'lcovonly';</span>
-<span class="lineNum">      34 </span>                :<span class="lineCov">         39 : util.inherits(LcovOnlyReport, Report);</span>
-<a name="35"><span class="lineNum">      35 </span>                :            : </a>
-<span class="lineNum">      36 </span>                :<span class="lineCov">         39 : Report.mix(LcovOnlyReport, {</span>
-<span class="lineNum">      37 </span>                :            :     writeFileCoverage: function (writer, fc) {
-<span class="lineNum">      38 </span>                :<span class="lineCov">         41 :         var functions = fc.f,</span>
-<span class="lineNum">      39 </span>                :            :             functionMap = fc.fnMap,
-<span class="lineNum">      40 </span>                :            :             lines = fc.l,
-<span class="lineNum">      41 </span>                :            :             branches = fc.b,
-<span class="lineNum">      42 </span>                :            :             branchMap = fc.branchMap;
+<span class="lineNum">       9 </span>                :            :     Report = require('./index');
+<span class="lineNum">      10 </span>                :            : /**
+<span class="lineNum">      11 </span>                :            :  * a `Report` implementation that produces an LCOV coverage file from coverage objects.
+<span class="lineNum">      12 </span>                :            :  *
+<span class="lineNum">      13 </span>                :            :  * Usage
+<span class="lineNum">      14 </span>                :            :  * -----
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  *      var report = require('istanbul').Report.create('lcovonly');
+<span class="lineNum">      17 </span>                :            :  *
+<span class="lineNum">      18 </span>                :            :  *
+<span class="lineNum">      19 </span>                :            :  * @class LcovOnlyReport
+<span class="lineNum">      20 </span>                :            :  * @extends Report
+<span class="lineNum">      21 </span>                :            :  * @constructor
+<span class="lineNum">      22 </span>                :            :  * @param {Object} opts optional
+<a name="23"><span class="lineNum">      23 </span>                :            :  * @param {String} [opts.dir] the directory in which to the `lcov.info` file. Defaults to `process.cwd()`</a>
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :<span class="lineCov">         51 : function LcovOnlyReport(opts) {</span>
+<span class="lineNum">      26 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         12 :     this.opts = opts || {};</span>
+<span class="lineNum">      27 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         12 :     this.opts.dir = this.opts.dir || process.cwd();</span>
+<span class="lineNum">      28 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 12 times"> + </span>]:<span class="lineCov">         12 :     this.opts.writer = this.opts.writer || null;</span>
+<span class="lineNum">      29 </span>                :            : }
+<span class="lineNum">      30 </span>                :<span class="lineCov">         51 : LcovOnlyReport.TYPE = 'lcovonly';</span>
+<span class="lineNum">      31 </span>                :<span class="lineCov">         51 : util.inherits(LcovOnlyReport, Report);</span>
+<a name="32"><span class="lineNum">      32 </span>                :            : </a>
+<span class="lineNum">      33 </span>                :<span class="lineCov">         51 : Report.mix(LcovOnlyReport, {</span>
+<span class="lineNum">      34 </span>                :            :     writeFileCoverage: function (writer, fc) {
+<span class="lineNum">      35 </span>                :<span class="lineCov">         41 :         var functions = fc.f,</span>
+<span class="lineNum">      36 </span>                :            :             functionMap = fc.fnMap,
+<span class="lineNum">      37 </span>                :            :             lines = fc.l,
+<span class="lineNum">      38 </span>                :            :             branches = fc.b,
+<span class="lineNum">      39 </span>                :            :             branchMap = fc.branchMap;
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :<span class="lineCov">         41 :         writer.println('TN:'); //no test name</span>
+<a name="42"><span class="lineNum">      42 </span>                :<span class="lineCov">         41 :         writer.println('SF:' + fc.path);</span></a>
 <span class="lineNum">      43 </span>                :            : 
-<span class="lineNum">      44 </span>                :<span class="lineCov">         41 :         writer.println('TN:'); //no test name</span>
-<a name="45"><span class="lineNum">      45 </span>                :<span class="lineCov">         41 :         writer.println('SF:' + fc.path);</span></a>
-<span class="lineNum">      46 </span>                :            : 
-<span class="lineNum">      47 </span>                :<span class="lineCov">         41 :         Object.keys(functions).forEach(function (key) {</span>
-<span class="lineNum">      48 </span>                :<span class="lineCov">         51 :             var meta = functionMap[key];</span>
-<span class="lineNum">      49 </span>                :<span class="lineCov">         51 :             writer.println('FN:' + [ meta.line, meta.name ].join(','));</span>
-<a name="50"><span class="lineNum">      50 </span>                :            :         });</a>
-<span class="lineNum">      51 </span>                :            : 
-<span class="lineNum">      52 </span>                :<span class="lineCov">         41 :         Object.keys(functions).forEach(function (key) {</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">         51 :             var stats = functions[key],</span>
-<span class="lineNum">      54 </span>                :            :                 meta = functionMap[key];
-<span class="lineNum">      55 </span>                :<span class="lineCov">         51 :             writer.println('FNDA:' + [ stats, meta.name ].join(','));</span>
-<a name="56"><span class="lineNum">      56 </span>                :            :         });</a>
-<span class="lineNum">      57 </span>                :            : 
-<span class="lineNum">      58 </span>                :<span class="lineCov">         41 :         Object.keys(lines).forEach(function (key) {</span>
-<span class="lineNum">      59 </span>                :<span class="lineCov">        154 :             var stat = lines[key];</span>
-<span class="lineNum">      60 </span>                :<span class="lineCov">        154 :             writer.println('DA:' + [ key, stat ].join(','));</span>
-<a name="61"><span class="lineNum">      61 </span>                :            :         });</a>
-<span class="lineNum">      62 </span>                :            : 
-<span class="lineNum">      63 </span>                :<span class="lineCov">         41 :         Object.keys(branches).forEach(function (key) {</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">         32 :             var branchArray = branches[key],</span>
-<span class="lineNum">      65 </span>                :            :                 meta = branchMap[key],
-<a name="66"><span class="lineNum">      66 </span>                :            :                 line = meta.line,</a>
-<span class="lineNum">      67 </span>                :            :                 i = 0;
-<span class="lineNum">      68 </span>                :<span class="lineCov">         32 :             branchArray.forEach(function (b) {</span>
-<span class="lineNum">      69 </span>                :<span class="lineCov">         64 :                 writer.println('BRDA:' + [line, key, i, b].join(','));</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">         64 :                 i += 1;</span>
-<span class="lineNum">      71 </span>                :            :             });
-<span class="lineNum">      72 </span>                :            :         });
-<span class="lineNum">      73 </span>                :<span class="lineCov">         41 :         writer.println('end_of_record');</span>
-<a name="74"><span class="lineNum">      74 </span>                :            :     },</a>
-<span class="lineNum">      75 </span>                :            : 
-<span class="lineNum">      76 </span>                :            :     writeReport: function (collector, sync) {
-<span class="lineNum">      77 </span>                :<span class="lineCov">         11 :         var outputFile = path.resolve(this.opts.dir, 'lcov.info'),</span>
-<span class="lineNum">      78 </span>                :            :             writer = new Writer(sync),
-<a name="79"><span class="lineNum">      79 </span>                :            :             that = this;</a>
-<span class="lineNum">      80 </span>                :<span class="lineCov">         11 :         writer.start(outputFile);</span>
-<span class="lineNum">      81 </span>                :<span class="lineCov">         11 :         collector.files().forEach(function (key) {</span>
-<span class="lineNum">      82 </span>                :<span class="lineCov">         41 :             that.writeFileCoverage(writer, collector.fileCoverageFor(key));</span>
-<span class="lineNum">      83 </span>                :            :         });
-<span class="lineNum">      84 </span>                :<span class="lineCov">         11 :         writer.end();</span>
-<span class="lineNum">      85 </span>                :            :     }
-<span class="lineNum">      86 </span>                :            : });
-<span class="lineNum">      87 </span>                :            : 
-<span class="lineNum">      88 </span>                :<span class="lineCov">         39 : module.exports = LcovOnlyReport;</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">         41 :         Object.keys(functions).forEach(function (key) {</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">         51 :             var meta = functionMap[key];</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">         51 :             writer.println('FN:' + [ meta.line, meta.name ].join(','));</span>
+<a name="47"><span class="lineNum">      47 </span>                :            :         });</a>
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :<span class="lineCov">         41 :         Object.keys(functions).forEach(function (key) {</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">         51 :             var stats = functions[key],</span>
+<span class="lineNum">      51 </span>                :            :                 meta = functionMap[key];
+<span class="lineNum">      52 </span>                :<span class="lineCov">         51 :             writer.println('FNDA:' + [ stats, meta.name ].join(','));</span>
+<a name="53"><span class="lineNum">      53 </span>                :            :         });</a>
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :<span class="lineCov">         41 :         Object.keys(lines).forEach(function (key) {</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        154 :             var stat = lines[key];</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">        154 :             writer.println('DA:' + [ key, stat ].join(','));</span>
+<a name="58"><span class="lineNum">      58 </span>                :            :         });</a>
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :<span class="lineCov">         41 :         Object.keys(branches).forEach(function (key) {</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">         32 :             var branchArray = branches[key],</span>
+<span class="lineNum">      62 </span>                :            :                 meta = branchMap[key],
+<a name="63"><span class="lineNum">      63 </span>                :            :                 line = meta.line,</a>
+<span class="lineNum">      64 </span>                :            :                 i = 0;
+<span class="lineNum">      65 </span>                :<span class="lineCov">         32 :             branchArray.forEach(function (b) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">         64 :                 writer.println('BRDA:' + [line, key, i, b].join(','));</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">         64 :                 i += 1;</span>
+<span class="lineNum">      68 </span>                :            :             });
+<span class="lineNum">      69 </span>                :            :         });
+<span class="lineNum">      70 </span>                :<span class="lineCov">         41 :         writer.println('end_of_record');</span>
+<a name="71"><span class="lineNum">      71 </span>                :            :     },</a>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :            :     writeReport: function (collector, sync) {
+<span class="lineNum">      74 </span>                :<span class="lineCov">         11 :         var outputFile = path.resolve(this.opts.dir, 'lcov.info'),</span>
+<a name="75"><span class="lineNum">      75 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 11 times"> + </span>]:            :             writer = this.opts.writer || new Writer(sync),</a>
+<a name="76"><span class="lineNum">      76 </span>                :            :             that = this;</a>
+<span class="lineNum">      77 </span>                :<span class="lineCov">         11 :         writer.writeFile(outputFile, function () {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">         11 :             collector.files().forEach(function (key) {</span>
+<span class="lineNum">      79 </span>                :<span class="lineCov">         41 :                 that.writeFileCoverage(writer, collector.fileCoverageFor(key));</span>
+<span class="lineNum">      80 </span>                :            :             });
+<span class="lineNum">      81 </span>                :            :         });
+<span class="lineNum">      82 </span>                :            :     }
+<span class="lineNum">      83 </span>                :            : });
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineCov">         51 : module.exports = LcovOnlyReport;</span>
 </pre>
       </td>
     </tr>

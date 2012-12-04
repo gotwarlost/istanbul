@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2012-09-11</td>
+            <td class="headerValue">2012-12-04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -74,99 +74,99 @@
 <span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 <a name="4"><span class="lineNum">       4 </span>                :            :  */</a>
 <span class="lineNum">       5 </span>                :            : 
-<span class="lineNum">       6 </span>                :<span class="lineCov">         39 : function InsertionText(text, consumeBlanks) {</span>
-<span class="lineNum">       7 </span>                :<span class="lineCov">        510 :     this.text = text;</span>
-<span class="lineNum">       8 </span>                :<span class="lineCov">        510 :     this.origLength = text.length;</span>
-<span class="lineNum">       9 </span>                :<span class="lineCov">        510 :     this.offsets = [];</span>
-<span class="lineNum">      10 </span>                :<span class="lineCov">        510 :     this.consumeBlanks = consumeBlanks;</span>
-<span class="lineNum">      11 </span>                :<span class="lineCov">        510 :     this.startPos = this.findFirstNonBlank();</span>
-<span class="lineNum">      12 </span>                :<span class="lineCov">        510 :     this.endPos = this.findLastNonBlank();</span>
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : function InsertionText(text, consumeBlanks) {</span>
+<span class="lineNum">       7 </span>                :<span class="lineCov">        561 :     this.text = text;</span>
+<span class="lineNum">       8 </span>                :<span class="lineCov">        561 :     this.origLength = text.length;</span>
+<span class="lineNum">       9 </span>                :<span class="lineCov">        561 :     this.offsets = [];</span>
+<span class="lineNum">      10 </span>                :<span class="lineCov">        561 :     this.consumeBlanks = consumeBlanks;</span>
+<span class="lineNum">      11 </span>                :<span class="lineCov">        561 :     this.startPos = this.findFirstNonBlank();</span>
+<span class="lineNum">      12 </span>                :<span class="lineCov">        561 :     this.endPos = this.findLastNonBlank();</span>
 <span class="lineNum">      13 </span>                :            : }
 <span class="lineNum">      14 </span>                :            : 
-<span class="lineNum">      15 </span>                :<span class="lineCov">         39 : var WHITE_RE = /[ \f\n\r\t\v\u00A0\u2028\u2029]/;</span>
+<span class="lineNum">      15 </span>                :<span class="lineCov">         51 : var WHITE_RE = /[ \f\n\r\t\v\u00A0\u2028\u2029]/;</span>
 <span class="lineNum">      16 </span>                :            : 
-<a name="17"><span class="lineNum">      17 </span>                :<span class="lineCov">         39 : InsertionText.prototype = {</span></a>
+<a name="17"><span class="lineNum">      17 </span>                :<span class="lineCov">         51 : InsertionText.prototype = {</span></a>
 <span class="lineNum">      18 </span>                :            : 
 <span class="lineNum">      19 </span>                :            :     findFirstNonBlank: function () {
-<span class="lineNum">      20 </span>                :<span class="lineCov">        510 :         var pos = -1,</span>
+<span class="lineNum">      20 </span>                :<span class="lineCov">        561 :         var pos = -1,</span>
 <span class="lineNum">      21 </span>                :            :             text = this.text,
 <span class="lineNum">      22 </span>                :            :             len = text.length,
 <span class="lineNum">      23 </span>                :            :             i;
-<span class="lineNum">      24 </span>                :<span class="lineCov">        510 :         for (i = 0; i &lt; len; i += 1) {</span>
-<span class="lineNum">      25 </span>        [<span class="branchCov" title="Branch 0 was taken 365 times"> + </span><span class="branchCov" title="Branch 1 was taken 1340 times"> + </span>]:<span class="lineCov">       1705 :             if (!text.charAt(i).match(WHITE_RE)) {</span>
-<span class="lineNum">      26 </span>                :<span class="lineCov">        365 :                 pos = i;</span>
-<span class="lineNum">      27 </span>                :<span class="lineCov">        365 :                 break;</span>
+<span class="lineNum">      24 </span>                :<span class="lineCov">        561 :         for (i = 0; i &lt; len; i += 1) {</span>
+<span class="lineNum">      25 </span>        [<span class="branchCov" title="Branch 0 was taken 398 times"> + </span><span class="branchCov" title="Branch 1 was taken 1472 times"> + </span>]:<span class="lineCov">       1870 :             if (!text.charAt(i).match(WHITE_RE)) {</span>
+<span class="lineNum">      26 </span>                :<span class="lineCov">        398 :                 pos = i;</span>
+<span class="lineNum">      27 </span>                :<span class="lineCov">        398 :                 break;</span>
 <span class="lineNum">      28 </span>                :            :             }
 <span class="lineNum">      29 </span>                :            :         }
-<a name="30"><span class="lineNum">      30 </span>                :<span class="lineCov">        510 :         return pos;</span></a>
+<a name="30"><span class="lineNum">      30 </span>                :<span class="lineCov">        561 :         return pos;</span></a>
 <span class="lineNum">      31 </span>                :            :     },
 <span class="lineNum">      32 </span>                :            :     findLastNonBlank: function () {
-<span class="lineNum">      33 </span>                :<span class="lineCov">        510 :         var text = this.text,</span>
+<span class="lineNum">      33 </span>                :<span class="lineCov">        561 :         var text = this.text,</span>
 <span class="lineNum">      34 </span>                :            :             len = text.length,
 <span class="lineNum">      35 </span>                :            :             pos = text.length + 1,
 <span class="lineNum">      36 </span>                :            :             i;
-<span class="lineNum">      37 </span>                :<span class="lineCov">        510 :         for (i = len - 1; i &gt;= 0; i -= 1) {</span>
-<span class="lineNum">      38 </span>        [<span class="branchCov" title="Branch 0 was taken 365 times"> + </span><span class="branchCov" title="Branch 1 was taken 16 times"> + </span>]:<span class="lineCov">        381 :             if (!text.charAt(i).match(WHITE_RE)) {</span>
-<span class="lineNum">      39 </span>                :<span class="lineCov">        365 :                 pos = i;</span>
-<span class="lineNum">      40 </span>                :<span class="lineCov">        365 :                 break;</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">        561 :         for (i = len - 1; i &gt;= 0; i -= 1) {</span>
+<span class="lineNum">      38 </span>        [<span class="branchCov" title="Branch 0 was taken 398 times"> + </span><span class="branchCov" title="Branch 1 was taken 16 times"> + </span>]:<span class="lineCov">        414 :             if (!text.charAt(i).match(WHITE_RE)) {</span>
+<span class="lineNum">      39 </span>                :<span class="lineCov">        398 :                 pos = i;</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">        398 :                 break;</span>
 <span class="lineNum">      41 </span>                :            :             }
 <span class="lineNum">      42 </span>                :            :         }
-<a name="43"><span class="lineNum">      43 </span>                :<span class="lineCov">        510 :         return pos;</span></a>
+<a name="43"><span class="lineNum">      43 </span>                :<span class="lineCov">        561 :         return pos;</span></a>
 <span class="lineNum">      44 </span>                :            :     },
 <span class="lineNum">      45 </span>                :            :     originalLength: function () {
-<span class="lineNum">      46 </span>                :<span class="lineCov">        210 :         return this.origLength;</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">        226 :         return this.origLength;</span>
 <a name="47"><span class="lineNum">      47 </span>                :            :     },</a>
 <span class="lineNum">      48 </span>                :            : 
 <span class="lineNum">      49 </span>                :            :     insertAt: function (col, str, insertBefore, consumeBlanks) {
-<span class="lineNum">      50 </span>        [<span class="branchCov" title="Branch 0 was taken 161 times"> + </span><span class="branchCov" title="Branch 1 was taken 5 times"> + </span>]:<span class="lineCov">        166 :         consumeBlanks = typeof consumeBlanks === 'undefined' ? this.consumeBlanks : consumeBlanks;</span>
-<span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 33 times"> + </span><span class="branchCov" title="Branch 1 was taken 133 times"> + </span>]:<span class="lineCov">        166 :         col = col &gt; this.originalLength() ? this.originalLength() : col;</span>
-<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 165 times"> + </span>]:<span class="lineCov">        166 :         col = col &lt; 0 ? 0 : col;</span>
+<span class="lineNum">      50 </span>        [<span class="branchCov" title="Branch 0 was taken 173 times"> + </span><span class="branchCov" title="Branch 1 was taken 5 times"> + </span>]:<span class="lineCov">        178 :         consumeBlanks = typeof consumeBlanks === 'undefined' ? this.consumeBlanks : consumeBlanks;</span>
+<span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 36 times"> + </span><span class="branchCov" title="Branch 1 was taken 142 times"> + </span>]:<span class="lineCov">        178 :         col = col &gt; this.originalLength() ? this.originalLength() : col;</span>
+<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 177 times"> + </span>]:<span class="lineCov">        178 :         col = col &lt; 0 ? 0 : col;</span>
 <span class="lineNum">      53 </span>                :            : 
-<span class="lineNum">      54 </span>        [<span class="branchCov" title="Branch 0 was taken 136 times"> + </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">        166 :         if (consumeBlanks) {</span>
-<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 44 times"> + </span><span class="branchCov" title="Branch 1 was taken 92 times"> + </span>]:<span class="lineCov">        136 :             if (col &lt;= this.startPos) {</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">         44 :                 col = 0;</span>
+<span class="lineNum">      54 </span>        [<span class="branchCov" title="Branch 0 was taken 148 times"> + </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">        178 :         if (consumeBlanks) {</span>
+<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 48 times"> + </span><span class="branchCov" title="Branch 1 was taken 100 times"> + </span>]:<span class="lineCov">        148 :             if (col &lt;= this.startPos) {</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">         48 :                 col = 0;</span>
 <span class="lineNum">      57 </span>                :            :             }
-<span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 66 times"> + </span><span class="branchCov" title="Branch 1 was taken 70 times"> + </span>]:<span class="lineCov">        136 :             if (col &gt; this.endPos) {</span>
-<span class="lineNum">      59 </span>                :<span class="lineCov">         66 :                 col = this.origLength;</span>
+<span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 72 times"> + </span><span class="branchCov" title="Branch 1 was taken 76 times"> + </span>]:<span class="lineCov">        148 :             if (col &gt; this.endPos) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">         72 :                 col = this.origLength;</span>
 <span class="lineNum">      60 </span>                :            :             }
 <span class="lineNum">      61 </span>                :            :         }
 <span class="lineNum">      62 </span>                :            : 
-<span class="lineNum">      63 </span>                :<span class="lineCov">        166 :         var len = str.length,</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">        178 :         var len = str.length,</span>
 <span class="lineNum">      64 </span>                :            :             offset = this.findOffset(col, len, insertBefore),
 <span class="lineNum">      65 </span>                :            :             realPos = col + offset,
 <span class="lineNum">      66 </span>                :            :             text = this.text;
-<span class="lineNum">      67 </span>                :<span class="lineCov">        166 :         this.text = text.substring(0, realPos) + str + text.substring(realPos);</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">        166 :         return this;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">        178 :         this.text = text.substring(0, realPos) + str + text.substring(realPos);</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">        178 :         return this;</span>
 <a name="69"><span class="lineNum">      69 </span>                :            :     },</a>
 <span class="lineNum">      70 </span>                :            : 
 <span class="lineNum">      71 </span>                :            :     findOffset: function (pos, len, insertBefore) {
-<span class="lineNum">      72 </span>                :<span class="lineCov">        166 :         var offsets = this.offsets,</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">        178 :         var offsets = this.offsets,</span>
 <span class="lineNum">      73 </span>                :            :             offsetObj,
 <span class="lineNum">      74 </span>                :            :             cumulativeOffset = 0,
 <span class="lineNum">      75 </span>                :            :             i;
 <span class="lineNum">      76 </span>                :            : 
-<span class="lineNum">      77 </span>                :<span class="lineCov">        166 :         for (i = 0; i &lt; offsets.length; i += 1) {</span>
-<span class="lineNum">      78 </span>                :<span class="lineCov">         91 :             offsetObj = offsets[i];</span>
-<span class="lineNum">      79 </span>        [<span class="branchCov" title="Branch 0 was taken 87 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">         91 :             if (offsetObj.pos &lt; pos || (offsetObj.pos === pos &amp;&amp; !insertBefore)) {</span>
-<span class="lineNum">         </span>     [<span class="branchCov" title="Branch 0 was taken 91 times"> + </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span><span class="branchCov" title="Branch 2 was taken 8 times"> + </span>]
-<span class="lineNum">      80 </span>                :<span class="lineCov">         87 :                 cumulativeOffset += offsetObj.len;</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">        178 :         for (i = 0; i &lt; offsets.length; i += 1) {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">         97 :             offsetObj = offsets[i];</span>
+<span class="lineNum">      79 </span>        [<span class="branchCov" title="Branch 0 was taken 93 times"> + </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">         97 :             if (offsetObj.pos &lt; pos || (offsetObj.pos === pos &amp;&amp; !insertBefore)) {</span>
+<span class="lineNum">         </span>     [<span class="branchCov" title="Branch 0 was taken 97 times"> + </span><span class="branchCov" title="Branch 1 was taken 9 times"> + </span><span class="branchCov" title="Branch 2 was taken 8 times"> + </span>]
+<span class="lineNum">      80 </span>                :<span class="lineCov">         93 :                 cumulativeOffset += offsetObj.len;</span>
 <span class="lineNum">      81 </span>                :            :             }
-<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 0 was taken 9 times"> + </span><span class="branchCov" title="Branch 1 was taken 82 times"> + </span>]:<span class="lineCov">         91 :             if (offsetObj.pos &gt;= pos) {</span>
+<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 0 was taken 9 times"> + </span><span class="branchCov" title="Branch 1 was taken 88 times"> + </span>]:<span class="lineCov">         97 :             if (offsetObj.pos &gt;= pos) {</span>
 <span class="lineNum">      83 </span>                :<span class="lineCov">          9 :                 break;</span>
 <span class="lineNum">      84 </span>                :            :             }
 <span class="lineNum">      85 </span>                :            :         }
-<span class="lineNum">      86 </span>[<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 158 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 166 times"> + </span><span class="branchCov" title="Branch 1 was taken 86 times"> + </span>]:<span class="lineCov">        166 :         if (offsetObj &amp;&amp; offsetObj.pos === pos) {</span>
+<span class="lineNum">      86 </span>[<span class="branchCov" title="Branch 0 was taken 8 times"> + </span><span class="branchCov" title="Branch 1 was taken 170 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 178 times"> + </span><span class="branchCov" title="Branch 1 was taken 92 times"> + </span>]:<span class="lineCov">        178 :         if (offsetObj &amp;&amp; offsetObj.pos === pos) {</span>
 <span class="lineNum">      87 </span>                :<span class="lineCov">          8 :             offsetObj.len += len;</span>
 <span class="lineNum">      88 </span>                :            :         } else {
-<span class="lineNum">      89 </span>                :<span class="lineCov">        158 :             offsets.splice(i, 0, { pos: pos, len: len });</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">        170 :             offsets.splice(i, 0, { pos: pos, len: len });</span>
 <span class="lineNum">      90 </span>                :            :         }
-<span class="lineNum">      91 </span>                :<span class="lineCov">        166 :         return cumulativeOffset;</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">        178 :         return cumulativeOffset;</span>
 <a name="92"><span class="lineNum">      92 </span>                :            :     },</a>
 <span class="lineNum">      93 </span>                :            : 
 <span class="lineNum">      94 </span>                :            :     wrap: function (startPos, startText, endPos, endText, consumeBlanks) {
-<span class="lineNum">      95 </span>                :<span class="lineCov">         75 :         this.insertAt(startPos, startText, true, consumeBlanks);</span>
-<span class="lineNum">      96 </span>                :<span class="lineCov">         75 :         this.insertAt(endPos, endText, false, consumeBlanks);</span>
-<span class="lineNum">      97 </span>                :<span class="lineCov">         75 :         return this;</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">         81 :         this.insertAt(startPos, startText, true, consumeBlanks);</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">         81 :         this.insertAt(endPos, endText, false, consumeBlanks);</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">         81 :         return this;</span>
 <a name="98"><span class="lineNum">      98 </span>                :            :     },</a>
 <span class="lineNum">      99 </span>                :            : 
 <span class="lineNum">     100 </span>                :            :     wrapLine: function (startText, endText) {
@@ -174,11 +174,11 @@
 <a name="102"><span class="lineNum">     102 </span>                :            :     },</a>
 <span class="lineNum">     103 </span>                :            : 
 <span class="lineNum">     104 </span>                :            :     toString: function () {
-<span class="lineNum">     105 </span>                :<span class="lineCov">        467 :         return this.text;</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">        514 :         return this.text;</span>
 <span class="lineNum">     106 </span>                :            :     }
 <span class="lineNum">     107 </span>                :            : };
 <span class="lineNum">     108 </span>                :            : 
-<span class="lineNum">     109 </span>                :<span class="lineCov">         39 : module.exports = InsertionText;</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">         51 : module.exports = InsertionText;</span>
 </pre>
       </td>
     </tr>

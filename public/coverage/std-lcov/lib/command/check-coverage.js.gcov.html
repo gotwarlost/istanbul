@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - lcov.info - lib/command/check-coverage.js</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/command</a> - check-coverage.js<span style="font-size: 80%;"> (source / <a href="check-coverage.js.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntryHi">96.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-12-04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryMed">80.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+<span class="lineNum">       3 </span>                :            :  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+<span class="lineNum">       4 </span>                :            :  */
+<span class="lineNum">       5 </span>                :            : 
+<span class="lineNum">       6 </span>                :<span class="lineCov">         51 : var nopt = require('nopt'),</span>
+<span class="lineNum">       7 </span>                :            :     path = require('path'),
+<span class="lineNum">       8 </span>                :            :     fs = require('fs'),
+<span class="lineNum">       9 </span>                :            :     Collector = require('../collector'),
+<span class="lineNum">      10 </span>                :            :     formatOption = require('../util/help-formatter').formatOption,
+<span class="lineNum">      11 </span>                :            :     util = require('util'),
+<span class="lineNum">      12 </span>                :            :     utils = require('../object-utils'),
+<span class="lineNum">      13 </span>                :            :     filesFor = require('../util/file-matcher').filesFor,
+<a name="14"><span class="lineNum">      14 </span>                :            :     Command = require('./index');</a>
+<span class="lineNum">      15 </span>                :            : 
+<span class="lineNum">      16 </span>                :<span class="lineCov">         51 : function CheckCoverageCommand() {</span>
+<span class="lineNum">      17 </span>                :<span class="lineCov">          8 :     Command.call(this);</span>
+<span class="lineNum">      18 </span>                :            : }
+<span class="lineNum">      19 </span>                :            : 
+<span class="lineNum">      20 </span>                :<span class="lineCov">         51 : CheckCoverageCommand.TYPE = 'check-coverage';</span>
+<span class="lineNum">      21 </span>                :<span class="lineCov">         51 : util.inherits(CheckCoverageCommand, Command);</span>
+<a name="22"><span class="lineNum">      22 </span>                :            : </a>
+<span class="lineNum">      23 </span>                :<span class="lineCov">         51 : Command.mix(CheckCoverageCommand, {</span>
+<span class="lineNum">      24 </span>                :            :     synopsis: function () {
+<span class="lineNum">      25 </span>                :<span class="lineCov">          5 :         return &quot;checks overall coverage against thresholds from coverage JSON files. Exits 1 if thresholds are not met, 0 otherwise&quot;;</span>
+<a name="26"><span class="lineNum">      26 </span>                :            :     },</a>
+<span class="lineNum">      27 </span>                :            : 
+<span class="lineNum">      28 </span>                :            :     usage: function () {
+<span class="lineNum">      29 </span>                :<span class="lineCov">          2 :         console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; [&lt;include-pattern&gt;]\n\nOptions are:\n\n' +</span>
+<span class="lineNum">      30 </span>                :            :             [
+<span class="lineNum">      31 </span>                :            :                 formatOption('--statements &lt;threshold&gt;', 'The minimum statement coverage required as a percentage'),
+<span class="lineNum">      32 </span>                :            :                 formatOption('--functions &lt;threshold&gt;', 'The minimum statement threshold coverage required as a percentage'),
+<span class="lineNum">      33 </span>                :            :                 formatOption('--branches &lt;threshold&gt;', 'The minimum branch coverage required as a percentage'),
+<span class="lineNum">      34 </span>                :            :                 formatOption('--lines &lt;threshold&gt;', 'The minimum line coverage required as a percentage')
+<span class="lineNum">      35 </span>                :            :             ].join('\n\n') + '\n');
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :<span class="lineCov">          2 :         console.error('&lt;include-pattern&gt; is a fileset pattern that can be used to select one or more coverage files ' +</span>
+<span class="lineNum">      40 </span>                :            :             'for merge. This defaults to &quot;**/coverage*.json&quot;');
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :<span class="lineCov">          2 :         console.error('\n');</span>
+<a name="43"><span class="lineNum">      43 </span>                :            :     },</a>
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            :     run: function (args, callback) {
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :<span class="lineCov">          2 :         var config = {</span>
+<span class="lineNum">      48 </span>                :            :                 root: path,
+<span class="lineNum">      49 </span>                :            :                 dir: path,
+<span class="lineNum">      50 </span>                :            :                 statements: Number,
+<span class="lineNum">      51 </span>                :            :                 lines: Number,
+<span class="lineNum">      52 </span>                :            :                 branches: Number,
+<span class="lineNum">      53 </span>                :            :                 functions: Number,
+<span class="lineNum">      54 </span>                :            :                 verbose: Boolean
+<span class="lineNum">      55 </span>                :            :             },
+<span class="lineNum">      56 </span>                :            :             opts = nopt(config, { v : '--verbose' }, args, 0),
+<span class="lineNum">      57 </span>                :            :             includePattern = '**/coverage*.json',
+<span class="lineNum">      58 </span>                :            :             root,
+<span class="lineNum">      59 </span>                :            :             collector = new Collector(),
+<span class="lineNum">      60 </span>                :            :             errors = [];
+<span class="lineNum">      61 </span>                :            : 
+<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :         if (opts.argv.remain.length &gt; 0) {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">          1 :             includePattern = opts.argv.remain[0];</span>
+<span class="lineNum">      64 </span>                :            :         }
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :         root = opts.root || process.cwd();</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">          2 :         filesFor({</span>
+<a name="68"><span class="lineNum">      68 </span>                :            :             root: root,</a>
+<span class="lineNum">      69 </span>                :            :             includes: [ includePattern ]
+<a name="70"><span class="lineNum">      70 </span>                :            :         }, function (err, files) {</a>
+<span class="lineNum">      71 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :             if (err) { throw err; }</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">          2 :             files.forEach(function (file) {</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">          1 :                 var coverageObject =  JSON.parse(fs.readFileSync(file, 'utf8'));</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">          1 :                 collector.add(coverageObject);</span>
+<span class="lineNum">      75 </span>                :            :             });
+<span class="lineNum">      76 </span>                :<span class="lineCov">          2 :             var thresholds = {</span>
+<span class="lineNum">      77 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:            :                 statements: opts.statements || 0,
+<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:            :                 branches: opts.branches || 0,
+<span class="lineNum">      79 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:            :                 lines: opts.lines || 0,
+<span class="lineNum">      80 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:            :                 functions: opts.functions || 0
+<span class="lineNum">      81 </span>                :            :             },
+<span class="lineNum">      82 </span>                :            :                 actuals = utils.summarizeCoverage(collector.getFinalCoverage());
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          2 :             if (opts.verbose) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">          1 :                 console.log('Compare actuals against thresholds');</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">          1 :                 console.log(JSON.stringify({ actuals: actuals, thresholds: thresholds }, undefined, 4));</span>
+<a name="87"><span class="lineNum">      87 </span>                :            :             }</a>
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :<span class="lineCov">          2 :             Object.keys(thresholds).forEach(function (key) {</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">          8 :                 var actual = actuals[key].pct,</span>
+<span class="lineNum">      91 </span>                :            :                     threshold = thresholds[key];
+<span class="lineNum">      92 </span>                :            : 
+<span class="lineNum">      93 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">          8 :                 if (actual &lt; threshold) {</span>
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :                     errors.push('ERROR: Coverage for ' + key + ' (' + actual + '%) does not meet threshold (' + threshold + '%)');</span>
+<span class="lineNum">      95 </span>                :            :                 }
+<span class="lineNum">      96 </span>                :            :             });
+<span class="lineNum">      97 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :             return callback(errors.length === 0 ? null : errors.join(&quot;\n&quot;));</span>
+<span class="lineNum">      98 </span>                :            :         });
+<span class="lineNum">      99 </span>                :            :     }
+<span class="lineNum">     100 </span>                :            : });
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :<span class="lineCov">         51 : module.exports = CheckCoverageCommand;</span>
+<span class="lineNum">     103 </span>                :            : 
+<span class="lineNum">     104 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
