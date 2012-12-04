@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -121,7 +123,6 @@
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  *&#x2F;
 
-&#x2F;*jslint nomen: true *&#x2F;
 var Factory = require(&#x27;..&#x2F;util&#x2F;factory&#x27;),
     factory = new Factory(&#x27;store&#x27;, __dirname, false);
 &#x2F;**
@@ -157,7 +158,7 @@ var Factory = require(&#x27;..&#x2F;util&#x2F;factory&#x27;),
  * @protected
  * @param {Object} options Optional. The options supported by a specific store implementation.
  *&#x2F;
-function Store(options) {}
+function Store(&#x2F;* options *&#x2F;) {}
 
 &#x2F;&#x2F;add register, create, mix, loadAll, getStoreList as class methods
 factory.bindClassMethods(Store);
@@ -188,7 +189,7 @@ Store.prototype = {
      * @param {String} key the key for the content
      * @param {String} contents the contents for the key
      *&#x2F;
-    set: function (key, contents) { throw new Error(&quot;set: must be overridden&quot;); },
+    set: function (&#x2F;* key, contents *&#x2F;) { throw new Error(&quot;set: must be overridden&quot;); },
     &#x2F;**
      * returns the content associated to a specific key or throws if the key
      * was not &#x60;set&#x60;
@@ -196,7 +197,7 @@ Store.prototype = {
      * @param {String} key the key for which to get the content
      * @return {String} the content for the specified key
      *&#x2F;
-    get: function (key) { throw new Error(&quot;get: must be overridden&quot;); },
+    get: function (&#x2F;* key *&#x2F;) { throw new Error(&quot;get: must be overridden&quot;); },
     &#x2F;**
      * returns a list of all known keys
      * @method keys
@@ -209,7 +210,7 @@ Store.prototype = {
      * @param {String} key
      * @return true if the key is valid for this store, false otherwise
      *&#x2F;
-    hasKey: function (key) { throw new Error(&quot;hasKey: must be overridden&quot;); },
+    hasKey: function (&#x2F;* key *&#x2F;) { throw new Error(&quot;hasKey: must be overridden&quot;); },
     &#x2F;**
      * lifecycle method to dispose temporary resources associated with the store
      * @method dispose

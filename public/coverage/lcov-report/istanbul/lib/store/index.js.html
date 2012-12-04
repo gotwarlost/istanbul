@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/store/index.js</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="en-gb">
     
         <link rel='stylesheet' href='../../../prettify.css'>
     
@@ -317,17 +319,12 @@
 120
 121
 122
-123
-124</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+123</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,16 +356,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,7 +374,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -425,7 +425,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">165</span>
+<span class="cline-any cline-yes">185</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -434,11 +434,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-yes">79</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
@@ -446,7 +446,6 @@
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 &nbsp;
-/*jslint nomen: true */
 var Factory = require('../util/factory'),
     factory = new Factory('store', __dirname, false);
 /**
@@ -482,7 +481,7 @@ var Factory = require('../util/factory'),
  * @protected
  * @param {Object} options Optional. The options supported by a specific store implementation.
  */
-function Store(options) {}
+function Store(/* options */) {}
 &nbsp;
 //add register, create, mix, loadAll, getStoreList as class methods
 factory.bindClassMethods(Store);
@@ -513,7 +512,7 @@ Store.prototype = {
      * @param {String} key the key for the content
      * @param {String} contents the contents for the key
      */
-    set: function (key, contents) { throw new Error("set: must be overridden"); },
+    set: function (/* key, contents */) { throw new Error("set: must be overridden"); },
     /**
      * returns the content associated to a specific key or throws if the key
      * was not `set`
@@ -521,7 +520,7 @@ Store.prototype = {
      * @param {String} key the key for which to get the content
      * @return {String} the content for the specified key
      */
-    get: function (key) { throw new Error("get: must be overridden"); },
+    get: function (/* key */) { throw new Error("get: must be overridden"); },
     /**
      * returns a list of all known keys
      * @method keys
@@ -534,7 +533,7 @@ Store.prototype = {
      * @param {String} key
      * @return true if the key is valid for this store, false otherwise
      */
-    hasKey: function (key) { throw new Error("hasKey: must be overridden"); },
+    hasKey: function (/* key */) { throw new Error("hasKey: must be overridden"); },
     /**
      * lifecycle method to dispose temporary resources associated with the store
      * @method dispose
@@ -569,7 +568,7 @@ module.exports = Store;
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
 </div>
 </body>
 
@@ -661,7 +660,7 @@ module.exports = Store;
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
-            if (prettyPrint) {
+            if (typeof prettyPrint === 'function') {
                 prettyPrint();
             }
         });

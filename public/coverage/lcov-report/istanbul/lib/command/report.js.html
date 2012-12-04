@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/command/report.js</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="en-gb">
     
         <link rel='stylesheet' href='../../../prettify.css'>
     
@@ -179,7 +181,7 @@
     <h1>Code coverage report for <span class='entity'>istanbul/lib/command/report.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>96.88% <small>(31 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>96.97% <small>(32 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class='metric'>90% <small>(9 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -188,7 +190,7 @@
         Functions: <span class='metric'>100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>100% <small>(32 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/command/</a> &#187; report.js</div>
@@ -290,12 +292,14 @@
 93
 94
 95
-96</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+96
+97
+98</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,14 +310,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -331,6 +335,7 @@
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,11 +383,12 @@
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
@@ -414,8 +420,8 @@ Command.mix(ReportCommand, {
     },
 &nbsp;
     usage: function () {
-        console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; [ &lt;format&gt; [&lt;include-pattern&gt;] ]\n\nOptions are:\n\n'
-            + [
+        console.error('\nUsage: ' + this.toolName() + ' ' + this.type() + ' &lt;options&gt; [ &lt;format&gt; [&lt;include-pattern&gt;] ]\n\nOptions are:\n\n' +
+            [
                 formatOption('--root &lt;input-directory&gt;', 'The input root directory for finding coverage files'),
                 formatOption('--dir &lt;report-directory&gt;', 'The output directory where files will be written. This defaults to ./coverage/'),
                 formatOption('--verbose, -v', 'verbose mode')
@@ -424,12 +430,13 @@ Command.mix(ReportCommand, {
         console.error('\n');
 &nbsp;
         console.error('&lt;format&gt; is one of html, lcovonly or lcov (html + lcovonly). Default is lcov');
-        console.error('&lt;include-pattern&gt; is a fileset pattern that can be used to select one or move coverage files for merged reporting. This defaults to "**/coverage*.json"');
+        console.error('&lt;include-pattern&gt; is a fileset pattern that can be used to select one or more coverage files ' +
+            'for merged reporting. This defaults to "**/coverage*.json"');
 &nbsp;
         console.error('\n');
     },
 &nbsp;
-    run: function (args) {
+    run: function (args, callback) {
 &nbsp;
         var config = {
                 root: path,
@@ -457,7 +464,7 @@ Command.mix(ReportCommand, {
         try {
             reporter = Report.create(fmt, opts);
         } catch (ex) {
-            throw inputError.create('Invalid report format [' + fmt + ']');
+            return callback(inputError.create('Invalid report format [' + fmt + ']'));
         }
 &nbsp;
         root = opts.root || process.cwd();
@@ -473,6 +480,7 @@ Command.mix(ReportCommand, {
             console.log('Using reporter [' + fmt + ']');
             reporter.writeReport(collector);
             console.log('Done');
+            return callback();
         });
     }
 });
@@ -485,7 +493,7 @@ module.exports = ReportCommand;
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
 </div>
 </body>
 
@@ -577,7 +585,7 @@ module.exports = ReportCommand;
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
-            if (prettyPrint) {
+            if (typeof prettyPrint === 'function') {
                 prettyPrint();
             }
         });

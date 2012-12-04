@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -135,6 +137,7 @@ var path = require(&#x27;path&#x27;),
     Report = require(&#x27;.&#x2F;lib&#x2F;report&#x27;),
     meta = require(&#x27;.&#x2F;lib&#x2F;util&#x2F;meta&#x27;);
 
+&#x2F;&#x2F;register our standard plaugins
 require(&#x27;.&#x2F;lib&#x2F;register-plugins&#x27;);
 
 &#x2F;**
@@ -220,7 +223,13 @@ module.exports = {
      * @property {String} VERSION
      * @static
      *&#x2F;
-    VERSION: meta.VERSION
+    VERSION: meta.VERSION,
+    &#x2F;&#x2F;undocumented
+    _yuiLoadHook: require(&#x27;.&#x2F;lib&#x2F;util&#x2F;yui-load-hook&#x27;).getPostLoadHook,
+    &#x2F;&#x2F;undocumented
+    TreeSummarizer: require(&#x27;.&#x2F;lib&#x2F;util&#x2F;tree-summarizer&#x27;),
+    &#x2F;&#x2F;undocumented
+    assetsDir: path.resolve(__dirname, &#x27;lib&#x27;, &#x27;vendor&#x27;)
 };
 
 

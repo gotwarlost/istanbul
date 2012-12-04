@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -122,13 +124,9 @@
  *&#x2F;
 
 var path = require(&#x27;path&#x27;),
-    fs = require(&#x27;fs&#x27;),
-    util = require(&#x27;util&#x27;),
-    Report = require(&#x27;.&#x2F;index&#x27;),
-    Store = require(&#x27;..&#x2F;store&#x27;),
     Writer = require(&#x27;..&#x2F;util&#x2F;file-writer&#x27;),
-    utils = require(&#x27;..&#x2F;object-utils&#x27;);
-
+    util = require(&#x27;util&#x27;),
+    Report = require(&#x27;.&#x2F;index&#x27;);
 &#x2F;**
  * a &#x60;Report&#x60; implementation that produces an LCOV coverage file from coverage objects.
  *
@@ -147,6 +145,7 @@ var path = require(&#x27;path&#x27;),
 function LcovOnlyReport(opts) {
     this.opts = opts || {};
     this.opts.dir = this.opts.dir || process.cwd();
+    this.opts.writer = this.opts.writer || null;
 }
 LcovOnlyReport.TYPE = &#x27;lcovonly&#x27;;
 util.inherits(LcovOnlyReport, Report);
@@ -193,13 +192,13 @@ Report.mix(LcovOnlyReport, {
 
     writeReport: function (collector, sync) {
         var outputFile = path.resolve(this.opts.dir, &#x27;lcov.info&#x27;),
-            writer = new Writer(sync),
+            writer = this.opts.writer || new Writer(sync),
             that = this;
-        writer.start(outputFile);
-        collector.files().forEach(function (key) {
-            that.writeFileCoverage(writer, collector.fileCoverageFor(key));
+        writer.writeFile(outputFile, function () {
+            collector.files().forEach(function (key) {
+                that.writeFileCoverage(writer, collector.fileCoverageFor(key));
+            });
         });
-        writer.end();
     }
 });
 

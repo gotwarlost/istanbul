@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Code coverage report for istanbul/lib/report/lcovonly.js</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="en-gb">
     
         <link rel='stylesheet' href='../../../prettify.css'>
     
@@ -182,10 +184,10 @@
         Statements: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>100% <small>(8 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Lines: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -279,17 +281,12 @@
 82
 83
 84
-85
-86
-87
-88</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+85</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,16 +305,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">41</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -365,23 +361,19 @@
 <span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-yes">41</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">40</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span></td><td class="text"><pre class="prettyprint lang-js">/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 &nbsp;
 var path = require('path'),
-    fs = require('fs'),
-    util = require('util'),
-    Report = require('./index'),
-    Store = require('../store'),
     Writer = require('../util/file-writer'),
-    utils = require('../object-utils');
-&nbsp;
+    util = require('util'),
+    Report = require('./index');
 /**
  * a `Report` implementation that produces an LCOV coverage file from coverage objects.
  *
@@ -400,6 +392,7 @@ var path = require('path'),
 function LcovOnlyReport(opts) {
     this.opts = opts || {};
     this.opts.dir = this.opts.dir || process.cwd();
+    this.opts.writer = this.opts.writer || null;
 }
 LcovOnlyReport.TYPE = 'lcovonly';
 util.inherits(LcovOnlyReport, Report);
@@ -446,13 +439,13 @@ Report.mix(LcovOnlyReport, {
 &nbsp;
     writeReport: function (collector, sync) {
         var outputFile = path.resolve(this.opts.dir, 'lcov.info'),
-            writer = new Writer(sync),
+            writer = this.opts.writer || new Writer(sync),
             that = this;
-        writer.start(outputFile);
-        collector.files().forEach(function (key) {
-            that.writeFileCoverage(writer, collector.fileCoverageFor(key));
+        writer.writeFile(outputFile, function () {
+            collector.files().forEach(function (key) {
+                that.writeFileCoverage(writer, collector.fileCoverageFor(key));
+            });
         });
-        writer.end();
     }
 });
 &nbsp;
@@ -461,7 +454,7 @@ module.exports = LcovOnlyReport;</pre></td></tr>
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 10:15:35 GMT-0700 (PDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
 </div>
 </body>
 
@@ -553,7 +546,7 @@ module.exports = LcovOnlyReport;</pre></td></tr>
 
         Y.on('domready', function () {
             replaceTable(Y.one('div.coverage-summary table'));
-            if (prettyPrint) {
+            if (typeof prettyPrint === 'function') {
                 prettyPrint();
             }
         });

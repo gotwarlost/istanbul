@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -124,7 +126,6 @@
 var path = require(&#x27;path&#x27;),
     mkdirp = require(&#x27;mkdirp&#x27;),
     fs = require(&#x27;fs&#x27;),
-    util = require(&#x27;util&#x27;),
     Report = require(&#x27;.&#x2F;index&#x27;),
     TreeSummarizer = require(&#x27;..&#x2F;util&#x2F;tree-summarizer&#x27;),
     utils = require(&#x27;..&#x2F;object-utils&#x27;),
@@ -178,14 +179,14 @@ function fill(str, width, right, tabs) {
         remaining = width - leadingSpaces,
         leader = padding(leadingSpaces),
         fmtStr = &#x27;&#x27;,
-        fill;
+        fillStr;
 
     if (remaining &gt; 0) {
         if (remaining &gt;= str.length) {
-            fill = padding(remaining - str.length);
-            fmtStr = right ? fill + str : str + fill;
+            fillStr = padding(remaining - str.length);
+            fmtStr = right ? fillStr + str : str + fillStr;
         } else {
-           fmtStr = str.substring(str.length - remaining);
+            fmtStr = str.substring(str.length - remaining);
             fmtStr = &#x27;... &#x27; + fmtStr.substring(4);
         }
     }
@@ -279,7 +280,7 @@ function walk(node, nameWidth, array, level) {
 }
 
 Report.mix(TextReport, {
-    writeReport: function (collector, sync) {
+    writeReport: function (collector &#x2F;*, sync *&#x2F;) {
         var summarizer = new TreeSummarizer(),
             tree,
             root,

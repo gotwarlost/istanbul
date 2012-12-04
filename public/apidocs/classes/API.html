@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -120,7 +122,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;index.js.html#l22"><code>index.js:22</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;index.js.html#l23"><code>index.js:23</code></a>
         </div>
     
 
@@ -140,7 +142,7 @@
 
 <h2>Usage</h2>
 
-<pre class="code"><code class="prettyprint"> var istanbul = require('istanbul');
+<pre class="code prettyprint"><code> var istanbul = require('istanbul');
 </code></pre>
 </div>
 
@@ -171,10 +173,45 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
+                                <a href="#method_addInstrumentCandidate">addInstrumentCandidate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_hookRequire">hookRequire</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_matcherFor">matcherFor</a>
 
                                 
                                     <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unhookRequire">unhookRequire</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_writeReports">writeReports</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_writeReportsFor">writeReportsFor</a>
+
                                 
                                 
                             </li>
@@ -266,6 +303,180 @@
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method_addInstrumentCandidate" class="method item">
+    <h3 class="name"><code>addInstrumentCandidate</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>file</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l36"><code>misc&#x2F;samples&#x2F;coverage.js:36</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>adds a file as a candidate for instrumentation when require is hooked</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">file</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the file to add as an instrumentation candidate</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hookRequire" class="method item">
+    <h3 class="name"><code>hookRequire</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>verbose</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l45"><code>misc&#x2F;samples&#x2F;coverage.js:45</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>hooks require to instrument all files that have been specified as instrumentation candidates</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">verbose</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>true for debug messages</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_matcherFor" class="method item">
     <h3 class="name"><code>matcherFor</code></h3>
 
@@ -316,7 +527,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l71"><code>index.js:71</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l72"><code>index.js:72</code></a>
         
         </p>
 
@@ -439,6 +650,255 @@ for examples.</p>
 </div>
 
                 
+                    <div id="method_unhookRequire" class="method item">
+    <h3 class="name"><code>unhookRequire</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l61"><code>misc&#x2F;samples&#x2F;coverage.js:61</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>unhooks require hooks that have been installed</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_writeReports" class="method item">
+    <h3 class="name"><code>writeReports</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>dir</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l118"><code>misc&#x2F;samples&#x2F;coverage.js:118</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>writes reports for everything accumulated by the collector</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">dir</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the output directory for reports</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_writeReportsFor" class="method item">
+    <h3 class="name"><code>writeReportsFor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fileList</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>dir</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l103"><code>misc&#x2F;samples&#x2F;coverage.js:103</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>writes reports for an array of JSON files representing partial coverage information</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fileList</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>array of file names containing partial coverage objects</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">dir</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the output directory for reports</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
             </div>
         
 
@@ -472,7 +932,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l47"><code>index.js:47</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l48"><code>index.js:48</code></a>
         
         </p>
 
@@ -518,7 +978,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l53"><code>index.js:53</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l54"><code>index.js:54</code></a>
         
         </p>
 
@@ -564,7 +1024,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l35"><code>index.js:35</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l36"><code>index.js:36</code></a>
         
         </p>
 
@@ -610,7 +1070,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l59"><code>index.js:59</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l60"><code>index.js:60</code></a>
         
         </p>
 
@@ -656,7 +1116,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l41"><code>index.js:41</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l42"><code>index.js:42</code></a>
         
         </p>
 
@@ -702,7 +1162,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l65"><code>index.js:65</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l66"><code>index.js:66</code></a>
         
         </p>
 
@@ -748,7 +1208,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l100"><code>index.js:100</code></a>
+        <a href="..&#x2F;files&#x2F;index.js.html#l101"><code>index.js:101</code></a>
         
         </p>
 

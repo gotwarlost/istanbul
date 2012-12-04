@@ -5,6 +5,15 @@
         "version": "0.0.1-12"
     },
     "files": {
+        "lib/report/cobertura.js": {
+            "name": "lib/report/cobertura.js",
+            "modules": {},
+            "classes": {
+                "CoberturaReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/report/html.js": {
             "name": "lib/report/html.js",
             "modules": {},
@@ -131,6 +140,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "misc/samples/coverage.js": {
+            "name": "misc/samples/coverage.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "index.js": {
             "name": "index.js",
             "modules": {
@@ -148,6 +164,7 @@
             "name": "istanbul",
             "submodules": {},
             "classes": {
+                "CoberturaReport": 1,
                 "HtmlReport": 1,
                 "Report": 1,
                 "LcovReport": 1,
@@ -168,11 +185,41 @@
             "namespaces": {},
             "tag": "module",
             "file": "index.js",
-            "line": 22,
+            "line": 23,
             "description": "provides access to the key libraries in istanbul so you can write\nyour own tools using `istanbul` as a library."
         }
     },
     "classes": {
+        "CoberturaReport": {
+            "name": "CoberturaReport",
+            "shortname": "CoberturaReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/cobertura.js",
+            "line": 12,
+            "description": "a `Report` implementation that produces a cobertura-style XML file that conforms to the\nhttp://cobertura.sourceforge.net/xml/coverage-04.dtd DTD.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the cobertura-coverage.xml will be written",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
         "HtmlReport": {
             "name": "HtmlReport",
             "shortname": "HtmlReport",
@@ -183,7 +230,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/html.js",
-            "line": 293,
+            "line": 290,
             "description": "a `Report` implementation that produces HTML coverage reports.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('html');",
             "extends": "Report",
             "is_constructor": 1,
@@ -213,7 +260,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/index.js",
-            "line": 9,
+            "line": 8,
             "description": "abstract report class for producing coverage reports.\n\nUsage\n-----\n\n     var Report = require('istanbul').Report,\n         report = Report.create('html'),\n         collector = new require('istanbul').Collector;\n\n     collector.add(coverageObject);\n    report.writeReport(collector);",
             "is_constructor": 1,
             "access": "protected",
@@ -236,7 +283,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/lcov.js",
-            "line": 13,
+            "line": 12,
             "description": "a `Report` implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.\nThe name and behavior of this report is designed to ease migration for projects that currently use `yuitest_coverage`\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('lcov');",
             "extends": "Report",
             "is_constructor": 1,
@@ -248,7 +295,7 @@
                     "props": [
                         {
                             "name": "dir",
-                            "description": "the directory in which to the `lcov.info` file. HTML files are written in a subdirectory called `lcov-report`. Defaults to `process.cwd()`",
+                            "description": "the directory in which to the `lcov.info` file.\n HTML files are written in a subdirectory called `lcov-report`. Defaults to `process.cwd()`",
                             "type": "String",
                             "optional": true
                         }
@@ -266,7 +313,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/lcovonly.js",
-            "line": 14,
+            "line": 10,
             "description": "a `Report` implementation that produces an LCOV coverage file from coverage objects.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('lcovonly');",
             "extends": "Report",
             "is_constructor": 1,
@@ -296,7 +343,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/text-summary.js",
-            "line": 13,
+            "line": 12,
             "description": "a `Report` implementation that produces text output for overall coverage in summary format.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text-summary');",
             "extends": "Report",
             "is_constructor": 1,
@@ -332,7 +379,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/text.js",
-            "line": 18,
+            "line": 17,
             "description": "a `Report` implementation that produces text output in a detailed table.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text');",
             "extends": "Report",
             "is_constructor": 1,
@@ -389,7 +436,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/store/index.js",
-            "line": 9,
+            "line": 8,
             "description": "An abstraction for keeping track of content against some keys (e.g.\noriginal source, instrumented source, coverage objects against file names).\nThis class is both the base class as well as a factory for `Store` implementations.\n\nUsage\n-----\n\n     var Store = require('istanbul').Store,\n         store = Store.create('memory');\n\n     //basic use\n     store.set('foo', 'foo-content');\n     var content = store.get('foo');\n\n     //keys and values\n     store.keys().forEach(function (key) {\n         console.log(key + ':\\n' + store.get(key);\n     });\n     if (store.hasKey('bar') { console.log(store.get('bar'); }\n\n\n     //syntactic sugar\n     store.setObject('foo', { foo: true });\n     console.log(store.getObject('foo').foo);\n\n     store.dispose();",
             "is_constructor": 1,
             "access": "protected",
@@ -498,7 +545,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/instrumenter.js",
-            "line": 252,
+            "line": 253,
             "description": "mechanism to instrument code for coverage. It uses the `esprima` and\n`escodegen` libraries for JS parsing and code generation respectively.\n\nWorks on `node` as well as the browser.\n\nUsage on nodejs\n---------------\n\n     var instrumenter = new require('istanbul').Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nUsage in a browser\n------------------\n\nLoad `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.\n\nCreate an instrumenter object as:\n\n     var instrumenter = new Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nAside from demonstration purposes, it is unclear why you would want to instrument code in a browser.",
             "is_constructor": 1,
             "params": [
@@ -578,14 +625,14 @@
             "module": "istanbul",
             "namespace": "",
             "file": "index.js",
-            "line": 22,
+            "line": 23,
             "description": "the top-level API for `istanbul`.\n\nUsage\n-----\n\n     var istanbul = require('istanbul');"
         }
     },
     "classitems": [
         {
             "file": "lib/report/index.js",
-            "line": 31,
+            "line": 30,
             "description": "registers a new report implementation.",
             "itemtype": "method",
             "name": "register",
@@ -601,7 +648,7 @@
         },
         {
             "file": "lib/report/index.js",
-            "line": 38,
+            "line": 37,
             "description": "returns a report implementation of the specified type.",
             "itemtype": "method",
             "name": "create",
@@ -626,7 +673,7 @@
         },
         {
             "file": "lib/report/index.js",
-            "line": 48,
+            "line": 47,
             "description": "writes the report for a set of coverage objects added to a collector.",
             "itemtype": "method",
             "name": "writeReport",
@@ -646,7 +693,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 47,
+            "line": 46,
             "description": "registers a new store implementation.",
             "itemtype": "method",
             "name": "register",
@@ -662,7 +709,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 54,
+            "line": 53,
             "description": "returns a store implementation of the specified type.",
             "itemtype": "method",
             "name": "create",
@@ -687,7 +734,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 64,
+            "line": 63,
             "description": "sets some content associated with a specific key. The manner in which\nduplicate keys are handled for multiple `set()` calls with the same\nkey is implementation-specific.",
             "itemtype": "method",
             "name": "set",
@@ -707,7 +754,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 74,
+            "line": 73,
             "description": "returns the content associated to a specific key or throws if the key\nwas not `set`",
             "itemtype": "method",
             "name": "get",
@@ -726,7 +773,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 82,
+            "line": 81,
             "description": "returns a list of all known keys",
             "itemtype": "method",
             "name": "keys",
@@ -738,7 +785,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 88,
+            "line": 87,
             "description": "returns true if the key is one for which a `get()` call would work.",
             "itemtype": "method",
             "name": "hasKey",
@@ -756,7 +803,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 95,
+            "line": 94,
             "description": "lifecycle method to dispose temporary resources associated with the store",
             "itemtype": "method",
             "name": "dispose",
@@ -764,7 +811,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 100,
+            "line": 99,
             "description": "sugar method to return an object associated with a specific key. Throws\nif the content set against the key was not a valid JSON string.",
             "itemtype": "method",
             "name": "getObject",
@@ -783,7 +830,7 @@
         },
         {
             "file": "lib/store/index.js",
-            "line": 110,
+            "line": 109,
             "description": "sugar method to set an object against a specific key.",
             "itemtype": "method",
             "name": "setObject",
@@ -874,7 +921,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 77,
+            "line": 74,
             "description": "hooks `require` to return transformed code to the node module loader.\nExceptions in the transform result in the original code being used instead.",
             "itemtype": "method",
             "name": "hookRequire",
@@ -908,8 +955,8 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 109,
-            "description": "unhook `require` to restore it to its original state. Also unloads the  modules in\nthe `require` cache that would have matched the matcher provide in the\n`hookRequire` method.",
+            "line": 104,
+            "description": "unhook `require` to restore it to its original state.",
             "itemtype": "method",
             "name": "unhookRequire",
             "static": 1,
@@ -917,7 +964,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 120,
+            "line": 112,
             "description": "hooks `vm.createScript` to return transformed code out of which a `Script` object will be created.\nExceptions in the transform result in the original code being used instead.",
             "itemtype": "method",
             "name": "hookCreateScript",
@@ -951,7 +998,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 141,
+            "line": 133,
             "description": "unhooks vm.createScript, restoring it to its original state.",
             "itemtype": "method",
             "name": "unhookCreateScript",
@@ -960,7 +1007,7 @@
         },
         {
             "file": "lib/instrumenter.js",
-            "line": 343,
+            "line": 344,
             "description": "synchronous instrumentation method. Throws when illegal code is passed to it",
             "itemtype": "method",
             "name": "instrumentSync",
@@ -980,7 +1027,7 @@
         },
         {
             "file": "lib/instrumenter.js",
-            "line": 389,
+            "line": 391,
             "description": "Callback based instrumentation. Note that this still executes synchronously in the same process tick\nand calls back immediately. It only provides the options for callback style error handling as\nopposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`",
             "itemtype": "method",
             "name": "instrument",
@@ -1001,6 +1048,16 @@
                     "type": "Function(err, instrumentedCode)"
                 }
             ],
+            "class": "Instrumenter"
+        },
+        {
+            "file": "lib/instrumenter.js",
+            "line": 416,
+            "description": "returns the file coverage object for the code that was instrumented\njust before calling this method. Note that this represents a\n\"zero-coverage\" object which is not even representative of the code\nbeing loaded in node or a browser (which would increase the statement\ncounts for mainline code).",
+            "return": {
+                "description": "a \"zero-coverage\" file coverage object for the code last instrumented\nby this instrumenter",
+                "type": "Object"
+            },
             "class": "Instrumenter"
         },
         {
@@ -1170,8 +1227,144 @@
             "class": "ObjectUtils"
         },
         {
+            "file": "misc/samples/coverage.js",
+            "line": 13,
+            "description": "Facade for all coverage operations support node as well as browser cases\n\nUsage:\n```\n //Node unit tests\n var coverage = require('/path/to/this/file');\n coverage.hookRequire(); // hooks require for instrumentation\n coverage.addInstrumentCandidate(file); // adds a file that needs to be instrumented; should be called before file is `require`d\n\n //Browser tests\n var coverage = require('/path/to/this/file');\n var instrumentedCode = coverage.instrumentFile(file); //alternatively, use `instrumentCode` if you have already loaded the code\n //collect coverage from the browser\n // this coverage will be stored as `window.__coverage__`\n // and...\n coverage.addCoverage(coverageObject); // rinse and repeat\n ```\n\n //in all cases, add an exit handler to the process\n process.once('exit', function () { coverage.writeReports(outputDir); }); //write coverage reports",
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 36,
+            "description": "adds a file as a candidate for instrumentation when require is hooked",
+            "itemtype": "method",
+            "name": "addInstrumentCandidate",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "the file to add as an instrumentation candidate"
+                }
+            ],
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 45,
+            "description": "hooks require to instrument all files that have been specified as instrumentation candidates",
+            "itemtype": "method",
+            "name": "hookRequire",
+            "params": [
+                {
+                    "name": "verbose",
+                    "description": "true for debug messages"
+                }
+            ],
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 61,
+            "description": "unhooks require hooks that have been installed",
+            "itemtype": "method",
+            "name": "unhookRequire",
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 68,
+            "description": "returns the coverage collector, creating one if necessary and automatically\nadding the contents of the global coverage object. You can use this method\nin an exit handler to get the accumulated coverage.",
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 88,
+            "description": "adds coverage to the collector for browser test cases",
+            "params": [
+                {
+                    "name": "coverageObject",
+                    "description": "the coverage object to add"
+                }
+            ],
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 96,
+            "description": "returns the merged coverage for the collector",
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 103,
+            "description": "writes reports for an array of JSON files representing partial coverage information",
+            "itemtype": "method",
+            "name": "writeReportsFor",
+            "params": [
+                {
+                    "name": "fileList",
+                    "description": "array of file names containing partial coverage objects"
+                },
+                {
+                    "name": "dir",
+                    "description": "the output directory for reports"
+                }
+            ],
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 118,
+            "description": "writes reports for everything accumulated by the collector",
+            "itemtype": "method",
+            "name": "writeReports",
+            "params": [
+                {
+                    "name": "dir",
+                    "description": "the output directory for reports"
+                }
+            ],
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 136,
+            "description": "returns the instrumented version of the code specified",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "the code to instrument",
+                    "type": "String"
+                },
+                {
+                    "name": "file",
+                    "description": "the file from which the code was load",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the instrumented version of the code in the file",
+                "type": "String"
+            },
+            "class": "API"
+        },
+        {
+            "file": "misc/samples/coverage.js",
+            "line": 146,
+            "description": "returns the instrumented version of the code present in the specified file",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "the file to load"
+                }
+            ],
+            "return": {
+                "description": "the instrumented version of the code in the file",
+                "type": "String"
+            },
+            "class": "API"
+        },
+        {
             "file": "index.js",
-            "line": 35,
+            "line": 36,
             "description": "the Instrumenter class.",
             "itemtype": "property",
             "name": "Instrumenter",
@@ -1182,7 +1375,7 @@
         },
         {
             "file": "index.js",
-            "line": 41,
+            "line": 42,
             "description": "the Store class.",
             "itemtype": "property",
             "name": "Store",
@@ -1193,7 +1386,7 @@
         },
         {
             "file": "index.js",
-            "line": 47,
+            "line": 48,
             "description": "the Collector class",
             "itemtype": "property",
             "name": "Collector",
@@ -1204,7 +1397,7 @@
         },
         {
             "file": "index.js",
-            "line": 53,
+            "line": 54,
             "description": "the hook module",
             "itemtype": "property",
             "name": "hook",
@@ -1215,7 +1408,7 @@
         },
         {
             "file": "index.js",
-            "line": 59,
+            "line": 60,
             "description": "the Report class",
             "itemtype": "property",
             "name": "Report",
@@ -1226,7 +1419,7 @@
         },
         {
             "file": "index.js",
-            "line": 65,
+            "line": 66,
             "description": "utility for processing coverage objects",
             "itemtype": "property",
             "name": "utils",
@@ -1237,7 +1430,7 @@
         },
         {
             "file": "index.js",
-            "line": 71,
+            "line": 72,
             "description": "asynchronously returns a function that can match filesystem paths.\nThe function returned in the callback may be passed directly as a `matcher`\nto the functions in the `hook` module.\n\nWhen no options are passed, the match function is one that matches all JS\nfiles under the current working directory except ones under `node_modules`\n\nMatch patterns are `ant`-style patterns processed using the `fileset` library.\nExamples not provided due to limitations in putting asterisks inside\njsdoc comments. Please refer to tests under `test/other/test-matcher.js`\nfor examples.",
             "itemtype": "method",
             "name": "matcherFor",
@@ -1279,7 +1472,7 @@
         },
         {
             "file": "index.js",
-            "line": 100,
+            "line": 101,
             "description": "the version of the library",
             "itemtype": "property",
             "name": "VERSION",
@@ -1287,6 +1480,36 @@
             "static": 1,
             "class": "API",
             "module": "istanbul"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nreturns the file coverage object for the code that was instrumented\njust before calling this method. Note that this represents a\n\"zero-coverage\" object which is not even representative of the code\nbeing loaded in node or a browser (which would increase the statement\ncounts for mainline code).",
+            "line": " lib/instrumenter.js:416"
+        },
+        {
+            "message": "Missing item type\nFacade for all coverage operations support node as well as browser cases\n\nUsage:\n```\n //Node unit tests\n var coverage = require('/path/to/this/file');\n coverage.hookRequire(); // hooks require for instrumentation\n coverage.addInstrumentCandidate(file); // adds a file that needs to be instrumented; should be called before file is `require`d\n\n //Browser tests\n var coverage = require('/path/to/this/file');\n var instrumentedCode = coverage.instrumentFile(file); //alternatively, use `instrumentCode` if you have already loaded the code\n //collect coverage from the browser\n // this coverage will be stored as `window.__coverage__`\n // and...\n coverage.addCoverage(coverageObject); // rinse and repeat\n ```\n\n //in all cases, add an exit handler to the process\n process.once('exit', function () { coverage.writeReports(outputDir); }); //write coverage reports",
+            "line": " misc/samples/coverage.js:13"
+        },
+        {
+            "message": "Missing item type\nreturns the coverage collector, creating one if necessary and automatically\nadding the contents of the global coverage object. You can use this method\nin an exit handler to get the accumulated coverage.",
+            "line": " misc/samples/coverage.js:68"
+        },
+        {
+            "message": "Missing item type\nadds coverage to the collector for browser test cases",
+            "line": " misc/samples/coverage.js:88"
+        },
+        {
+            "message": "Missing item type\nreturns the merged coverage for the collector",
+            "line": " misc/samples/coverage.js:96"
+        },
+        {
+            "message": "Missing item type\nreturns the instrumented version of the code specified",
+            "line": " misc/samples/coverage.js:136"
+        },
+        {
+            "message": "Missing item type\nreturns the instrumented version of the code present in the specified file",
+            "line": " misc/samples/coverage.js:146"
         }
     ]
 }

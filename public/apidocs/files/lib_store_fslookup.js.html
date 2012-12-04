@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -165,7 +167,7 @@ Store.mix(LookupStore, {
             return false;
         }
     },
-    set: function (key, contents) {
+    set: function (key &#x2F;*, contents *&#x2F;) {
         if (!this.hasKey(key)) {
             throw new Error(&#x27;Attempt to set contents for non-existent file [&#x27; + key + &#x27;] on a fslookup store&#x27;);
         }

@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -166,7 +168,6 @@
                 .replace(new RegExp(&#x27;\\+&#x27;, &#x27;g&#x27;), &#x27;_&#x27;)
                 .replace(new RegExp(&#x27;&#x2F;&#x27;, &#x27;g&#x27;), &#x27;$&#x27;);
         } else {
-            &#x2F;*jslint nomen: true *&#x2F;
             window.__cov_seq = window.__cov_seq || 0;
             window.__cov_seq += 1;
             suffix = window.__cov_seq;
@@ -256,7 +257,8 @@
 
         var type = node.type,
             children = SYNTAX[type].children,
-            applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name, &#x2F;&#x2F; don&#x27;t run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
+            &#x2F;&#x2F; don&#x27;t run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
+            applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name,
             walkerFn = applyCustomWalker ? walker.walkMap[type] : null,
             i,
             j,
@@ -266,7 +268,6 @@
             ret = node,
             childArray,
             childElement,
-            tmpNode,
             pathElement,
             assignNode,
             isLast;
@@ -277,7 +278,9 @@
             for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {
                 isLast = walkFnIndex === walkerFn.length - 1;
                 ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;
-                if (ret.type !== type &amp;&amp; !isLast) { throw new Error(&#x27;Only the last walker is allowed to change the node type: [type was: &#x27; + type + &#x27; ]&#x27;); }
+                if (ret.type !== type &amp;&amp; !isLast) {
+                    throw new Error(&#x27;Only the last walker is allowed to change the node type: [type was: &#x27; + type + &#x27; ]&#x27;);
+                }
             }
         } else {
             if (walkerFn) {
@@ -488,7 +491,8 @@
                 statement: 0
             };
 
-            if (typeof code !== &#x27;string&#x27;) { throw new Error(&#x27;Code must be string&#x27;); } &#x2F;&#x2F;protect from users accidentally passing in a Buffer object instead
+            &#x2F;&#x2F;protect from users accidentally passing in a Buffer object instead
+            if (typeof code !== &#x27;string&#x27;) { throw new Error(&#x27;Code must be string&#x27;); }
             if (code.charAt(0) === &#x27;#&#x27;) { &#x2F;&#x2F;shebang, &#x27;comment&#x27; it out, won&#x27;t affect syntax tree locations for things we care about
                 code = &#x27;&#x2F;&#x2F;&#x27; + code;
             }
@@ -529,7 +533,18 @@
                 callback(ex);
             }
         },
-
+        &#x2F;**
+         * returns the file coverage object for the code that was instrumented
+         * just before calling this method. Note that this represents a
+         * &quot;zero-coverage&quot; object which is not even representative of the code
+         * being loaded in node or a browser (which would increase the statement
+         * counts for mainline code).
+         * @return {Object} a &quot;zero-coverage&quot; file coverage object for the code last instrumented
+         * by this instrumenter
+         *&#x2F;
+        lastFileCoverage: function () {
+            return this.coverState;
+        },
         fixColumnPositions: function (coverState) {
             var offset = LEADER_WRAP.length,
                 fixer = function (loc) {
@@ -569,7 +584,9 @@
                 file = this.coverState.path.replace(&#x2F;\\&#x2F;g, &#x27;\\\\&#x27;),
                 tracker = this.currentState.trackerVar,
                 coverState,
-                replacer = function (s) { &#x2F;&#x2F;return replacements using the function to ensure that the replacement is treated like a dumb string and not as a string with RE replacement patterns
+                &#x2F;&#x2F; return replacements using the function to ensure that the replacement is
+                &#x2F;&#x2F; treated like a dumb string and not as a string with RE replacement patterns
+                replacer = function (s) {
                     return function () { return s; };
                 },
                 code;
@@ -622,13 +639,13 @@
             return sName;
         },
 
-        skipInit: function (node, walker) {
+        skipInit: function (node &#x2F;*, walker *&#x2F;) {
             if (node.init) {
                 node.init.skipWalk = true;
             }
         },
 
-        skipLeft: function (node, walker) {
+        skipLeft: function (node &#x2F;*, walker *&#x2F;) {
             node.left.skipWalk = true;
         },
 
@@ -664,7 +681,10 @@
         },
 
         coverFunction: function (node, walker) {
-            var id = this.functionName(node, walker.startLineForNode(node), { start: node.loc.start, end: { line: node.body.loc.start.line, column: node.body.loc.start.column } }),
+            var id = this.functionName(node, walker.startLineForNode(node), {
+                    start: node.loc.start,
+                    end: { line: node.body.loc.start.line, column: node.body.loc.start.column }
+                }),
                 body = node.body,
                 blockBody = body.body;
             blockBody.unshift(
@@ -769,7 +789,10 @@
             }
 
             this.findLeaves(node, leaves);
-            bName = this.branchName(&#x27;binary-expr&#x27;, walker.startLineForNode(node), this.locationsForNodes(leaves.map(function (item) { return item.node; })));
+            bName = this.branchName(&#x27;binary-expr&#x27;,
+                walker.startLineForNode(node),
+                this.locationsForNodes(leaves.map(function (item) { return item.node; }))
+            );
             for (i = 0; i &lt; leaves.length; i += 1) {
                 tuple = leaves[i];
                 tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);

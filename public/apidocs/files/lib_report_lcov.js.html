@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -123,7 +125,6 @@
 
 var path = require(&#x27;path&#x27;),
     mkdirp = require(&#x27;mkdirp&#x27;),
-    util = require(&#x27;util&#x27;),
     Report = require(&#x27;.&#x2F;index&#x27;),
     LcovOnlyReport = require(&#x27;.&#x2F;lcovonly&#x27;),
     HtmlReport = require(&#x27;.&#x2F;html&#x27;);
@@ -142,7 +143,8 @@ var path = require(&#x27;path&#x27;),
  * @extends Report
  * @constructor
  * @param {Object} opts optional
- * @param {String} [opts.dir] the directory in which to the &#x60;lcov.info&#x60; file. HTML files are written in a subdirectory called &#x60;lcov-report&#x60;. Defaults to &#x60;process.cwd()&#x60;
+ * @param {String} [opts.dir] the directory in which to the &#x60;lcov.info&#x60; file.
+ *  HTML files are written in a subdirectory called &#x60;lcov-report&#x60;. Defaults to &#x60;process.cwd()&#x60;
  *&#x2F;
 function LcovReport(opts) {
     Report.call(this);

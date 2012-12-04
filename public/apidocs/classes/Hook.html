@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -151,7 +153,7 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
 
 <h2>Usage</h2>
 
-<pre class="code"><code class="prettyprint"> var hook = require('istanbul').hook,
+<pre class="code prettyprint"><code> var hook = require('istanbul').hook,
      myMatcher = function (file) { return file.match(/foo/); },
      myTransformer = function (code, file) { return 'console.log("' + file + '");' + code; };
 
@@ -293,7 +295,7 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l120"><code>lib&#x2F;hook.js:120</code></a>
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l112"><code>lib&#x2F;hook.js:112</code></a>
         
         </p>
 
@@ -445,7 +447,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l77"><code>lib&#x2F;hook.js:77</code></a>
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l74"><code>lib&#x2F;hook.js:74</code></a>
         
         </p>
 
@@ -575,7 +577,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l141"><code>lib&#x2F;hook.js:141</code></a>
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l133"><code>lib&#x2F;hook.js:133</code></a>
         
         </p>
 
@@ -631,7 +633,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l109"><code>lib&#x2F;hook.js:109</code></a>
+        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l104"><code>lib&#x2F;hook.js:104</code></a>
         
         </p>
 
@@ -642,9 +644,7 @@ Exceptions in the transform result in the original code being used instead.</p>
     </div>
 
     <div class="description">
-        <p>unhook <code>require</code> to restore it to its original state. Also unloads the  modules in
-the <code>require</code> cache that would have matched the matcher provide in the
-<code>hookRequire</code> method.</p>
+        <p>unhook <code>require</code> to restore it to its original state.</p>
     </div>
 
     

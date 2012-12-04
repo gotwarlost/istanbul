@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -180,7 +182,7 @@ Collector.prototype = {
      * @param {String} testName Optional. The name of the test used to produce the object.
      *      This is currently not used.
      *&#x2F;
-    add: function (coverage, testName) {
+    add: function (coverage &#x2F;*, testName *&#x2F;) {
         var store = this.store;
         Object.keys(coverage).forEach(function (key) {
             var fileCoverage = coverage[key];

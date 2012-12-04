@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -148,14 +150,11 @@
  *
  * @class Hook
  *&#x2F;
-&#x2F;*jslint nomen: true *&#x2F;
-var path = require(&#x27;path&#x27;),
-    fs = require(&#x27;fs&#x27;),
+var fs = require(&#x27;fs&#x27;),
     Module = require(&#x27;module&#x27;),
     vm = require(&#x27;vm&#x27;),
     originalLoader = Module._extensions[&#x27;.js&#x27;],
-    originalCreateScript = vm.createScript,
-    lastMatcher;
+    originalCreateScript = vm.createScript;
 
 function transformFn(matcher, transformer, verbose) {
 
@@ -206,10 +205,9 @@ function unloadRequireCache(matcher) {
  *&#x2F;
 function hookRequire(matcher, transformer, options) {
     options = options || {};
-    lastMatcher = matcher;
     var fn = transformFn(matcher, transformer, options.verbose),
-        postLoadHook = options.postLoadHook
-            &amp;&amp; typeof options.postLoadHook === &#x27;function&#x27; ? options.postLoadHook : null;
+        postLoadHook = options.postLoadHook &amp;&amp;
+            typeof options.postLoadHook === &#x27;function&#x27; ? options.postLoadHook : null;
 
     Module._extensions[&#x27;.js&#x27;] = function (module, filename) {
         var ret = fn(fs.readFileSync(filename, &#x27;utf8&#x27;), filename);
@@ -222,18 +220,14 @@ function hookRequire(matcher, transformer, options) {
             postLoadHook(filename);
         }
     };
-    unloadRequireCache(matcher);
 }
 &#x2F;**
- * unhook &#x60;require&#x60; to restore it to its original state. Also unloads the  modules in
- * the &#x60;require&#x60; cache that would have matched the matcher provide in the
- * &#x60;hookRequire&#x60; method.
+ * unhook &#x60;require&#x60; to restore it to its original state.
  * @method unhookRequire
  * @static
  *&#x2F;
 function unhookRequire() {
     Module._extensions[&#x27;.js&#x27;] = originalLoader;
-    unloadRequireCache(lastMatcher);
 }
 &#x2F;**
  * hooks &#x60;vm.createScript&#x60; to return transformed code out of which a &#x60;Script&#x60; object will be created.
@@ -269,7 +263,8 @@ module.exports = {
     hookRequire: hookRequire,
     unhookRequire: unhookRequire,
     hookCreateScript: hookCreateScript,
-    unhookCreateScript: unhookCreateScript
+    unhookCreateScript: unhookCreateScript,
+    unloadRequireCache: unloadRequireCache
 };
 
 

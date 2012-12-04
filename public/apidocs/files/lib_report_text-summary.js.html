@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -124,7 +126,6 @@
 var path = require(&#x27;path&#x27;),
     mkdirp = require(&#x27;mkdirp&#x27;),
     fs = require(&#x27;fs&#x27;),
-    util = require(&#x27;util&#x27;),
     utils = require(&#x27;..&#x2F;object-utils&#x27;),
     Report = require(&#x27;.&#x2F;index&#x27;);
 
@@ -160,7 +161,7 @@ function lineForKey(summary, key) {
 }
 
 Report.mix(TextSummaryReport, {
-    writeReport: function (collector, sync) {
+    writeReport: function (collector &#x2F;*, sync *&#x2F;) {
         var summaries = [],
             finalSummary,
             lines = [],

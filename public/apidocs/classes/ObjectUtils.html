@@ -43,6 +43,8 @@
             
                 <li><a href="..&#x2F;classes/API.html">API</a></li>
             
+                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+            
                 <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
             
                 <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
@@ -139,7 +141,7 @@
     <p>utility methods to process coverage objects. A coverage object has the following
 format.</p>
 
-<pre class="code"><code class="prettyprint"> {
+<pre class="code prettyprint"><code> {
      "/path/to/file1.js": { file1 coverage },
      "/path/to/file2.js": { file2 coverage }
  }
@@ -156,7 +158,7 @@ format.</p>
 
 <h2>Usage on nodejs</h2>
 
-<pre class="code"><code class="prettyprint"> var objectUtils = require('istanbul').utils;
+<pre class="code prettyprint"><code> var objectUtils = require('istanbul').utils;
 </code></pre>
 
 <h2>Usage in a browser</h2>
@@ -520,7 +522,7 @@ it is not recomputed.</p>
         <p>returns a blank summary metrics object. A metrics object has the following
 format.</p>
 
-<pre class="code"><code class="prettyprint"> {
+<pre class="code prettyprint"><code> {
      lines: lineMetrics,
      statements: statementMetrics,
      functions: functionMetrics,
@@ -530,7 +532,7 @@ format.</p>
 
 <p>Each individual metric object looks as follows:</p>
 
-<pre class="code"><code class="prettyprint"> {
+<pre class="code prettyprint"><code> {
      total: n,
      covered: m,
      pct: percent
