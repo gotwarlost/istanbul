@@ -153,6 +153,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.24</td><td>Add lcov summaries. Fixes issue #20</td></tr>
 <tr><td>v0.1.23</td><td>Add ability to save a baseline coverage file for the instrument command. Fixes issue #19</td></tr>
 <tr><td>v0.1.22</td><td>Add signature attribute to cobertura method tags to fix NPE by the Hudson publisher</td></tr>
 <tr><td>v0.1.21</td><td>Add cobertura XML report format; exprimental for now</td></tr>
