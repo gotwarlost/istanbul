@@ -75,6 +75,12 @@ function runCommand(command, args, envVars, callback) {
                 var filtered = array.filter(function (item) {
                     return item.match(pat);
                 });
+                if (filtered.length === 0) {
+                    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+                    console.log('Could not find: ' + pat + ' in:');
+                    console.log(array.join('\n'));
+                    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+                }
                 return filtered.length > 0;
             };
         };
