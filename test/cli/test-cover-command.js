@@ -109,5 +109,21 @@ module.exports = {
             test.ok(results.grepError(/Unable to resolve file/));
             test.done();
         });
+    },
+    "should work with RequireJS and AMD modules": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/amd-run.js', '-v' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(results.grepError(/Module load hook:/));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+                filtered;
+            filtered = Object.keys(coverage).filter(function (k) { return k.match(/amd\/lorem/) || k.match(/amd\/ipsum/); });
+            test.ok(filtered.length === 2);
+            test.ok(filtered.length === Object.keys(coverage).length);
+            test.done();
+        });
     }
 };

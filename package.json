@@ -36,7 +36,8 @@
         "rimraf": "*",
         "nodeunit": "*",
         "jshint": "*",
-        "yui-lint": "*"
+        "yui-lint": "*",
+        "requirejs": "2.x"
     },
     "TODO": [
         "Need a legend for the HTML report + some explanation on how branch coverage is shown",
