@@ -83,7 +83,7 @@ module.exports = {
         run([ 'lib/foo.js', '--save-baseline', '--baseline-file=' + covFile ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(covFile));
-            //test.ok(results.grepOutput(/Saving baseline coverage at/));
+            test.ok(results.grepOutput(/Saving baseline coverage at/));
             test.done();
         });
     },
