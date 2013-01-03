@@ -112,7 +112,7 @@ module.exports = {
     },
     "should work with RequireJS and AMD modules": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/amd-run.js', '-v' ], function (results) {
+        run([ 'test/amd-run.js', '-v', '--hook-run-in-context' ], function (results) {
             test.ok(results.succeeded());
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
