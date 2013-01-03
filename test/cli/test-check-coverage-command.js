@@ -68,6 +68,17 @@ module.exports = {
             test.done();
         });
     },
+    "should fail with multiple reasons when multiple thresholds violated with negative thresholds": function (test) {
+        test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+        run([ '--statements=-3', '--functions=-10', '--branches=-1', '--lines=-3' ], function (results) {
+            test.ok(!results.succeeded());
+            test.ok(results.grepError(/Uncovered count for lines/));
+            test.ok(results.grepError(/Uncovered count for statements/));
+            test.ok(results.grepError(/Uncovered count for branches/));
+            test.ok(!results.grepError(/Uncovered count for functions/));
+            test.done();
+        });
+    },
     "should pass with multiple reasons when all thresholds in check": function (test) {
         test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
         run([ '--statements=60', '--functions=50', '--branches=50', '--lines=60', '-v' ], function (results) {
