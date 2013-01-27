@@ -105,7 +105,7 @@ module.exports = {
      */
     VERSION: meta.VERSION,
     //undocumented
-    _yuiLoadHook: require('./lib/util/yui-load-hook').getPostLoadHook,
+    _yuiLoadHook: require('./lib/util/yui-load-hook'),
     //undocumented
     TreeSummarizer: require('./lib/util/tree-summarizer'),
     //undocumented

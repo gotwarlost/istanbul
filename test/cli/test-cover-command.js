@@ -125,5 +125,19 @@ module.exports = {
             test.ok(filtered.length === Object.keys(coverage).length);
             test.done();
         });
+    },
+    "should apply post-require-hook correctly": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'node_modules/post-require/hook.js' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(results.grepError(/PRH: MatchFn was a function/));
+            test.ok(results.grepError(/PRH: TransformFn was a function/));
+            test.ok(results.grepError(/PRH: Verbose was true/));
+            //yes, post require hook must be called always even when a file is not covered
+            test.ok(results.grepError(/PRH: Saw foo\.js/));
+            //and, of course, for covered files as well
+            test.ok(results.grepError(/PRH: Saw bar\.js/));
+            test.done();
+        });
     }
 };
