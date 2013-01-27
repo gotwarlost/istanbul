@@ -153,6 +153,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.28</td><td>Add --post-require-hook switch to support use-cases similar to the YUI loader</td></tr>
 <tr><td>v0.1.27</td><td>Add --hook-run-in-context switch to support RequireJS modules. Thanks to @millermedeiros for the pull request</td></tr>
 <tr><td>v0.1.26</td><td>Add support for minimum uncovered unit for check-coverage. Fixes #25</td></tr>
 <tr><td>v0.1.25</td><td>Allow for relative paths in the YUI loader hook</td></tr>
