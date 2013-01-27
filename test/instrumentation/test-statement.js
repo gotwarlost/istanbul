@@ -1,7 +1,6 @@
 /*jslint nomen: true */
 var helper = require('../helper'),
     Instrumenter = require('../../lib/instrumenter'),
-    path = require('path'),
     code,
     verifier;
 

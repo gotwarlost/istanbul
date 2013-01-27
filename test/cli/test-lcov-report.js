@@ -10,16 +10,14 @@ var path = require('path'),
     runCover = helper.runCommand.bind(null, COVER_COMMAND),
     Reporter = require('../../lib/report/lcov'),
     Collector = require('../../lib/collector'),
-    existsSync = fs.existsSync || path.existsSync,
-    filename,
-    cov;
+    existsSync = fs.existsSync || path.existsSync;
 
 module.exports = {
     setUp: function (cb) {
         rimraf.sync(OUTPUT_DIR);
         mkdirp.sync(OUTPUT_DIR);
         helper.resetOpts();
-        runCover([ 'test/run.js', '--report', 'none' ], function (results) {
+        runCover([ 'test/run.js', '--report', 'none' ], function (/* results */) {
             cb();
         });
     },

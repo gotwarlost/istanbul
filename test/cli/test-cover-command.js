@@ -1,7 +1,6 @@
 /*jslint nomen: true */
 var path = require('path'),
     fs = require('fs'),
-    vm = require('vm'),
     rimraf = require('rimraf'),
     mkdirp = require('mkdirp'),
     COMMAND = 'cover',

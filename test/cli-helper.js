@@ -1,7 +1,6 @@
 /*jslint nomen: true */
 var path = require('path'),
     fs = require('fs'),
-    util = require('util'),
     cp = require('child_process'),
     Module = require('module'),
     originalLoader = Module._extensions['.js'],

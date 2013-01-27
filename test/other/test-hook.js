@@ -2,10 +2,10 @@
 var hook = require('../../lib/hook'),
     currentHook,
     matcher = function (file) { return file.indexOf('foo.js') > 0; },
-    transformer = function (code, file) { return 'module.exports.bar = function () { return "bar"; };'; },
-    transformer2 = function (code, file) { return 'module.exports.blah = function () { return "blah"; };'; },
-    badTransformer = function (code, file) { throw "Boo!"; },
-    scriptTransformer = function (code, file) { return '(function () { return 42; }());'; };
+    transformer = function () { return 'module.exports.bar = function () { return "bar"; };'; },
+    transformer2 = function () { return 'module.exports.blah = function () { return "blah"; };'; },
+    badTransformer = function () { throw "Boo!"; },
+    scriptTransformer = function () { return '(function () { return 42; }());'; };
 
 module.exports = {
     "when require is hooked": {

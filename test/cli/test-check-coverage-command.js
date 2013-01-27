@@ -17,7 +17,7 @@ module.exports = {
         rimraf.sync(OUTPUT_DIR);
         mkdirp.sync(OUTPUT_DIR);
         helper.resetOpts();
-        runCover([ 'test/run.js', '--report', 'none' ], function (results) {
+        runCover([ 'test/run.js', '--report', 'none' ], function (/* results */) {
             cb();
         });
     },

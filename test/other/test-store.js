@@ -75,10 +75,10 @@ module.exports = {
     },
 
     "should be able to register a new store": function (test) {
-        function NStore(opts) {
+        function NStore() {
         }
         NStore.prototype = {
-            set: function (file, content) { return 'x'; }
+            set: function (/* file, content */) { return 'x'; }
         };
         NStore.TYPE = 'nstore';
 
@@ -90,7 +90,7 @@ module.exports = {
     },
 
     "should not be able to register an invalid store": function (test) {
-        function NStore(opts) {}
+        function NStore() {}
         test.throws(function () {
             Store.register(NStore);
         },
@@ -107,7 +107,7 @@ module.exports = {
     },
 
     "should require overriding of all overrideables": function (test) {
-        function NStore(opts) {}
+        function NStore() {}
         NStore.TYPE = 'nstore';
         util.inherits(NStore, Store);
         Store.register(NStore);

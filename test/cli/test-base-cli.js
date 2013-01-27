@@ -1,6 +1,5 @@
 /*jslint nomen: true */
-var path = require('path'),
-    helper = require('../cli-helper');
+var helper = require('../cli-helper');
 
 module.exports = {
     setUp: function (cb) {

@@ -1,5 +1,4 @@
 /*jslint nomen: true */
-/*global __coverage__ */
 var Instrumenter = require('../lib/instrumenter'),
     vm = require('vm'),
     NO_OP = function () {},
@@ -74,7 +73,8 @@ function setup(file, codeArray, opts) {
     opts.debug = opts.debug || process.env.DEBUG;
 
     var expectError = opts.expectError,
-        coverageVariable = typeof opts.coverageVariable === 'undefined' ? '$$coverage$$' : opts.coverageVariable, //exercise the case where RE substitutions for the preamble have $ signs
+        //exercise the case where RE substitutions for the preamble have $ signs
+        coverageVariable = typeof opts.coverageVariable === 'undefined' ? '$$coverage$$' : opts.coverageVariable,
         ps = opts.embedSource || false,
         verifier,
         cover = new Instrumenter({
@@ -97,11 +97,11 @@ function setup(file, codeArray, opts) {
                 return;
             }
             var wrappedCode = '(function (args) { var output;\n' + generated + '\nreturn output;\n})',
-                fn,
-                output;
+                fn;
             global[coverageVariable] = undefined;
             fn = vm.runInThisContext(wrappedCode, __filename);
-            verifier = new Verifier({ debug: opts.debug, file: file, fn: fn, code: codeArray, generatedCode: generated, coverageVariable: coverageVariable });
+            verifier = new Verifier({ debug: opts.debug, file: file, fn: fn, code: codeArray,
+                generatedCode: generated, coverageVariable: coverageVariable });
             if (opts.debug) {
                 console.log('================== Original ============================================');
                 console.log(annotatedCode(codeArray));

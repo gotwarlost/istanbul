@@ -10,16 +10,14 @@ var path = require('path'),
     runCover = helper.runCommand.bind(null, COVER_COMMAND),
     Reporter = require('../../lib/report/html'),
     Collector = require('../../lib/collector'),
-    existsSync = fs.existsSync || path.existsSync,
-    filename,
-    cov;
+    existsSync = fs.existsSync || path.existsSync;
 
 module.exports = {
     setUp: function (cb) {
         rimraf.sync(OUTPUT_DIR);
         mkdirp.sync(OUTPUT_DIR);
         helper.resetOpts();
-        runCover([ 'test/run.js', '--report', 'none' ], function (results) {
+        runCover([ 'test/run.js', '--report', 'none' ], function (/* results */) {
             cb();
         });
     },
@@ -102,7 +100,7 @@ module.exports = {
             obj[k].code = code;
             obj[k].path = mangled;
             copy[mangled] = obj[k];
-            test.ok(mangled != k); //verify something _did_ get mangled
+            test.ok(mangled !== k); //verify something _did_ get mangled
             test.ok(copy[mangled].code);
         });
         collector.add(copy);

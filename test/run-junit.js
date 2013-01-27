@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-var path = require('path'),
-    nodeunit = require('nodeunit'),
+var nodeunit = require('nodeunit'),
     mkdirp = require('mkdirp'),
     loader = require('./loader'),
     common = require('./common');
