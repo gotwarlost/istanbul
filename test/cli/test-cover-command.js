@@ -125,7 +125,7 @@ module.exports = {
             test.done();
         });
     },
-    "should apply post-require-hook correctly": function (test) {
+    "should apply post-require-hook correctly when absolute path specified": function (test) {
         helper.setOpts({ lazyHook : true });
         run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'node_modules/post-require/hook.js' ], function (results) {
             test.ok(results.succeeded());
@@ -136,6 +136,27 @@ module.exports = {
             test.ok(results.grepError(/PRH: Saw foo\.js/));
             //and, of course, for covered files as well
             test.ok(results.grepError(/PRH: Saw bar\.js/));
+            test.done();
+        });
+    },
+    "should apply post-require-hook correctly when module name specified": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'post-require' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(results.grepError(/PRH: MatchFn was a function/));
+            test.ok(results.grepError(/PRH: TransformFn was a function/));
+            test.ok(results.grepError(/PRH: Verbose was true/));
+            //yes, post require hook must be called always even when a file is not covered
+            test.ok(results.grepError(/PRH: Saw foo\.js/));
+            //and, of course, for covered files as well
+            test.ok(results.grepError(/PRH: Saw bar\.js/));
+            test.done();
+        });
+    },
+    "should barf when  post-require-hook not available": function (test) {
+        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'does-not-exist' ], function (results) {
+            test.ok(!results.succeeded());
+            test.ok(results.grepError(/Unable to resolve \[does-not-exist\] as a node module/));
             test.done();
         });
     }
