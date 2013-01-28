@@ -204,6 +204,7 @@ The following third-party libraries are used by this module:
 * mkdirp: https://github.com/substack/node-mkdirp - to create output directories
 * nodeunit: https://github.com/caolan/nodeunit - dev dependency for unit tests
 * nopt: https://github.com/isaacs/nopt - for option parsing
+* resolve: https://github.com/substack/node-resolve - for resolving a post-require hook module name into its main file.
 * rimraf - https://github.com/isaacs/rimraf - dev dependency for unit tests
 * which: https://github.com/isaacs/node-which - to resolve a node command to a file for the `cover` command
 * wordwrap: https://github.com/substack/node-wordwrap - for prettier help
