@@ -35,7 +35,8 @@ var nodeunit = require('nodeunit'),
     loader = require('./loader'),
     child_process = require('child_process'),
     rimraf = require('rimraf'),
-    common = require('./common');
+    common = require('./common'),
+    cliHelper = require('./cli-helper');
 
 function runTests(pat, forceCover) {
     var defaultReporter = nodeunit.reporters['default'],
@@ -43,6 +44,7 @@ function runTests(pat, forceCover) {
         args,
         proc;
 
+    cliHelper.setVerbose(process.env.VERBOSE);
     loader.runTests(pat, defaultReporter, undefined, function (err) {
         var coverageDir = common.getCoverageDir();
         //if any test failed then we cannot obviously run self-coverage
@@ -55,7 +57,7 @@ function runTests(pat, forceCover) {
             common.setSelfCover(true);
             console.log('Running self-coverage....');
             // run the equivalent of
-            // $ istanbul cover run-junit.js -- <pat>
+            // $ istanbul cover run-again.js -- <pat>
             args = [
                 path.resolve(__dirname, '..', 'lib', 'cli.js'),
                 'cover',
@@ -70,7 +72,7 @@ function runTests(pat, forceCover) {
                 '**/test/**',
                 '--x',
                 '**/yui-load-hook.js',
-                path.resolve(__dirname, 'run-junit.js'),
+                path.resolve(__dirname, 'run-again.js'),
                 '--',
                 pat || ''
             ];
