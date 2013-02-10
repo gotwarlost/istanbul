@@ -11,7 +11,7 @@ var handlebars = require('handlebars'),
         return fs.readFileSync(file, 'utf8');
     },
     esprimaSource = reader('..', '..', '..', 'node_modules', 'esprima', 'esprima.js'),
-    escodegenSource = reader('..', '..', '..', 'node_modules', 'escodegen', 'escodegen.js'),
+    escodegenSource = reader('..', '..', '..', 'node_modules', 'escodegen', 'escodegen.browser.js'),
     vm = require('vm'),
     server;
 
