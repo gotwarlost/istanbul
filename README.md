@@ -153,6 +153,8 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.30</td><td>Write standard blurbs ("writing coverage object..." etc.) to stderr rather than stdout</td></tr>
+<tr><td>v0.1.29</td><td>Allow --post-require-hook to be a module that can be `require`-d</td></tr>
 <tr><td>v0.1.28</td><td>Add --post-require-hook switch to support use-cases similar to the YUI loader</td></tr>
 <tr><td>v0.1.27</td><td>Add --hook-run-in-context switch to support RequireJS modules. Thanks to @millermedeiros for the pull request</td></tr>
 <tr><td>v0.1.26</td><td>Add support for minimum uncovered unit for check-coverage. Fixes #25</td></tr>
