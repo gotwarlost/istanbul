@@ -1,0 +1,34 @@
+{
+    "//": "None of this is implemented; just ideas at this point - responsibility-specific config",
+
+    "verbose": false,
+    "instrumentation": {
+        "root": ".",
+        "default-excludes": true,
+        "x": [ "**/vendor/**" ],
+        "embed-source": false,
+        "variable": "__coverage__",
+        "compact": true
+    },
+    "reporting": {
+        "print": "summary",
+        "report": [ "lcov", "cobertura" ],
+        "dir": "./coverage",
+        "watermarks": {
+            "default": [ 50, 80 ],
+            "branches": [ 25, 60 ]
+        }
+    },
+    "hooks": {
+        "hook-run-in-context": false,
+        "post-require-hook": null
+    },
+    "baseline": {
+        "save-baseline": false,
+        "baseline-file": "./coverage/coverage-baseline.json"
+    },
+    "thresholds": {
+        "statements": -10,
+        "branches": 80
+    }
+}
