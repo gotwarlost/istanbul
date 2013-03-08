@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.32</td><td>Fix for null nodes in array expressions, add @unindented as contributor</td></tr>
 <tr><td>v0.1.31</td><td>Misc internal fixes and test changes</td></tr>
 <tr><td>v0.1.30</td><td>Write standard blurbs ("writing coverage object..." etc.) to stderr rather than stdout</td></tr>
 <tr><td>v0.1.29</td><td>Allow --post-require-hook to be a module that can be `require`-d</td></tr>

@@ -152,7 +152,7 @@ All the features of istanbul can be accessed as a library using its [public API]
 Changelog
 ---------
 
-Changelog has been moved [here](http://github.com/gotwarlost/istanbul/raw/master/CHANGELOG.md).
+Changelog has been moved [here](https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md).
 
 License
 -------
