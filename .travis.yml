@@ -1,9 +1,9 @@
 language: node_js
 
 node_js:
-  - 0.6
-  - 0.8
-  - 0.9
+  - "0.6"
+  - "0.8"
+  - "0.10"
 
 branches:
   except:
@@ -11,8 +11,4 @@ branches:
 
 script:
     - npm test --cover
-
-matrix:
-  allow_failures:
-    - node_js: 0.9
 
