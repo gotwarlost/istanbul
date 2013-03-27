@@ -159,5 +159,12 @@ module.exports = {
             test.ok(results.grepError(/Unable to resolve \[does-not-exist\] as a node module/));
             test.done();
         });
+    },
+    "should not introduce globals in the middle of running a test": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/global-leak.js', '-v' ], function (results) {
+            test.ok(results.succeeded());
+            test.done();
+        });
     }
 };
