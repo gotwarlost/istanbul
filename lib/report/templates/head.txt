@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for {{entity}}</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    {{#if prettify}}
-        <link rel='stylesheet' href='{{prettify.css}}'>
-    {{/if}}
-    <style type='text/css'>
+    <meta charset="utf-8">
+{{#if prettify}}
+    <link rel="stylesheet" href="{{prettify.css}}">
+{{/if}}
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -177,22 +179,22 @@
     </style>
 </head>
 <body>
-<div class='header {{reportClass}}'>
-    <h1>Code coverage report for <span class='entity'>{{entity}}</span></h1>
+<div class="header {{reportClass}}">
+    <h1>Code coverage report for <span class="entity">{{entity}}</span></h1>
     <h2>
         {{#with metrics.statements}}
-        Statements: <span class='metric'>{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         {{/with}}
         {{#with metrics.branches}}
-        Branches: <span class='metric'>{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         {{/with}}
         {{#with metrics.functions}}
-        Functions: <span class='metric'>{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         {{/with}}
         {{#with metrics.lines}}
-        Lines: <span class='metric'>{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">{{pct}}% <small>({{covered}} / {{total}})</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         {{/with}}
     </h2>
     {{{pathHtml}}}
 </div>
-<div class='body'>
+<div class="body">
