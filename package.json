@@ -27,13 +27,13 @@
         "escodegen": "0.0.x",
         "handlebars": "1.0.x",
         "mkdirp": "0.3.x",
-        "nopt": "2.0.x",
+        "nopt": "2.1.x",
         "fileset": "0.1.x",
         "which": "1.0.x",
-        "async": "0.1.x",
+        "async": "0.2.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
-        "resolve": "0.2.x"
+        "resolve": "0.3.x"
     },
     "devDependencies": {
         "rimraf": "*",
