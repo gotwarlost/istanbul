@@ -1,6 +1,6 @@
 {
     "name": "istanbul",
-    "version": "0.1.34",
+    "version": "0.1.35",
     "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
     "keywords": [ "coverage", "code coverage", "JS code coverage", "JS coverage" ],
     "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
@@ -11,7 +11,8 @@
         "nowamasa <nowamasa@gmail.com>",
         "Miller Medeiros <contact@millermedeiros.com>",
         "Daniel Perez Alvarez <unindented@gmail.com>",
-        "Mathias Bynens <mathias@qiwi.be>"
+        "Mathias Bynens <mathias@qiwi.be>",
+        "Nathan Brown <nate@betable.com>"
     ],
     "preferGlobal": true,
     "scripts": {
@@ -42,10 +43,6 @@
         "jshint": "*",
         "yui-lint": "*",
         "requirejs": "2.x"
-    },
-    "TODO": [
-        "Need a legend for the HTML report + some explanation on how branch coverage is shown",
-        "figure out a controlled mechanism to suppress branch coverage when impossible-to-test branches are present in source"
-    ]
+    }
 }
 
