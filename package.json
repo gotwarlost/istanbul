@@ -18,11 +18,15 @@
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json lib/*js lib/command/*js lib/report/*js lib/store/*js lib/util/*js test/*js test/instrumentation/*js test/cli/*js test/other/*js",
         "test": "test/run.js",
-	    "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
+        "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
     "bin": {
         "istanbul": "./lib/cli.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/gotwarlost/istanbul.git"
     },
     "dependencies": {
         "esprima": "1.0.x",
