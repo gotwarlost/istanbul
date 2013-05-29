@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.36</td><td>real quiet when --print=none specified, add repo URL to package.json, add contributors</td></tr>
 <tr><td>v0.1.35</td><td>accept cobertura contrib from @nbrownus, fix #52</td></tr>
 <tr><td>v0.1.34</td><td>fix async reporting, update dependencies, accept html cleanup contrib from @mathiasbynens</td></tr>
 <tr><td>v0.1.33</td><td>initialize global coverage object before running tests to workaround mocha leak detection</td></tr>
