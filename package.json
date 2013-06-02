@@ -41,7 +41,8 @@
         "async": "0.2.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
-        "resolve": "0.3.x"
+        "resolve": "0.3.x",
+        "colors": "~0.6.0-1"
     },
     "devDependencies": {
         "rimraf": "*",
