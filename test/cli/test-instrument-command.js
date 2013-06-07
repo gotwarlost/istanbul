@@ -108,7 +108,30 @@ module.exports = {
             test.done();
         });
     },
-    "should copy on js files when using complete-copy": function(test) {
+    "should not copy non js files when using no-complete-copy": function(test) {
+      var inputDirectory, outputDirectory, inputFileCount, jsFileCount = 0;
+
+      inputDirectory = path.join(__dirname, '../other/data-complete-copy/');
+      outputDirectory = OUTPUT_DIR;
+      inputFileCount = fs.readdirSync(inputDirectory).length;
+
+      fs.readdirSync(inputDirectory).forEach(function(file) {
+        var extenstion = path.extname(file);
+
+        if (extenstion === '.js') {
+          jsFileCount++;
+        }
+      });
+
+      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+      test.equal(fs.readdirSync(outputDirectory).length, 0);
+
+      run([ inputDirectory, '--output', OUTPUT_DIR, '--no-complete-copy'], function (results) {
+        test.equal(fs.readdirSync(outputDirectory).length, jsFileCount);
+        test.done();
+      });
+    },
+    "should copy non js files when using complete-copy": function(test) {
       var inputDirectory, outputDirectory, inputFileCount;
 
       inputDirectory = path.join(__dirname, '../other/data-complete-copy/');
