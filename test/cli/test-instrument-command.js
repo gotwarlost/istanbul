@@ -107,6 +107,21 @@ module.exports = {
             test.ok(results.grepError(/Cannot instrument into the same directory/));
             test.done();
         });
-    }
+    },
+    "should copy on js files when using complete-copy": function(test) {
+      var inputDirectory, outputDirectory, inputFileCount;
+
+      inputDirectory = path.join(__dirname, '../other/data-complete-copy/');
+      outputDirectory = OUTPUT_DIR;
+      inputFileCount = fs.readdirSync(inputDirectory).length;
+
+      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+      test.equal(fs.readdirSync(outputDirectory).length, 0);
+
+      run([ inputDirectory, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
+        test.equal(fs.readdirSync(outputDirectory).length, inputFileCount);
+        test.done();
+      });
+    },
 };
 
