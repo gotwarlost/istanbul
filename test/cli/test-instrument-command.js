@@ -4,6 +4,7 @@ var path = require('path'),
     vm = require('vm'),
     rimraf = require('rimraf'),
     mkdirp = require('mkdirp'),
+    INPUT_DIR_CC = path.join(__dirname, '../other/data-complete-copy/'),
     OUTPUT_DIR = path.resolve(process.cwd(), 'output'),
     COMMAND = 'instrument',
     DIR = path.resolve(__dirname, 'sample-project'),
@@ -109,13 +110,11 @@ module.exports = {
         });
     },
     "should not copy non js files when using no-complete-copy": function(test) {
-      var inputDirectory, outputDirectory, inputFileCount, jsFileCount = 0;
+      var inputFileCount, jsFileCount = 0;
 
-      inputDirectory = path.join(__dirname, '../other/data-complete-copy/');
-      outputDirectory = OUTPUT_DIR;
-      inputFileCount = fs.readdirSync(inputDirectory).length;
+      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-      fs.readdirSync(inputDirectory).forEach(function(file) {
+      fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
         var extenstion = path.extname(file);
 
         if (extenstion === '.js') {
@@ -123,26 +122,24 @@ module.exports = {
         }
       });
 
+      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
       test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
-      test.equal(fs.readdirSync(outputDirectory).length, 0);
 
-      run([ inputDirectory, '--output', OUTPUT_DIR, '--no-complete-copy'], function (results) {
-        test.equal(fs.readdirSync(outputDirectory).length, jsFileCount);
+      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function (results) {
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, jsFileCount);
         test.done();
       });
     },
     "should copy non js files when using complete-copy": function(test) {
-      var inputDirectory, outputDirectory, inputFileCount;
+      var inputFileCount;
 
-      inputDirectory = path.join(__dirname, '../other/data-complete-copy/');
-      outputDirectory = OUTPUT_DIR;
-      inputFileCount = fs.readdirSync(inputDirectory).length;
+      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
+      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
       test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
-      test.equal(fs.readdirSync(outputDirectory).length, 0);
 
-      run([ inputDirectory, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
-        test.equal(fs.readdirSync(outputDirectory).length, inputFileCount);
+      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
         test.done();
       });
     },
