@@ -119,44 +119,44 @@ module.exports = {
         });
     },
     "should not copy non js files when using no-complete-copy": function(test) {
-      var inputFileCount;
+        var inputFileCount;
 
-      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
-      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
-        test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
-        test.done();
-      });
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
+            test.done();
+        });
     },
     "should not copy non js files when not specifying complete-copy": function(test) {
-      // Backward compatibility test
-      var inputFileCount;
+        // Backward compatibility test
+        var inputFileCount;
 
-      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
-      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function () {
-        test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
-        test.done();
-      });
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
+            test.done();
+        });
     },
     "should copy non js files when using complete-copy": function(test) {
-      var inputFileCount;
+        var inputFileCount;
 
-      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
-      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function () {
-        test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
-        test.done();
-      });
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
+            test.done();
+        });
     },
 };
 
