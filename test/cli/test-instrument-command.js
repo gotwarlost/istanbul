@@ -125,7 +125,7 @@ module.exports = {
       test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
       test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function (results) {
+      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
         test.equal(fs.readdirSync(OUTPUT_DIR).length, jsFileCount);
         test.done();
       });
@@ -138,7 +138,7 @@ module.exports = {
       test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
       test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
+      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function () {
         test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
         test.done();
       });
