@@ -10,7 +10,16 @@ var path = require('path'),
     DIR = path.resolve(__dirname, 'sample-project'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
-    run = helper.runCommand.bind(null, COMMAND);
+    run = helper.runCommand.bind(null, COMMAND),
+    INPUT_DIR_JS_FILE_COUNT = 0;
+
+fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
+    var extenstion = path.extname(file);
+
+    if (extenstion === '.js') {
+        INPUT_DIR_JS_FILE_COUNT++;
+    }
+});
 
 module.exports = {
     setUp: function (cb) {
@@ -110,23 +119,29 @@ module.exports = {
         });
     },
     "should not copy non js files when using no-complete-copy": function(test) {
-      var inputFileCount, jsFileCount = 0;
+      var inputFileCount;
 
       inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
-
-      fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
-        var extenstion = path.extname(file);
-
-        if (extenstion === '.js') {
-          jsFileCount++;
-        }
-      });
 
       test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
       test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
       run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
-        test.equal(fs.readdirSync(OUTPUT_DIR).length, jsFileCount);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
+        test.done();
+      });
+    },
+    "should not copy non js files when not specifying complete-copy": function(test) {
+      // Backward compatibility test
+      var inputFileCount;
+
+      inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+
+      test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+      test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+
+      run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function () {
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
         test.done();
       });
     },
