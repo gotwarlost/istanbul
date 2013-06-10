@@ -4,12 +4,22 @@ var path = require('path'),
     vm = require('vm'),
     rimraf = require('rimraf'),
     mkdirp = require('mkdirp'),
+    INPUT_DIR_CC = path.join(__dirname, '../other/data-complete-copy/'),
     OUTPUT_DIR = path.resolve(process.cwd(), 'output'),
     COMMAND = 'instrument',
     DIR = path.resolve(__dirname, 'sample-project'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
-    run = helper.runCommand.bind(null, COMMAND);
+    run = helper.runCommand.bind(null, COMMAND),
+    INPUT_DIR_JS_FILE_COUNT = 0;
+
+fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
+    var extenstion = path.extname(file);
+
+    if (extenstion === '.js') {
+        INPUT_DIR_JS_FILE_COUNT++;
+    }
+});
 
 module.exports = {
     setUp: function (cb) {
@@ -107,6 +117,46 @@ module.exports = {
             test.ok(results.grepError(/Cannot instrument into the same directory/));
             test.done();
         });
-    }
+    },
+    "should not copy non js files when using no-complete-copy": function(test) {
+        var inputFileCount;
+
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
+            test.done();
+        });
+    },
+    "should not copy non js files when not specifying complete-copy": function(test) {
+        // Backward compatibility test
+        var inputFileCount;
+
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
+            test.done();
+        });
+    },
+    "should copy non js files when using complete-copy": function(test) {
+        var inputFileCount;
+
+        inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
+
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
+
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function () {
+            test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
+            test.done();
+        });
+    },
 };
 
