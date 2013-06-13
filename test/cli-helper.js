@@ -73,6 +73,7 @@ function runCommand(command, args, envVars, callback) {
         handle,
         out = '',
         err = '',
+        exitCode = 1,
         grepper = function (array) {
             return function (pat) {
                 var filtered = array.filter(function (item) {
@@ -132,19 +133,21 @@ function runCommand(command, args, envVars, callback) {
             process.stderr.write(data);
         }
     });
-    handle.on('exit', function (exitCode) {
-        setTimeout(function () {
-            out = out.split(/\r?\n/);
-            err = err.split(/\r?\n/);
-            callback({
-                succeeded: function () { return exitCode === 0; },
-                exitCode: exitCode,
-                stdout: function () { return out; },
-                stderr: function () { return err; },
-                grepOutput: grepper(out),
-                grepError: grepper(err)
-            });
-        }, 100);
+    handle.on('exit', function (code) {
+        exitCode = code;
+    });
+
+    handle.on('close', function () {
+        out = out.split(/\r?\n/);
+        err = err.split(/\r?\n/);
+        callback({
+            succeeded: function () { return exitCode === 0; },
+            exitCode: exitCode,
+            stdout: function () { return out; },
+            stderr: function () { return err; },
+            grepOutput: grepper(out),
+            grepError: grepper(err)
+        });
     });
 }
 
