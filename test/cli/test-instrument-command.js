@@ -1,6 +1,7 @@
 /*jslint nomen: true */
 var path = require('path'),
     fs = require('fs'),
+    existsSync = fs.existsSync || path.existsSync,
     vm = require('vm'),
     rimraf = require('rimraf'),
     mkdirp = require('mkdirp'),
@@ -158,7 +159,7 @@ module.exports = {
         run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
             test.ok(results.succeeded());
             test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
-            test.ok(fs.existsSync(path.resolve(OUTPUT_DIR, 'subdir', 'x.css')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'subdir', 'x.css')));
             test.done();
         });
     }
