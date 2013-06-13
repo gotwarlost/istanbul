@@ -123,10 +123,11 @@ module.exports = {
 
         inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 6);
         test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function () {
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--no-complete-copy'], function (results) {
+            test.ok(results.succeeded());
             test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
             test.done();
         });
@@ -137,10 +138,11 @@ module.exports = {
 
         inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 6);
         test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function () {
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR], function (results) {
+            test.ok(results.succeeded());
             test.equal(fs.readdirSync(OUTPUT_DIR).length, INPUT_DIR_JS_FILE_COUNT);
             test.done();
         });
@@ -150,11 +152,13 @@ module.exports = {
 
         inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
 
-        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 5);
+        test.equal(fs.readdirSync(INPUT_DIR_CC).length, 6);
         test.equal(fs.readdirSync(OUTPUT_DIR).length, 0);
 
-        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function () {
+        run([ INPUT_DIR_CC, '--output', OUTPUT_DIR, '--complete-copy'], function (results) {
+            test.ok(results.succeeded());
             test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
+            test.ok(fs.existsSync(path.resolve(OUTPUT_DIR, 'subdir', 'x.css')));
             test.done();
         });
     }
