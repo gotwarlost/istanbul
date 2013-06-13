@@ -157,6 +157,6 @@ module.exports = {
             test.equal(fs.readdirSync(OUTPUT_DIR).length, inputFileCount);
             test.done();
         });
-    },
+    }
 };
 
