@@ -135,19 +135,18 @@ function runCommand(command, args, envVars, callback) {
     });
     handle.on('exit', function (code) {
         exitCode = code;
-    });
-
-    handle.on('close', function () {
-        out = out.split(/\r?\n/);
-        err = err.split(/\r?\n/);
-        callback({
-            succeeded: function () { return exitCode === 0; },
-            exitCode: exitCode,
-            stdout: function () { return out; },
-            stderr: function () { return err; },
-            grepOutput: grepper(out),
-            grepError: grepper(err)
-        });
+        setTimeout(function () {
+            out = out.split(/\r?\n/);
+            err = err.split(/\r?\n/);
+            callback({
+                succeeded: function () { return exitCode === 0; },
+                exitCode: exitCode,
+                stdout: function () { return out; },
+                stderr: function () { return err; },
+                grepOutput: grepper(out),
+                grepError: grepper(err)
+            });
+        }, 100);
     });
 }
 
