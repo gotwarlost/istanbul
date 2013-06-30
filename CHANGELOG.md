@@ -2,6 +2,10 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.38</td><td><ul>
+        <li>factor out AST instrumentation into own instrumentASTSync method</li>
+        <li>always set function declaration coverage stats to 1 since every such declaration is "executed" exactly one time by the compiler</li>
+    </ul></td></tr>
 <tr><td>v0.1.37</td><td>--complete-copy flag contrib from @kami, correct strict mode semantics for instrumented functions</td></tr>
 <tr><td>v0.1.36</td><td>real quiet when --print=none specified, add repo URL to package.json, add contributors</td></tr>
 <tr><td>v0.1.35</td><td>accept cobertura contrib from @nbrownus, fix #52</td></tr>
