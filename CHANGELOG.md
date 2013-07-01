@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.39</td><td>add <source> tag to cobertura report, pull request by @jhansche</td></tr>
 <tr><td>v0.1.38</td><td><ul>
         <li>factor out AST instrumentation into own instrumentASTSync method</li>
         <li>always set function declaration coverage stats to 1 since every such declaration is "executed" exactly one time by the compiler</li>
