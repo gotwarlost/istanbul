@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.40</td><td>forward sourceStore from lcov to html report, pull request by @vojtajina</td></tr>
 <tr><td>v0.1.39</td><td>add <source> tag to cobertura report, pull request by @jhansche</td></tr>
 <tr><td>v0.1.38</td><td><ul>
         <li>factor out AST instrumentation into own instrumentASTSync method</li>
