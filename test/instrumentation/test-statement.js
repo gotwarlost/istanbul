@@ -111,7 +111,8 @@ module.exports = {
             verifier.verify(test, [ 10 ], 10, { lines: { 1: 1, 2: 1 }, branches: { 1: [1, 0 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
             var cov = verifier.getCoverage(),
                 fileCov = cov[Object.keys(cov)[0]];
-            test.ok(fileCov.code);
+            test.ok(fileCov.code.length > 1);
+            test.ok(fileCov.code[1] === 'output = x;');
             test.done();
         }
     },
