@@ -35,7 +35,7 @@
     },
     "dependencies": {
         "esprima": "1.0.x",
-        "escodegen": "0.0.x",
+        "escodegen": "0.0.23",
         "handlebars": "1.0.x",
         "mkdirp": "0.3.x",
         "nopt": "2.1.x",
