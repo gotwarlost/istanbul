@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.43</td>Add colors to text report thanks to @runk<td></td></tr>
 <tr><td>v0.1.42</td><td>fix #78: embed source regression introduced in v0.1.38. Fix broken test for this</td></tr>
 <tr><td>v0.1.41</td><td>add json report to dump coverage object for certain use cases</td></tr>
 <tr><td>v0.1.40</td><td>forward sourceStore from lcov to html report, pull request by @vojtajina</td></tr>
