@@ -2,8 +2,6 @@
 var path = require('path'),
     fs = require('fs');
 
-require('../lib/register-plugins');
-
 function loadDirTests(dir, pat) {
     var files = fs.readdirSync(path.resolve(__dirname, dir))
         .filter(function (f) {
