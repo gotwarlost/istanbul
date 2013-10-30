@@ -146,6 +146,7 @@ Writes reports using `coverage*.json` files as the source of coverage informatio
 * cobertura - produces a cobertura-coverage.xml file for easy Hudson integration
 * text-summary - produces a compact text summary of coverage, typically to console
 * text - produces a detailed text table with coverage for all files
+* teamcity - produces service messages to report code coverage to TeamCity
 
 Additional report formats may be plugged in at the library level.
 
