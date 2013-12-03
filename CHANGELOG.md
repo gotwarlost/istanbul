@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.1.46</td><td>Fix #114</td></tr>
 <tr><td>v0.1.45</td><td>Add teamcity reporter, thanks to @chrisgladd</td></tr>
 <tr><td>v0.1.44</td><td>Fix inconsistency in processing empty switch with latest esprima, up deps</td></tr>
 <tr><td>v0.1.43</td><td>Add colors to text report thanks to @runk</td></tr>
