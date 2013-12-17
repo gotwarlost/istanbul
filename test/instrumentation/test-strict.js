@@ -103,14 +103,17 @@ module.exports = {
                 '        output = "pass";',
                 '    }'
             ];
+            console.log(code.join("\n"));
             verifier = helper.verifier(__filename, code);
             cb();
         },
 
-        "should not change behavor (this is a bug!)": function (test) {
+        "should correctly interpret the strict statement": function (test) {
+            // use strict semantics still do not work since it is not top-level but called from vm.runInThisContext
             verifier.verify(test, [], "fail", {
-                statements: { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 0 },
-                lines: { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 7: 0 },
+                //however statements and lines should line up
+                statements: { 1: 1, 2: 1, 3: 1, 4: 1, 5: 0 },
+                lines: { 2: 1, 3: 1, 4: 1, 5: 1, 7: 0 },
                 branches: {},
                 functions: {}
             });
