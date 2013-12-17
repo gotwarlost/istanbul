@@ -2,6 +2,13 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.2.0</td><td><ul>
+    <li>Add --preserve-comments to instrumenter options, thanks to @arikon</li>
+    <li>Support 'use strict;' in file scope, thanks to @pornel</li>
+</ul>
+    Up minor version due to the new way in which the global object is accessed.
+    This _should_ be backwards-compatible but has not been tested in the wild.
+</td></tr>
 <tr><td>v0.1.46</td><td>Fix #114</td></tr>
 <tr><td>v0.1.45</td><td>Add teamcity reporter, thanks to @chrisgladd</td></tr>
 <tr><td>v0.1.44</td><td>Fix inconsistency in processing empty switch with latest esprima, up deps</td></tr>
