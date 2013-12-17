@@ -42,6 +42,17 @@ module.exports = {
             test.done();
         });
     },
+    "should preserve comments in output": function (test) {
+        run([ 'lib/foo.js', '--preserve-comments' ], function (results) {
+            var code = results.stdout().join('\n');
+            test.ok(results.succeeded());
+            test.doesNotThrow(function () {
+                vm.createScript(code, path.resolve(DIR, 'lib', 'foo.js'));
+            }, "Invalid code generated; logging interference perhaps?");
+            test.ok(code.match(/\/\/ export what we need/), 'Could not find comment that should have been preserved');
+            test.done();
+        });
+    },
     "should work with compact as default": function (test) {
         run([ 'lib/foo.js' ], function (results) {
             test.ok(results.succeeded());

@@ -76,13 +76,15 @@ function setup(file, codeArray, opts) {
         //exercise the case where RE substitutions for the preamble have $ signs
         coverageVariable = typeof opts.coverageVariable === 'undefined' ? '$$coverage$$' : opts.coverageVariable,
         ps = opts.embedSource || false,
+        pc = opts.preserveComments || false,
         verifier,
         cover = new Instrumenter({
             debug: opts.debug,
             walkDebug: opts.walkDebug,
             noAutoWrap: opts.noAutoWrap,
             coverageVariable: coverageVariable,
-            embedSource: ps
+            embedSource: ps,
+            preserveComments: pc
         }),
         args = [ codeArray.join("\n")],
         callback = function (err, generated) {

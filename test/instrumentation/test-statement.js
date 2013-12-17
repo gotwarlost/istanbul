@@ -177,6 +177,32 @@ module.exports = {
             verifier.verify(test, [ 1 ], "undef", { lines: { 2: 1, 3: 1 }, branches: { 1: [ 0, 1 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
             test.done();
         }
+    },
+    "with code having comments": {
+        setUp: function (cb) {
+            code = [
+                '#!/usr/bin/env node',
+                'var x = args[0] > 5 ? args[0] : "undef";',
+                '/* set the output */',
+                'output = x;'
+            ];
+            verifier = helper.verifier(__filename, code, { noAutoWrap: true, preserveComments: true });
+            cb();
+        },
+
+        "should preserve comments in generated code": function (test) {
+            test.ok(verifier.generatedCode.match(/\/\* set the output \*\//));
+            test.done();
+        },
+
+        "should cover line and one branch": function (test) {
+            verifier.verify(test, [ 10 ], 10, { lines: { 2: 1, 4: 1 }, branches: { 1: [1, 0 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
+            test.done();
+        },
+        "should cover line and other branch": function (test) {
+            verifier.verify(test, [ 1 ], "undef", { lines: { 2: 1, 4: 1 }, branches: { 1: [ 0, 1 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
+            test.done();
+        }
     }
 };
 
