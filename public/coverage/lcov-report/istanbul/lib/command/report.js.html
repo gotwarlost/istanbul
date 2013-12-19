@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/command/report.js</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/command/report.js</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/command/report.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>96.97% <small>(32 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">96.97% <small>(32 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>90% <small>(9 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">90% <small>(9 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(32 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(32 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/command/</a> &#187; report.js</div>
 </div>
-<div class='body'>
+<div class="body">
 <pre><table class="coverage">
 <tr><td class="line-count">1
 2
@@ -299,7 +318,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,14 +329,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -341,7 +360,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -354,41 +373,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-yes">4</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
@@ -472,7 +491,7 @@ Command.mix(ReportCommand, {
             root: root,
             includes: [ includePattern ]
         }, function (err, files) {
-            <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) { <span class="cstat-no" title="statement not covered" >throw err; </span>}
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (err) { <span class="cstat-no" title="statement not covered" >throw err; </span>}
             files.forEach(function (file) {
                 var coverageObject =  JSON.parse(fs.readFileSync(file, 'utf8'));
                 collector.add(coverageObject);
@@ -492,10 +511,9 @@ module.exports = ReportCommand;
 </table></pre>
 
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../../prettify.js"></script>
 
@@ -591,4 +609,5 @@ module.exports = ReportCommand;
         });
     });
 </script>
+</body>
 </html>

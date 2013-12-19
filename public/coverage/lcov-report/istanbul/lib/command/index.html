@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/command/</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/command/</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/command/</span></h1>
     <h2>
         
-        Statements: <span class='metric'>94.63% <small>(194 / 205)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">96.94% <small>(222 / 229)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>87.88% <small>(58 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">93.75% <small>(75 / 80)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>89.58% <small>(43 / 48)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">95.92% <small>(47 / 49)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>96.43% <small>(189 / 196)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">98.64% <small>(218 / 221)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric">3 statements, 3 functions</span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; istanbul/lib/command/</div>
 </div>
-<div class='body'>
+<div class="body">
 <div class="coverage-summary">
 <table>
 <thead>
@@ -214,15 +233,15 @@
 </thead>
 <tbody><tr>
 	<td class="file high" data-value="check-coverage.js"><a href="check-coverage.js.html">check-coverage.js</a></td>
-	<td data-value="93.55" class="pic high"><span class="cover-fill" style="width: 93px;"></span><span class="cover-empty" style="width:7px;"></span></td>
-	<td data-value="93.55" class="pct high">93.55%</td>
-	<td data-value="31" class="abs high">(29&nbsp;/&nbsp;31)</td>
-	<td data-value="80" class="pct high">80%</td>
-	<td data-value="20" class="abs high">(16&nbsp;/&nbsp;20)</td>
+	<td data-value="97.37" class="pic high"><span class="cover-fill" style="width: 97px;"></span><span class="cover-empty" style="width:3px;"></span></td>
+	<td data-value="97.37" class="pct high">97.37%</td>
+	<td data-value="38" class="abs high">(37&nbsp;/&nbsp;38)</td>
+	<td data-value="95.83" class="pct high">95.83%</td>
+	<td data-value="24" class="abs high">(23&nbsp;/&nbsp;24)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
-	<td data-value="96.67" class="pct high">96.67%</td>
-	<td data-value="30" class="abs high">(29&nbsp;/&nbsp;30)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="37" class="abs high">(37&nbsp;/&nbsp;37)</td>
 	</tr>
 
 <tr>
@@ -252,29 +271,29 @@
 	</tr>
 
 <tr>
-	<td class="file medium" data-value="index.js"><a href="index.js.html">index.js</a></td>
-	<td data-value="70" class="pic medium"><span class="cover-fill" style="width: 70px;"></span><span class="cover-empty" style="width:30px;"></span></td>
-	<td data-value="70" class="pct medium">70%</td>
-	<td data-value="10" class="abs medium">(7&nbsp;/&nbsp;10)</td>
+	<td class="file high" data-value="index.js"><a href="index.js.html">index.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
-	<td data-value="50" class="pct medium">50%</td>
-	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
-	<td data-value="70" class="pct medium">70%</td>
-	<td data-value="10" class="abs medium">(7&nbsp;/&nbsp;10)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="6" class="abs high">(6&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="instrument.js"><a href="instrument.js.html">instrument.js</a></td>
-	<td data-value="94.05" class="pic high"><span class="cover-fill" style="width: 94px;"></span><span class="cover-empty" style="width:6px;"></span></td>
-	<td data-value="94.05" class="pct high">94.05%</td>
-	<td data-value="84" class="abs high">(79&nbsp;/&nbsp;84)</td>
-	<td data-value="91.18" class="pct high">91.18%</td>
-	<td data-value="34" class="abs high">(31&nbsp;/&nbsp;34)</td>
-	<td data-value="87.5" class="pct high">87.5%</td>
-	<td data-value="16" class="abs high">(14&nbsp;/&nbsp;16)</td>
-	<td data-value="96.1" class="pct high">96.1%</td>
-	<td data-value="77" class="abs high">(74&nbsp;/&nbsp;77)</td>
+	<td data-value="95.05" class="pic high"><span class="cover-fill" style="width: 95px;"></span><span class="cover-empty" style="width:5px;"></span></td>
+	<td data-value="95.05" class="pct high">95.05%</td>
+	<td data-value="101" class="abs high">(96&nbsp;/&nbsp;101)</td>
+	<td data-value="93.18" class="pct high">93.18%</td>
+	<td data-value="44" class="abs high">(41&nbsp;/&nbsp;44)</td>
+	<td data-value="88.24" class="pct high">88.24%</td>
+	<td data-value="17" class="abs high">(15&nbsp;/&nbsp;17)</td>
+	<td data-value="96.84" class="pct high">96.84%</td>
+	<td data-value="95" class="abs high">(92&nbsp;/&nbsp;95)</td>
 	</tr>
 
 <tr>
@@ -307,10 +326,9 @@
 </table>
 </div>
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../../prettify.js"></script>
 
@@ -406,4 +424,5 @@
         });
     });
 </script>
+</body>
 </html>

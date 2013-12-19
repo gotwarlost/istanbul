@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for All files</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>All files</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">All files</span></h1>
     <h2>
         
-        Statements: <span class='metric'>96.14% <small>(1469 / 1528)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">96.34% <small>(1763 / 1830)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>89.2% <small>(545 / 611)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">90.26% <small>(741 / 821)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>97.96% <small>(336 / 343)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">98.46% <small>(384 / 390)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>96.9% <small>(1436 / 1482)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">97.06% <small>(1717 / 1769)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric">14 statements, 8 functions, 21 branches</span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"></div>
 </div>
-<div class='body'>
+<div class="body">
 <div class="coverage-summary">
 <table>
 <thead>
@@ -227,54 +246,54 @@
 
 <tr>
 	<td class="file high" data-value="istanbul/lib/"><a href="istanbul/lib/index.html">istanbul/lib/</a></td>
-	<td data-value="97.48" class="pic high"><span class="cover-fill" style="width: 97px;"></span><span class="cover-empty" style="width:3px;"></span></td>
-	<td data-value="97.48" class="pct high">97.48%</td>
-	<td data-value="436" class="abs high">(425&nbsp;/&nbsp;436)</td>
-	<td data-value="89.76" class="pct high">89.76%</td>
-	<td data-value="205" class="abs high">(184&nbsp;/&nbsp;205)</td>
-	<td data-value="97.98" class="pct high">97.98%</td>
-	<td data-value="99" class="abs high">(97&nbsp;/&nbsp;99)</td>
-	<td data-value="98.12" class="pct high">98.12%</td>
-	<td data-value="425" class="abs high">(417&nbsp;/&nbsp;425)</td>
+	<td data-value="98.91" class="pic high"><span class="cover-fill" style="width: 98px;"></span><span class="cover-empty" style="width:2px;"></span></td>
+	<td data-value="98.91" class="pct high">98.91%</td>
+	<td data-value="552" class="abs high">(546&nbsp;/&nbsp;552)</td>
+	<td data-value="98.46" class="pct high">98.46%</td>
+	<td data-value="324" class="abs high">(319&nbsp;/&nbsp;324)</td>
+	<td data-value="98.25" class="pct high">98.25%</td>
+	<td data-value="114" class="abs high">(112&nbsp;/&nbsp;114)</td>
+	<td data-value="98.87" class="pct high">98.87%</td>
+	<td data-value="533" class="abs high">(527&nbsp;/&nbsp;533)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="istanbul/lib/command/"><a href="istanbul/lib/command/index.html">istanbul/lib/command/</a></td>
-	<td data-value="94.63" class="pic high"><span class="cover-fill" style="width: 94px;"></span><span class="cover-empty" style="width:6px;"></span></td>
-	<td data-value="94.63" class="pct high">94.63%</td>
-	<td data-value="205" class="abs high">(194&nbsp;/&nbsp;205)</td>
-	<td data-value="87.88" class="pct high">87.88%</td>
-	<td data-value="66" class="abs high">(58&nbsp;/&nbsp;66)</td>
-	<td data-value="89.58" class="pct high">89.58%</td>
-	<td data-value="48" class="abs high">(43&nbsp;/&nbsp;48)</td>
-	<td data-value="96.43" class="pct high">96.43%</td>
-	<td data-value="196" class="abs high">(189&nbsp;/&nbsp;196)</td>
+	<td data-value="96.94" class="pic high"><span class="cover-fill" style="width: 96px;"></span><span class="cover-empty" style="width:4px;"></span></td>
+	<td data-value="96.94" class="pct high">96.94%</td>
+	<td data-value="229" class="abs high">(222&nbsp;/&nbsp;229)</td>
+	<td data-value="93.75" class="pct high">93.75%</td>
+	<td data-value="80" class="abs high">(75&nbsp;/&nbsp;80)</td>
+	<td data-value="95.92" class="pct high">95.92%</td>
+	<td data-value="49" class="abs high">(47&nbsp;/&nbsp;49)</td>
+	<td data-value="98.64" class="pct high">98.64%</td>
+	<td data-value="221" class="abs high">(218&nbsp;/&nbsp;221)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="istanbul/lib/command/common/"><a href="istanbul/lib/command/common/index.html">istanbul/lib/command/common/</a></td>
-	<td data-value="90.91" class="pic high"><span class="cover-fill" style="width: 90px;"></span><span class="cover-empty" style="width:10px;"></span></td>
-	<td data-value="90.91" class="pct high">90.91%</td>
-	<td data-value="66" class="abs high">(60&nbsp;/&nbsp;66)</td>
-	<td data-value="84.85" class="pct high">84.85%</td>
-	<td data-value="33" class="abs high">(28&nbsp;/&nbsp;33)</td>
+	<td data-value="92.77" class="pic high"><span class="cover-fill" style="width: 92px;"></span><span class="cover-empty" style="width:8px;"></span></td>
+	<td data-value="92.77" class="pct high">92.77%</td>
+	<td data-value="83" class="abs high">(77&nbsp;/&nbsp;83)</td>
+	<td data-value="81.13" class="pct high">81.13%</td>
+	<td data-value="53" class="abs high">(43&nbsp;/&nbsp;53)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="6" class="abs high">(6&nbsp;/&nbsp;6)</td>
-	<td data-value="92.31" class="pct high">92.31%</td>
-	<td data-value="65" class="abs high">(60&nbsp;/&nbsp;65)</td>
+	<td data-value="93.75" class="pct high">93.75%</td>
+	<td data-value="80" class="abs high">(75&nbsp;/&nbsp;80)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="istanbul/lib/report/"><a href="istanbul/lib/report/index.html">istanbul/lib/report/</a></td>
-	<td data-value="94.78" class="pic high"><span class="cover-fill" style="width: 94px;"></span><span class="cover-empty" style="width:6px;"></span></td>
-	<td data-value="94.78" class="pct high">94.78%</td>
-	<td data-value="460" class="abs high">(436&nbsp;/&nbsp;460)</td>
-	<td data-value="85.71" class="pct high">85.71%</td>
-	<td data-value="168" class="abs high">(144&nbsp;/&nbsp;168)</td>
+	<td data-value="92.88" class="pic high"><span class="cover-fill" style="width: 92px;"></span><span class="cover-empty" style="width:8px;"></span></td>
+	<td data-value="92.88" class="pct high">92.88%</td>
+	<td data-value="548" class="abs high">(509&nbsp;/&nbsp;548)</td>
+	<td data-value="77.09" class="pct medium">77.09%</td>
+	<td data-value="227" class="abs medium">(175&nbsp;/&nbsp;227)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="94" class="abs high">(94&nbsp;/&nbsp;94)</td>
-	<td data-value="95.32" class="pct high">95.32%</td>
-	<td data-value="449" class="abs high">(428&nbsp;/&nbsp;449)</td>
+	<td data-value="103" class="abs high">(103&nbsp;/&nbsp;103)</td>
+	<td data-value="93.82" class="pct high">93.82%</td>
+	<td data-value="534" class="abs high">(501&nbsp;/&nbsp;534)</td>
 	</tr>
 
 <tr>
@@ -282,8 +301,8 @@
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="73" class="abs high">(73&nbsp;/&nbsp;73)</td>
-	<td data-value="85.71" class="pct high">85.71%</td>
-	<td data-value="14" class="abs high">(12&nbsp;/&nbsp;14)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="14" class="abs high">(14&nbsp;/&nbsp;14)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="28" class="abs high">(28&nbsp;/&nbsp;28)</td>
 	<td data-value="100" class="pct high">100%</td>
@@ -292,25 +311,24 @@
 
 <tr>
 	<td class="file high" data-value="istanbul/lib/util/"><a href="istanbul/lib/util/index.html">istanbul/lib/util/</a></td>
-	<td data-value="97.54" class="pic high"><span class="cover-fill" style="width: 97px;"></span><span class="cover-empty" style="width:3px;"></span></td>
-	<td data-value="97.54" class="pct high">97.54%</td>
-	<td data-value="285" class="abs high">(278&nbsp;/&nbsp;285)</td>
-	<td data-value="95.2" class="pct high">95.2%</td>
-	<td data-value="125" class="abs high">(119&nbsp;/&nbsp;125)</td>
-	<td data-value="100" class="pct high">100%</td>
-	<td data-value="68" class="abs high">(68&nbsp;/&nbsp;68)</td>
-	<td data-value="98.16" class="pct high">98.16%</td>
-	<td data-value="272" class="abs high">(267&nbsp;/&nbsp;272)</td>
+	<td data-value="97.37" class="pic high"><span class="cover-fill" style="width: 97px;"></span><span class="cover-empty" style="width:3px;"></span></td>
+	<td data-value="97.37" class="pct high">97.37%</td>
+	<td data-value="342" class="abs high">(333&nbsp;/&nbsp;342)</td>
+	<td data-value="93.5" class="pct high">93.5%</td>
+	<td data-value="123" class="abs high">(115&nbsp;/&nbsp;123)</td>
+	<td data-value="97.78" class="pct high">97.78%</td>
+	<td data-value="90" class="abs high">(88&nbsp;/&nbsp;90)</td>
+	<td data-value="98.47" class="pct high">98.47%</td>
+	<td data-value="326" class="abs high">(321&nbsp;/&nbsp;326)</td>
 	</tr>
 
 </tbody>
 </table>
 </div>
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="prettify.js"></script>
 
@@ -406,4 +424,5 @@
         });
     });
 </script>
+</body>
 </html>

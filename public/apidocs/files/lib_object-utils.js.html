@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;object-utils.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <title>lib/object-utils.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -114,22 +118,22 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;object-utils.js</h1>
+                        <h1 class="file-heading">File: lib/object-utils.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*
+/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- *&#x2F;
+ */
 
-&#x2F;**
+/**
  * utility methods to process coverage objects. A coverage object has the following
  * format.
  *
  *      {
- *          &quot;&#x2F;path&#x2F;to&#x2F;file1.js&quot;: { file1 coverage },
- *          &quot;&#x2F;path&#x2F;to&#x2F;file2.js&quot;: { file2 coverage }
+ *          &quot;/path/to/file1.js&quot;: { file1 coverage },
+ *          &quot;/path/to/file2.js&quot;: { file2 coverage }
  *      }
  *
  *  The internals of the file coverage object are intentionally not documented since
@@ -154,9 +158,9 @@
  *
  * @class ObjectUtils
  * @static
- *&#x2F;
+ */
 (function (isNode) {
-    &#x2F;**
+    /**
      * adds line coverage information to a file coverage object, reverse-engineering
      * it from statement coverage. The object passed in is updated in place.
      *
@@ -166,7 +170,7 @@
      * @method addDerivedInfoForFile
      * @static
      * @param {Object} fileCoverage the coverage object for a single file
-     *&#x2F;
+     */
     function addDerivedInfoForFile(fileCoverage) {
         var statementMap = fileCoverage.statementMap,
             statements = fileCoverage.s,
@@ -178,30 +182,31 @@
                 var line = statementMap[st].start.line,
                     count = statements[st],
                     prevVal = lineMap[line];
+                if (count === 0 &amp;&amp; statementMap[st].skip) { count = 1; }
                 if (typeof prevVal === &#x27;undefined&#x27; || prevVal &lt; count) {
                     lineMap[line] = count;
                 }
             });
         }
     }
-    &#x2F;**
+    /**
      * adds line coverage information to all file coverage objects.
      *
      * @method addDerivedInfo
      * @static
      * @param {Object} coverage the coverage object
-     *&#x2F;
+     */
     function addDerivedInfo(coverage) {
         Object.keys(coverage).forEach(function (k) {
             addDerivedInfoForFile(coverage[k]);
         });
     }
-    &#x2F;**
+    /**
      * removes line coverage information from all file coverage objects
      * @method removeDerivedInfo
      * @static
      * @param {Object} coverage the coverage object
-     *&#x2F;
+     */
     function removeDerivedInfo(coverage) {
         Object.keys(coverage).forEach(function (k) {
             delete coverage[k].l;
@@ -211,21 +216,27 @@
     function percent(covered, total) {
         var tmp;
         if (total &gt; 0) {
-            tmp = 1000 * 100 * covered &#x2F; total + 5;
-            return Math.floor(tmp &#x2F; 10) &#x2F; 100;
+            tmp = 1000 * 100 * covered / total + 5;
+            return Math.floor(tmp / 10) / 100;
         } else {
             return 100.00;
         }
     }
 
-    function computeSimpleTotals(fileCoverage, property) {
+    function computeSimpleTotals(fileCoverage, property, mapProperty) {
         var stats = fileCoverage[property],
-            ret = { total: 0, covered: 0 };
+            map = mapProperty ? fileCoverage[mapProperty] : null,
+            ret = { total: 0, covered: 0, skipped: 0 };
 
         Object.keys(stats).forEach(function (key) {
+            var covered = !!stats[key],
+                skipped = map &amp;&amp; map[key].skip;
             ret.total += 1;
-            if (stats[key]) {
+            if (covered || skipped) {
                 ret.covered += 1;
+            }
+            if (!covered &amp;&amp; skipped) {
+                ret.skipped += 1;
             }
         });
         ret.pct = percent(ret.covered, ret.total);
@@ -234,18 +245,31 @@
 
     function computeBranchTotals(fileCoverage) {
         var stats = fileCoverage.b,
-            ret = { total: 0, covered: 0 };
+            branchMap = fileCoverage.branchMap,
+            ret = { total: 0, covered: 0, skipped: 0 };
 
         Object.keys(stats).forEach(function (key) {
             var branches = stats[key],
-                covered = branches.filter(function (num) { return num &gt; 0; });
+                map = branchMap[key],
+                covered,
+                skipped,
+                i;
+            for (i = 0; i &lt; branches.length; i += 1) {
+                covered = branches[i] &gt; 0;
+                skipped = map.locations &amp;&amp; map.locations[i] &amp;&amp; map.locations[i].skip;
+                if (covered || skipped) {
+                    ret.covered += 1;
+                }
+                if (!covered &amp;&amp; skipped) {
+                    ret.skipped += 1;
+                }
+            }
             ret.total += branches.length;
-            ret.covered += covered.length;
         });
         ret.pct = percent(ret.covered, ret.total);
         return ret;
     }
-    &#x2F;**
+    /**
      * returns a blank summary metrics object. A metrics object has the following
      * format.
      *
@@ -267,32 +291,36 @@
      * @method blankSummary
      * @static
      * @return {Object} a blank metrics object
-     *&#x2F;
+     */
     function blankSummary() {
         return {
             lines: {
                 total: 0,
                 covered: 0,
+                skipped: 0,
                 pct: &#x27;Unknown&#x27;
             },
             statements: {
                 total: 0,
                 covered: 0,
+                skipped: 0,
                 pct: &#x27;Unknown&#x27;
             },
             functions: {
                 total: 0,
                 covered: 0,
+                skipped: 0,
                 pct: &#x27;Unknown&#x27;
             },
             branches: {
                 total: 0,
                 covered: 0,
+                skipped: 0,
                 pct: &#x27;Unknown&#x27;
             }
         };
     }
-    &#x2F;**
+    /**
      * returns the summary metrics given the coverage object for a single file. See &#x60;blankSummary()&#x60;
      * to understand the format of the returned object.
      *
@@ -300,17 +328,17 @@
      * @static
      * @param {Object} fileCoverage the coverage object for a single file.
      * @return {Object} the summary metrics for the file
-     *&#x2F;
+     */
     function summarizeFileCoverage(fileCoverage) {
         var ret = blankSummary();
         addDerivedInfoForFile(fileCoverage);
         ret.lines = computeSimpleTotals(fileCoverage, &#x27;l&#x27;);
-        ret.functions = computeSimpleTotals(fileCoverage, &#x27;f&#x27;);
-        ret.statements = computeSimpleTotals(fileCoverage, &#x27;s&#x27;);
+        ret.functions = computeSimpleTotals(fileCoverage, &#x27;f&#x27;, &#x27;fnMap&#x27;);
+        ret.statements = computeSimpleTotals(fileCoverage, &#x27;s&#x27;, &#x27;statementMap&#x27;);
         ret.branches = computeBranchTotals(fileCoverage);
         return ret;
     }
-    &#x2F;**
+    /**
      * merges two instances of file coverage objects *for the same file*
      * such that the execution counts are correct.
      *
@@ -320,12 +348,12 @@
      * @param {Object} second the second file coverage object for the same file
      * @return {Object} an object that is a result of merging the two. Note that
      *      the input objects are not changed in any way.
-     *&#x2F;
+     */
     function mergeFileCoverage(first, second) {
         var ret = JSON.parse(JSON.stringify(first)),
             i;
 
-        delete ret.l; &#x2F;&#x2F;remove derived info
+        delete ret.l; //remove derived info
 
         Object.keys(second.s).forEach(function (k) {
             ret.s[k] += second.s[k];
@@ -343,7 +371,7 @@
 
         return ret;
     }
-    &#x2F;**
+    /**
      * merges multiple summary metrics objects by summing up the &#x60;totals&#x60; and
      * &#x60;covered&#x60; fields and recomputing the percentages. This function is generic
      * and can accept any number of arguments.
@@ -352,7 +380,7 @@
      * @static
      * @param {Object} summary... multiple summary metrics objects
      * @return {Object} the merged summary metrics
-     *&#x2F;
+     */
     function mergeSummaryObjects() {
         var ret = blankSummary(),
             args = Array.prototype.slice.call(arguments),
@@ -362,6 +390,7 @@
                     keys.forEach(function (key) {
                         ret[key].total += obj[key].total;
                         ret[key].covered += obj[key].covered;
+                        ret[key].skipped += obj[key].skipped;
                     });
                 }
             };
@@ -374,7 +403,7 @@
 
         return ret;
     }
-    &#x2F;**
+    /**
      * returns the coverage summary for a single coverage object. This is
      * wrapper over &#x60;summarizeFileCoverage&#x60; and &#x60;mergeSummaryObjects&#x60; for
      * the common case of a single coverage object
@@ -382,7 +411,7 @@
      * @static
      * @param {Object} coverage  the coverage object
      * @return {Object} summary coverage metrics across all files in the coverage object
-     *&#x2F;
+     */
     function summarizeCoverage(coverage) {
         var fileSummary = [];
         Object.keys(coverage).forEach(function (key) {
@@ -391,7 +420,7 @@
         return mergeSummaryObjects.apply(null, fileSummary);
     }
 
-    &#x2F;**
+    /**
      * makes the coverage object generated by this library yuitest_coverage compatible.
      * Note that this transformation is lossy since the returned object will not have
      * statement and branch coverage.
@@ -400,7 +429,7 @@
      * @static
      * @param {Object} coverage The &#x60;istanbul&#x60; coverage object
      * @return {Object} a coverage object in &#x60;yuitest_coverage&#x60; format.
-     *&#x2F;
+     */
     function toYUICoverage(coverage) {
         var ret = {};
 
@@ -452,6 +481,7 @@
         toYUICoverage: toYUICoverage
     };
 
+    /* istanbul ignore else: windows */
     if (isNode) {
         module.exports = exportables;
     } else {
@@ -469,13 +499,13 @@
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

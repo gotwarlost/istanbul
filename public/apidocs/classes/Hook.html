@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Hook - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -122,7 +126,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_hook.js.html#l6"><code>lib&#x2F;hook.js:6</code></a>
+            Defined in: <a href="../files/lib_hook.js.html#l6"><code>lib&#x2F;hook.js:6</code></a>
         </div>
     
 
@@ -142,25 +146,20 @@
 This mechanism is general and relies on a user-supplied <code>matcher</code> function that determines when transformations should be
 performed and a user-supplied <code>transformer</code> function that performs the actual transform.
 Instrumenting code for coverage is one specific example of useful hooking.</p>
-
 <p>Note that both the <code>matcher</code> and <code>transformer</code> must execute synchronously.</p>
-
 <p>For the common case of matching filesystem paths based on inclusion/ exclusion patterns, use the <code>matcherFor</code>
 function in the istanbul API to get a matcher.</p>
-
 <p>It is up to the transformer to perform processing with side-effects, such as caching, storing the original
 source code to disk in case of dynamically generated scripts etc. The <code>Store</code> class can help you with this.</p>
-
-<h2>Usage</h2>
-
-<pre class="code prettyprint"><code> var hook = require('istanbul').hook,
+<h2 id="usage">Usage</h2>
+<pre class="code prettyprint"><code> var hook = require(&#39;istanbul&#39;).hook,
      myMatcher = function (file) { return file.match(/foo/); },
-     myTransformer = function (code, file) { return 'console.log("' + file + '");' + code; };
+     myTransformer = function (code, file) { return &#39;console.log(&quot;&#39; + file + &#39;&quot;);&#39; + code; };
 
  hook.hookRequire(myMatcher, myTransformer);
 
- var foo = require('foo'); //will now print foo's module path to console
-</code></pre>
+ var foo = require(&#39;foo&#39;); //will now print foo&#39;s module path to console</code></pre>
+
 </div>
 
 
@@ -206,6 +205,15 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_hookRunInThisContext">hookRunInThisContext</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_unhookCreateScript">unhookCreateScript</a>
 
                                 
@@ -216,6 +224,15 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
                         
                             <li class="index-item method">
                                 <a href="#method_unhookRequire">unhookRequire</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unhookRunInThisContext">unhookRunInThisContext</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -295,7 +312,7 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l112"><code>lib&#x2F;hook.js:112</code></a>
+        <a href="../files/lib_hook.js.html#l116"><code>lib&#x2F;hook.js:116</code></a>
         
         </p>
 
@@ -308,6 +325,7 @@ source code to disk in case of dynamically generated scripts etc. The <code>Stor
     <div class="description">
         <p>hooks <code>vm.createScript</code> to return transformed code out of which a <code>Script</code> object will be created.
 Exceptions in the transform result in the original code being used instead.</p>
+
     </div>
 
     
@@ -327,6 +345,7 @@ Exceptions in the transform result in the original code being used instead.</p>
                     <div class="param-description">
                         <p>a function that is called with the filename passed to <code>vm.createScript</code>
  Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise</p>
+
                     </div>
 
                     
@@ -343,6 +362,7 @@ Exceptions in the transform result in the original code being used instead.</p>
                     <div class="param-description">
                         <p>a function called with the original code and the filename passed to
  <code>vm.createScript</code>. Should return the transformed code.</p>
+
                     </div>
 
                     
@@ -358,6 +378,7 @@ Exceptions in the transform result in the original code being used instead.</p>
 
                     <div class="param-description">
                         <p>options Optional.</p>
+
                     </div>
 
                     
@@ -372,6 +393,7 @@ Exceptions in the transform result in the original code being used instead.</p>
 
                                 <div class="param-description">
                                     <p>write a line to standard error every time the transformer is called</p>
+
                                 </div>
 
                                 
@@ -447,7 +469,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l74"><code>lib&#x2F;hook.js:74</code></a>
+        <a href="../files/lib_hook.js.html#l76"><code>lib&#x2F;hook.js:76</code></a>
         
         </p>
 
@@ -460,6 +482,7 @@ Exceptions in the transform result in the original code being used instead.</p>
     <div class="description">
         <p>hooks <code>require</code> to return transformed code to the node module loader.
 Exceptions in the transform result in the original code being used instead.</p>
+
     </div>
 
     
@@ -479,6 +502,7 @@ Exceptions in the transform result in the original code being used instead.</p>
                     <div class="param-description">
                         <p>a function that is called with the absolute path to the file being
  <code>require</code>-d. Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise</p>
+
                     </div>
 
                     
@@ -495,6 +519,7 @@ Exceptions in the transform result in the original code being used instead.</p>
                     <div class="param-description">
                         <p>a function called with the original code and the associated path of the file
  from where the code was loaded. Should return the transformed code.</p>
+
                     </div>
 
                     
@@ -510,6 +535,7 @@ Exceptions in the transform result in the original code being used instead.</p>
 
                     <div class="param-description">
                         <p>options Optional.</p>
+
                     </div>
 
                     
@@ -524,6 +550,179 @@ Exceptions in the transform result in the original code being used instead.</p>
 
                                 <div class="param-description">
                                     <p>write a line to standard error every time the transformer is called</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[postLoadHook]</code>
+                                    <span class="type">Function</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>a function that is called with the name of the file being
+ required. This is called after the require is processed irrespective of whether it was transformed.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hookRunInThisContext" class="method item">
+    <h3 class="name"><code>hookRunInThisContext</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>matcher</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>transformer</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_hook.js.html#l147"><code>lib&#x2F;hook.js:147</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>hooks <code>vm.runInThisContext</code> to return transformed code.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">matcher</code>
+                        <span class="type">Function(filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function that is called with the filename passed to <code>vm.createScript</code>
+ Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">transformer</code>
+                        <span class="type">Function(code, filePath)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a function called with the original code and the filename passed to
+ <code>vm.createScript</code>. Should return the transformed code.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>options Optional.</p>
+
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[verbose]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>write a line to standard error every time the transformer is called</p>
+
                                 </div>
 
                                 
@@ -577,7 +776,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l133"><code>lib&#x2F;hook.js:133</code></a>
+        <a href="../files/lib_hook.js.html#l137"><code>lib&#x2F;hook.js:137</code></a>
         
         </p>
 
@@ -589,6 +788,7 @@ Exceptions in the transform result in the original code being used instead.</p>
 
     <div class="description">
         <p>unhooks vm.createScript, restoring it to its original state.</p>
+
     </div>
 
     
@@ -633,7 +833,7 @@ Exceptions in the transform result in the original code being used instead.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_hook.js.html#l104"><code>lib&#x2F;hook.js:104</code></a>
+        <a href="../files/lib_hook.js.html#l108"><code>lib&#x2F;hook.js:108</code></a>
         
         </p>
 
@@ -645,6 +845,64 @@ Exceptions in the transform result in the original code being used instead.</p>
 
     <div class="description">
         <p>unhook <code>require</code> to restore it to its original state.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_unhookRunInThisContext" class="method item">
+    <h3 class="name"><code>unhookRunInThisContext</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_hook.js.html#l167"><code>lib&#x2F;hook.js:167</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>unhooks vm.runInThisContext, restoring it to its original state.</p>
+
     </div>
 
     
@@ -672,13 +930,13 @@ Exceptions in the transform result in the original code being used instead.</p>
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

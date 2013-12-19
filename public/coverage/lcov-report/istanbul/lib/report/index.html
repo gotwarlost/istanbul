@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/report/</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/report/</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/report/</span></h1>
     <h2>
         
-        Statements: <span class='metric'>94.78% <small>(436 / 460)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">92.88% <small>(509 / 548)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>85.71% <small>(144 / 168)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">77.09% <small>(175 / 227)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(94 / 94)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(103 / 103)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>95.32% <small>(428 / 449)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">93.82% <small>(501 / 534)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; istanbul/lib/report/</div>
 </div>
-<div class='body'>
+<div class="body">
 <div class="coverage-summary">
 <table>
 <thead>
@@ -216,26 +235,26 @@
 	<td class="file high" data-value="cobertura.js"><a href="cobertura.js.html">cobertura.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="78" class="abs high">(78&nbsp;/&nbsp;78)</td>
-	<td data-value="100" class="pct high">100%</td>
-	<td data-value="16" class="abs high">(16&nbsp;/&nbsp;16)</td>
+	<td data-value="84" class="abs high">(84&nbsp;/&nbsp;84)</td>
+	<td data-value="95" class="pct high">95%</td>
+	<td data-value="20" class="abs high">(19&nbsp;/&nbsp;20)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="20" class="abs high">(20&nbsp;/&nbsp;20)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="76" class="abs high">(76&nbsp;/&nbsp;76)</td>
+	<td data-value="82" class="abs high">(82&nbsp;/&nbsp;82)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="html.js"><a href="html.js.html">html.js</a></td>
-	<td data-value="92.54" class="pic high"><span class="cover-fill" style="width: 92px;"></span><span class="cover-empty" style="width:8px;"></span></td>
-	<td data-value="92.54" class="pct high">92.54%</td>
-	<td data-value="201" class="abs high">(186&nbsp;/&nbsp;201)</td>
-	<td data-value="83.67" class="pct high">83.67%</td>
-	<td data-value="98" class="abs high">(82&nbsp;/&nbsp;98)</td>
+	<td data-value="89.3" class="pic high"><span class="cover-fill" style="width: 89px;"></span><span class="cover-empty" style="width:11px;"></span></td>
+	<td data-value="89.3" class="pct high">89.3%</td>
+	<td data-value="215" class="abs high">(192&nbsp;/&nbsp;215)</td>
+	<td data-value="72.8" class="pct medium">72.8%</td>
+	<td data-value="125" class="abs medium">(91&nbsp;/&nbsp;125)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="39" class="abs high">(39&nbsp;/&nbsp;39)</td>
-	<td data-value="93.78" class="pct high">93.78%</td>
-	<td data-value="193" class="abs high">(181&nbsp;/&nbsp;193)</td>
+	<td data-value="40" class="abs high">(40&nbsp;/&nbsp;40)</td>
+	<td data-value="91.67" class="pct high">91.67%</td>
+	<td data-value="204" class="abs high">(187&nbsp;/&nbsp;204)</td>
 	</tr>
 
 <tr>
@@ -249,6 +268,19 @@
 	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="6" class="abs high">(6&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="json.js"><a href="json.js.html">json.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="21" class="abs high">(21&nbsp;/&nbsp;21)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="21" class="abs high">(21&nbsp;/&nbsp;21)</td>
 	</tr>
 
 <tr>
@@ -268,13 +300,13 @@
 	<td class="file high" data-value="lcovonly.js"><a href="lcovonly.js.html">lcovonly.js</a></td>
 	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="31" class="abs high">(31&nbsp;/&nbsp;31)</td>
+	<td data-value="37" class="abs high">(37&nbsp;/&nbsp;37)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="8" class="abs high">(8&nbsp;/&nbsp;8)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
 	<td data-value="100" class="pct high">100%</td>
-	<td data-value="31" class="abs high">(31&nbsp;/&nbsp;31)</td>
+	<td data-value="37" class="abs high">(37&nbsp;/&nbsp;37)</td>
 	</tr>
 
 <tr>
@@ -291,39 +323,51 @@
 	</tr>
 
 <tr>
-	<td class="file high" data-value="text-summary.js"><a href="text-summary.js.html">text-summary.js</a></td>
-	<td data-value="92.86" class="pic high"><span class="cover-fill" style="width: 92px;"></span><span class="cover-empty" style="width:8px;"></span></td>
-	<td data-value="92.86" class="pct high">92.86%</td>
-	<td data-value="28" class="abs high">(26&nbsp;/&nbsp;28)</td>
-	<td data-value="75" class="pct medium">75%</td>
-	<td data-value="8" class="abs medium">(6&nbsp;/&nbsp;8)</td>
+	<td class="file high" data-value="teamcity.js"><a href="teamcity.js.html">teamcity.js</a></td>
+	<td data-value="96.77" class="pic high"><span class="cover-fill" style="width: 96px;"></span><span class="cover-empty" style="width:4px;"></span></td>
+	<td data-value="96.77" class="pct high">96.77%</td>
+	<td data-value="31" class="abs high">(30&nbsp;/&nbsp;31)</td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
-	<td data-value="92.59" class="pct high">92.59%</td>
-	<td data-value="27" class="abs high">(25&nbsp;/&nbsp;27)</td>
+	<td data-value="96.77" class="pct high">96.77%</td>
+	<td data-value="31" class="abs high">(30&nbsp;/&nbsp;31)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="text-summary.js"><a href="text-summary.js.html">text-summary.js</a></td>
+	<td data-value="90.63" class="pic high"><span class="cover-fill" style="width: 90px;"></span><span class="cover-empty" style="width:10px;"></span></td>
+	<td data-value="90.63" class="pct high">90.63%</td>
+	<td data-value="32" class="abs high">(29&nbsp;/&nbsp;32)</td>
+	<td data-value="70" class="pct medium">70%</td>
+	<td data-value="10" class="abs medium">(7&nbsp;/&nbsp;10)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
+	<td data-value="90.32" class="pct high">90.32%</td>
+	<td data-value="31" class="abs high">(28&nbsp;/&nbsp;31)</td>
 	</tr>
 
 <tr>
 	<td class="file high" data-value="text.js"><a href="text.js.html">text.js</a></td>
-	<td data-value="92.78" class="pic high"><span class="cover-fill" style="width: 92px;"></span><span class="cover-empty" style="width:8px;"></span></td>
-	<td data-value="92.78" class="pct high">92.78%</td>
-	<td data-value="97" class="abs high">(90&nbsp;/&nbsp;97)</td>
-	<td data-value="82.35" class="pct high">82.35%</td>
-	<td data-value="34" class="abs high">(28&nbsp;/&nbsp;34)</td>
+	<td data-value="88.35" class="pic high"><span class="cover-fill" style="width: 88px;"></span><span class="cover-empty" style="width:12px;"></span></td>
+	<td data-value="88.35" class="pct high">88.35%</td>
+	<td data-value="103" class="abs high">(91&nbsp;/&nbsp;103)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="44" class="abs medium">(33&nbsp;/&nbsp;44)</td>
 	<td data-value="100" class="pct high">100%</td>
 	<td data-value="15" class="abs high">(15&nbsp;/&nbsp;15)</td>
-	<td data-value="92.78" class="pct high">92.78%</td>
-	<td data-value="97" class="abs high">(90&nbsp;/&nbsp;97)</td>
+	<td data-value="88.35" class="pct high">88.35%</td>
+	<td data-value="103" class="abs high">(91&nbsp;/&nbsp;103)</td>
 	</tr>
 
 </tbody>
 </table>
 </div>
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../../prettify.js"></script>
 
@@ -419,4 +463,5 @@
         });
     });
 </script>
+</body>
 </html>

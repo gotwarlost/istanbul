@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Hook",
         "HtmlReport",
         "Instrumenter",
+        "JsonReport",
         "LcovOnlyReport",
         "LcovReport",
         "LookupStore",
@@ -14,6 +15,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ObjectUtils",
         "Report",
         "Store",
+        "TeamcityReport",
         "TextReport",
         "TextSummaryReport",
         "TmpStore"

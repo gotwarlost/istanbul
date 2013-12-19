@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Store - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -122,7 +126,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l8"><code>lib&#x2F;store&#x2F;index.js:8</code></a>
+            Defined in: <a href="../files/lib_store_index.js.html#l8"><code>lib&#x2F;store&#x2F;index.js:8</code></a>
         </div>
     
 
@@ -141,29 +145,27 @@
     <p>An abstraction for keeping track of content against some keys (e.g.
 original source, instrumented source, coverage objects against file names).
 This class is both the base class as well as a factory for <code>Store</code> implementations.</p>
-
-<h2>Usage</h2>
-
-<pre class="code prettyprint"><code> var Store = require('istanbul').Store,
-     store = Store.create('memory');
+<h2 id="usage">Usage</h2>
+<pre class="code prettyprint"><code> var Store = require(&#39;istanbul&#39;).Store,
+     store = Store.create(&#39;memory&#39;);
 
  //basic use
- store.set('foo', 'foo-content');
- var content = store.get('foo');
+ store.set(&#39;foo&#39;, &#39;foo-content&#39;);
+ var content = store.get(&#39;foo&#39;);
 
  //keys and values
  store.keys().forEach(function (key) {
-     console.log(key + ':\n' + store.get(key);
+     console.log(key + &#39;:\n&#39; + store.get(key);
  });
- if (store.hasKey('bar') { console.log(store.get('bar'); }
+ if (store.hasKey(&#39;bar&#39;) { console.log(store.get(&#39;bar&#39;); }
 
 
  //syntactic sugar
- store.setObject('foo', { foo: true });
- console.log(store.getObject('foo').foo);
+ store.setObject(&#39;foo&#39;, { foo: true });
+ console.log(store.getObject(&#39;foo&#39;).foo);
 
- store.dispose();
-</code></pre>
+ store.dispose();</code></pre>
+
 </div>
 
 
@@ -213,7 +215,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l8"><code>lib&#x2F;store&#x2F;index.js:8</code></a>
+        <a href="../files/lib_store_index.js.html#l8"><code>lib&#x2F;store&#x2F;index.js:8</code></a>
         
         </p>
 
@@ -243,6 +245,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
 
                     <div class="param-description">
                         <p>Optional. The options supported by a specific store implementation.</p>
+
                     </div>
 
                     
@@ -419,7 +422,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l53"><code>lib&#x2F;store&#x2F;index.js:53</code></a>
+        <a href="../files/lib_store_index.js.html#l53"><code>lib&#x2F;store&#x2F;index.js:53</code></a>
         
         </p>
 
@@ -431,6 +434,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
 
     <div class="description">
         <p>returns a store implementation of the specified type.</p>
+
     </div>
 
     
@@ -449,6 +453,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
 
                     <div class="param-description">
                         <p>the type of store to create</p>
+
                     </div>
 
                     
@@ -464,6 +469,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
 
                     <div class="param-description">
                         <p>Optional. Options specific to the store implementation</p>
+
                     </div>
 
                     
@@ -482,7 +488,8 @@ This class is both the base class as well as a factory for <code>Store</code> im
                     
                         <span class="type"><a href="../classes/Store.html" class="crosslink">Store</a></span>:
                     
-                    a new store of the specified type
+                    <p>a new store of the specified type</p>
+
                 
             </div>
         </div>
@@ -524,7 +531,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l94"><code>lib&#x2F;store&#x2F;index.js:94</code></a>
+        <a href="../files/lib_store_index.js.html#l94"><code>lib&#x2F;store&#x2F;index.js:94</code></a>
         
         </p>
 
@@ -536,6 +543,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
 
     <div class="description">
         <p>lifecycle method to dispose temporary resources associated with the store</p>
+
     </div>
 
     
@@ -592,7 +600,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l73"><code>lib&#x2F;store&#x2F;index.js:73</code></a>
+        <a href="../files/lib_store_index.js.html#l73"><code>lib&#x2F;store&#x2F;index.js:73</code></a>
         
         </p>
 
@@ -605,6 +613,7 @@ This class is both the base class as well as a factory for <code>Store</code> im
     <div class="description">
         <p>returns the content associated to a specific key or throws if the key
 was not <code>set</code></p>
+
     </div>
 
     
@@ -623,6 +632,7 @@ was not <code>set</code></p>
 
                     <div class="param-description">
                         <p>the key for which to get the content</p>
+
                     </div>
 
                     
@@ -641,7 +651,8 @@ was not <code>set</code></p>
                     
                         <span class="type">String</span>:
                     
-                    the content for the specified key
+                    <p>the content for the specified key</p>
+
                 
             </div>
         </div>
@@ -697,7 +708,7 @@ was not <code>set</code></p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l99"><code>lib&#x2F;store&#x2F;index.js:99</code></a>
+        <a href="../files/lib_store_index.js.html#l99"><code>lib&#x2F;store&#x2F;index.js:99</code></a>
         
         </p>
 
@@ -710,6 +721,7 @@ was not <code>set</code></p>
     <div class="description">
         <p>sugar method to return an object associated with a specific key. Throws
 if the content set against the key was not a valid JSON string.</p>
+
     </div>
 
     
@@ -728,6 +740,7 @@ if the content set against the key was not a valid JSON string.</p>
 
                     <div class="param-description">
                         <p>the key for which to return the associated object</p>
+
                     </div>
 
                     
@@ -746,7 +759,8 @@ if the content set against the key was not a valid JSON string.</p>
                     
                         <span class="type">Object</span>:
                     
-                    the object corresponding to the key
+                    <p>the object corresponding to the key</p>
+
                 
             </div>
         </div>
@@ -802,7 +816,7 @@ if the content set against the key was not a valid JSON string.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l87"><code>lib&#x2F;store&#x2F;index.js:87</code></a>
+        <a href="../files/lib_store_index.js.html#l87"><code>lib&#x2F;store&#x2F;index.js:87</code></a>
         
         </p>
 
@@ -814,6 +828,7 @@ if the content set against the key was not a valid JSON string.</p>
 
     <div class="description">
         <p>returns true if the key is one for which a <code>get()</code> call would work.</p>
+
     </div>
 
     
@@ -848,7 +863,8 @@ if the content set against the key was not a valid JSON string.</p>
             <div class="returns-description">
                 
                     
-                    true if the key is valid for this store, false otherwise
+                    <p>true if the key is valid for this store, false otherwise</p>
+
                 
             </div>
         </div>
@@ -894,7 +910,7 @@ if the content set against the key was not a valid JSON string.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l81"><code>lib&#x2F;store&#x2F;index.js:81</code></a>
+        <a href="../files/lib_store_index.js.html#l81"><code>lib&#x2F;store&#x2F;index.js:81</code></a>
         
         </p>
 
@@ -906,6 +922,7 @@ if the content set against the key was not a valid JSON string.</p>
 
     <div class="description">
         <p>returns a list of all known keys</p>
+
     </div>
 
     
@@ -919,7 +936,8 @@ if the content set against the key was not a valid JSON string.</p>
                     
                         <span class="type">Array</span>:
                     
-                    an array of seen keys
+                    <p>an array of seen keys</p>
+
                 
             </div>
         </div>
@@ -973,7 +991,7 @@ if the content set against the key was not a valid JSON string.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l46"><code>lib&#x2F;store&#x2F;index.js:46</code></a>
+        <a href="../files/lib_store_index.js.html#l46"><code>lib&#x2F;store&#x2F;index.js:46</code></a>
         
         </p>
 
@@ -985,6 +1003,7 @@ if the content set against the key was not a valid JSON string.</p>
 
     <div class="description">
         <p>registers a new store implementation.</p>
+
     </div>
 
     
@@ -1004,6 +1023,7 @@ if the content set against the key was not a valid JSON string.</p>
                     <div class="param-description">
                         <p>the constructor function for the store. This function must have a
  <code>TYPE</code> property of type String, that will be used in <code>Store.create()</code></p>
+
                     </div>
 
                     
@@ -1067,7 +1087,7 @@ if the content set against the key was not a valid JSON string.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l63"><code>lib&#x2F;store&#x2F;index.js:63</code></a>
+        <a href="../files/lib_store_index.js.html#l63"><code>lib&#x2F;store&#x2F;index.js:63</code></a>
         
         </p>
 
@@ -1081,6 +1101,7 @@ if the content set against the key was not a valid JSON string.</p>
         <p>sets some content associated with a specific key. The manner in which
 duplicate keys are handled for multiple <code>set()</code> calls with the same
 key is implementation-specific.</p>
+
     </div>
 
     
@@ -1099,6 +1120,7 @@ key is implementation-specific.</p>
 
                     <div class="param-description">
                         <p>the key for the content</p>
+
                     </div>
 
                     
@@ -1114,6 +1136,7 @@ key is implementation-specific.</p>
 
                     <div class="param-description">
                         <p>the contents for the key</p>
+
                     </div>
 
                     
@@ -1177,7 +1200,7 @@ key is implementation-specific.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_store_index.js.html#l109"><code>lib&#x2F;store&#x2F;index.js:109</code></a>
+        <a href="../files/lib_store_index.js.html#l109"><code>lib&#x2F;store&#x2F;index.js:109</code></a>
         
         </p>
 
@@ -1189,6 +1212,7 @@ key is implementation-specific.</p>
 
     <div class="description">
         <p>sugar method to set an object against a specific key.</p>
+
     </div>
 
     
@@ -1207,6 +1231,7 @@ key is implementation-specific.</p>
 
                     <div class="param-description">
                         <p>the key for the object</p>
+
                     </div>
 
                     
@@ -1222,6 +1247,7 @@ key is implementation-specific.</p>
 
                     <div class="param-description">
                         <p>the object to be stored</p>
+
                     </div>
 
                     
@@ -1254,13 +1280,13 @@ key is implementation-specific.</p>
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

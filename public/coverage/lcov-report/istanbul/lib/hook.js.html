@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/hook.js</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/hook.js</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/hook.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(41 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">97.96% <small>(48 / 49)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>95.83% <small>(23 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">92.31% <small>(24 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">92.31% <small>(12 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(41 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">97.96% <small>(48 / 49)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/</a> &#187; hook.js</div>
 </div>
-<div class='body'>
+<div class="body">
 <pre><table class="coverage">
 <tr><td class="line-count">1
 2
@@ -347,7 +366,44 @@
 148
 149
 150
-151</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,42 +435,44 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">37</span>
-<span class="cline-any cline-yes">174</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">174</span>
-<span class="cline-any cline-yes">114</span>
-<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">1221</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">114</span>
-<span class="cline-any cline-yes">114</span>
-<span class="cline-any cline-yes">113</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1221</span>
+<span class="cline-any cline-yes">1141</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1141</span>
+<span class="cline-any cline-yes">1141</span>
+<span class="cline-any cline-yes">1140</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-yes">80</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">174</span>
+<span class="cline-any cline-yes">1221</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">628</span>
+<span class="cline-any cline-yes">743</span>
 <span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -432,30 +490,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-yes">36</span>
-<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36</span>
-<span class="cline-any cline-yes">173</span>
-<span class="cline-any cline-yes">173</span>
-<span class="cline-any cline-yes">112</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">1217</span>
+<span class="cline-any cline-yes">1217</span>
+<span class="cline-any cline-yes">1137</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">61</span>
+<span class="cline-any cline-yes">80</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">173</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1217</span>
+<span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -470,7 +530,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
@@ -484,11 +544,44 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -529,16 +622,18 @@
  *
  * @class Hook
  */
-var fs = require('fs'),
+var path = require('path'),
+    fs = require('fs'),
     Module = require('module'),
     vm = require('vm'),
     originalLoader = Module._extensions['.js'],
-    originalCreateScript = vm.createScript;
+    originalCreateScript = vm.createScript,
+    originalRunInThisContext = vm.runInThisContext;
 &nbsp;
 function transformFn(matcher, transformer, verbose) {
 &nbsp;
     return function (code, filename) {
-        var shouldHook = matcher(filename),
+        var shouldHook = matcher(path.resolve(filename)),
             transformed,
             changed = false;
 &nbsp;
@@ -562,7 +657,7 @@ function transformFn(matcher, transformer, verbose) {
 }
 &nbsp;
 function unloadRequireCache(matcher) {
-    <span class="missing-if-branch" title="else path not taken"" >E</span>if (matcher &amp;&amp; typeof require !== 'undefined' &amp;&amp; require &amp;&amp; require.cache) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (matcher &amp;&amp; typeof require !== 'undefined' &amp;&amp; require &amp;&amp; require.cache) {
         Object.keys(require.cache).forEach(function (filename) {
             if (matcher(filename)) {
                 delete require.cache[filename];
@@ -581,6 +676,8 @@ function unloadRequireCache(matcher) {
  *  from where the code was loaded. Should return the transformed code.
  * @param options {Object} options Optional.
  * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
+ * @param {Function} [options.postLoadHook] a function that is called with the name of the file being
+ *  required. This is called after the require is processed irrespective of whether it was transformed.
  */
 function hookRequire(matcher, transformer, options) {
     options = options || {};
@@ -638,11 +735,44 @@ function unhookCreateScript() {
     vm.createScript = originalCreateScript;
 }
 &nbsp;
+&nbsp;
+/**
+ * hooks `vm.runInThisContext` to return transformed code.
+ * @method hookRunInThisContext
+ * @static
+ * @param matcher {Function(filePath)} a function that is called with the filename passed to `vm.createScript`
+ *  Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise
+ * @param transformer {Function(code, filePath)} a function called with the original code and the filename passed to
+ *  `vm.createScript`. Should return the transformed code.
+ * @param options {Object} options Optional.
+ * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
+ */
+function hookRunInThisContext(matcher, transformer, opts) {
+    opts = opts || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+    var fn = transformFn(matcher, transformer, opts.verbose);
+    vm.runInThisContext = function (code, file) {
+        var ret = fn(code, file);
+        return originalRunInThisContext(ret.code, file);
+    };
+}
+&nbsp;
+/**
+ * unhooks vm.runInThisContext, restoring it to its original state.
+ * @method unhookRunInThisContext
+ * @static
+ */
+<span class="fstat-no" title="function not covered" >function unhookRunInThisContext() {</span>
+<span class="cstat-no" title="statement not covered" >    vm.runInThisContext = originalRunInThisContext;</span>
+}
+&nbsp;
+&nbsp;
 module.exports = {
     hookRequire: hookRequire,
     unhookRequire: unhookRequire,
     hookCreateScript: hookCreateScript,
     unhookCreateScript: unhookCreateScript,
+    hookRunInThisContext : hookRunInThisContext,
+    unhookRunInThisContext : unhookRunInThisContext,
     unloadRequireCache: unloadRequireCache
 };
 &nbsp;
@@ -651,10 +781,9 @@ module.exports = {
 </table></pre>
 
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../prettify.js"></script>
 
@@ -750,4 +879,5 @@ module.exports = {
         });
     });
 </script>
+</body>
 </html>

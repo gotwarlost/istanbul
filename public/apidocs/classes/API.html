@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>API - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -122,7 +126,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;index.js.html#l23"><code>index.js:23</code></a>
+            Defined in: <a href="../files/index.js.html#l23"><code>index.js:23</code></a>
         </div>
     
 
@@ -139,11 +143,9 @@
 
 <div class="box intro">
     <p>the top-level API for <code>istanbul</code>.</p>
+<h2 id="usage">Usage</h2>
+<pre class="code prettyprint"><code> var istanbul = require(&#39;istanbul&#39;);</code></pre>
 
-<h2>Usage</h2>
-
-<pre class="code prettyprint"><code> var istanbul = require('istanbul');
-</code></pre>
 </div>
 
 
@@ -345,7 +347,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l36"><code>misc&#x2F;samples&#x2F;coverage.js:36</code></a>
+        <a href="../files/misc_samples_coverage.js.html#l36"><code>misc&#x2F;samples&#x2F;coverage.js:36</code></a>
         
         </p>
 
@@ -357,6 +359,7 @@
 
     <div class="description">
         <p>adds a file as a candidate for instrumentation when require is hooked</p>
+
     </div>
 
     
@@ -375,6 +378,7 @@
 
                     <div class="param-description">
                         <p>the file to add as an instrumentation candidate</p>
+
                     </div>
 
                     
@@ -432,7 +436,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l45"><code>misc&#x2F;samples&#x2F;coverage.js:45</code></a>
+        <a href="../files/misc_samples_coverage.js.html#l45"><code>misc&#x2F;samples&#x2F;coverage.js:45</code></a>
         
         </p>
 
@@ -444,6 +448,7 @@
 
     <div class="description">
         <p>hooks require to instrument all files that have been specified as instrumentation candidates</p>
+
     </div>
 
     
@@ -462,6 +467,7 @@
 
                     <div class="param-description">
                         <p>true for debug messages</p>
+
                     </div>
 
                     
@@ -527,7 +533,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l72"><code>index.js:72</code></a>
+        <a href="../files/index.js.html#l72"><code>index.js:72</code></a>
         
         </p>
 
@@ -541,14 +547,13 @@
         <p>asynchronously returns a function that can match filesystem paths.
 The function returned in the callback may be passed directly as a <code>matcher</code>
 to the functions in the <code>hook</code> module.</p>
-
 <p>When no options are passed, the match function is one that matches all JS
 files under the current working directory except ones under <code>node_modules</code></p>
-
 <p>Match patterns are <code>ant</code>-style patterns processed using the <code>fileset</code> library.
 Examples not provided due to limitations in putting asterisks inside
 jsdoc comments. Please refer to tests under <code>test/other/test-matcher.js</code>
 for examples.</p>
+
     </div>
 
     
@@ -567,6 +572,7 @@ for examples.</p>
 
                     <div class="param-description">
                         <p>Optional. Lookup options.</p>
+
                     </div>
 
                     
@@ -582,6 +588,7 @@ for examples.</p>
                                 <div class="param-description">
                                     <p>the root of the filesystem tree under
     which to match files. Defaults to <code>process.cwd()</code></p>
+
                                 </div>
 
                                 
@@ -597,6 +604,7 @@ for examples.</p>
                                 <div class="param-description">
                                     <p>an array of include patterns to match.
     Defaults to all JS files under the root.</p>
+
                                 </div>
 
                                 
@@ -613,6 +621,7 @@ for examples.</p>
                                     <p>and array of exclude patterns. File paths
     matching these patterns will be excluded by the returned matcher.
     Defaults to files under <code>node_modules</code> found anywhere under root.</p>
+
                                 </div>
 
                                 
@@ -635,6 +644,7 @@ for examples.</p>
      called with two arguments. The first is an <code>Error</code> object in case
      of errors or a falsy value if there were no errors. The second
      is a function that may be use as a matcher.</p>
+
                     </div>
 
                     
@@ -682,7 +692,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l61"><code>misc&#x2F;samples&#x2F;coverage.js:61</code></a>
+        <a href="../files/misc_samples_coverage.js.html#l61"><code>misc&#x2F;samples&#x2F;coverage.js:61</code></a>
         
         </p>
 
@@ -694,6 +704,7 @@ for examples.</p>
 
     <div class="description">
         <p>unhooks require hooks that have been installed</p>
+
     </div>
 
     
@@ -746,7 +757,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l118"><code>misc&#x2F;samples&#x2F;coverage.js:118</code></a>
+        <a href="../files/misc_samples_coverage.js.html#l118"><code>misc&#x2F;samples&#x2F;coverage.js:118</code></a>
         
         </p>
 
@@ -758,6 +769,7 @@ for examples.</p>
 
     <div class="description">
         <p>writes reports for everything accumulated by the collector</p>
+
     </div>
 
     
@@ -776,6 +788,7 @@ for examples.</p>
 
                     <div class="param-description">
                         <p>the output directory for reports</p>
+
                     </div>
 
                     
@@ -839,7 +852,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;misc_samples_coverage.js.html#l103"><code>misc&#x2F;samples&#x2F;coverage.js:103</code></a>
+        <a href="../files/misc_samples_coverage.js.html#l103"><code>misc&#x2F;samples&#x2F;coverage.js:103</code></a>
         
         </p>
 
@@ -851,6 +864,7 @@ for examples.</p>
 
     <div class="description">
         <p>writes reports for an array of JSON files representing partial coverage information</p>
+
     </div>
 
     
@@ -869,6 +883,7 @@ for examples.</p>
 
                     <div class="param-description">
                         <p>array of file names containing partial coverage objects</p>
+
                     </div>
 
                     
@@ -884,6 +899,7 @@ for examples.</p>
 
                     <div class="param-description">
                         <p>the output directory for reports</p>
+
                     </div>
 
                     
@@ -932,7 +948,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l48"><code>index.js:48</code></a>
+        <a href="../files/index.js.html#l48"><code>index.js:48</code></a>
         
         </p>
 
@@ -943,6 +959,7 @@ for examples.</p>
 
     <div class="description">
         <p>the Collector class</p>
+
     </div>
 
     
@@ -978,7 +995,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l54"><code>index.js:54</code></a>
+        <a href="../files/index.js.html#l54"><code>index.js:54</code></a>
         
         </p>
 
@@ -989,6 +1006,7 @@ for examples.</p>
 
     <div class="description">
         <p>the hook module</p>
+
     </div>
 
     
@@ -1024,7 +1042,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l36"><code>index.js:36</code></a>
+        <a href="../files/index.js.html#l36"><code>index.js:36</code></a>
         
         </p>
 
@@ -1035,6 +1053,7 @@ for examples.</p>
 
     <div class="description">
         <p>the Instrumenter class.</p>
+
     </div>
 
     
@@ -1070,7 +1089,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l60"><code>index.js:60</code></a>
+        <a href="../files/index.js.html#l60"><code>index.js:60</code></a>
         
         </p>
 
@@ -1081,6 +1100,7 @@ for examples.</p>
 
     <div class="description">
         <p>the Report class</p>
+
     </div>
 
     
@@ -1116,7 +1136,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l42"><code>index.js:42</code></a>
+        <a href="../files/index.js.html#l42"><code>index.js:42</code></a>
         
         </p>
 
@@ -1127,6 +1147,7 @@ for examples.</p>
 
     <div class="description">
         <p>the Store class.</p>
+
     </div>
 
     
@@ -1162,7 +1183,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l66"><code>index.js:66</code></a>
+        <a href="../files/index.js.html#l66"><code>index.js:66</code></a>
         
         </p>
 
@@ -1173,6 +1194,7 @@ for examples.</p>
 
     <div class="description">
         <p>utility for processing coverage objects</p>
+
     </div>
 
     
@@ -1208,7 +1230,7 @@ for examples.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;index.js.html#l101"><code>index.js:101</code></a>
+        <a href="../files/index.js.html#l101"><code>index.js:101</code></a>
         
         </p>
 
@@ -1219,6 +1241,7 @@ for examples.</p>
 
     <div class="description">
         <p>the version of the library</p>
+
     </div>
 
     
@@ -1244,13 +1267,13 @@ for examples.</p>
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

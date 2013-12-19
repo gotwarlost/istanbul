@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>index.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -118,29 +122,29 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*
+/*
 Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
 Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
-*&#x2F;
+*/
 
-&#x2F;**
+/**
  * provides access to the key libraries in istanbul so you can write
  * your own tools using &#x60;istanbul&#x60; as a library.
  *
  * @module istanbul
- *&#x2F;
+ */
 
-&#x2F;*jslint nomen: true *&#x2F;
+/*jslint nomen: true */
 var path = require(&#x27;path&#x27;),
     fs = require(&#x27;fs&#x27;),
-    Store = require(&#x27;.&#x2F;lib&#x2F;store&#x27;),
-    Report = require(&#x27;.&#x2F;lib&#x2F;report&#x27;),
-    meta = require(&#x27;.&#x2F;lib&#x2F;util&#x2F;meta&#x27;);
+    Store = require(&#x27;./lib/store&#x27;),
+    Report = require(&#x27;./lib/report&#x27;),
+    meta = require(&#x27;./lib/util/meta&#x27;);
 
-&#x2F;&#x2F;register our standard plaugins
-require(&#x27;.&#x2F;lib&#x2F;register-plugins&#x27;);
+//register our standard plaugins
+require(&#x27;./lib/register-plugins&#x27;);
 
-&#x2F;**
+/**
  * the top-level API for &#x60;istanbul&#x60;.
  *
  * Usage
@@ -150,46 +154,46 @@ require(&#x27;.&#x2F;lib&#x2F;register-plugins&#x27;);
  *
  *
  * @class API
- *&#x2F;
+ */
 
 module.exports = {
-    &#x2F;**
+    /**
      * the Instrumenter class.
      * @property {Instrumenter} Instrumenter
      * @static
-     *&#x2F;
-    Instrumenter: require(&#x27;.&#x2F;lib&#x2F;instrumenter&#x27;),
-    &#x2F;**
+     */
+    Instrumenter: require(&#x27;./lib/instrumenter&#x27;),
+    /**
      * the Store class.
      * @property {Store} Store
      * @static
-     *&#x2F;
+     */
     Store: Store,
-    &#x2F;**
+    /**
      * the Collector class
      * @property {Collector} Collector
      * @static
-     *&#x2F;
-    Collector: require(&#x27;.&#x2F;lib&#x2F;collector&#x27;),
-    &#x2F;**
+     */
+    Collector: require(&#x27;./lib/collector&#x27;),
+    /**
      * the hook module
      * @property {Hook} hook
      * @static
-     *&#x2F;
-    hook: require(&#x27;.&#x2F;lib&#x2F;hook&#x27;),
-    &#x2F;**
+     */
+    hook: require(&#x27;./lib/hook&#x27;),
+    /**
      * the Report class
      * @property {Report} Report
      * @static
-     *&#x2F;
+     */
     Report: Report,
-    &#x2F;**
+    /**
      * utility for processing coverage objects
      * @property {ObjectUtils} utils
      * @static
-     *&#x2F;
-    utils: require(&#x27;.&#x2F;lib&#x2F;object-utils&#x27;),
-    &#x2F;**
+     */
+    utils: require(&#x27;./lib/object-utils&#x27;),
+    /**
      * asynchronously returns a function that can match filesystem paths.
      * The function returned in the callback may be passed directly as a &#x60;matcher&#x60;
      * to the functions in the &#x60;hook&#x60; module.
@@ -199,7 +203,7 @@ module.exports = {
      *
      * Match patterns are &#x60;ant&#x60;-style patterns processed using the &#x60;fileset&#x60; library.
      * Examples not provided due to limitations in putting asterisks inside
-     * jsdoc comments. Please refer to tests under &#x60;test&#x2F;other&#x2F;test-matcher.js&#x60;
+     * jsdoc comments. Please refer to tests under &#x60;test/other/test-matcher.js&#x60;
      * for examples.
      *
      * @method matcherFor
@@ -216,19 +220,19 @@ module.exports = {
      *      called with two arguments. The first is an &#x60;Error&#x60; object in case
      *      of errors or a falsy value if there were no errors. The second
      *      is a function that may be use as a matcher.
-     *&#x2F;
-    matcherFor: require(&#x27;.&#x2F;lib&#x2F;util&#x2F;file-matcher&#x27;).matcherFor,
-    &#x2F;**
+     */
+    matcherFor: require(&#x27;./lib/util/file-matcher&#x27;).matcherFor,
+    /**
      * the version of the library
      * @property {String} VERSION
      * @static
-     *&#x2F;
+     */
     VERSION: meta.VERSION,
-    &#x2F;&#x2F;undocumented
-    _yuiLoadHook: require(&#x27;.&#x2F;lib&#x2F;util&#x2F;yui-load-hook&#x27;).getPostLoadHook,
-    &#x2F;&#x2F;undocumented
-    TreeSummarizer: require(&#x27;.&#x2F;lib&#x2F;util&#x2F;tree-summarizer&#x27;),
-    &#x2F;&#x2F;undocumented
+    //undocumented
+    _yuiLoadHook: require(&#x27;./lib/util/yui-load-hook&#x27;),
+    //undocumented
+    TreeSummarizer: require(&#x27;./lib/util/tree-summarizer&#x27;),
+    //undocumented
     assetsDir: path.resolve(__dirname, &#x27;lib&#x27;, &#x27;vendor&#x27;)
 };
 
@@ -243,13 +247,13 @@ module.exports = {
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

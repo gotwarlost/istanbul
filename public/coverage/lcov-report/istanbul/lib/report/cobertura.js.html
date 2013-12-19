@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/report/cobertura.js</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/report/cobertura.js</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/report/cobertura.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(78 / 78)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(84 / 84)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">95% <small>(19 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(20 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(20 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(76 / 76)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(82 / 82)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/report/</a> &#187; cobertura.js</div>
 </div>
-<div class='body'>
+<div class="body">
 <pre><table class="coverage">
 <tr><td class="line-count">1
 2
@@ -383,12 +402,33 @@
 184
 185
 186
-187</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,36 +449,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-yes">182</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">202</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-yes">182</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">202</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -457,7 +499,7 @@
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -475,10 +517,26 @@
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8</span>
@@ -505,7 +563,7 @@
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-yes">8</span>
 <span class="cline-any cline-yes">2</span>
@@ -520,6 +578,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -549,9 +609,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -568,7 +629,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -576,7 +637,7 @@
 &nbsp;
 var path = require('path'),
     Report = require('./index'),
-    Writer = require('../util/file-writer'),
+    FileWriter = require('../util/file-writer'),
     TreeSummarizer = require('../util/tree-summarizer'),
     utils = require('../object-utils');
 &nbsp;
@@ -587,7 +648,7 @@ var path = require('path'),
  * Usage
  * -----
  *
- *      var report = require('istanbul').Report.create('text');
+ *      var report = require('istanbul').Report.create('cobertura');
  *
  * @class CoberturaReport
  * @extends Report
@@ -598,8 +659,10 @@ var path = require('path'),
 function CoberturaReport(opts) {
     Report.call(this);
     opts = opts || {};
-    this.dir = opts.dir || process.cwd();
+    this.projectRoot = process.cwd();
+    this.dir = opts.dir || this.projectRoot;
     this.file = opts.file || 'cobertura-coverage.xml';
+    this.opts = opts;
 }
 &nbsp;
 CoberturaReport.TYPE = 'cobertura';
@@ -643,7 +706,7 @@ function branchCoverageByLine(fileCoverage) {
     return ret;
 }
 &nbsp;
-function addClassStats(node, fileCoverage, writer) {
+function addClassStats(node, fileCoverage, writer, projectRoot) {
     var metrics = node.metrics,
         branchByLine = branchCoverageByLine(fileCoverage),
         fnMap,
@@ -651,7 +714,7 @@ function addClassStats(node, fileCoverage, writer) {
 &nbsp;
     writer.println('\t\t&lt;class' +
         attr('name', asClassName(node)) +
-        attr('filename', node.fullPath()) +
+        attr('filename', node.fullPath().replace(projectRoot + (path.sep || <span class="branch-1 cbranch-no" title="branch not covered" >'/')</span>, '')) +
         attr('line-rate', metrics.lines.pct / 100.0) +
         attr('branch-rate', metrics.branches.pct / 100.0) +
         '&gt;');
@@ -661,11 +724,27 @@ function addClassStats(node, fileCoverage, writer) {
     Object.keys(fnMap).forEach(function (k) {
         var name = fnMap[k].name,
             hits = fileCoverage.f[k];
-        writer.println('\t\t\t&lt;method' +
+&nbsp;
+        writer.println(
+            '\t\t\t&lt;method' +
             attr('name', name) +
             attr('hits', hits) +
             attr('signature', '()V') + //fake out a no-args void return
-            ' /&gt;');
+            '&gt;'
+        );
+&nbsp;
+        //Add the function definition line and hits so that jenkins cobertura plugin records method hits
+        writer.println(
+            '\t\t\t\t&lt;lines&gt;' +
+             '&lt;line' +
+            attr('number', fnMap[k].line) +
+            attr('hits', fileCoverage.f[k]) +
+            '/&gt;' +
+            '&lt;/lines&gt;'
+        );
+&nbsp;
+        writer.println('\t\t\t&lt;/method&gt;');
+&nbsp;
     });
     writer.println('\t\t&lt;/methods&gt;');
 &nbsp;
@@ -691,7 +770,7 @@ function addClassStats(node, fileCoverage, writer) {
     writer.println('\t\t&lt;/class&gt;');
 }
 &nbsp;
-function walk(node, collector, writer, level) {
+function walk(node, collector, writer, level, projectRoot) {
     var metrics;
     if (level === 0) {
         metrics = node.metrics;
@@ -706,7 +785,9 @@ function walk(node, collector, writer, level) {
             attr('branch-rate', metrics.branches.pct / 100.0) +
             attr('timestamp', Date.now()) +
             'complexity="0" version="0.1"&gt;');
-        writer.println('&lt;sources /&gt;');
+        writer.println('&lt;sources&gt;');
+        writer.println('\t&lt;source&gt;' + projectRoot + '&lt;/source&gt;');
+        writer.println('&lt;/sources&gt;');
         writer.println('&lt;packages&gt;');
     }
     if (node.packageMetrics) {
@@ -719,14 +800,14 @@ function walk(node, collector, writer, level) {
         writer.println('\t&lt;classes&gt;');
         node.children.filter(function (child) { return child.kind !== 'dir'; }).
             forEach(function (child) {
-                addClassStats(child, collector.fileCoverageFor(child.fullPath()), writer);
+                addClassStats(child, collector.fileCoverageFor(child.fullPath()), writer, projectRoot);
             });
         writer.println('\t&lt;/classes&gt;');
         writer.println('\t&lt;/package&gt;');
     }
     node.children.filter(function (child) { return child.kind === 'dir'; }).
         forEach(function (child) {
-            walk(child, collector, writer, level + 1);
+            walk(child, collector, writer, level + 1, projectRoot);
         });
 &nbsp;
     if (level === 0) {
@@ -739,7 +820,8 @@ Report.mix(CoberturaReport, {
     writeReport: function (collector, sync) {
         var summarizer = new TreeSummarizer(),
             outputFile = path.join(this.dir, this.file),
-            writer = new Writer(sync),
+            writer = this.opts.writer || new FileWriter(sync),
+            projectRoot = this.projectRoot,
             tree,
             root;
 &nbsp;
@@ -748,8 +830,8 @@ Report.mix(CoberturaReport, {
         });
         tree = summarizer.getTreeSummary();
         root = tree.root;
-        writer.writeFile(outputFile, function () {
-            walk(root, collector, writer, 0);
+        writer.writeFile(outputFile, function (contentWriter) {
+            walk(root, collector, contentWriter, 0, projectRoot);
         });
     }
 });
@@ -759,10 +841,9 @@ module.exports = CoberturaReport;
 </table></pre>
 
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../../prettify.js"></script>
 
@@ -858,4 +939,5 @@ module.exports = CoberturaReport;
         });
     });
 </script>
+</body>
 </html>

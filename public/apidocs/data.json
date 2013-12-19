@@ -2,9 +2,16 @@
     "project": {
         "name": "The Istanbul API",
         "description": "The Istanbul API: a code coverage library",
-        "version": "0.0.1-12"
+        "version": "0.2.0"
     },
     "files": {
+        "lib/command/instrument.js": {
+            "name": "lib/command/instrument.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/report/cobertura.js": {
             "name": "lib/report/cobertura.js",
             "modules": {},
@@ -32,6 +39,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/report/json.js": {
+            "name": "lib/report/json.js",
+            "modules": {},
+            "classes": {
+                "JsonReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/report/lcov.js": {
             "name": "lib/report/lcov.js",
             "modules": {},
@@ -46,6 +62,15 @@
             "modules": {},
             "classes": {
                 "LcovOnlyReport": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/report/teamcity.js": {
+            "name": "lib/report/teamcity.js",
+            "modules": {},
+            "classes": {
+                "TeamcityReport": 1
             },
             "fors": {},
             "namespaces": {}
@@ -101,6 +126,20 @@
             "classes": {
                 "TmpStore": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/util/flow-control.js": {
+            "name": "lib/util/flow-control.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/util/writer.js": {
+            "name": "lib/util/writer.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -167,8 +206,10 @@
                 "CoberturaReport": 1,
                 "HtmlReport": 1,
                 "Report": 1,
+                "JsonReport": 1,
                 "LcovReport": 1,
                 "LcovOnlyReport": 1,
+                "TeamcityReport": 1,
                 "TextSummaryReport": 1,
                 "TextReport": 1,
                 "LookupStore": 1,
@@ -201,7 +242,7 @@
             "module": "istanbul",
             "file": "lib/report/cobertura.js",
             "line": 12,
-            "description": "a `Report` implementation that produces a cobertura-style XML file that conforms to the\nhttp://cobertura.sourceforge.net/xml/coverage-04.dtd DTD.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('text');",
+            "description": "a `Report` implementation that produces a cobertura-style XML file that conforms to the\nhttp://cobertura.sourceforge.net/xml/coverage-04.dtd DTD.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('cobertura');",
             "extends": "Report",
             "is_constructor": 1,
             "params": [
@@ -230,7 +271,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/html.js",
-            "line": 290,
+            "line": 308,
             "description": "a `Report` implementation that produces HTML coverage reports.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('html');",
             "extends": "Report",
             "is_constructor": 1,
@@ -261,7 +302,7 @@
             "module": "istanbul",
             "file": "lib/report/index.js",
             "line": 8,
-            "description": "abstract report class for producing coverage reports.\n\nUsage\n-----\n\n     var Report = require('istanbul').Report,\n         report = Report.create('html'),\n         collector = new require('istanbul').Collector;\n\n     collector.add(coverageObject);\n    report.writeReport(collector);",
+            "description": "abstract report class for producing coverage reports.\n\nUsage\n-----\n\n     var Report = require('istanbul').Report,\n         report = Report.create('html'),\n         collector = new require('istanbul').Collector;\n\n     collector.add(coverageObject);\n     report.writeReport(collector);",
             "is_constructor": 1,
             "access": "protected",
             "tagname": "",
@@ -270,6 +311,36 @@
                     "name": "options",
                     "description": "Optional. The options supported by a specific store implementation.",
                     "type": "Object"
+                }
+            ]
+        },
+        "JsonReport": {
+            "name": "JsonReport",
+            "shortname": "JsonReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/json.js",
+            "line": 10,
+            "description": "a `Report` implementation that produces a coverage JSON object.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('json');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to write the `coverage-final.json` file. Defaults to `process.cwd()`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
             ]
         },
@@ -313,7 +384,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/report/lcovonly.js",
-            "line": 10,
+            "line": 11,
             "description": "a `Report` implementation that produces an LCOV coverage file from coverage objects.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('lcovonly');",
             "extends": "Report",
             "is_constructor": 1,
@@ -326,6 +397,42 @@
                         {
                             "name": "dir",
                             "description": "the directory in which to the `lcov.info` file. Defaults to `process.cwd()`",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "TeamcityReport": {
+            "name": "TeamcityReport",
+            "shortname": "TeamcityReport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "istanbul",
+            "file": "lib/report/teamcity.js",
+            "line": 12,
+            "description": "a `Report` implementation that produces system messages interpretable by TeamCity.\n\nUsage\n-----\n\n     var report = require('istanbul').Report.create('teamcity');",
+            "extends": "Report",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "opts",
+                    "description": "optional",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "dir",
+                            "description": "the directory in which to the text coverage report will be written, when writing to a file",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "file",
+                            "description": "the filename for the report. When omitted, the report is written to console",
                             "type": "String",
                             "optional": true
                         }
@@ -545,7 +652,7 @@
             "extension_for": [],
             "module": "istanbul",
             "file": "lib/instrumenter.js",
-            "line": 253,
+            "line": 285,
             "description": "mechanism to instrument code for coverage. It uses the `esprima` and\n`escodegen` libraries for JS parsing and code generation respectively.\n\nWorks on `node` as well as the browser.\n\nUsage on nodejs\n---------------\n\n     var instrumenter = new require('istanbul').Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nUsage in a browser\n------------------\n\nLoad `esprima.js`, `escodegen.js` and `instrumenter.js` (this file) using `script` tags or other means.\n\nCreate an instrumenter object as:\n\n     var instrumenter = new Instrumenter(),\n         changed = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');\n\nAside from demonstration purposes, it is unclear why you would want to instrument code in a browser.",
             "is_constructor": 1,
             "params": [
@@ -563,6 +670,12 @@
                         {
                             "name": "embedSource",
                             "description": "whether to embed the source code of every\n     file as an array in the file coverage object for that file. Defaults to `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "preserveComments",
+                            "description": "whether comments should be preserved in the output. Defaults to `false`",
                             "type": "Boolean",
                             "optional": true
                         },
@@ -630,6 +743,12 @@
         }
     },
     "classitems": [
+        {
+            "file": "lib/command/instrument.js",
+            "line": 22,
+            "description": "Chunk file size to use when reading non JavaScript files in memory\nand copying them over when using complete-copy flag.",
+            "class": "CoberturaReport"
+        },
         {
             "file": "lib/report/index.js",
             "line": 30,
@@ -849,6 +968,61 @@
             "class": "Store"
         },
         {
+            "file": "lib/util/flow-control.js",
+            "line": 7,
+            "description": "Wrap a function and make sure it's called only once.",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "Function to wrap.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Wrapped function.",
+                "type": "Function"
+            },
+            "class": "Collector"
+        },
+        {
+            "file": "lib/util/writer.js",
+            "line": 34,
+            "description": "allows writing content to a file using a callback that is passed a content writer",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "the name of the file to write"
+                },
+                {
+                    "name": "callback",
+                    "description": "the callback that is called as `callback(contentWriter)`"
+                }
+            ],
+            "class": "Collector"
+        },
+        {
+            "file": "lib/util/writer.js",
+            "line": 42,
+            "description": "copies a file from source to destination",
+            "params": [
+                {
+                    "name": "source",
+                    "description": "the file to copy, found on the file system"
+                },
+                {
+                    "name": "dest",
+                    "description": "the destination path"
+                }
+            ],
+            "class": "Collector"
+        },
+        {
+            "file": "lib/util/writer.js",
+            "line": 50,
+            "description": "marker method to indicate that the caller is done with this writer object\nThe writer is expected to emit a `done` event only after this method is called\nand it is truly done.",
+            "class": "Collector"
+        },
+        {
             "file": "lib/collector.js",
             "line": 57,
             "description": "adds a coverage object to the collector.",
@@ -921,7 +1095,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 74,
+            "line": 76,
             "description": "hooks `require` to return transformed code to the node module loader.\nExceptions in the transform result in the original code being used instead.",
             "itemtype": "method",
             "name": "hookRequire",
@@ -947,6 +1121,12 @@
                             "description": "write a line to standard error every time the transformer is called",
                             "type": "Boolean",
                             "optional": true
+                        },
+                        {
+                            "name": "postLoadHook",
+                            "description": "a function that is called with the name of the file being\n required. This is called after the require is processed irrespective of whether it was transformed.",
+                            "type": "Function",
+                            "optional": true
                         }
                     ]
                 }
@@ -955,7 +1135,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 104,
+            "line": 108,
             "description": "unhook `require` to restore it to its original state.",
             "itemtype": "method",
             "name": "unhookRequire",
@@ -964,7 +1144,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 112,
+            "line": 116,
             "description": "hooks `vm.createScript` to return transformed code out of which a `Script` object will be created.\nExceptions in the transform result in the original code being used instead.",
             "itemtype": "method",
             "name": "hookCreateScript",
@@ -998,7 +1178,7 @@
         },
         {
             "file": "lib/hook.js",
-            "line": 133,
+            "line": 137,
             "description": "unhooks vm.createScript, restoring it to its original state.",
             "itemtype": "method",
             "name": "unhookCreateScript",
@@ -1006,8 +1186,51 @@
             "class": "Hook"
         },
         {
+            "file": "lib/hook.js",
+            "line": 147,
+            "description": "hooks `vm.runInThisContext` to return transformed code.",
+            "itemtype": "method",
+            "name": "hookRunInThisContext",
+            "static": 1,
+            "params": [
+                {
+                    "name": "matcher",
+                    "description": "a function that is called with the filename passed to `vm.createScript`\n Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise",
+                    "type": "Function(filePath)"
+                },
+                {
+                    "name": "transformer",
+                    "description": "a function called with the original code and the filename passed to\n `vm.createScript`. Should return the transformed code.",
+                    "type": "Function(code, filePath)"
+                },
+                {
+                    "name": "options",
+                    "description": "options Optional.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "verbose",
+                            "description": "write a line to standard error every time the transformer is called",
+                            "type": "Boolean",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Hook"
+        },
+        {
+            "file": "lib/hook.js",
+            "line": 167,
+            "description": "unhooks vm.runInThisContext, restoring it to its original state.",
+            "itemtype": "method",
+            "name": "unhookRunInThisContext",
+            "static": 1,
+            "class": "Hook"
+        },
+        {
             "file": "lib/instrumenter.js",
-            "line": 344,
+            "line": 380,
             "description": "synchronous instrumentation method. Throws when illegal code is passed to it",
             "itemtype": "method",
             "name": "instrumentSync",
@@ -1027,7 +1250,32 @@
         },
         {
             "file": "lib/instrumenter.js",
-            "line": 391,
+            "line": 456,
+            "description": "synchronous instrumentation method that instruments an AST instead.",
+            "itemtype": "method",
+            "name": "instrumentASTSync",
+            "params": [
+                {
+                    "name": "program",
+                    "description": "the AST to be instrumented",
+                    "type": "String"
+                },
+                {
+                    "name": "filename",
+                    "description": "Optional. The name of the file from which\n the code was read. A temporary filename is generated when not specified.\n Not specifying a filename is only useful for unit tests and demonstrations\n of this library.",
+                    "type": "String"
+                },
+                {
+                    "name": "originalCode",
+                    "description": "the original code corresponding to the AST,\n used for embedding the source into the coverage object",
+                    "type": "String"
+                }
+            ],
+            "class": "Instrumenter"
+        },
+        {
+            "file": "lib/instrumenter.js",
+            "line": 503,
             "description": "Callback based instrumentation. Note that this still executes synchronously in the same process tick\nand calls back immediately. It only provides the options for callback style error handling as\nopposed to a `try-catch` style and nothing more. Implemented as a wrapper over `instrumentSync`",
             "itemtype": "method",
             "name": "instrument",
@@ -1052,7 +1300,7 @@
         },
         {
             "file": "lib/instrumenter.js",
-            "line": 416,
+            "line": 528,
             "description": "returns the file coverage object for the code that was instrumented\njust before calling this method. Note that this represents a\n\"zero-coverage\" object which is not even representative of the code\nbeing loaded in node or a browser (which would increase the statement\ncounts for mainline code).",
             "return": {
                 "description": "a \"zero-coverage\" file coverage object for the code last instrumented\nby this instrumenter",
@@ -1078,7 +1326,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 67,
+            "line": 68,
             "description": "adds line coverage information to all file coverage objects.",
             "itemtype": "method",
             "name": "addDerivedInfo",
@@ -1094,7 +1342,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 79,
+            "line": 80,
             "description": "removes line coverage information from all file coverage objects",
             "itemtype": "method",
             "name": "removeDerivedInfo",
@@ -1110,7 +1358,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 128,
+            "line": 148,
             "description": "returns a blank summary metrics object. A metrics object has the following\nformat.\n\n     {\n         lines: lineMetrics,\n         statements: statementMetrics,\n         functions: functionMetrics,\n         branches: branchMetrics\n     }\n\n Each individual metric object looks as follows:\n\n     {\n         total: n,\n         covered: m,\n         pct: percent\n     }",
             "itemtype": "method",
             "name": "blankSummary",
@@ -1123,7 +1371,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 175,
+            "line": 199,
             "description": "returns the summary metrics given the coverage object for a single file. See `blankSummary()`\nto understand the format of the returned object.",
             "itemtype": "method",
             "name": "summarizeFileCoverage",
@@ -1143,7 +1391,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 193,
+            "line": 217,
             "description": "merges two instances of file coverage objects *for the same file*\nsuch that the execution counts are correct.",
             "itemtype": "method",
             "name": "mergeFileCoverage",
@@ -1168,7 +1416,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 226,
+            "line": 250,
             "description": "merges multiple summary metrics objects by summing up the `totals` and\n`covered` fields and recomputing the percentages. This function is generic\nand can accept any number of arguments.",
             "itemtype": "method",
             "name": "mergeSummaryObjects",
@@ -1188,7 +1436,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 257,
+            "line": 282,
             "description": "returns the coverage summary for a single coverage object. This is\nwrapper over `summarizeFileCoverage` and `mergeSummaryObjects` for\nthe common case of a single coverage object",
             "itemtype": "method",
             "name": "summarizeCoverage",
@@ -1208,7 +1456,7 @@
         },
         {
             "file": "lib/object-utils.js",
-            "line": 274,
+            "line": 299,
             "description": "makes the coverage object generated by this library yuitest_coverage compatible.\nNote that this transformation is lossy since the returned object will not have\nstatement and branch coverage.",
             "itemtype": "method",
             "name": "toYUICoverage",
@@ -1484,8 +1732,28 @@
     ],
     "warnings": [
         {
+            "message": "Missing item type\nChunk file size to use when reading non JavaScript files in memory\nand copying them over when using complete-copy flag.",
+            "line": " lib/command/instrument.js:22"
+        },
+        {
+            "message": "Missing item type\nWrap a function and make sure it's called only once.",
+            "line": " lib/util/flow-control.js:7"
+        },
+        {
+            "message": "Missing item type\nallows writing content to a file using a callback that is passed a content writer",
+            "line": " lib/util/writer.js:34"
+        },
+        {
+            "message": "Missing item type\ncopies a file from source to destination",
+            "line": " lib/util/writer.js:42"
+        },
+        {
+            "message": "Missing item type\nmarker method to indicate that the caller is done with this writer object\nThe writer is expected to emit a `done` event only after this method is called\nand it is truly done.",
+            "line": " lib/util/writer.js:50"
+        },
+        {
             "message": "Missing item type\nreturns the file coverage object for the code that was instrumented\njust before calling this method. Note that this represents a\n\"zero-coverage\" object which is not even representative of the code\nbeing loaded in node or a browser (which would increase the statement\ncounts for mainline code).",
-            "line": " lib/instrumenter.js:416"
+            "line": " lib/instrumenter.js:528"
         },
         {
             "message": "Missing item type\nFacade for all coverage operations support node as well as browser cases\n\nUsage:\n```\n //Node unit tests\n var coverage = require('/path/to/this/file');\n coverage.hookRequire(); // hooks require for instrumentation\n coverage.addInstrumentCandidate(file); // adds a file that needs to be instrumented; should be called before file is `require`d\n\n //Browser tests\n var coverage = require('/path/to/this/file');\n var instrumentedCode = coverage.instrumentFile(file); //alternatively, use `instrumentCode` if you have already loaded the code\n //collect coverage from the browser\n // this coverage will be stored as `window.__coverage__`\n // and...\n coverage.addCoverage(coverageObject); // rinse and repeat\n ```\n\n //in all cases, add an exit handler to the process\n process.once('exit', function () { coverage.writeReports(outputDir); }); //write coverage reports",

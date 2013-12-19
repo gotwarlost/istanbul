@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;hook.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <title>lib/hook.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -114,16 +118,16 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;hook.js</h1>
+                        <h1 class="file-heading">File: lib/hook.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*
+/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- *&#x2F;
+ */
 
-&#x2F;**
+/**
  * provides a mechanism to transform code in the scope of &#x60;require&#x60; or &#x60;vm.createScript&#x60;.
  * This mechanism is general and relies on a user-supplied &#x60;matcher&#x60; function that determines when transformations should be
  * performed and a user-supplied &#x60;transformer&#x60; function that performs the actual transform.
@@ -131,7 +135,7 @@
  *
  * Note that both the &#x60;matcher&#x60; and &#x60;transformer&#x60; must execute synchronously.
  *
- * For the common case of matching filesystem paths based on inclusion&#x2F; exclusion patterns, use the &#x60;matcherFor&#x60;
+ * For the common case of matching filesystem paths based on inclusion/ exclusion patterns, use the &#x60;matcherFor&#x60;
  * function in the istanbul API to get a matcher.
  *
  * It is up to the transformer to perform processing with side-effects, such as caching, storing the original
@@ -141,25 +145,27 @@
  * -----
  *
  *      var hook = require(&#x27;istanbul&#x27;).hook,
- *          myMatcher = function (file) { return file.match(&#x2F;foo&#x2F;); },
+ *          myMatcher = function (file) { return file.match(/foo/); },
  *          myTransformer = function (code, file) { return &#x27;console.log(&quot;&#x27; + file + &#x27;&quot;);&#x27; + code; };
  *
  *      hook.hookRequire(myMatcher, myTransformer);
  *
- *      var foo = require(&#x27;foo&#x27;); &#x2F;&#x2F;will now print foo&#x27;s module path to console
+ *      var foo = require(&#x27;foo&#x27;); //will now print foo&#x27;s module path to console
  *
  * @class Hook
- *&#x2F;
-var fs = require(&#x27;fs&#x27;),
+ */
+var path = require(&#x27;path&#x27;),
+    fs = require(&#x27;fs&#x27;),
     Module = require(&#x27;module&#x27;),
     vm = require(&#x27;vm&#x27;),
     originalLoader = Module._extensions[&#x27;.js&#x27;],
-    originalCreateScript = vm.createScript;
+    originalCreateScript = vm.createScript,
+    originalRunInThisContext = vm.runInThisContext;
 
 function transformFn(matcher, transformer, verbose) {
 
     return function (code, filename) {
-        var shouldHook = matcher(filename),
+        var shouldHook = matcher(path.resolve(filename)),
             transformed,
             changed = false;
 
@@ -191,7 +197,7 @@ function unloadRequireCache(matcher) {
         });
     }
 }
-&#x2F;**
+/**
  * hooks &#x60;require&#x60; to return transformed code to the node module loader.
  * Exceptions in the transform result in the original code being used instead.
  * @method hookRequire
@@ -202,7 +208,9 @@ function unloadRequireCache(matcher) {
  *  from where the code was loaded. Should return the transformed code.
  * @param options {Object} options Optional.
  * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
- *&#x2F;
+ * @param {Function} [options.postLoadHook] a function that is called with the name of the file being
+ *  required. This is called after the require is processed irrespective of whether it was transformed.
+ */
 function hookRequire(matcher, transformer, options) {
     options = options || {};
     var fn = transformFn(matcher, transformer, options.verbose),
@@ -221,15 +229,15 @@ function hookRequire(matcher, transformer, options) {
         }
     };
 }
-&#x2F;**
+/**
  * unhook &#x60;require&#x60; to restore it to its original state.
  * @method unhookRequire
  * @static
- *&#x2F;
+ */
 function unhookRequire() {
     Module._extensions[&#x27;.js&#x27;] = originalLoader;
 }
-&#x2F;**
+/**
  * hooks &#x60;vm.createScript&#x60; to return transformed code out of which a &#x60;Script&#x60; object will be created.
  * Exceptions in the transform result in the original code being used instead.
  * @method hookCreateScript
@@ -240,7 +248,7 @@ function unhookRequire() {
  *  &#x60;vm.createScript&#x60;. Should return the transformed code.
  * @param options {Object} options Optional.
  * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
- *&#x2F;
+ */
 function hookCreateScript(matcher, transformer, opts) {
     opts = opts || {};
     var fn = transformFn(matcher, transformer, opts.verbose);
@@ -250,20 +258,53 @@ function hookCreateScript(matcher, transformer, opts) {
     };
 }
 
-&#x2F;**
+/**
  * unhooks vm.createScript, restoring it to its original state.
  * @method unhookCreateScript
  * @static
- *&#x2F;
+ */
 function unhookCreateScript() {
     vm.createScript = originalCreateScript;
 }
+
+
+/**
+ * hooks &#x60;vm.runInThisContext&#x60; to return transformed code.
+ * @method hookRunInThisContext
+ * @static
+ * @param matcher {Function(filePath)} a function that is called with the filename passed to &#x60;vm.createScript&#x60;
+ *  Should return a truthy value when transformations need to be applied to the code, a falsy value otherwise
+ * @param transformer {Function(code, filePath)} a function called with the original code and the filename passed to
+ *  &#x60;vm.createScript&#x60;. Should return the transformed code.
+ * @param options {Object} options Optional.
+ * @param {Boolean} [options.verbose] write a line to standard error every time the transformer is called
+ */
+function hookRunInThisContext(matcher, transformer, opts) {
+    opts = opts || {};
+    var fn = transformFn(matcher, transformer, opts.verbose);
+    vm.runInThisContext = function (code, file) {
+        var ret = fn(code, file);
+        return originalRunInThisContext(ret.code, file);
+    };
+}
+
+/**
+ * unhooks vm.runInThisContext, restoring it to its original state.
+ * @method unhookRunInThisContext
+ * @static
+ */
+function unhookRunInThisContext() {
+    vm.runInThisContext = originalRunInThisContext;
+}
+
 
 module.exports = {
     hookRequire: hookRequire,
     unhookRequire: unhookRequire,
     hookCreateScript: hookCreateScript,
     unhookCreateScript: unhookCreateScript,
+    hookRunInThisContext : hookRunInThisContext,
+    unhookRunInThisContext : unhookRunInThisContext,
     unloadRequireCache: unloadRequireCache
 };
 
@@ -278,13 +319,13 @@ module.exports = {
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

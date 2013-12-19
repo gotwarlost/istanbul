@@ -1,18 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Code coverage report for istanbul/lib/util/file-writer.js</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="content-language" content="en-gb">
-    
-        <link rel='stylesheet' href='../../../prettify.css'>
-    
-    <style type='text/css'>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
         body, html {
             margin:0; padding: 0;
         }
         body {
-            font-family: "Helvetic Neue", Helvetica,Arial;
+            font-family: Helvetica Neue, Helvetica,Arial;
             font-size: 10pt;
         }
         div.header, div.footer {
@@ -46,11 +45,14 @@
             font-size: 10pt;
         }
         pre {
-            font-family: consolas, menlo, monaco, monospace;
+            font-family: Consolas, Menlo, Monaco, monospace;
             margin: 0;
             padding: 0;
             line-height: 14px;
             font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
         }
 
         div.path { font-size: 110%; }
@@ -98,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -105,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -174,28 +190,31 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
-<div class='header high'>
-    <h1>Code coverage report for <span class='entity'>istanbul/lib/util/file-writer.js</span></h1>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">istanbul/lib/util/file-writer.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(33 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">96.97% <small>(64 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(12 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">91.3% <small>(21 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(62 / 62)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">istanbul/lib/util/</a> &#187; file-writer.js</div>
 </div>
-<div class='body'>
+<div class="body">
 <pre><table class="coverage">
 <tr><td class="line-count">1
 2
@@ -261,142 +280,339 @@
 62
 63
 64
-65</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">73</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">365</span>
+<span class="cline-any cline-yes">876</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4493</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32233</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-yes">1118</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-yes">2022</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2024</span>
+<span class="cline-any cline-yes">1003</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">32</span>
 <span class="cline-any cline-yes">32</span>
-<span class="cline-any cline-yes">32</span>
-<span class="cline-any cline-yes">32</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22</span>
-<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">3140</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">106</span>
-<span class="cline-any cline-yes">106</span>
-<span class="cline-any cline-yes">106</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">573</span>
-<span class="cline-any cline-yes">573</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">90</span>
-<span class="cline-any cline-yes">89</span>
-<span class="cline-any cline-yes">89</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1465</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">89</span>
-<span class="cline-any cline-yes">88</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22</span>
-<span class="cline-any cline-yes">21</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">182</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21</span>
-<span class="cline-any cline-yes">20</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">112</span>
-<span class="cline-any cline-yes">110</span>
-<span class="cline-any cline-yes">110</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">110</span>
-<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">51</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-yes">73</span></td><td class="text"><pre class="prettyprint lang-js">/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 &nbsp;
 var path = require('path'),
+    util = require('util'),
     fs = require('fs'),
-    mkdirp = require('mkdirp');
+    async = require('async'),
+    mkdirp = require('mkdirp'),
+    writer = require('./writer'),
+    Writer = writer.Writer,
+    ContentWriter = writer.ContentWriter;
 &nbsp;
-function FileWriter(sync) {
-    this.writing = false;
-    this.start = sync ? this.startSync : this.startAsync;
-    this.write = sync ? this.writeSync : this.writeAsync;
-    this.end = sync ? this.endSync : this.endAsync;
+function extend(cons, proto) {
+    Object.keys(proto).forEach(function (k) {
+        cons.prototype[k] = proto[k];
+    });
 }
 &nbsp;
-FileWriter.prototype = {
+function BufferedContentWriter() {
+    ContentWriter.call(this);
+    this.content = '';
+}
+util.inherits(BufferedContentWriter, ContentWriter);
+&nbsp;
+extend(BufferedContentWriter, {
+    write: function (str) {
+        this.content += str;
+    },
+    getContent: function () {
+        return this.content;
+    }
+});
+&nbsp;
+function StreamContentWriter(stream) {
+    ContentWriter.call(this);
+    this.stream = stream;
+}
+util.inherits(StreamContentWriter, ContentWriter);
+&nbsp;
+extend(StreamContentWriter, {
+    write: function (str) {
+        this.stream.write(str);
+    }
+});
+&nbsp;
+function SyncFileWriter() {
+    Writer.call(this);
+}
+util.inherits(SyncFileWriter, Writer);
+&nbsp;
+extend(SyncFileWriter, {
+    writeFile: function (file, callback) {
+        mkdirp.sync(path.dirname(file));
+        var cw = new BufferedContentWriter();
+        callback(cw);
+        fs.writeFileSync(file, cw.getContent(), 'utf8');
+    },
+    done: function () {
+        this.emit('done'); //everything already done
+    }
+});
+&nbsp;
+function AsyncFileWriter() {
+    this.queue = async.queue(this.processFile.bind(this), 20);
+    this.openFileMap = {};
+}
+&nbsp;
+util.inherits(AsyncFileWriter, Writer);
+&nbsp;
+extend(AsyncFileWriter, {
+    writeFile: function (file, callback) {
+        this.openFileMap[file] = true;
+        this.queue.push({ file: file, callback: callback });
+    },
+    processFile: function (task, cb) {
+        var file = task.file,
+            userCallback = task.callback,
+            that = this,
+            stream,
+            contentWriter;
+&nbsp;
+        mkdirp.sync(path.dirname(file));
+        stream = fs.createWriteStream(file);
+        stream.on('close', function () {
+            delete that.openFileMap[file];
+            cb();
+            that.checkDone();
+        });
+        stream.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span> <span class="cstat-no" title="statement not covered" >that.emit('error', err); </span>});
+        contentWriter = new StreamContentWriter(stream);
+        userCallback(contentWriter);
+        stream.end();
+    },
+    done: function () {
+        this.doneCalled = true;
+        this.checkDone();
+    },
+    checkDone: function () {
+        if (!this.doneCalled) { return; }
+        if (Object.keys(this.openFileMap).length === 0) {
+            this.emit('done');
+        }
+    }
+});
+&nbsp;
+function FileWriter(sync) {
+    Writer.call(this);
+    var that = this;
+    this.delegate = sync ? new SyncFileWriter() : new AsyncFileWriter();
+    this.delegate.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span> <span class="cstat-no" title="statement not covered" >that.emit('error', err); </span>});
+    this.delegate.on('done', function () { that.emit('done'); });
+}
+&nbsp;
+util.inherits(FileWriter, Writer);
+&nbsp;
+extend(FileWriter, {
     copyFile: function (source, dest) {
         mkdirp.sync(path.dirname(dest));
         fs.writeFileSync(dest, fs.readFileSync(source));
     },
     writeFile: function (file, callback) {
-        this.start(file);
-        callback(this);
-        this.end();
+        this.delegate.writeFile(file, callback);
     },
-    println: function (str) {
-        this.write(str);
-        this.write('\n');
-    },
-    startSync: function (fileName) {
-        this.doStart(fileName);
-        this.contents = '';
-        this.filename = fileName;
-    },
-    writeSync: function (str) {
-        this.contents += str;
-    },
-    endSync: function () {
-        this.doEnd();
-        fs.writeFileSync(this.filename, this.contents, 'utf8');
-    },
-    startAsync: function (fileName) {
-        this.doStart(fileName);
-        this.stream = fs.createWriteStream(fileName);
-    },
-    writeAsync: function (str) {
-        this.stream.write(str);
-    },
-    endAsync: function () {
-        this.doEnd();
-        this.stream.end();
-    },
-    doStart: function (fileName) {
-        if (this.writing) { throw new Error('Attempt to start a new file before ending the previous one'); }
-        this.writing = true;
-        mkdirp.sync(path.dirname(fileName));
-    },
-    doEnd : function () {
-        if (!this.writing) { throw new Error('Attempt to end a file without starting it'); }
-        this.writing = false;
+    done: function () {
+        this.delegate.done();
     }
-};
+});
 &nbsp;
 module.exports = FileWriter;</pre></td></tr>
 </table></pre>
 
 </div>
-<div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 04 2012 08:47:30 GMT-0800 (PST)</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 20:58:49 GMT-0800 (PST)</div>
 </div>
-</body>
 
 <script src="../../../prettify.js"></script>
 
@@ -492,4 +708,5 @@ module.exports = FileWriter;</pre></td></tr>
         });
     });
 </script>
+</body>
 </html>

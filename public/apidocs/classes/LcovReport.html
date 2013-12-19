@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>LcovReport - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -126,7 +130,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_report_lcov.js.html#l12"><code>lib&#x2F;report&#x2F;lcov.js:12</code></a>
+            Defined in: <a href="../files/lib_report_lcov.js.html#l12"><code>lib&#x2F;report&#x2F;lcov.js:12</code></a>
         </div>
     
 
@@ -144,11 +148,9 @@
 <div class="box intro">
     <p>a <code>Report</code> implementation that produces an LCOV coverage file and an associated HTML report from coverage objects.
 The name and behavior of this report is designed to ease migration for projects that currently use <code>yuitest_coverage</code></p>
+<h2 id="usage">Usage</h2>
+<pre class="code prettyprint"><code> var report = require(&#39;istanbul&#39;).Report.create(&#39;lcov&#39;);</code></pre>
 
-<h2>Usage</h2>
-
-<pre class="code prettyprint"><code> var report = require('istanbul').Report.create('lcov');
-</code></pre>
 </div>
 
 
@@ -196,7 +198,7 @@ The name and behavior of this report is designed to ease migration for projects 
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_report_lcov.js.html#l12"><code>lib&#x2F;report&#x2F;lcov.js:12</code></a>
+        <a href="../files/lib_report_lcov.js.html#l12"><code>lib&#x2F;report&#x2F;lcov.js:12</code></a>
         
         </p>
 
@@ -226,6 +228,7 @@ The name and behavior of this report is designed to ease migration for projects 
 
                     <div class="param-description">
                         <p>optional</p>
+
                     </div>
 
                     
@@ -241,6 +244,7 @@ The name and behavior of this report is designed to ease migration for projects 
                                 <div class="param-description">
                                     <p>the directory in which to the <code>lcov.info</code> file.
  HTML files are written in a subdirectory called <code>lcov-report</code>. Defaults to <code>process.cwd()</code></p>
+
                                 </div>
 
                                 
@@ -348,11 +352,11 @@ The name and behavior of this report is designed to ease migration for projects 
         
             
                 <p>Inherited from
-                <a href="..&#x2F;classes&#x2F;Report.html#method_writeReport">Report</a>:
+                <a href="../classes/Report.html#method_writeReport">Report</a>:
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_report_index.js.html#l47"><code>lib&#x2F;report&#x2F;index.js:47</code></a>
+        <a href="../files/lib_report_index.js.html#l47"><code>lib&#x2F;report&#x2F;index.js:47</code></a>
         
         </p>
 
@@ -364,6 +368,7 @@ The name and behavior of this report is designed to ease migration for projects 
 
     <div class="description">
         <p>writes the report for a set of coverage objects added to a collector.</p>
+
     </div>
 
     
@@ -382,6 +387,7 @@ The name and behavior of this report is designed to ease migration for projects 
 
                     <div class="param-description">
                         <p>the collector for getting the set of files and coverage</p>
+
                     </div>
 
                     
@@ -397,6 +403,7 @@ The name and behavior of this report is designed to ease migration for projects 
 
                     <div class="param-description">
                         <p>true if reports must be written synchronously, false if they can be written using asynchronous means (e.g. stream.write)</p>
+
                     </div>
 
                     
@@ -429,13 +436,13 @@ The name and behavior of this report is designed to ease migration for projects 
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

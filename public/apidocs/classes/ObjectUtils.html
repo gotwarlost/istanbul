@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>ObjectUtils - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -122,7 +126,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l6"><code>lib&#x2F;object-utils.js:6</code></a>
+            Defined in: <a href="../files/lib_object-utils.js.html#l6"><code>lib&#x2F;object-utils.js:6</code></a>
         </div>
     
 
@@ -140,31 +144,22 @@
 <div class="box intro">
     <p>utility methods to process coverage objects. A coverage object has the following
 format.</p>
-
 <pre class="code prettyprint"><code> {
-     "/path/to/file1.js": { file1 coverage },
-     "/path/to/file2.js": { file2 coverage }
- }
-</code></pre>
-
-<p>The internals of the file coverage object are intentionally not documented since
+     &quot;/path/to/file1.js&quot;: { file1 coverage },
+     &quot;/path/to/file2.js&quot;: { file2 coverage }
+ }</code></pre>
+<p> The internals of the file coverage object are intentionally not documented since
  it is not a public interface.</p>
-
-<p><em>Note:</em> When a method of this module has the word <code>File</code> in it, it will accept
+<p> <em>Note:</em> When a method of this module has the word <code>File</code> in it, it will accept
  one of the sub-objects of the main coverage object as an argument. Other
  methods accept the higher level coverage object with multiple keys.</p>
-
 <p>Works on <code>node</code> as well as the browser.</p>
-
-<h2>Usage on nodejs</h2>
-
-<pre class="code prettyprint"><code> var objectUtils = require('istanbul').utils;
-</code></pre>
-
-<h2>Usage in a browser</h2>
-
+<h2 id="usage-on-nodejs">Usage on nodejs</h2>
+<pre class="code prettyprint"><code> var objectUtils = require(&#39;istanbul&#39;).utils;</code></pre>
+<h2 id="usage-in-a-browser">Usage in a browser</h2>
 <p>Load this file using a <code>script</code> tag or other means. This will set <code>window.coverageUtils</code>
-to this module's exports.</p>
+to this module&#39;s exports.</p>
+
 </div>
 
 
@@ -332,7 +327,7 @@ to this module's exports.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l67"><code>lib&#x2F;object-utils.js:67</code></a>
+        <a href="../files/lib_object-utils.js.html#l68"><code>lib&#x2F;object-utils.js:68</code></a>
         
         </p>
 
@@ -344,6 +339,7 @@ to this module's exports.</p>
 
     <div class="description">
         <p>adds line coverage information to all file coverage objects.</p>
+
     </div>
 
     
@@ -362,6 +358,7 @@ to this module's exports.</p>
 
                     <div class="param-description">
                         <p>the coverage object</p>
+
                     </div>
 
                     
@@ -421,7 +418,7 @@ to this module's exports.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l39"><code>lib&#x2F;object-utils.js:39</code></a>
+        <a href="../files/lib_object-utils.js.html#l39"><code>lib&#x2F;object-utils.js:39</code></a>
         
         </p>
 
@@ -434,9 +431,9 @@ to this module's exports.</p>
     <div class="description">
         <p>adds line coverage information to a file coverage object, reverse-engineering
 it from statement coverage. The object passed in is updated in place.</p>
-
 <p>Note that if line coverage information is already present in the object,
 it is not recomputed.</p>
+
     </div>
 
     
@@ -455,6 +452,7 @@ it is not recomputed.</p>
 
                     <div class="param-description">
                         <p>the coverage object for a single file</p>
+
                     </div>
 
                     
@@ -508,7 +506,7 @@ it is not recomputed.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l128"><code>lib&#x2F;object-utils.js:128</code></a>
+        <a href="../files/lib_object-utils.js.html#l148"><code>lib&#x2F;object-utils.js:148</code></a>
         
         </p>
 
@@ -521,23 +519,19 @@ it is not recomputed.</p>
     <div class="description">
         <p>returns a blank summary metrics object. A metrics object has the following
 format.</p>
-
 <pre class="code prettyprint"><code> {
      lines: lineMetrics,
      statements: statementMetrics,
      functions: functionMetrics,
      branches: branchMetrics
- }
-</code></pre>
-
-<p>Each individual metric object looks as follows:</p>
-
+ }</code></pre>
+<p> Each individual metric object looks as follows:</p>
 <pre class="code prettyprint"><code> {
      total: n,
      covered: m,
      pct: percent
- }
-</code></pre>
+ }</code></pre>
+
     </div>
 
     
@@ -551,7 +545,8 @@ format.</p>
                     
                         <span class="type">Object</span>:
                     
-                    a blank metrics object
+                    <p>a blank metrics object</p>
+
                 
             </div>
         </div>
@@ -615,7 +610,7 @@ format.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l193"><code>lib&#x2F;object-utils.js:193</code></a>
+        <a href="../files/lib_object-utils.js.html#l217"><code>lib&#x2F;object-utils.js:217</code></a>
         
         </p>
 
@@ -628,6 +623,7 @@ format.</p>
     <div class="description">
         <p>merges two instances of file coverage objects <em>for the same file</em>
 such that the execution counts are correct.</p>
+
     </div>
 
     
@@ -646,6 +642,7 @@ such that the execution counts are correct.</p>
 
                     <div class="param-description">
                         <p>the first file coverage object for a given file</p>
+
                     </div>
 
                     
@@ -661,6 +658,7 @@ such that the execution counts are correct.</p>
 
                     <div class="param-description">
                         <p>the second file coverage object for the same file</p>
+
                     </div>
 
                     
@@ -679,8 +677,9 @@ such that the execution counts are correct.</p>
                     
                         <span class="type">Object</span>:
                     
-                    an object that is a result of merging the two. Note that
-     the input objects are not changed in any way.
+                    <p>an object that is a result of merging the two. Note that
+     the input objects are not changed in any way.</p>
+
                 
             </div>
         </div>
@@ -738,7 +737,7 @@ such that the execution counts are correct.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l226"><code>lib&#x2F;object-utils.js:226</code></a>
+        <a href="../files/lib_object-utils.js.html#l250"><code>lib&#x2F;object-utils.js:250</code></a>
         
         </p>
 
@@ -752,6 +751,7 @@ such that the execution counts are correct.</p>
         <p>merges multiple summary metrics objects by summing up the <code>totals</code> and
 <code>covered</code> fields and recomputing the percentages. This function is generic
 and can accept any number of arguments.</p>
+
     </div>
 
     
@@ -770,6 +770,7 @@ and can accept any number of arguments.</p>
 
                     <div class="param-description">
                         <p>multiple summary metrics objects</p>
+
                     </div>
 
                     
@@ -788,7 +789,8 @@ and can accept any number of arguments.</p>
                     
                         <span class="type">Object</span>:
                     
-                    the merged summary metrics
+                    <p>the merged summary metrics</p>
+
                 
             </div>
         </div>
@@ -842,7 +844,7 @@ and can accept any number of arguments.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l79"><code>lib&#x2F;object-utils.js:79</code></a>
+        <a href="../files/lib_object-utils.js.html#l80"><code>lib&#x2F;object-utils.js:80</code></a>
         
         </p>
 
@@ -854,6 +856,7 @@ and can accept any number of arguments.</p>
 
     <div class="description">
         <p>removes line coverage information from all file coverage objects</p>
+
     </div>
 
     
@@ -872,6 +875,7 @@ and can accept any number of arguments.</p>
 
                     <div class="param-description">
                         <p>the coverage object</p>
+
                     </div>
 
                     
@@ -935,7 +939,7 @@ and can accept any number of arguments.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l257"><code>lib&#x2F;object-utils.js:257</code></a>
+        <a href="../files/lib_object-utils.js.html#l282"><code>lib&#x2F;object-utils.js:282</code></a>
         
         </p>
 
@@ -949,6 +953,7 @@ and can accept any number of arguments.</p>
         <p>returns the coverage summary for a single coverage object. This is
 wrapper over <code>summarizeFileCoverage</code> and <code>mergeSummaryObjects</code> for
 the common case of a single coverage object</p>
+
     </div>
 
     
@@ -967,6 +972,7 @@ the common case of a single coverage object</p>
 
                     <div class="param-description">
                         <p>the coverage object</p>
+
                     </div>
 
                     
@@ -985,7 +991,8 @@ the common case of a single coverage object</p>
                     
                         <span class="type">Object</span>:
                     
-                    summary coverage metrics across all files in the coverage object
+                    <p>summary coverage metrics across all files in the coverage object</p>
+
                 
             </div>
         </div>
@@ -1043,7 +1050,7 @@ the common case of a single coverage object</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l175"><code>lib&#x2F;object-utils.js:175</code></a>
+        <a href="../files/lib_object-utils.js.html#l199"><code>lib&#x2F;object-utils.js:199</code></a>
         
         </p>
 
@@ -1056,6 +1063,7 @@ the common case of a single coverage object</p>
     <div class="description">
         <p>returns the summary metrics given the coverage object for a single file. See <code>blankSummary()</code>
 to understand the format of the returned object.</p>
+
     </div>
 
     
@@ -1074,6 +1082,7 @@ to understand the format of the returned object.</p>
 
                     <div class="param-description">
                         <p>the coverage object for a single file.</p>
+
                     </div>
 
                     
@@ -1092,7 +1101,8 @@ to understand the format of the returned object.</p>
                     
                         <span class="type">Object</span>:
                     
-                    the summary metrics for the file
+                    <p>the summary metrics for the file</p>
+
                 
             </div>
         </div>
@@ -1150,7 +1160,7 @@ to understand the format of the returned object.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_object-utils.js.html#l274"><code>lib&#x2F;object-utils.js:274</code></a>
+        <a href="../files/lib_object-utils.js.html#l299"><code>lib&#x2F;object-utils.js:299</code></a>
         
         </p>
 
@@ -1164,6 +1174,7 @@ to understand the format of the returned object.</p>
         <p>makes the coverage object generated by this library yuitest_coverage compatible.
 Note that this transformation is lossy since the returned object will not have
 statement and branch coverage.</p>
+
     </div>
 
     
@@ -1182,6 +1193,7 @@ statement and branch coverage.</p>
 
                     <div class="param-description">
                         <p>The <code>istanbul</code> coverage object</p>
+
                     </div>
 
                     
@@ -1200,7 +1212,8 @@ statement and branch coverage.</p>
                     
                         <span class="type">Object</span>:
                     
-                    a coverage object in <code>yuitest_coverage</code> format.
+                    <p>a coverage object in <code>yuitest_coverage</code> format.</p>
+
                 
             </div>
         </div>
@@ -1227,13 +1240,13 @@ statement and branch coverage.</p>
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

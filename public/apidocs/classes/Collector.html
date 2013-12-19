@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Collector - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -122,7 +126,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_collector.js.html#l9"><code>lib&#x2F;collector.js:9</code></a>
+            Defined in: <a href="../files/lib_collector.js.html#l9"><code>lib&#x2F;collector.js:9</code></a>
         </div>
     
 
@@ -143,35 +147,31 @@ of overlapping coverage information for the same files in multiple coverage
 objects and does not double-count in this situation. For example, if
 you pass the same coverage object multiple times, the final merged object will be
 no different that any of the objects passed in (except for execution counts).</p>
-
 <p>The <code>Collector</code> is built for scale to handle thousands of coverage objects.
 By default, all processing is done in memory since the common use-case is of
 one or a few coverage objects. You can work around memory
 issues by passing in a <code>Store</code> implementation that stores temporary computations
 on disk (the <code>tmp</code> store, for example).</p>
-
 <p>The <code>getFinalCoverage</code> method returns an object with merged coverage information
 and is provided as a convenience for implementors working with coverage information
 that can fit into memory. Reporters, in the interest of generality, should <em>not</em> use this method for
 creating reports.</p>
-
-<h2>Usage</h2>
-
-<pre class="code prettyprint"><code> var collector = new require('istanbul').Collector();
+<h2 id="usage">Usage</h2>
+<pre class="code prettyprint"><code> var collector = new require(&#39;istanbul&#39;).Collector();
 
  files.forEach(function (f) {
      //each coverage object can have overlapping information about multiple files
-     collector.add(JSON.parse(fs.readFileSync(f, 'utf8')));
+     collector.add(JSON.parse(fs.readFileSync(f, &#39;utf8&#39;)));
  });
 
  collector.files().forEach(function(file) {
      var fileCoverage = collector.fileCoverageFor(file);
-     console.log('Coverage for ' + file + ' is:' + JSON.stringify(fileCoverage));
+     console.log(&#39;Coverage for &#39; + file + &#39; is:&#39; + JSON.stringify(fileCoverage));
  });
 
  // convenience method: do not use this when dealing with a large number of files
- var finalCoverage = collector.getFinalCoverage();
-</code></pre>
+ var finalCoverage = collector.getFinalCoverage();</code></pre>
+
 </div>
 
 
@@ -219,7 +219,7 @@ creating reports.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l9"><code>lib&#x2F;collector.js:9</code></a>
+        <a href="../files/lib_collector.js.html#l9"><code>lib&#x2F;collector.js:9</code></a>
         
         </p>
 
@@ -249,6 +249,7 @@ creating reports.</p>
 
                     <div class="param-description">
                         <p>Optional. Configuration options.</p>
+
                     </div>
 
                     
@@ -263,8 +264,9 @@ creating reports.</p>
                                 <div class="param-description">
                                     <ul>
 <li>an implementation of <code>Store</code> to use for temporary
- calculations.</li>
+   calculations.</li>
 </ul>
+
                                 </div>
 
                                 
@@ -407,7 +409,7 @@ creating reports.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l57"><code>lib&#x2F;collector.js:57</code></a>
+        <a href="../files/lib_collector.js.html#l57"><code>lib&#x2F;collector.js:57</code></a>
         
         </p>
 
@@ -419,6 +421,7 @@ creating reports.</p>
 
     <div class="description">
         <p>adds a coverage object to the collector.</p>
+
     </div>
 
     
@@ -437,6 +440,7 @@ creating reports.</p>
 
                     <div class="param-description">
                         <p>the coverage object.</p>
+
                     </div>
 
                     
@@ -453,6 +457,7 @@ creating reports.</p>
                     <div class="param-description">
                         <p>Optional. The name of the test used to produce the object.
      This is currently not used.</p>
+
                     </div>
 
                     
@@ -500,7 +505,7 @@ creating reports.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l111"><code>lib&#x2F;collector.js:111</code></a>
+        <a href="../files/lib_collector.js.html#l111"><code>lib&#x2F;collector.js:111</code></a>
         
         </p>
 
@@ -513,6 +518,7 @@ creating reports.</p>
     <div class="description">
         <p>disposes this collector and reclaims temporary resources used in the
 computation. Calls <code>dispose()</code> on the underlying store.</p>
+
     </div>
 
     
@@ -569,7 +575,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l84"><code>lib&#x2F;collector.js:84</code></a>
+        <a href="../files/lib_collector.js.html#l84"><code>lib&#x2F;collector.js:84</code></a>
         
         </p>
 
@@ -581,6 +587,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
 
     <div class="description">
         <p>return file coverage information for a single file</p>
+
     </div>
 
     
@@ -600,6 +607,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
                     <div class="param-description">
                         <p>the path for the file for which coverage information is
      required. Must be one of the values returned in the <code>files()</code> method.</p>
+
                     </div>
 
                     
@@ -618,7 +626,8 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
                     
                         <span class="type">Object</span>:
                     
-                    the coverage information for the specified file.
+                    <p>the coverage information for the specified file.</p>
+
                 
             </div>
         </div>
@@ -664,7 +673,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l76"><code>lib&#x2F;collector.js:76</code></a>
+        <a href="../files/lib_collector.js.html#l76"><code>lib&#x2F;collector.js:76</code></a>
         
         </p>
 
@@ -676,6 +685,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
 
     <div class="description">
         <p>returns a list of unique file paths for which coverage information has been added.</p>
+
     </div>
 
     
@@ -689,7 +699,8 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
                     
                         <span class="type">Array</span>:
                     
-                    an array of file paths for which coverage information is present.
+                    <p>an array of file paths for which coverage information is present.</p>
+
                 
             </div>
         </div>
@@ -735,7 +746,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_collector.js.html#l96"><code>lib&#x2F;collector.js:96</code></a>
+        <a href="../files/lib_collector.js.html#l96"><code>lib&#x2F;collector.js:96</code></a>
         
         </p>
 
@@ -749,6 +760,7 @@ computation. Calls <code>dispose()</code> on the underlying store.</p>
         <p>returns file coverage information for all files. This has the same format as
 any of the objects passed in to the <code>add</code> method. The number of keys in this
 object will be a superset of all keys found in the objects passed to <code>add()</code></p>
+
     </div>
 
     
@@ -762,7 +774,8 @@ object will be a superset of all keys found in the objects passed to <code>add()
                     
                         <span class="type">Object</span>:
                     
-                    the merged coverage information
+                    <p>the merged coverage information</p>
+
                 
             </div>
         </div>
@@ -789,13 +802,13 @@ object will be a superset of all keys found in the objects passed to <code>add()
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

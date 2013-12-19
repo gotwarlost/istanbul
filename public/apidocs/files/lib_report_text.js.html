@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;report&#x2F;text.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <title>lib/report/text.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -114,27 +118,27 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;report&#x2F;text.js</h1>
+                        <h1 class="file-heading">File: lib/report/text.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*
+/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- *&#x2F;
+ */
 
 var path = require(&#x27;path&#x27;),
     mkdirp = require(&#x27;mkdirp&#x27;),
     fs = require(&#x27;fs&#x27;),
-    Report = require(&#x27;.&#x2F;index&#x27;),
-    TreeSummarizer = require(&#x27;..&#x2F;util&#x2F;tree-summarizer&#x27;),
-    utils = require(&#x27;..&#x2F;object-utils&#x27;),
+    Report = require(&#x27;./index&#x27;),
+    TreeSummarizer = require(&#x27;../util/tree-summarizer&#x27;),
+    utils = require(&#x27;../object-utils&#x27;),
     PCT_COLS = 10,
     TAB_SIZE = 3,
     DELIM = &#x27; |&#x27;,
     COL_DELIM = &#x27;-+&#x27;;
 
-&#x2F;**
+/**
  * a &#x60;Report&#x60; implementation that produces text output in a detailed table.
  *
  * Usage
@@ -150,7 +154,7 @@ var path = require(&#x27;path&#x27;),
  * @param {String} [opts.file] the filename for the report. When omitted, the report is written to console
  * @param {Number} [opts.maxcols] the max column width of the report. By default, the width of the report is adjusted based on the length of the paths
  *              to be reported.
- *&#x2F;
+ */
 function TextReport(opts) {
     Report.call(this);
     opts = opts || {};
@@ -162,12 +166,12 @@ function TextReport(opts) {
 
 TextReport.TYPE = &#x27;text&#x27;;
 
-function padding(num, char) {
+function padding(num, ch) {
     var str = &#x27;&#x27;,
         i;
-    char = char || &#x27; &#x27;;
+    ch = ch || &#x27; &#x27;;
     for (i = 0; i &lt; num; i += 1) {
-        str += char;
+        str += ch;
     }
     return str;
 }
@@ -175,23 +179,37 @@ function padding(num, char) {
 function fill(str, width, right, tabs) {
     tabs = tabs || 0;
     str = String(str);
+
     var leadingSpaces = tabs * TAB_SIZE,
         remaining = width - leadingSpaces,
         leader = padding(leadingSpaces),
         fmtStr = &#x27;&#x27;,
-        fillStr;
+        fillStr,
+        isNumber = !isNaN(parseFloat(str)) &amp;&amp; isFinite(str),
+        strlen = str.length,
+        isTty = Boolean(process.stdout.isTTY);
+
+    if (isNumber &amp;&amp; isTty) {
+        // low: &lt; 50 % medium: &gt;= 50 % high: &gt;= 80 %
+        if (str &gt;= 80) {
+            str = &#x27;\033[92m&#x27; + str + &#x27;\033[0m&#x27;; // high - green
+        } else if (str &gt;= 50) {
+            str = &#x27;\033[93m&#x27; + str + &#x27;\033[0m&#x27;; // medium - yellow
+        } else {
+            str = &#x27;\033[91m&#x27; + str + &#x27;\033[0m&#x27;; // low - red
+        }
+    }
 
     if (remaining &gt; 0) {
-        if (remaining &gt;= str.length) {
-            fillStr = padding(remaining - str.length);
+        if (remaining &gt;= strlen) {
+            fillStr = padding(remaining - strlen);
             fmtStr = right ? fillStr + str : str + fillStr;
         } else {
-            fmtStr = str.substring(str.length - remaining);
+            fmtStr = str.substring(strlen - remaining);
             fmtStr = &#x27;... &#x27; + fmtStr.substring(4);
         }
     }
     return leader + fmtStr;
-
 }
 
 function formatName(name, maxCols, level) {
@@ -280,7 +298,7 @@ function walk(node, nameWidth, array, level) {
 }
 
 Report.mix(TextReport, {
-    writeReport: function (collector &#x2F;*, sync *&#x2F;) {
+    writeReport: function (collector /*, sync */) {
         var summarizer = new TreeSummarizer(),
             tree,
             root,
@@ -324,13 +342,13 @@ module.exports = TextReport;
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;instrumenter.js - The Istanbul API</title>
-    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
-    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.7.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+    <title>lib/instrumenter.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="The Istanbul API"></h1>
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1-12</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,43 +41,47 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/API.html">API</a></li>
+                <li><a href="../classes/API.html">API</a></li>
             
-                <li><a href="..&#x2F;classes/CoberturaReport.html">CoberturaReport</a></li>
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
             
-                <li><a href="..&#x2F;classes/Collector.html">Collector</a></li>
+                <li><a href="../classes/Collector.html">Collector</a></li>
             
-                <li><a href="..&#x2F;classes/Hook.html">Hook</a></li>
+                <li><a href="../classes/Hook.html">Hook</a></li>
             
-                <li><a href="..&#x2F;classes/HtmlReport.html">HtmlReport</a></li>
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
             
-                <li><a href="..&#x2F;classes/Instrumenter.html">Instrumenter</a></li>
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
             
-                <li><a href="..&#x2F;classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
             
-                <li><a href="..&#x2F;classes/LcovReport.html">LcovReport</a></li>
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
             
-                <li><a href="..&#x2F;classes/LookupStore.html">LookupStore</a></li>
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
             
-                <li><a href="..&#x2F;classes/MemoryStore.html">MemoryStore</a></li>
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
             
-                <li><a href="..&#x2F;classes/ObjectUtils.html">ObjectUtils</a></li>
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
             
-                <li><a href="..&#x2F;classes/Report.html">Report</a></li>
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
             
-                <li><a href="..&#x2F;classes/Store.html">Store</a></li>
+                <li><a href="../classes/Report.html">Report</a></li>
             
-                <li><a href="..&#x2F;classes/TextReport.html">TextReport</a></li>
+                <li><a href="../classes/Store.html">Store</a></li>
             
-                <li><a href="..&#x2F;classes/TextSummaryReport.html">TextSummaryReport</a></li>
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
             
-                <li><a href="..&#x2F;classes/TmpStore.html">TmpStore</a></li>
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/istanbul.html">istanbul</a></li>
+                <li><a href="../modules/istanbul.html">istanbul</a></li>
             
             </ul>
         </div>
@@ -114,30 +118,32 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;instrumenter.js</h1>
+                        <h1 class="file-heading">File: lib/instrumenter.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*
+/*
  Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
  Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- *&#x2F;
+ */
 
-&#x2F;*global esprima, escodegen, window *&#x2F;
+/*global esprima, escodegen, window */
 (function (isNode) {
-
+    &quot;use strict&quot;;
     var SYNTAX,
         nodeType,
         ESP = isNode ? require(&#x27;esprima&#x27;) : esprima,
-        ESPGEN = isNode ? require(&#x27;escodegen&#x27;) : escodegen,  &#x2F;&#x2F;TODO - package as dependency
+        ESPGEN = isNode ? require(&#x27;escodegen&#x27;) : escodegen,  //TODO - package as dependency
         crypto = isNode ? require(&#x27;crypto&#x27;) : null,
         LEADER_WRAP = &#x27;(function () { &#x27;,
         TRAILER_WRAP = &#x27;\n}());&#x27;,
+        COMMENT_RE = /^\s*istanbul\s+ignore\s+(if|else|next)(?=\W|$)/,
         astgen,
         preconditions,
         cond,
         isArray = Array.isArray;
 
+    /* istanbul ignore if: untestable */
     if (!isArray) {
         isArray = function (thing) { return thing &amp;&amp;  Object.prototype.toString.call(thing) === &#x27;[object Array]&#x27;; };
     }
@@ -150,6 +156,7 @@
             &#x27;Array does not implement push&#x27;: [].push,
             &#x27;Array does not implement unshift&#x27;: [].unshift
         };
+        /* istanbul ignore next: untestable */
         for (cond in preconditions) {
             if (preconditions.hasOwnProperty(cond)) {
                 if (!preconditions[cond]) { throw new Error(cond); }
@@ -163,10 +170,10 @@
             hash = crypto.createHash(&#x27;md5&#x27;);
             hash.update(filename);
             suffix = hash.digest(&#x27;base64&#x27;);
-            &#x2F;&#x2F;trim trailing equal signs, turn identifier unsafe chars to safe ones + =&gt; _ and &#x2F; =&gt; $
+            //trim trailing equal signs, turn identifier unsafe chars to safe ones + =&gt; _ and / =&gt; $
             suffix = suffix.replace(new RegExp(&#x27;=&#x27;, &#x27;g&#x27;), &#x27;&#x27;)
                 .replace(new RegExp(&#x27;\\+&#x27;, &#x27;g&#x27;), &#x27;_&#x27;)
-                .replace(new RegExp(&#x27;&#x2F;&#x27;, &#x27;g&#x27;), &#x27;$&#x27;);
+                .replace(new RegExp(&#x27;/&#x27;, &#x27;g&#x27;), &#x27;$&#x27;);
         } else {
             window.__cov_seq = window.__cov_seq || 0;
             window.__cov_seq += 1;
@@ -227,6 +234,7 @@
     };
 
     for (nodeType in SYNTAX) {
+        /* istanbul ignore else: has own property */
         if (SYNTAX.hasOwnProperty(nodeType)) {
             SYNTAX[nodeType] = { name: nodeType, children: SYNTAX[nodeType] };
         }
@@ -243,8 +251,9 @@
         sequence: function (one, two) { return { type: SYNTAX.SequenceExpression.name, expressions: [one, two] }; }
     };
 
-    function Walker(walkMap, scope, debug) {
+    function Walker(walkMap, preprocessor, scope, debug) {
         this.walkMap = walkMap;
+        this.preprocessor = preprocessor;
         this.scope = scope;
         this.debug = debug;
         if (this.debug) {
@@ -256,8 +265,10 @@
     function defaultWalker(node, walker) {
 
         var type = node.type,
+            preprocessor,
+            postprocessor,
             children = SYNTAX[type].children,
-            &#x2F;&#x2F; don&#x27;t run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
+            // don&#x27;t run generated nodes thru custom walks otherwise we will attempt to instrument the instrumentation code :)
             applyCustomWalker = !!node.loc || node.type === SYNTAX.Program.name,
             walkerFn = applyCustomWalker ? walker.walkMap[type] : null,
             i,
@@ -265,26 +276,37 @@
             walkFnIndex,
             childType,
             childNode,
-            ret = node,
+            ret,
             childArray,
             childElement,
             pathElement,
             assignNode,
             isLast;
 
-        if (node.walking) { throw new Error(&#x27;Infinite regress: Custom walkers may NOT call walker.walk(node)&#x27;); }
+        /* istanbul ignore if: guard */
+        if (node.walking) { throw new Error(&#x27;Infinite regress: Custom walkers may NOT call walker.apply(node)&#x27;); }
         node.walking = true;
+
+        ret = walker.apply(node, walker.preprocessor);
+
+        preprocessor = ret.preprocessor;
+        if (preprocessor) {
+            delete ret.preprocessor;
+            ret = walker.apply(node, preprocessor);
+        }
+
         if (isArray(walkerFn)) {
             for (walkFnIndex = 0; walkFnIndex &lt; walkerFn.length; walkFnIndex += 1) {
                 isLast = walkFnIndex === walkerFn.length - 1;
-                ret = walker.walk(ret, walkerFn[walkFnIndex]) || ret;
+                ret = walker.apply(ret, walkerFn[walkFnIndex]);
+                /*istanbul ignore next: paranoid check */
                 if (ret.type !== type &amp;&amp; !isLast) {
                     throw new Error(&#x27;Only the last walker is allowed to change the node type: [type was: &#x27; + type + &#x27; ]&#x27;);
                 }
             }
         } else {
             if (walkerFn) {
-                ret = walker.walk(node, walkerFn) || ret;
+                ret = walker.apply(node, walkerFn);
             }
         }
 
@@ -298,25 +320,28 @@
                     for (j = 0; j &lt; childNode.length; j += 1) {
                         childElement = childNode[j];
                         pathElement.index = j;
-                        assignNode = walker.walk(childElement, null, pathElement) || childElement;
-                        if (isArray(assignNode.prepend)) {
-                            pushAll(childArray, assignNode.prepend);
-                            delete assignNode.prepend;
+                        if (childElement) {
+                          assignNode = walker.apply(childElement, null, pathElement);
+                          if (isArray(assignNode.prepend)) {
+                              pushAll(childArray, assignNode.prepend);
+                              delete assignNode.prepend;
+                          }
                         }
                         pushAll(childArray, assignNode);
                     }
                     node[childType] = childArray;
                 } else {
-                    assignNode = walker.walk(childNode, null, pathElement) || childNode;
+                    assignNode = walker.apply(childNode, null, pathElement);
+                    /*istanbul ignore if: paranoid check */
                     if (isArray(assignNode.prepend)) {
                         throw new Error(&#x27;Internal error: attempt to prepend statements in disallowed (non-array) context&#x27;);
-                        &#x2F;* if this should be allowed, this is how to solve it
+                        /* if this should be allowed, this is how to solve it
                         tmpNode = { type: &#x27;BlockStatement&#x27;, body: [] };
                         pushAll(tmpNode.body, assignNode.prepend);
                         pushAll(tmpNode.body, assignNode);
                         node[childType] = tmpNode;
                         delete assignNode.prepend;
-                        *&#x2F;
+                        */
                     } else {
                         node[childType] = assignNode;
                     }
@@ -324,17 +349,24 @@
             }
         }
 
+        postprocessor = ret.postprocessor;
+        if (postprocessor) {
+            delete ret.postprocessor;
+            ret = walker.apply(ret, postprocessor);
+        }
+
         delete node.walking;
+
         return ret;
     }
 
     Walker.prototype = {
         startWalk: function (node) {
             this.path = [];
-            this.walk(node);
+            this.apply(node);
         },
 
-        walk: function (node, walkFn, pathElement) {
+        apply: function (node, walkFn, pathElement) {
             var ret, i, seq, prefix;
 
             walkFn = walkFn || defaultWalker;
@@ -353,15 +385,19 @@
                 this.level -= 1;
                 console.log(prefix + &#x27;Return (&#x27; + seq + &#x27;):&#x27; + node.type);
             }
-            return ret;
+            return ret || node;
         },
 
         startLineForNode: function (node) {
-            return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : null;
+            return node &amp;&amp; node.loc &amp;&amp; node.loc.start ? node.loc.start.line : /* istanbul ignore next: guard */ null;
+        },
+
+        ancestor: function (n) {
+            return this.path.length &gt; n - 1 ? this.path[this.path.length - n] : /* istanbul ignore next: guard */ null;
         },
 
         parent: function () {
-            return this.path.length &gt; 0 ? this.path[this.path.length - 1] : null;
+            return this.ancestor(1);
         },
 
         isLabeled: function () {
@@ -370,7 +406,7 @@
         }
     };
 
-    &#x2F;**
+    /**
      * mechanism to instrument code for coverage. It uses the &#x60;esprima&#x60; and
      * &#x60;escodegen&#x60; libraries for JS parsing and code generation respectively.
      *
@@ -401,6 +437,7 @@
      *      tracking coverage. Defaults to &#x60;__coverage__&#x60;
      * @param {Boolean} [options.embedSource] whether to embed the source code of every
      *      file as an array in the file coverage object for that file. Defaults to &#x60;false&#x60;
+     * @param {Boolean} [options.preserveComments] whether comments should be preserved in the output. Defaults to &#x60;false&#x60;
      * @param {Boolean} [options.noCompact] emit readable code when set. Defaults to &#x60;false&#x60;
      * @param {Boolean} [options.noAutoWrap] do not automatically wrap the source in
      *      an anonymous function before covering it. By default, code is wrapped in
@@ -419,7 +456,7 @@
      *      setting this option is a pretty-print of the coverage variable. Defaults to &#x60;false&#x60;
      * @param {Boolean} [options.walkDebug] assist in debugging of the AST walker used by this class.
      *
-     *&#x2F;
+     */
     function Instrumenter(options) {
         this.opts = options || {
             debug: false,
@@ -428,7 +465,8 @@
             codeGenerationOptions: undefined,
             noAutoWrap: false,
             noCompact: false,
-            embedSource: false
+            embedSource: false,
+            preserveComments: false
         };
 
         this.walker = new Walker({
@@ -440,28 +478,30 @@
             ThrowStatement: this.coverStatement,
             TryStatement: this.coverStatement,
             VariableDeclaration: this.coverStatement,
-            IfStatement: [ this.ifBlockConverter, this.ifBranchInjector, this.coverStatement ],
+            IfStatement: [ this.ifBlockConverter, this.coverStatement, this.ifBranchInjector ],
             ForStatement: [ this.skipInit, this.loopBlockConverter, this.coverStatement ],
             ForInStatement: [ this.skipLeft, this.loopBlockConverter, this.coverStatement ],
             WhileStatement: [ this.loopBlockConverter, this.coverStatement ],
             DoWhileStatement: [ this.loopBlockConverter, this.coverStatement ],
-            SwitchStatement: [ this.switchBranchInjector, this.coverStatement ],
+            SwitchStatement: [ this.coverStatement, this.switchBranchInjector ],
+            SwitchCase: [ this.switchCaseInjector ],
             WithStatement: this.coverStatement,
             FunctionDeclaration: [ this.coverFunction, this.coverStatement ],
             FunctionExpression: this.coverFunction,
             LabeledStatement: this.coverStatement,
             ConditionalExpression: this.conditionalBranchInjector,
-            LogicalExpression: this.logicalExpressionBranchInjector
-        }, this, this.opts.walkDebug);
+            LogicalExpression: this.logicalExpressionBranchInjector,
+            ObjectExpression: this.maybeAddType
+        }, this.extractCurrentHint, this, this.opts.walkDebug);
 
-        &#x2F;&#x2F;unit testing purposes only
+        //unit testing purposes only
         if (this.opts.backdoor &amp;&amp; this.opts.backdoor.omitTrackerSuffix) {
             this.omitTrackerSuffix = true;
         }
     }
 
     Instrumenter.prototype = {
-        &#x2F;**
+        /**
          * synchronous instrumentation method. Throws when illegal code is passed to it
          * @method instrumentSync
          * @param {String} code the code to be instrumented as a String
@@ -469,10 +509,88 @@
          *  the code was read. A temporary filename is generated when not specified.
          *  Not specifying a filename is only useful for unit tests and demonstrations
          *  of this library.
-         *&#x2F;
+         */
         instrumentSync: function (code, filename) {
-            var codegenOptions,
-                program;
+            var program;
+
+            //protect from users accidentally passing in a Buffer object instead
+            if (typeof code !== &#x27;string&#x27;) { throw new Error(&#x27;Code must be string&#x27;); }
+            if (code.charAt(0) === &#x27;#&#x27;) { //shebang, &#x27;comment&#x27; it out, won&#x27;t affect syntax tree locations for things we care about
+                code = &#x27;//&#x27; + code;
+            }
+            if (!this.opts.noAutoWrap) {
+                code = LEADER_WRAP + code + TRAILER_WRAP;
+            }
+            program = ESP.parse(code, {
+                loc: true,
+                range: true,
+                tokens: this.opts.preserveComments,
+                comment: true
+            });
+            if (this.opts.preserveComments) {
+                program = ESPGEN.attachComments(program, program.comments, program.tokens);
+            }
+            if (!this.opts.noAutoWrap) {
+                program = {
+                    type: SYNTAX.Program.name,
+                    body: program.body[0].expression.callee.body.body,
+                    comments: program.comments
+                };
+            }
+            return this.instrumentASTSync(program, filename, code);
+        },
+        filterHints: function (comments) {
+            var ret = [],
+                i,
+                comment,
+                groups;
+            if (!(comments &amp;&amp; isArray(comments))) {
+                return ret;
+            }
+            for (i = 0; i &lt; comments.length; i += 1) {
+                comment = comments[i];
+                /* istanbul ignore else: paranoid check */
+                if (comment &amp;&amp; comment.value &amp;&amp; comment.range &amp;&amp; isArray(comment.range)) {
+                    groups = String(comment.value).match(COMMENT_RE);
+                    if (groups) {
+                        ret.push({ type: groups[1], start: comment.range[0], end: comment.range[1] });
+                    }
+                }
+            }
+            return ret;
+        },
+        extractCurrentHint: function (node) {
+            if (!node.range) { return; }
+            var i = this.currentState.lastHintPosition + 1,
+                hints = this.currentState.hints,
+                nodeStart = node.range[0],
+                hint;
+            this.currentState.currentHint = null;
+            while (i &lt; hints.length) {
+                hint = hints[i];
+                if (hint.end &lt; nodeStart) {
+                    this.currentState.currentHint = hint;
+                    this.currentState.lastHintPosition = i;
+                    i += 1;
+                } else {
+                    break;
+                }
+            }
+        },
+        /**
+         * synchronous instrumentation method that instruments an AST instead.
+         * @method instrumentASTSync
+         * @param {String} program the AST to be instrumented
+         * @param {String} filename Optional. The name of the file from which
+         *  the code was read. A temporary filename is generated when not specified.
+         *  Not specifying a filename is only useful for unit tests and demonstrations
+         *  of this library.
+         *  @param {String} originalCode the original code corresponding to the AST,
+         *  used for embedding the source into the coverage object
+         */
+        instrumentASTSync: function (program, filename, originalCode) {
+            var usingStrict = false,
+                codegenOptions;
             filename = filename || String(new Date().getTime()) + &#x27;.js&#x27;;
             this.coverState = {
                 path: filename,
@@ -488,27 +606,25 @@
                 func: 0,
                 branch: 0,
                 variable: 0,
-                statement: 0
+                statement: 0,
+                hints: this.filterHints(program.comments),
+                currentHint: null,
+                lastHintPosition: -1,
+                ignoring: 0
             };
-
-            &#x2F;&#x2F;protect from users accidentally passing in a Buffer object instead
-            if (typeof code !== &#x27;string&#x27;) { throw new Error(&#x27;Code must be string&#x27;); }
-            if (code.charAt(0) === &#x27;#&#x27;) { &#x2F;&#x2F;shebang, &#x27;comment&#x27; it out, won&#x27;t affect syntax tree locations for things we care about
-                code = &#x27;&#x2F;&#x2F;&#x27; + code;
-            }
-            if (!this.opts.noAutoWrap) {
-                code = LEADER_WRAP + code + TRAILER_WRAP;
-            }
-            program = ESP.parse(code, { loc: true });
-            if (!this.opts.noAutoWrap) {
-                program = { type: SYNTAX.Program.name, body: program.body[0].expression.callee.body.body };
+            if (program.body &amp;&amp; program.body.length &gt; 0 &amp;&amp; this.isUseStrictExpression(program.body[0])) {
+                //nuke it
+                program.body.shift();
+                //and add it back at code generation time
+                usingStrict = true;
             }
             this.walker.startWalk(program);
             codegenOptions = this.opts.codeGenerationOptions || { format: { compact: !this.opts.noCompact }};
-            &#x2F;&#x2F;console.log(JSON.stringify(program, undefined, 2));
-            return this.getPreamble(code) + &#x27;\n&#x27; + ESPGEN.generate(program, codegenOptions) + &#x27;\n&#x27;;
+            codegenOptions.comment = this.opts.preserveComments;
+            //console.log(JSON.stringify(program, undefined, 2));
+            return this.getPreamble(originalCode || &#x27;&#x27;, usingStrict) + &#x27;\n&#x27; + ESPGEN.generate(program, codegenOptions) + &#x27;\n&#x27;;
         },
-        &#x2F;**
+        /**
          * Callback based instrumentation. Note that this still executes synchronously in the same process tick
          * and calls back immediately. It only provides the options for callback style error handling as
          * opposed to a &#x60;try-catch&#x60; style and nothing more. Implemented as a wrapper over &#x60;instrumentSync&#x60;
@@ -520,7 +636,7 @@
          *  Not specifying a filename is only useful for unit tests and demonstrations
          *  of this library.
          * @param {Function(err, instrumentedCode)} callback - the callback function
-         *&#x2F;
+         */
         instrument: function (code, filename, callback) {
 
             if (!callback &amp;&amp; typeof filename === &#x27;function&#x27;) {
@@ -533,7 +649,7 @@
                 callback(ex);
             }
         },
-        &#x2F;**
+        /**
          * returns the file coverage object for the code that was instrumented
          * just before calling this method. Note that this represents a
          * &quot;zero-coverage&quot; object which is not even representative of the code
@@ -541,7 +657,7 @@
          * counts for mainline code).
          * @return {Object} a &quot;zero-coverage&quot; file coverage object for the code last instrumented
          * by this instrumenter
-         *&#x2F;
+         */
         lastFileCoverage: function () {
             return this.coverState;
         },
@@ -562,14 +678,17 @@
 
             obj = coverState.statementMap;
             for (k in obj) {
+                /* istanbul ignore else: has own property */
                 if (obj.hasOwnProperty(k)) { fixer(obj[k]); }
             }
             obj = coverState.fnMap;
             for (k in obj) {
+                /* istanbul ignore else: has own property */
                 if (obj.hasOwnProperty(k)) { fixer(obj[k].loc); }
             }
             obj = coverState.branchMap;
             for (k in obj) {
+                /* istanbul ignore else: has own property */
                 if (obj.hasOwnProperty(k)) {
                     locations = obj[k].locations;
                     for (i = 0; i &lt; locations.length; i += 1) {
@@ -579,13 +698,14 @@
             }
         },
 
-        getPreamble: function (sourceCode) {
+        getPreamble: function (sourceCode, emitUseStrict) {
             var varName = this.opts.coverageVariable || &#x27;__coverage__&#x27;,
-                file = this.coverState.path.replace(&#x2F;\\&#x2F;g, &#x27;\\\\&#x27;),
+                file = this.coverState.path.replace(/\\/g, &#x27;\\\\&#x27;),
                 tracker = this.currentState.trackerVar,
                 coverState,
-                &#x2F;&#x2F; return replacements using the function to ensure that the replacement is
-                &#x2F;&#x2F; treated like a dumb string and not as a string with RE replacement patterns
+                strictLine = emitUseStrict ? &#x27;&quot;use strict&quot;;&#x27; : &#x27;&#x27;,
+                // return replacements using the function to ensure that the replacement is
+                // treated like a dumb string and not as a string with RE replacement patterns
                 replacer = function (s) {
                     return function () { return s; };
                 },
@@ -594,21 +714,33 @@
                 this.fixColumnPositions(this.coverState);
             }
             if (this.opts.embedSource) {
-                this.coverState.code = sourceCode.split(&#x2F;\n&#x2F;);
+                this.coverState.code = sourceCode.split(/\r?\n/);
             }
             coverState = this.opts.debug ? JSON.stringify(this.coverState, undefined, 4) : JSON.stringify(this.coverState);
             code = [
-                &quot;if (typeof %GLOBAL% === &#x27;undefined&#x27;) { %GLOBAL% = {}; }&quot;,
-                &quot;if (!%GLOBAL%[&#x27;%FILE%&#x27;]) {&quot;,
-                &quot;   %GLOBAL%[&#x27;%FILE%&#x27;] = %OBJECT%;&quot;,
+                &quot;%STRICT%&quot;,
+                &quot;var %VAR% = (Function(&#x27;return this&#x27;))();&quot;,
+                &quot;if (!%VAR%.%GLOBAL%) { %VAR%.%GLOBAL% = {}; }&quot;,
+                &quot;%VAR% = %VAR%.%GLOBAL%;&quot;,
+                &quot;if (!(%VAR%[&#x27;%FILE%&#x27;])) {&quot;,
+                &quot;   %VAR%[&#x27;%FILE%&#x27;] = %OBJECT%;&quot;,
                 &quot;}&quot;,
-                &quot;var %VAR% = %GLOBAL%[&#x27;%FILE%&#x27;];&quot;
+                &quot;%VAR% = %VAR%[&#x27;%FILE%&#x27;];&quot;
             ].join(&quot;\n&quot;)
-                .replace(&#x2F;%VAR%&#x2F;g, replacer(tracker))
-                .replace(&#x2F;%GLOBAL%&#x2F;g, replacer(varName))
-                .replace(&#x2F;%FILE%&#x2F;g, replacer(file))
-                .replace(&#x2F;%OBJECT%&#x2F;g, replacer(coverState));
+                .replace(/%STRICT%/g, replacer(strictLine))
+                .replace(/%VAR%/g, replacer(tracker))
+                .replace(/%GLOBAL%/g, replacer(varName))
+                .replace(/%FILE%/g, replacer(file))
+                .replace(/%OBJECT%/g, replacer(coverState));
             return code;
+        },
+
+        startIgnore: function () {
+            this.currentState.ignoring += 1;
+        },
+
+        endIgnore: function () {
+            this.currentState.ignoring -= 1;
         },
 
         convertToBlock: function (node) {
@@ -630,39 +762,80 @@
             node.body = this.convertToBlock(node.body);
         },
 
-        statementName: function (location) {
-            var sName;
+        statementName: function (location, initValue) {
+            var sName,
+                ignoring = !!this.currentState.ignoring;
+
+            location.skip = ignoring || undefined;
+            initValue = initValue || 0;
             this.currentState.statement += 1;
             sName = this.currentState.statement;
             this.coverState.statementMap[sName] = location;
-            this.coverState.s[sName] = 0;
+            this.coverState.s[sName] = initValue;
             return sName;
         },
 
-        skipInit: function (node &#x2F;*, walker *&#x2F;) {
+        skipInit: function (node /*, walker */) {
             if (node.init) {
                 node.init.skipWalk = true;
             }
         },
 
-        skipLeft: function (node &#x2F;*, walker *&#x2F;) {
+        skipLeft: function (node /*, walker */) {
             node.left.skipWalk = true;
+        },
+
+        isUseStrictExpression: function (node) {
+            return node &amp;&amp; node.type === SYNTAX.ExpressionStatement.name &amp;&amp;
+                node.expression  &amp;&amp; node.expression.type === SYNTAX.Literal.name &amp;&amp;
+                node.expression.value === &#x27;use strict&#x27;;
+        },
+
+        maybeSkipNode: function (node, type) {
+            var alreadyIgnoring = !!this.currentState.ignoring,
+                hint = this.currentState.currentHint,
+                ignoreThis = !alreadyIgnoring &amp;&amp; hint &amp;&amp; hint.type === type;
+
+            if (ignoreThis) {
+                this.startIgnore();
+                node.postprocessor = this.endIgnore;
+                return true;
+            }
+            return false;
         },
 
         coverStatement: function (node, walker) {
             var sName,
-                incrStatementCount;
+                incrStatementCount,
+                grandParent;
 
-            sName = this.statementName(node.loc);
-            incrStatementCount = astgen.statement(
-                astgen.postIncrement(
-                    astgen.subscript(
-                        astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable(&#x27;s&#x27;)),
-                        astgen.stringLiteral(sName)
+            this.maybeSkipNode(node, &#x27;next&#x27;);
+
+            if (this.isUseStrictExpression(node)) {
+                grandParent = walker.ancestor(2);
+                /* istanbul ignore else: difficult to test */
+                if (grandParent) {
+                    if ((grandParent.node.type === SYNTAX.FunctionExpression.name ||
+                        grandParent.node.type === SYNTAX.FunctionDeclaration.name)  &amp;&amp;
+                        walker.parent().node.body[0] === node) {
+                        return;
+                    }
+                }
+            }
+            if (node.type === SYNTAX.FunctionDeclaration.name) {
+                sName = this.statementName(node.loc, 1);
+            } else {
+                sName = this.statementName(node.loc);
+                incrStatementCount = astgen.statement(
+                    astgen.postIncrement(
+                        astgen.subscript(
+                            astgen.dot(astgen.variable(this.currentState.trackerVar), astgen.variable(&#x27;s&#x27;)),
+                            astgen.stringLiteral(sName)
+                        )
                     )
-                )
-            );
-            this.splice(incrStatementCount, node, walker);
+                );
+                this.splice(incrStatementCount, node, walker);
+            }
         },
 
         splice: function (statements, node, walker) {
@@ -674,19 +847,29 @@
         functionName: function (node, line, location) {
             this.currentState.func += 1;
             var id = this.currentState.func,
+                ignoring = !!this.currentState.ignoring,
                 name = node.id ? node.id.name : &#x27;(anonymous_&#x27; + id + &#x27;)&#x27;;
-            this.coverState.fnMap[id] = { name: name, line: line, loc: location };
+            this.coverState.fnMap[id] = { name: name, line: line, loc: location, skip: ignoring || undefined };
             this.coverState.f[id] = 0;
             return id;
         },
 
         coverFunction: function (node, walker) {
-            var id = this.functionName(node, walker.startLineForNode(node), {
-                    start: node.loc.start,
-                    end: { line: node.body.loc.start.line, column: node.body.loc.start.column }
-                }),
+            var id,
                 body = node.body,
-                blockBody = body.body;
+                blockBody = body.body,
+                popped;
+
+            this.maybeSkipNode(node, &#x27;next&#x27;);
+
+            id = this.functionName(node, walker.startLineForNode(node), {
+                start: node.loc.start,
+                end: { line: node.body.loc.start.line, column: node.body.loc.start.column }
+            });
+
+            if (blockBody.length &gt; 0 &amp;&amp; this.isUseStrictExpression(blockBody[0])) {
+                popped = blockBody.shift();
+            }
             blockBody.unshift(
                 astgen.statement(
                     astgen.postIncrement(
@@ -697,18 +880,23 @@
                     )
                 )
             );
+            if (popped) {
+                blockBody.unshift(popped);
+            }
         },
 
         branchName: function (type, startLine, pathLocations) {
             var bName,
                 paths = [],
                 locations = [],
-                i;
+                i,
+                ignoring = !!this.currentState.ignoring;
             this.currentState.branch += 1;
             bName = this.currentState.branch;
             for (i = 0; i &lt; pathLocations.length; i += 1) {
-                paths.push(0);
+                pathLocations[i].skip = pathLocations[i].skip || ignoring || undefined;
                 locations.push(pathLocations[i]);
+                paths.push(0);
             }
             this.coverState.b[bName] = paths;
             this.coverState.branchMap[bName] = { line: startLine, type: type, locations: locations };
@@ -739,18 +927,29 @@
         },
 
         ifBranchInjector: function (node, walker) {
-            var line = node.loc.start.line,
+            var alreadyIgnoring = !!this.currentState.ignoring,
+                hint = this.currentState.currentHint,
+                ignoreThen = !alreadyIgnoring &amp;&amp; hint &amp;&amp; hint.type === &#x27;if&#x27;,
+                ignoreElse = !alreadyIgnoring &amp;&amp; hint &amp;&amp; hint.type === &#x27;else&#x27;,
+                line = node.loc.start.line,
                 col = node.loc.start.column,
                 start = { line: line, column: col },
                 end = { line: line, column: col },
                 bName = this.branchName(&#x27;if&#x27;, walker.startLineForNode(node), [
-                    { start: start, end: end },
-                    { start: start, end: end }
+                    { start: start, end: end, skip: ignoreThen || undefined },
+                    { start: start, end: end, skip: ignoreElse || undefined }
                 ]),
                 thenBody = node.consequent.body,
-                elseBody = node.alternate.body;
+                elseBody = node.alternate.body,
+                child;
             thenBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 0)));
             elseBody.unshift(astgen.statement(this.branchIncrementExprAst(bName, 1)));
+            if (ignoreThen) { child = node.consequent; child.preprocessor = this.startIgnore; child.postprocessor = this.endIgnore; }
+            if (ignoreElse) { child = node.alternate; child.preprocessor = this.startIgnore; child.postprocessor = this.endIgnore; }
+        },
+
+        branchLocationFor: function (name, index) {
+            return this.coverState.branchMap[name].locations[index];
         },
 
         switchBranchInjector: function (node, walker) {
@@ -758,12 +957,21 @@
                 bName,
                 i;
 
-            if (!cases) {
+            if (!(cases &amp;&amp; cases.length &gt; 0)) {
                 return;
             }
             bName = this.branchName(&#x27;switch&#x27;, walker.startLineForNode(node), this.locationsForNodes(cases));
             for (i = 0; i &lt; cases.length; i += 1) {
+                cases[i].branchLocation = this.branchLocationFor(bName, i);
                 cases[i].consequent.unshift(astgen.statement(this.branchIncrementExprAst(bName, i)));
+            }
+        },
+
+        switchCaseInjector: function (node) {
+            var location = node.branchLocation;
+            delete node.branchLocation;
+            if (this.maybeSkipNode(node, &#x27;next&#x27;)) {
+                location.skip = true;
             }
         },
 
@@ -772,8 +980,25 @@
                 ast1 = this.branchIncrementExprAst(bName, 0),
                 ast2 = this.branchIncrementExprAst(bName, 1);
 
+            node.consequent.preprocessor = this.maybeAddSkip(this.branchLocationFor(bName, 0));
+            node.alternate.preprocessor = this.maybeAddSkip(this.branchLocationFor(bName, 1));
             node.consequent = astgen.sequence(ast1, node.consequent);
             node.alternate = astgen.sequence(ast2, node.alternate);
+        },
+
+        maybeAddSkip: function (branchLocation) {
+            return function (node) {
+                var alreadyIgnoring = !!this.currentState.ignoring,
+                    hint = this.currentState.currentHint,
+                    ignoreThis = !alreadyIgnoring &amp;&amp; hint &amp;&amp; hint.type === &#x27;next&#x27;;
+                if (ignoreThis) {
+                    this.startIgnore();
+                    node.postprocessor = this.endIgnore;
+                }
+                if (ignoreThis || alreadyIgnoring) {
+                    branchLocation.skip = true;
+                }
+            };
         },
 
         logicalExpressionBranchInjector: function (node, walker) {
@@ -783,8 +1008,10 @@
                 tuple,
                 i;
 
+            this.maybeSkipNode(node, &#x27;next&#x27;);
+
             if (parent &amp;&amp; parent.node.type === SYNTAX.LogicalExpression.name) {
-                &#x2F;&#x2F;already covered
+                //already covered
                 return;
             }
 
@@ -796,6 +1023,7 @@
             for (i = 0; i &lt; leaves.length; i += 1) {
                 tuple = leaves[i];
                 tuple.parent[tuple.property] = astgen.sequence(this.branchIncrementExprAst(bName, i), tuple.node);
+                tuple.node.preprocessor = this.maybeAddSkip(this.branchLocationFor(bName, i));
             }
         },
 
@@ -805,6 +1033,17 @@
                 this.findLeaves(node.right, accumulator, node, &#x27;right&#x27;);
             } else {
                 accumulator.push({ node: node, parent: parent, property: property });
+            }
+        },
+        maybeAddType: function (node /*, walker */) {
+            var props = node.properties,
+                i,
+                child;
+            for (i = 0; i &lt; props.length; i += 1) {
+                child = props[i];
+                if (!child.type) {
+                    child.type = SYNTAX.Property.name;
+                }
             }
         }
     };
@@ -827,13 +1066,13 @@
         </div>
     </div>
 </div>
-<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
-<script src="..&#x2F;assets/js/yui-prettify.js"></script>
-<script src="..&#x2F;assets/../api.js"></script>
-<script src="..&#x2F;assets/js/api-filter.js"></script>
-<script src="..&#x2F;assets/js/api-list.js"></script>
-<script src="..&#x2F;assets/js/api-search.js"></script>
-<script src="..&#x2F;assets/js/apidocs.js"></script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
 </body>
 </html>
