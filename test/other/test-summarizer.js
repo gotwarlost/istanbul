@@ -10,22 +10,22 @@ module.exports = {
     setUp: function (cb) {
         summarizer = new TreeSummarizer();
         s1 = {
-            statements: { covered: 5, total: 10, pct: 50 },
-            lines: { covered: 5, total: 10, pct: 50 },
-            functions: { covered: 15, total: 20, pct: 75 },
-            branches: { covered: 100, total: 200, pct: 50 }
+            statements: { covered: 5, total: 10, pct: 50, skipped: 0 },
+            lines: { covered: 5, total: 10, pct: 50, skipped: 0 },
+            functions: { covered: 15, total: 20, pct: 75, skipped: 0 },
+            branches: { covered: 100, total: 200, pct: 50, skipped: 0 }
         };
         s2 = {
-            statements: { covered: 10, total: 20, pct: 50 },
-            lines: { covered: 10, total: 20, pct: 50 },
-            functions: { covered: 75, total: 100, pct: 75 },
-            branches: { covered: 1, total: 2, pct: 50 }
+            statements: { covered: 10, total: 20, pct: 50, skipped: 0 },
+            lines: { covered: 10, total: 20, pct: 50, skipped: 0 },
+            functions: { covered: 75, total: 100, pct: 75, skipped: 0 },
+            branches: { covered: 1, total: 2, pct: 50, skipped: 0 }
         };
         s3 = {
-            statements: { covered: 9, total: 10, pct: 90 },
-            lines: { covered: 9, total: 10, pct: 90 },
-            functions: { covered: 15, total: 15, pct: 100 },
-            branches: { covered: 101, total: 101, pct: 100 }
+            statements: { covered: 9, total: 10, pct: 90, skipped: 0 },
+            lines: { covered: 9, total: 10, pct: 90, skipped: 0 },
+            functions: { covered: 15, total: 15, pct: 100, skipped: 0 },
+            branches: { covered: 101, total: 101, pct: 100, skipped: 0 }
         };
         cb();
     },

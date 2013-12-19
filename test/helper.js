@@ -57,6 +57,11 @@ Verifier.prototype = {
         return global[this.coverageVariable];
     },
 
+    getFileCoverage: function () {
+        var cov = this.getCoverage();
+        return cov[Object.keys(cov)[0]];
+    },
+
     verifyError: function (test) {
         test.ok(this.err && typeof this.err === 'object', 'Error should be an object');
     },
