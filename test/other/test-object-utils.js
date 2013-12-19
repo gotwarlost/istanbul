@@ -116,58 +116,58 @@ module.exports = {
         },
         "should calculate correct summary": function (test) {
             var ret = utils.summarizeFileCoverage(it.foo);
-            test.deepEqual({ total: 4, covered: 3, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 5, covered: 4, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 2, covered: 1, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 5, covered: 2, pct: 40 }, ret.branches);
+            test.deepEqual({ total: 4, covered: 3, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 5, covered: 4, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 2, covered: 1, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 5, covered: 2, pct: 40, skipped: 0 }, ret.branches);
             test.done();
         },
         "should return a pct of 100 when nothing is available": function (test) {
             it.foo.b = {};
             var ret = utils.summarizeFileCoverage(it.foo);
-            test.deepEqual({ total: 4, covered: 3, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 5, covered: 4, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 2, covered: 1, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 0, covered: 0, pct: 100 }, ret.branches);
+            test.deepEqual({ total: 4, covered: 3, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 5, covered: 4, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 2, covered: 1, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 0, covered: 0, pct: 100, skipped: 0 }, ret.branches);
             test.done();
         },
         "should merge summary correctly": function (test) {
             var s1 = utils.summarizeFileCoverage(it.foo),
                 s2 = utils.summarizeFileCoverage(it2.foo),
                 ret = utils.mergeSummaryObjects(s1, s2);
-            test.deepEqual({ total: 8, covered: 6, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 10, covered: 8, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 4, covered: 2, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 10, covered: 4, pct: 40 }, ret.branches);
+            test.deepEqual({ total: 8, covered: 6, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 10, covered: 8, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 4, covered: 2, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 10, covered: 4, pct: 40, skipped: 0 }, ret.branches);
             test.done();
         },
         "should merge summary correctly in one call": function (test) {
             var coverage = { foo: it.foo, 'bar': it2.foo },
                 ret = utils.summarizeCoverage(coverage);
-            test.deepEqual({ total: 8, covered: 6, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 10, covered: 8, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 4, covered: 2, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 10, covered: 4, pct: 40 }, ret.branches);
+            test.deepEqual({ total: 8, covered: 6, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 10, covered: 8, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 4, covered: 2, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 10, covered: 4, pct: 40, skipped: 0 }, ret.branches);
             test.done();
         },
         "can merge with a blank object in first position": function (test) {
             var s1 = null,
                 s2 = utils.summarizeFileCoverage(it2.foo),
                 ret = utils.mergeSummaryObjects(s1, s2);
-            test.deepEqual({ total: 4, covered: 3, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 5, covered: 4, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 2, covered: 1, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 5, covered: 2, pct: 40 }, ret.branches);
+            test.deepEqual({ total: 4, covered: 3, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 5, covered: 4, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 2, covered: 1, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 5, covered: 2, pct: 40, skipped: 0 }, ret.branches);
             test.done();
         },
         "can merge with a blank object in second position": function (test) {
             var s1 = utils.summarizeFileCoverage(it2.foo),
                 s2 = null,
                 ret = utils.mergeSummaryObjects(s1, s2);
-            test.deepEqual({ total: 4, covered: 3, pct: 75 }, ret.lines);
-            test.deepEqual({ total: 5, covered: 4, pct: 80 }, ret.statements);
-            test.deepEqual({ total: 2, covered: 1, pct: 50 }, ret.functions);
-            test.deepEqual({ total: 5, covered: 2, pct: 40 }, ret.branches);
+            test.deepEqual({ total: 4, covered: 3, pct: 75, skipped: 0 }, ret.lines);
+            test.deepEqual({ total: 5, covered: 4, pct: 80, skipped: 0 }, ret.statements);
+            test.deepEqual({ total: 2, covered: 1, pct: 50, skipped: 0 }, ret.functions);
+            test.deepEqual({ total: 5, covered: 2, pct: 40, skipped: 0 }, ret.branches);
             test.done();
         },
         "can turn it into a YUI coverage object": function (test) {
