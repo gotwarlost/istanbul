@@ -2,6 +2,13 @@ Changelog
 ---------
 
 <table>
+<tr>
+<td>v0.2.1</td><td><ul>
+    <li>Add ability to skip branches and other hard-to-test code using comments.
+        See [the doc](https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md) for more details</li>
+    <li>Turn `util.error` into `console.error` for node 0.11 compatibility, thanks to @pornel</li>
+</ul></td>
+</tr>
 <tr><td>v0.2.0</td><td><ul>
     <li>Add --preserve-comments to instrumenter options, thanks to @arikon</li>
     <li>Support 'use strict;' in file scope, thanks to @pornel</li>
