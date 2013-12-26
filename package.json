@@ -26,7 +26,7 @@
     "preferGlobal": true,
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json lib/*js lib/command/*js lib/report/*js lib/store/*js lib/util/*js test/*js test/instrumentation/*js test/cli/*js test/other/*js",
-        "test": "test/run.js",
+        "test": "test/create-escodegen-browser.js && test/run.js",
         "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "esprima": "1.0.x",
-        "escodegen": "0.0.23",
+        "escodegen": "1.0.x",
         "handlebars": "1.0.x",
         "mkdirp": "0.3.x",
         "nopt": "2.1.x",
@@ -55,7 +55,8 @@
         "nodeunit": "*",
         "jshint": "*",
         "yui-lint": "*",
-        "requirejs": "2.x"
+        "requirejs": "2.x",
+        "bower": "1.x"
     }
 }
 
