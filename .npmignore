@@ -8,6 +8,8 @@ generate-pages.sh
 misc/
 build/
 public/
+test/
+bower_components/
 yuidoc.json
 .idea/
 html-report/
