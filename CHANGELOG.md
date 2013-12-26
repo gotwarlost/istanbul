@@ -2,6 +2,7 @@ Changelog
 ---------
 
 <table>
+<tr><td>v0.2.2</td><td>update escodegen, handlebars and resolve dependency versions</td></tr>
 <tr>
 <td>v0.2.1</td><td><ul>
     <li>Add ability to skip branches and other hard-to-test code using comments.
