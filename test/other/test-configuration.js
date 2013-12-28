@@ -152,5 +152,49 @@ module.exports = {
                 test.done();
             }
         }
+    },
+    "with custom watermarks": {
+        "should load from sparse config": function (test) {
+            config = configuration.loadObject({ reporting: { watermarks: { statements: [ 10, 90] } } });
+            var w = config.reporting.watermarks();
+            test.deepEqual([ 10, 90 ], w.statements);
+            test.deepEqual([ 50, 80 ], w.branches);
+            test.deepEqual([ 50, 80 ], w.functions);
+            test.deepEqual([ 50, 80 ], w.lines);
+            test.done();
+        },
+        "should not load any junk config": function (test) {
+            config = configuration.loadObject({
+                reporting: {
+                    watermarks: {
+                        statements: [ 10, 90, 95],
+                        branches: [ -10, 70 ],
+                        lines: [ 70, 110 ],
+                        functions: [ 'a', 10 ]
+                    }
+                }
+            });
+            var w = config.reporting.watermarks();
+            test.deepEqual([ 50, 80 ], w.statements);
+            test.deepEqual([ 50, 80 ], w.branches);
+            test.deepEqual([ 50, 80 ], w.functions);
+            test.deepEqual([ 50, 80 ], w.lines);
+            test.done();
+        },
+        "should not load any junk config (2)": function (test) {
+            config = configuration.loadObject({
+                reporting: {
+                    watermarks: {
+                        statements: [ 90, 80 ]
+                    }
+                }
+            });
+            var w = config.reporting.watermarks();
+            test.deepEqual([ 50, 80 ], w.statements);
+            test.deepEqual([ 50, 80 ], w.branches);
+            test.deepEqual([ 50, 80 ], w.functions);
+            test.deepEqual([ 50, 80 ], w.lines);
+            test.done();
+        }
     }
 };
