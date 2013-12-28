@@ -2,6 +2,12 @@ Changelog
 ---------
 
 <table>
+<tr>
+<td>v0.2.3</td><td><ul>
+    <li>Add YAML config file. `istanbul help config` has more details</li>
+    <li>Support custom reporting thresholds using the `watermarks` section of the config file</li>
+</ul></td>
+</tr>
 <tr><td>v0.2.2</td><td>update escodegen, handlebars and resolve dependency versions</td></tr>
 <tr>
 <td>v0.2.1</td><td><ul>
