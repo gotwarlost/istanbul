@@ -57,7 +57,7 @@ Supports the following use cases and more
 Ignoring statements
 -------------------
 
-* Skip the next 'thing' in the source
+* Skip the next 'thing' in the source with:
   `/* istanbul ignore next */`
 
 The command line
