@@ -73,6 +73,105 @@ module.exports = {
         test.done();
     },
 
+    "should test files written with Unix Line Endings (LF)": function (test) {
+        var barPath = path.resolve(DIR, 'lib', 'bar.js'),
+            oldBar = fs.readFileSync(barPath, 'utf8'),
+            eol = /(\r?\n|\r)/g,
+            newBar = oldBar.replace(eol, "\n"),
+			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            htmlReport = path.resolve(process.cwd(), 'html-report'),
+            reporter = new Reporter(),
+            obj,
+            collector = new Collector(),
+            fileFor = function () {
+                var args = Array.prototype.slice.call(arguments);
+                args.unshift(htmlReport);
+                return path.resolve.apply(null, args);
+            };
+
+		fs.writeFileSync(barPath, newBar);
+        obj = JSON.parse(fs.readFileSync(file, 'utf8'));
+        collector.add(obj);
+        try {
+            reporter.writeReport(collector, true);
+        } catch(err) {
+            test.ok(false);
+        } finally {
+            fs.writeFileSync(barPath, oldBar);
+        }
+        test.ok(existsSync(htmlReport));
+        test.ok(existsSync(fileFor('index.html')));
+        test.ok(existsSync(fileFor('lib', 'bar.js.html')));
+        test.ok(fs.readFileSync(fileFor('lib', 'bar.js.html'), 'utf8') !== '');
+        test.done();
+    },
+
+    "should test files written with Windows Line Endings (CRLF)": function (test) {
+        var barPath = path.resolve(DIR, 'lib', 'bar.js'),
+            oldBar = fs.readFileSync(barPath, 'utf8'),
+            eol = /(\r?\n|\r)/g,
+            newBar = oldBar.replace(eol, "\r\n"),
+			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            htmlReport = path.resolve(process.cwd(), 'html-report'),
+            reporter = new Reporter(),
+            obj,
+            collector = new Collector(),
+            fileFor = function () {
+                var args = Array.prototype.slice.call(arguments);
+                args.unshift(htmlReport);
+                return path.resolve.apply(null, args);
+            };
+
+		fs.writeFileSync(barPath, newBar);
+        obj = JSON.parse(fs.readFileSync(file, 'utf8'));
+        collector.add(obj);
+        try {
+            reporter.writeReport(collector, true);
+        } catch(err) {
+            test.ok(false);
+        } finally {
+            fs.writeFileSync(barPath, oldBar);
+        }
+        test.ok(existsSync(htmlReport));
+        test.ok(existsSync(fileFor('index.html')));
+        test.ok(existsSync(fileFor('lib', 'bar.js.html')));
+        test.ok(fs.readFileSync(fileFor('lib', 'bar.js.html'), 'utf8') !== '');
+        test.done();
+    },
+
+    "should test files written with Macintosh Line Endings (CR)": function (test) {
+        var barPath = path.resolve(DIR, 'lib', 'bar.js'),
+            oldBar = fs.readFileSync(barPath, 'utf8'),
+            eol = /(\r?\n|\r)/g,
+            newBar = oldBar.replace(eol, "\r"),
+			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            htmlReport = path.resolve(process.cwd(), 'html-report'),
+            reporter = new Reporter(),
+            obj,
+            collector = new Collector(),
+            fileFor = function () {
+                var args = Array.prototype.slice.call(arguments);
+                args.unshift(htmlReport);
+                return path.resolve.apply(null, args);
+            };
+
+		fs.writeFileSync(barPath, newBar);
+        obj = JSON.parse(fs.readFileSync(file, 'utf8'));
+        collector.add(obj);
+        try {
+            reporter.writeReport(collector, true);
+        } catch(err) {
+            test.ok(false);
+        } finally {
+            fs.writeFileSync(barPath, oldBar);
+        }
+        test.ok(existsSync(htmlReport));
+        test.ok(existsSync(fileFor('index.html')));
+        test.ok(existsSync(fileFor('lib', 'bar.js.html')));
+        test.ok(fs.readFileSync(fileFor('lib', 'bar.js.html'), 'utf8') !== '');
+        test.done();
+    },
+
     "should test files written when code packed into coverage object": function (test) {
         var file = path.resolve(OUTPUT_DIR, 'coverage.json'),
             htmlReport = path.resolve(OUTPUT_DIR),
