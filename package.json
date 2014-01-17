@@ -40,7 +40,7 @@
     "dependencies": {
         "esprima": "1.0.x",
         "escodegen": "1.0.x",
-        "handlebars": "1.2.x",
+        "handlebars": "1.3.x",
         "mkdirp": "0.3.x",
         "nopt": "2.1.x",
         "fileset": "0.1.x",
