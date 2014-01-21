@@ -54,6 +54,12 @@ Supports the following use cases and more
 * Server side code coverage for nodejs by embedding it as custom middleware
 
 
+Ignoring statements
+-------------------
+
+* Skip the next 'thing' in the source with:
+  `/* istanbul ignore next */`
+
 The command line
 ----------------
 
