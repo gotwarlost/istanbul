@@ -1,6 +1,6 @@
 {
     "name": "istanbul",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
     "keywords": [ "coverage", "code coverage", "JS code coverage", "JS coverage" ],
     "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
@@ -21,7 +21,9 @@
         "Dmitry Shirokov @runk <deadrunk@gmail.com>",
         "Chris Gladd @chrisgladd",
         "Sergey Belov <peimei@ya.ru>",
-        "porneL <pornel@pornel.net>"
+        "porneL <pornel@pornel.net>",
+        "@asifrc",
+        "Gergely Nemeth @gergelyke"
     ],
     "preferGlobal": true,
     "scripts": {

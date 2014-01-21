@@ -3,6 +3,12 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.4</td><td><ul>
+    <li>Fix line-split algo to handle Mac lin separators, thanks to @asifrc</li>
+    <li>Update README for quick intro to ignoring code for coverage, thanks to @gergelyke</li>
+</ul></td>
+</tr>
+<tr>
 <td>v0.2.3</td><td><ul>
     <li>Add YAML config file. `istanbul help config` has more details</li>
     <li>Support custom reporting thresholds using the `watermarks` section of the config file</li>
