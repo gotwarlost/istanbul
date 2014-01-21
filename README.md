@@ -54,6 +54,14 @@ Supports the following use cases and more
 * Server side code coverage for nodejs by embedding it as custom middleware
 
 
+Ignoring code for coverage
+--------------------------
+
+* Skip an `if` or `else` path with `/* istanbul ignore if */` or `/* istanbul ignore else */` respectively.
+* For all other cases, skip the next 'thing' in the source with: `/* istanbul ignore next */`
+
+See [ignoring-code-for-coverage.md](ignoring-code-for-coverage.md) for the spec.
+
 The command line
 ----------------
 
