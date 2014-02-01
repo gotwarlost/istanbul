@@ -54,10 +54,10 @@
         "js-yaml": "3.x"
     },
     "devDependencies": {
-        "rimraf": "*",
-        "nodeunit": "*",
-        "jshint": "*",
-        "yui-lint": "*",
+        "rimraf": "2.2.x",
+        "nodeunit": "0.8.x",
+        "jshint": "2.4.x",
+        "yui-lint": "0.1.x",
         "requirejs": "2.x",
         "bower": "1.x"
     }

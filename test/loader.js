@@ -10,7 +10,7 @@ function loadDirTests(dir, pat) {
             //return f.indexOf('browser') > 0;
             return pat.exec(f) && f.indexOf('.js') > 0 && f.indexOf('client.js') < 0 && f !== 'server.js';
         })
-        .map(function (f) { return path.resolve(__dirname, dir, f).substring(process.cwd().length); });
+        .map(function (f) { return path.relative(process.cwd(), path.resolve(__dirname, dir, f)); });
     return files;
 }
 
