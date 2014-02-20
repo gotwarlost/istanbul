@@ -19,6 +19,7 @@ whatsoever from the test runner
 * Can be used on the **command line** as well as a **library**
 * Based on the awesome `esprima` parser and the equally awesome `escodegen` code generator
 * Well-tested on node 0.4.x, 0.6.x, 0.8.x and the browser (instrumentation library only)
+* profile option to instrument the code with profiling code that gives function level statistics
 
 Installing
 ----------
@@ -89,6 +90,9 @@ Available commands are:
               instruments a file or a directory tree and writes the
               instrumented code to the desired output location
 
+      profile
+              instruments for profiling a file or a directory tree and writes
+              the instrumented code to the desired output location
 
       report  writes reports for coverage JSON objects produced in a previous
               run
@@ -142,6 +146,15 @@ The `instrument` command
 ------------------------
 
 Instruments a single JS file or an entire directory tree and produces an output directory tree with instrumented code. This should not be required for running node unit tests but is useful for tests to be run on the browser (using `yeti` for example).
+
+The `profile` command
+------------------------
+
+Instruments for profiling a single JS file or an entire directory tree and produces an output directory tree with instrumented code.
+The produced code can be run to do profiling
+The produced code needs to have in case of node.js a file called profile.js on the root of the project
+The produced code needs to have in case of browser, an object profile already defined
+The profile object needs two functions, profile.start and profile.end, the parameters are: functionName,filename,arguments
 
 The `report` command
 -------------------
