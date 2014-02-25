@@ -151,6 +151,46 @@ module.exports = {
             test.done();
         }
     },
+    "without a directory": {
+        setUp: function (cb) {
+            summarizer.addFileCoverageSummary('foo.js', s1);
+            summarizer.addFileCoverageSummary('bar.js', s2);
+            summarizer.addFileCoverageSummary('util/baz.js', s3);
+            tree = summarizer.getTreeSummary();
+            //console.log(JSON.stringify(tree, undefined, 2));
+            cb();
+        },
+        "should build a correct tree but with a mangled name for the main dir": function (test) {
+            var node = tree.root,
+                utilSummary = utils.mergeSummaryObjects(s3),
+                libSummary = utils.mergeSummaryObjects(s1, s2),
+                fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
+            test.equal('/', node.fullPath());
+            test.equal('', node.displayShortName());
+            test.equal(2, node.children.length);
+            test.deepEqual(fullSummary, node.metrics);
+            test.ok(node === tree.getNode(''));
+            node = tree.root.children[0];
+            test.equal('/__root__/', node.fullPath());
+            test.equal('__root__/', node.displayShortName());
+            test.equal(2, node.children.length);
+            test.deepEqual(libSummary, node.metrics);
+            test.deepEqual(s2, node.children[0].metrics);
+            test.deepEqual(s1, node.children[1].metrics);
+            test.ok(node === tree.getNode('__root__/'));
+            node = tree.root.children[1];
+            test.equal('/util/', node.fullPath());
+            test.equal('util/', node.displayShortName());
+            test.equal(1, node.children.length);
+            test.deepEqual(utilSummary, node.metrics);
+            test.deepEqual(s3, node.children[0].metrics);
+            test.ok(node === tree.getNode('util/'));
+            test.ok(tree.getNode('foo.js'));
+            test.ok(tree.getNode('bar.js'));
+            test.ok(tree.getNode('util/baz.js'));
+            test.done();
+        }
+    },
     "with no summaries provided at all": {
         setUp: function (cb) {
             tree = summarizer.getTreeSummary();
