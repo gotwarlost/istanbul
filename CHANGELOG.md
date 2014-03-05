@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.6</td><td><ul>
+    <li>Revert bad commit for tree summarizer</li>
+</ul></td>
+</tr>
+<tr>
 <td>v0.2.5</td><td><ul>
     <li>Add clover report, thanks to @bixdeng, @mpderbec</li>
     <li>Fix cobertura report bug for relative paths, thanks to @jxiaodev</li>
