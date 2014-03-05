@@ -12,5 +12,10 @@ function tryThis(str) {
 module.exports = {
     isYieldAvailable: function () {
         return tryThis('function *foo() { yield 1; }');
+    },
+
+    isForOfAvailable: function () {
+        return tryThis('function *foo() { yield 1; }\n' +
+            'for (var k of foo()) {}');
     }
 };
