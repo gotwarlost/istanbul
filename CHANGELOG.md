@@ -3,6 +3,14 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.5</td><td><ul>
+    <li>Add clover report, thanks to @bixdeng, @mpderbec</li>
+    <li>Fix cobertura report bug for relative paths, thanks to @jxiaodev</li>
+    <li>Run self-coverage on tests always</li>
+    <li>Fix tree summarizer when relative paths are involved, thanks to @Swatinem</li>
+</ul></td>
+</tr>
+<tr>
 <td>v0.2.4</td><td><ul>
     <li>Fix line-split algo to handle Mac lin separators, thanks to @asifrc</li>
     <li>Update README for quick intro to ignoring code for coverage, thanks to @gergelyke</li>

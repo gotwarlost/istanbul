@@ -1,5 +1,6 @@
 var TreeSummarizer = require('../../lib/util/tree-summarizer'),
     utils = require('../../lib/object-utils'),
+    path = require('path'),
     summarizer,
     tree,
     s1,
@@ -147,6 +148,45 @@ module.exports = {
             test.ok(node === tree.getNode('util/'));
             test.ok(tree.getNode('foo.js'));
             test.ok(tree.getNode('bar.js'));
+            test.ok(tree.getNode('util/baz.js'));
+            test.done();
+        }
+    },
+    "with relative paths": {
+        setUp: function (cb) {
+            summarizer.addFileCoverageSummary('tmp/lib/main/foo.js', s1);
+            summarizer.addFileCoverageSummary('tmp/lib/main/bar.js', s2);
+            summarizer.addFileCoverageSummary('tmp/lib/util/baz.js', s3);
+            tree = summarizer.getTreeSummary();
+            cb();
+        },
+        "should have the correct tree with no root hoisting": function (test) {
+            var node = tree.root,
+                utilSummary = utils.mergeSummaryObjects(s3),
+                libSummary = utils.mergeSummaryObjects(s1, s2),
+                fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
+            test.equal(path.resolve('tmp/lib') + '/', node.fullPath());
+            test.equal('', node.displayShortName());
+            test.equal(2, node.children.length);
+            test.deepEqual(fullSummary, node.metrics);
+            test.ok(node === tree.getNode(''));
+            node = tree.root.children[0];
+            test.equal(path.resolve('tmp/lib/main') + '/', node.fullPath());
+            test.equal('main/', node.displayShortName());
+            test.equal(2, node.children.length);
+            test.deepEqual(libSummary, node.metrics);
+            test.deepEqual(s2, node.children[0].metrics);
+            test.deepEqual(s1, node.children[1].metrics);
+            test.ok(node === tree.getNode('main/'));
+            node = tree.root.children[1];
+            test.equal(path.resolve('tmp/lib/util') + '/', node.fullPath());
+            test.equal('util/', node.displayShortName());
+            test.equal(1, node.children.length);
+            test.deepEqual(utilSummary, node.metrics);
+            test.deepEqual(s3, node.children[0].metrics);
+            test.ok(node === tree.getNode('util/'));
+            test.ok(tree.getNode('main/foo.js'));
+            test.ok(tree.getNode('main/bar.js'));
             test.ok(tree.getNode('util/baz.js'));
             test.done();
         }

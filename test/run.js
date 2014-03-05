@@ -6,8 +6,7 @@
  * Usage: run.js <test-pat> <force-cover>
  *     where <test-pat> is a string to run only those test cases that have the string in the filename
  *          <force-cover> is set to, say, 1, to indicate that the tests also need to be run in self-cover
- *             mode. Otherwise, self-cover is determined by the `npm_config_coverage` variable
- *             set by `npm test --coverage`
+ *             mode. Otherwise it is assumed to be true if no pattern is passed in
  *
  *  How self-cover works:
  *
@@ -40,7 +39,7 @@ var nodeunit = require('nodeunit'),
 
 function runTests(pat, forceCover) {
     var defaultReporter = nodeunit.reporters['default'],
-        selfCover = forceCover || process.env.npm_config_coverage, //set by npm test --coverage
+        selfCover = forceCover || !pat,
         args,
         proc;
 
