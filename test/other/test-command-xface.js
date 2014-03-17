@@ -1,4 +1,4 @@
-var Command = require('../../lib/command');
+var Command = require('../../lib/command/index');
 
 module.exports = {
     "should return command list": function (test) {
