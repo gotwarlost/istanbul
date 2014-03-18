@@ -58,8 +58,7 @@
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
         "resolve": "0.6.x",
-        "js-yaml": "3.x",
-        "testem": "0.6.9"
+        "js-yaml": "3.x"
     },
     "devDependencies": {
         "rimraf": "2.2.x",
