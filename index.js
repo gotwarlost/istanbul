@@ -13,8 +13,8 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
 /*jslint nomen: true */
 var path = require('path'),
     fs = require('fs'),
-    Store = require('./lib/store'),
-    Report = require('./lib/report'),
+    Store = require('./lib/store/index'),
+    Report = require('./lib/report/index'),
     meta = require('./lib/util/meta');
 
 //register our standard plaugins
