@@ -47,6 +47,9 @@
         "esprima": "1.0.x",
         "escodegen": "1.2.x",
         "handlebars": "1.3.x",
+        "coffee-script-redux": "=2.0.0-beta8",
+        "estraverse": "~1.5.0",
+        "lodash": "~2.4.1",
         "mkdirp": "0.3.x",
         "nopt": "2.2.x",
         "fileset": "0.1.x",
@@ -55,7 +58,8 @@
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
         "resolve": "0.6.x",
-        "js-yaml": "3.x"
+        "js-yaml": "3.x",
+        "testem": "0.6.9"
     },
     "devDependencies": {
         "rimraf": "2.2.x",
