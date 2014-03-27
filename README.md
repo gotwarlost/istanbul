@@ -14,7 +14,7 @@ and function coverage** and reverse-engineers **line coverage** with 100% fideli
 * **Module loader hooks** to instrument code on the fly
 * **Command line tools** to run node unit tests "with coverage turned on" and no cooperation
 whatsoever from the test runner
-* **HTML** and **LCOV** reporting.
+* **HTML**, **LCOV**, **Cobertura**, and **TeamCity** reporting.
 * Ability to use as **middleware** when serving JS files that need to be tested on the browser.
 * Can be used on the **command line** as well as a **library**
 * Based on the awesome `esprima` parser and the equally awesome `escodegen` code generator
@@ -157,6 +157,14 @@ Writes reports using `coverage*.json` files as the source of coverage informatio
 * teamcity - produces service messages to report code coverage to TeamCity
 
 Additional report formats may be plugged in at the library level.
+
+The `check-coverage` command
+----------------------------
+
+Checks the coverage of statements, functions, branches, and lines against the
+provided thresholds. Postive thresholds are taken to be the minimum percentage
+required and negative numbers are taken to be the number of uncovered entities
+allowed.
 
 Library usage
 -------------
