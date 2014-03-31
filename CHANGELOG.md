@@ -3,6 +3,12 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.7</td><td><ul>
+    <li>Upgrade esprima</li>
+    <li>Misc jshint fixes</li>
+</ul></td>
+</tr>
+<tr>
 <td>v0.2.6</td><td><ul>
     <li>Revert bad commit for tree summarizer</li>
 </ul></td>
