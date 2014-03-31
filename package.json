@@ -27,7 +27,9 @@
         "@bixdeng",
         "@mpderbec",
         "@jxiaodev",
-        "Arpad Borsos @Swatinem <arpad.borsos@googlemail.com>"
+        "Arpad Borsos @Swatinem <arpad.borsos@googlemail.com>",
+        "Ariya Hidayat @ariya",
+        "@markyen"
     ],
     "preferGlobal": true,
     "scripts": {
