@@ -1,6 +1,8 @@
 .npmignore
 .gitignore
+.jshintignore
 generate-pages.sh
+ignoring-code-for-coverage.md
 .travis.yml
 *.tar
 *.tgz
