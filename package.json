@@ -31,7 +31,7 @@
     ],
     "preferGlobal": true,
     "scripts": {
-        "pretest": "jshint --config ./node_modules/yui-lint/jshint.json lib/*js lib/command/*js lib/report/*js lib/store/*js lib/util/*js test/*js test/instrumentation/*js test/cli/*js test/other/*js",
+        "pretest": "jshint index.js lib/ test/",
         "test": "test/run.js",
         "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
@@ -61,8 +61,61 @@
         "rimraf": "2.2.x",
         "nodeunit": "0.8.x",
         "jshint": "2.4.x",
-        "yui-lint": "0.1.x",
         "requirejs": "2.x"
+    },
+    "jshintConfig": {
+        "bitwise": true,
+        "camelcase": false,
+        "curly": true,
+        "eqeqeq": true,
+        "forin": true,
+        "freeze": true,
+        "immed": true,
+        "latedef": true,
+        "maxlen": 150,
+        "newcap": true,
+        "noarg": true,
+        "nonbsp": true,
+        "nonew": true,
+        "plusplus": true,
+        "trailing": true,
+        "undef": true,
+        "unused": true,
+
+        "strict": false,
+
+        "asi": false,
+        "boss": false,
+        "debug": false,
+        "eqnull": false,
+        "esnext": false,
+        "evil": false,
+        "expr": false,
+        "funcscope": false,
+        "globalstrict": false,
+        "iterator": false,
+        "lastsemic": false,
+        "laxbreak": true,
+        "laxcomma": false,
+        "loopfunc": false,
+        "multistr": false,
+        "notypeof": false,
+        "proto": false,
+        "scripturl": false,
+        "smarttabs": false,
+        "shadow": false,
+        "sub": false,
+        "supernew": false,
+        "validthis": false,
+        "noyield": false,
+
+        "browser": true,
+        "node": true,
+
+        "nomen": false,
+        "onevar": true,
+        "passfail": false,
+        "white": false
     }
 }
 

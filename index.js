@@ -12,7 +12,6 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
 
 /*jslint nomen: true */
 var path = require('path'),
-    fs = require('fs'),
     Store = require('./lib/store'),
     Report = require('./lib/report'),
     meta = require('./lib/util/meta');

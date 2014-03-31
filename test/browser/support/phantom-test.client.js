@@ -7,7 +7,7 @@ var system = require('system'),
     files = args,
     done;
 
-console.log('Connecting to localhost, port: ' + port);
+console.log('Connecting to localhost, port: ' + port + ' (script=' + script + ')');
 console.log(files.length + ' files to be tested');
 
 page.onConsoleMessage = function (msg) { console.log(msg); };
