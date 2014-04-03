@@ -61,5 +61,13 @@ module.exports = {
             test.equal('', fs.readFileSync(path.resolve(OUTPUT_DIR, 'lcov.info'), 'utf8'));
             test.done();
         });
+    },
+    "should default to configuration value": function (test) {
+        test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+        run([ '--report', '--config', 'config.istanbul.yml' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
+            test.done();
+        });
     }
 };
