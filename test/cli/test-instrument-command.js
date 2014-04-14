@@ -33,6 +33,13 @@ module.exports = {
         rimraf.sync(OUTPUT_DIR);
         cb();
     },
+    "should accept raw javascript input from stdin": function (test) {
+        run([process.stdin], function (results) {
+            test.ok(results);
+            test.done();
+        });
+        process.stdin.end("var x = function () {};");
+    },
     "should work with default options for a single file": function (test) {
         run([ 'lib/foo.js' ], function (results) {
             test.ok(results.succeeded());
