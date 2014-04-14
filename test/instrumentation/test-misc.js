@@ -30,6 +30,34 @@ module.exports = {
             }
             test.done();
         }
+    },
+    "sourcemap generation": {
+        setUp: function (cb) {
+            instrumenter = new Instrumenter();
+            cb();
+        },
+        "lastSourceMap returns sourcemap (if available) for last instrumented file": function (test) {
+            var instrumenterOpts = instrumenter.opts.codegenerationoptions;
+            instrumenter.opts.codegenerationoptions = {
+                sourceMap: 'bar',
+                sourceMapWithCode: true
+            };
+            try {
+                instrumenter.instrumentSync('var foo = { a: 1 };');
+                if (typeof instrumenter.lastSourceMap() !== 'object') {
+                    test.fail('sourcemap should be available');
+                }
+
+                instrumenter.opts.codegenerationoptions = instrumenterOpts;
+                instrumenter.instrumentSync('var foo = { a: 1 };');
+                if (instrumenter.lastSourceMap() !== null) {
+                    test.fail('sourcemap should not be available');
+                }
+            } catch (ex) {
+                test.fail('instrumentation should have succeeded but did not');
+            }
+            test.done();
+        }
     }
 };
 
