@@ -4,7 +4,7 @@ Istanbul - a JS code coverage tool written in JS
 [![Build Status](https://secure.travis-ci.org/gotwarlost/istanbul.png)](http://travis-ci.org/gotwarlost/istanbul)
 [![Dependency Status](https://gemnasium.com/gotwarlost/istanbul.png)](https://gemnasium.com/gotwarlost/istanbul)
 
-[![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/) 
+[![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
 Features
 --------
@@ -109,6 +109,8 @@ The `cover` command
 The `cover` command can be used to get a coverage object and reports for any arbitrary
 node script. By default, coverage information is written under `./coverage` - this
 can be changed using command-line options.
+
+The `cover` command can also be passed an optional `--handle-sigint` flag to enable writing reports when a user triggers a manual SIGINT of the process that is being covered. This can be useful when you are generating coverage for a long lived process.
 
 The `test` command
 -------------------
@@ -219,5 +221,3 @@ Why the funky name?
 -------------------
 
 Since all the good ones are taken. Comes from the loose association of ideas across coverage, carpet-area coverage, the country that makes good carpets and so on...
-
-
