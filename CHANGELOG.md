@@ -3,6 +3,9 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.8</td><td>Upgrade esprima</td>
+</tr>
+<tr>
 <td>v0.2.7</td><td><ul>
     <li>Upgrade esprima</li>
     <li>Misc jshint fixes</li>
