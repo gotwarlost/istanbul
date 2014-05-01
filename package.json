@@ -46,7 +46,7 @@
         "url": "git://github.com/gotwarlost/istanbul.git"
     },
     "dependencies": {
-        "esprima": "1.1.x",
+        "esprima": "1.2.x",
         "escodegen": "1.3.x",
         "handlebars": "1.3.x",
         "mkdirp": "0.3.x",
