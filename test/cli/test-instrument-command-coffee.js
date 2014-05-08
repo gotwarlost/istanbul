@@ -8,7 +8,7 @@ var path = require('path'),
     INPUT_DIR_CC = path.join(__dirname, '../other/data-complete-copy/'),
     OUTPUT_DIR = path.resolve(process.cwd(), 'output'),
     COMMAND = 'instrument',
-    DIR = path.resolve(__dirname, 'sample-project'),
+    DIR = path.resolve(__dirname, 'sample-project-coffee'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
     run = helper.runCommand.bind(null, COMMAND),
@@ -17,7 +17,7 @@ var path = require('path'),
 fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
     var extension = path.extname(file);
 
-    if (extension === '.js') {
+    if (extension === '.js' || extension === '.coffee') {
         INPUT_DIR_JS_FILE_COUNT++;
     }
 });
@@ -27,37 +27,27 @@ module.exports = {
         rimraf.sync(OUTPUT_DIR);
         mkdirp.sync(OUTPUT_DIR);
         helper.resetOpts();
+        helper.setOpts({cwd: DIR});
         cb();
     },
     tearDown: function (cb) {
-        rimraf.sync(OUTPUT_DIR);
+        // rimraf.sync(OUTPUT_DIR);
         cb();
     },
     "should work with default options for a single file": function (test) {
-        run([ 'lib/foo.js' ], function (results) {
+        run([ 'lib/foo.coffee' ], function (results) {
             test.ok(results.succeeded());
             test.doesNotThrow(function () {
-                vm.createScript(results.stdout().join('\n'), path.resolve(DIR, 'lib', 'foo.js'));
+                vm.createScript(results.stdout().join('\n'), path.resolve(DIR, 'lib', 'foo.coffee'));
             }, "Invalid code generated; logging interference perhaps?");
-            test.done();
-        });
-    },
-    "should preserve comments in output": function (test) {
-        run([ 'lib/foo.js', '--preserve-comments' ], function (results) {
-            var code = results.stdout().join('\n');
-            test.ok(results.succeeded());
-            test.doesNotThrow(function () {
-                vm.createScript(code, path.resolve(DIR, 'lib', 'foo.js'));
-            }, "Invalid code generated; logging interference perhaps?");
-            test.ok(code.match(/\/\/ export what we need/), 'Could not find comment that should have been preserved');
             test.done();
         });
     },
     "should work with compact as default": function (test) {
-        run([ 'lib/foo.js' ], function (results) {
+        run([ 'lib/foo.coffee' ], function (results) {
             test.ok(results.succeeded());
             var compact = results.stdout().join('\n');
-            run([ 'lib/foo.js', '--no-compact' ], function (results2) {
+            run([ 'lib/foo.coffee', '--no-compact' ], function (results2) {
                 var full = results2.stdout().join('\n');
                 test.ok(full.length > compact.length);
                 test.done();
@@ -65,36 +55,22 @@ module.exports = {
         });
     },
     "should work with explicit output option for a single file": function (test) {
-        run([ 'lib/foo.js', '--output', path.resolve(OUTPUT_DIR, 'foo.js') ], function (results) {
+        run([ 'lib/foo.coffee', '--output', path.resolve(OUTPUT_DIR, 'foo.coffee') ], function (results) {
             test.ok(results.succeeded());
             test.doesNotThrow(function () {
-                vm.createScript(fs.readFileSync(path.resolve(OUTPUT_DIR, 'foo.js'), 'utf8'), path.resolve(DIR, 'lib', 'foo.js'));
+                vm.createScript(fs.readFileSync(path.resolve(OUTPUT_DIR, 'foo.coffee'), 'utf8'), path.resolve(DIR, 'lib', 'foo.coffee'));
             }, "Invalid code generated; logging interference perhaps?");
             test.done();
         });
     },
-    "should instrument multiple files": function (test) {
-        run([ 'lib', '--output', OUTPUT_DIR, '-v' ], function (results) {
-            test.ok(results.succeeded());
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'foo.js')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'bar.js')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'util', 'generate-names.js')));
-            test.equal(fs.readFileSync(path.resolve(DIR, 'lib', 'util', 'bad.js'), 'utf8'),
-                fs.readFileSync(path.resolve(OUTPUT_DIR, 'util', 'bad.js'), 'utf8'));
-            test.ok(results.grepOutput(/Processed: foo\.js/));
-            test.ok(results.grepOutput(/Processed \[\d+\] files in/));
-            test.ok(results.grepOutput(/The following 1 file\(s\) had errors and were copied as-is/));
-            test.done();
-        });
-    },
     "should instrument multiple files without errors": function (test) {
-        run([ 'lib', '--output', OUTPUT_DIR, '-x', '**/bad.js' ], function (results) {
+        run([ 'lib', '--output', OUTPUT_DIR, '-x', '**/bad.coffee' ], function (results) {
             test.ok(results.succeeded());
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'foo.js')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'bar.js')));
-            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'util', 'bad.js')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'foo.coffee')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'bar.coffee')));
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'util', 'bad.coffee')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'util', 'generate-names.js')));
-            test.ok(!results.grepOutput(/Processed: foo\.js/));
+            test.ok(!results.grepOutput(/Processed: foo\.coffee/));
             test.ok(results.grepOutput(/Processed \[\d+\] files in/));
             test.ok(!results.grepOutput(/The following 1 file\(s\) had errors and were copied as-is/));
             test.done();
@@ -102,7 +78,7 @@ module.exports = {
     },
     "should save baseline coverage when requested": function (test) {
         var covFile = path.resolve(OUTPUT_DIR, 'cov.json');
-        run([ 'lib/foo.js', '--save-baseline', '--baseline-file=' + covFile ], function (results) {
+        run([ 'lib/foo.coffee', '--save-baseline', '--baseline-file=' + covFile ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(covFile));
             test.ok(results.grepOutput(/Saving baseline coverage at/));
@@ -130,7 +106,7 @@ module.exports = {
             test.done();
         });
     },
-    "should not copy non js files when using no-complete-copy": function(test) {
+    "should not copy non js/coffee files when using no-complete-copy": function(test) {
         var inputFileCount;
 
         inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
@@ -144,7 +120,7 @@ module.exports = {
             test.done();
         });
     },
-    "should not copy non js files when not specifying complete-copy": function(test) {
+    "should not copy non js/coffee files when not specifying complete-copy": function(test) {
         // Backward compatibility test
         var inputFileCount;
 
@@ -159,7 +135,7 @@ module.exports = {
             test.done();
         });
     },
-    "should copy non js files when using complete-copy": function(test) {
+    "should copy non js/coffee files when using complete-copy": function(test) {
         var inputFileCount;
 
         inputFileCount = fs.readdirSync(INPUT_DIR_CC).length;
