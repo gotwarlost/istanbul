@@ -49,11 +49,11 @@
         "esprima": "1.2.x",
         "escodegen": "1.3.x",
         "handlebars": "1.3.x",
-        "mkdirp": "0.3.x",
+        "mkdirp": "0.5.x",
         "nopt": "2.2.x",
         "fileset": "0.1.x",
         "which": "1.0.x",
-        "async": "0.2.x",
+        "async": "0.8.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
         "resolve": "0.6.x",
@@ -62,7 +62,7 @@
     "devDependencies": {
         "rimraf": "2.2.x",
         "nodeunit": "0.8.x",
-        "jshint": "2.4.x",
+        "jshint": "2.5.x",
         "requirejs": "2.x"
     },
     "jshintConfig": {
