@@ -3,6 +3,10 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.9</td><td>Fix #202</td>
+</tr>
+<tr>
+<tr>
 <td>v0.2.8</td><td>Upgrade esprima</td>
 </tr>
 <tr>
