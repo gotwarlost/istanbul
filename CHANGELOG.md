@@ -3,6 +3,9 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.10</td><td>Add flag to handle sigints and dump coverage, thanks to @samccone</td>
+</tr>
+<tr>
 <td>v0.2.9</td><td>Fix #202</td>
 </tr>
 <tr>

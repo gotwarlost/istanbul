@@ -29,7 +29,8 @@
         "@jxiaodev",
         "Arpad Borsos @Swatinem <arpad.borsos@googlemail.com>",
         "Ariya Hidayat @ariya",
-        "@markyen"
+        "@markyen",
+        "Sam Saccone @samccone <sam@samx.it>"
     ],
     "preferGlobal": true,
     "scripts": {
