@@ -62,7 +62,7 @@
     "devDependencies": {
         "rimraf": "2.2.x",
         "nodeunit": "0.8.x",
-        "jshint": "2.5.x",
+        "jshint": "2.4.x",
         "requirejs": "2.x"
     },
     "jshintConfig": {
