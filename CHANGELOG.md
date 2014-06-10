@@ -3,6 +3,9 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.11</td><td>Allow source map generation, thanks to @jason0x43</td>
+</tr>
+<tr>
 <td>v0.2.10</td><td>Add flag to handle sigints and dump coverage, thanks to @samccone</td>
 </tr>
 <tr>
