@@ -154,7 +154,7 @@
             margin-left: 0.5em;
         }
         div.coverage-summary .yui3-datatable-sort-indicator {
-            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+            background: url("//yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
         }
         div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
             background-position: 0 -20px;
