@@ -3,6 +3,9 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.12</td><td>Text summary as valid markdown, thanks to @smikes</td>
+</tr>
+<tr>
 <td>v0.2.11</td><td>Allow source map generation, thanks to @jason0x43</td>
 </tr>
 <tr>
