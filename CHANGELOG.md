@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.13</td><td>Add `--preload-sources` option to `cover` command to make
+code not required by tests to appear in the coverage report.
+</td>
+</tr>
+<tr>
 <td>v0.2.12</td><td>Text summary as valid markdown, thanks to @smikes</td>
 </tr>
 <tr>
