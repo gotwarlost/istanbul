@@ -16,3 +16,7 @@ branches:
 script:
     - npm test --cover
 
+before_install:
+  - npm update -q
+
+
