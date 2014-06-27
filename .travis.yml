@@ -17,6 +17,6 @@ script:
     - npm test --cover
 
 before_install:
-  - env
+  - if [[ `node --version` == *v0.8* ]]; then npm install -g npm; fi
 
 
