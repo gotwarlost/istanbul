@@ -114,7 +114,7 @@ module.exports = {
         "code with non-string filename should not be transformed": function (test) {
             var s;
             hook.hookRunInThisContext(matcher, scriptTransformer);
-            s = require('vm').runInThisContext('(function () { return 10; }());', 23);
+            s = require('vm').runInThisContext('(function () { return 10; }());', {});
             test.equals(10, s);
             hook.unhookCreateScript();
             test.done();
