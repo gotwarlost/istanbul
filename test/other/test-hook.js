@@ -83,5 +83,41 @@ module.exports = {
             test.equals(10, s.runInThisContext());
             test.done();
         }
-    }
+    },
+	"when runInThisContext is hooked": {
+        setUp: function (cb) {
+            currentHook = require('vm').runInThisContext;
+            cb();
+        },
+        tearDown: function (cb) {
+            require('vm').runInThisContext = currentHook;
+            cb();
+        },
+        "foo should be transformed": function (test) {
+            var s;
+            hook.hookRunInThisContext(matcher, scriptTransformer);
+            s = require('vm').runInThisContext('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(42, s);
+            hook.unhookRunInThisContext();
+            s = require('vm').runInThisContext('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(10, s);
+            test.done();
+        },
+        "code with no filename should not be transformed": function (test) {
+            var s;
+            hook.hookRunInThisContext(matcher, scriptTransformer);
+            s = require('vm').runInThisContext('(function () { return 10; }());');
+            test.equals(10, s);
+            hook.unhookCreateScript();
+            test.done();
+        },
+        "code with non-string filename should not be transformed": function (test) {
+            var s;
+            hook.hookRunInThisContext(matcher, scriptTransformer);
+            s = require('vm').runInThisContext('(function () { return 10; }());', {});
+            test.equals(10, s);
+            hook.unhookCreateScript();
+            test.done();
+        }
+	},
 };
