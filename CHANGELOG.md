@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.14</td><td>Fix hook to deal with non-string/ missing filenames
+(thanks to @jason0x43), update dependencies
+</td>
+</tr>
+<tr>
 <td>v0.2.13</td><td>Add `--preload-sources` option to `cover` command to make
 code not required by tests to appear in the coverage report.
 </td>
