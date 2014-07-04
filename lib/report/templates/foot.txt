@@ -6,7 +6,7 @@
 {{#if prettify}}
 <script src="{{prettify.js}}"></script>
 {{/if}}
-<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script src="//yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
     YUI().use('datatable', function (Y) {
