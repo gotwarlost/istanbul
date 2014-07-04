@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.15</td><td>make link protocols relative so they don't break on https connections
+(thanks to @yasyf)
+</td>
+</tr>
+<tr>
 <td>v0.2.14</td><td>Fix hook to deal with non-string/ missing filenames
 (thanks to @jason0x43), update dependencies
 </td>
