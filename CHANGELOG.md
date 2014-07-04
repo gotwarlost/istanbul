@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.2.16</td><td>Make YUI links https-always since relative links break local
+filesystem use-case
+</td>
+</tr>
+<tr>
 <td>v0.2.15</td><td>make link protocols relative so they don't break on https connections
 (thanks to @yasyf)
 </td>
