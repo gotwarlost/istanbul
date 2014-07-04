@@ -76,6 +76,19 @@ module.exports = {
             test.done();
         });
     },
+    "should print only when requested": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/run.js', '--print-only'], function (results) {
+            // We can't test for non-existence of OUTPUT_DIR because it gets
+            // created in beforeEach instead of by the library. Looking for 
+            // cover.json should be enough to confirm.
+            test.ok(results.succeeded());
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.done();
+        });
+    },
     "should use non-default report format when requested": function (test) {
         helper.setOpts({ lazyHook : true });
         run([ 'test/run.js', '--report', 'lcovonly' ], function (results) {
