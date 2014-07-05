@@ -1,0 +1,4 @@
+reporting:
+  reports:
+    - cobertura
+    - html
