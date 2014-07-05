@@ -12,6 +12,7 @@ var handlebars = require('handlebars'),
     },
     esprimaSource = reader('..', '..', '..', 'node_modules', 'esprima', 'esprima.js'),
     escodegenSource = reader('..', '..', '..', 'node_modules', 'escodegen', 'escodegen.browser.min.js'),
+    yuiSource = reader('vendor', 'yui-support.js'),
     vm = require('vm'),
     server;
 
@@ -19,6 +20,11 @@ function handleInitialPage(request, response) {
     response.setHeader('content-type', 'text/html');
     var template = templateFor('index.html');
     response.end(template({ demo: server.demo ? 'yes' : '' }));
+}
+
+function handleYui(request, response) {
+    response.setHeader('content-type', 'application/javascript');
+    response.end(yuiSource, 'utf8');
 }
 
 function handleEsprima(request, response) {
@@ -106,6 +112,9 @@ function handler(request, response) {
         switch (request.url) {
         case '/':
             handleInitialPage(request, response);
+            break;
+        case '/_yui.js':
+            handleYui(request, response);
             break;
         case '/_esprima.js':
             handleEsprima(request, response);

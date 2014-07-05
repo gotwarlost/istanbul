@@ -1,3 +1,5 @@
 lib/vendor
 test/cli/sample-project
+test/browser/support/vendor
+
 
