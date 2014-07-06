@@ -86,7 +86,6 @@ module.exports = {
         run([ '--config', 'config.istanbul.yml' ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.done();
         });
     }
