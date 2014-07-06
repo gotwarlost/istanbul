@@ -2,3 +2,5 @@ reporting:
   reports:
     - cobertura
     - html
+    - lcovonly
+
