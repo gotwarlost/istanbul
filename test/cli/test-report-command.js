@@ -74,7 +74,7 @@ module.exports = {
     },
     "should run multiple reports when requested": function (test) {
         test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-        run([ 'lcovonly', 'cobertura' ], function (results) {
+        run([ '-v', 'lcovonly', 'cobertura', 'cobertura' ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
@@ -85,7 +85,7 @@ module.exports = {
         test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
         run([ '--config', 'config.istanbul.yml' ], function (results) {
             test.ok(results.succeeded());
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'foo.xml')));
             test.done();
         });
     }
