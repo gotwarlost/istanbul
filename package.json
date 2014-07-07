@@ -61,7 +61,8 @@
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
         "resolve": "0.7.x",
-        "js-yaml": "3.x"
+        "js-yaml": "3.x",
+        "once": "1.x"
     },
     "devDependencies": {
         "rimraf": "2.2.x",
