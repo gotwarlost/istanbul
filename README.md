@@ -173,6 +173,30 @@ allowed.
 Library usage
 -------------
 
+Instrumenter Example:
+
+``` js
+var Instrumenter = require('istanbul').Instrumenter;
+    instrumenter = new Instrumenter(),
+    instrumentedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+console.log(instrumentedCode);
+```
+
+Output:
+
+```
+
+var __cov_ECtNDGoq6USQiIaViK8Qyw = (Function('return this'))();
+if (!__cov_ECtNDGoq6USQiIaViK8Qyw.__coverage__) { __cov_ECtNDGoq6USQiIaViK8Qyw.__coverage__ = {}; }
+__cov_ECtNDGoq6USQiIaViK8Qyw = __cov_ECtNDGoq6USQiIaViK8Qyw.__coverage__;
+if (!(__cov_ECtNDGoq6USQiIaViK8Qyw['filename.js'])) {
+   __cov_ECtNDGoq6USQiIaViK8Qyw['filename.js'] = {"path":"filename.js","s":{"1":1,"2":0},"b":{},"f":{"1":0},"fnMap":{"1":{"name":"meaningOfLife","line":1,"loc":{"start":{"line":1,"column":-15},"end":{"line":1,"column":25}}}},"statementMap":{"1":{"start":{"line":1,"column":-15},"end":{"line":1,"column":39}},"2":{"start":{"line":1,"column":27},"end":{"line":1,"column":37}}},"branchMap":{}};
+}
+__cov_ECtNDGoq6USQiIaViK8Qyw = __cov_ECtNDGoq6USQiIaViK8Qyw['filename.js'];
+function meaningOfLife(){__cov_ECtNDGoq6USQiIaViK8Qyw.f['1']++;__cov_ECtNDGoq6USQiIaViK8Qyw.s['2']++;return 42;}
+
+```
+
 All the features of istanbul can be accessed as a library using its [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
 Changelog
