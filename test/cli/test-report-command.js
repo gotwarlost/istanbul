@@ -10,7 +10,8 @@ var path = require('path'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
     run = helper.runCommand.bind(null, COMMAND),
-    runCover = helper.runCommand.bind(null, COVER_COMMAND);
+    runCover = helper.runCommand.bind(null, COVER_COMMAND),
+    Report = require('../../lib/report');
 
 module.exports = {
     setUp: function (cb) {
@@ -72,9 +73,9 @@ module.exports = {
             test.done();
         });
     },
-    "should run multiple reports when requested": function (test) {
+    "should run all possible reports when requested": function (test) {
         test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-        run([ '-v', 'lcovonly', 'cobertura', 'cobertura' ], function (results) {
+        run([ '-v' ].concat(Report.getReportList()), function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));

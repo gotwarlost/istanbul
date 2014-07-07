@@ -8,7 +8,8 @@ var path = require('path'),
     OUTPUT_DIR = path.resolve(DIR, 'coverage'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
-    run = helper.runCommand.bind(null, COMMAND);
+    run = helper.runCommand.bind(null, COMMAND),
+    Report = require('../../lib/report');
 
 module.exports = {
     setUp: function (cb) {
@@ -33,6 +34,23 @@ module.exports = {
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
             test.ok(filtered.length === 2);
+            test.done();
+        });
+    },
+    "should cover tests running every possible report": function (test) {
+        helper.setOpts({ lazyHook : true });
+        var cmd = [ 'test/run.js', '-v', '--print=none' ];
+        Report.getReportList().forEach(function (r) {
+            cmd.push('--report=' + r);
+        });
+        run(cmd, function (results) {
+            test.ok(results.succeeded());
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage-final.json')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'clover.xml')));
             test.done();
         });
     },
