@@ -17,5 +17,6 @@ bower_components/
 .idea/
 html-report/
 build/
+public/
 
 npm-debug.log
