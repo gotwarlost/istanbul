@@ -3,6 +3,22 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.0</td>
+<td>
+    The *reports* release. **Potentially backwards-incompatible** if you are using
+    undocumented features or custom report implementations.
+    <ul>
+        <li>Change report command line to support multiple reports, add back-compat processing with warnings</li>
+        <li>Enable `report` command to read report list from config, thanks to @piuccio</li>
+        <li>Support multiple reports for `cover` and `report` commands</li>
+        <li>Support per-report config options in configuration file</li>
+        <li>Turn reports into event emitters so they can signal `done`</li>
+        <li>Add `Reporter` class to be able to generate multiple reports</li>
+        <li>Add a bunch of API docs, refactor README</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.2.16</td><td>Make YUI links https-always since relative links break local
 filesystem use-case
 </td>
