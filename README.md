@@ -11,8 +11,8 @@
 * [The command line](#the-command-line)
 * [Ignoring code for coverage](#ignoring-code-for-coverage)
 * [API](#api)
-* [Changelog]((https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md))
-* License and credits](#license)
+* [Changelog](https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md)
+* [License and credits](#license)
 
 ### Features
 
