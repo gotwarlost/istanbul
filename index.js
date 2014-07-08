@@ -22,7 +22,8 @@ require('./lib/register-plugins');
  *      var istanbul = require('istanbul');
  *
  *
- * @class istanbul
+ * @class Istanbul
+ * @static
  * @module main
  * @main main
  */
@@ -52,7 +53,7 @@ module.exports = {
     /**
      * the hook module
      * @property hook
-     * @type hook
+     * @type Hook
      * @static
      */
     hook: require('./lib/hook'),
@@ -66,7 +67,7 @@ module.exports = {
     /**
      * the config module
      * @property config
-     * @type config
+     * @type Config
      * @static
      */
     config: require('./lib/config'),
@@ -115,10 +116,32 @@ module.exports = {
     matcherFor: require('./lib/util/file-matcher').matcherFor,
     /**
      * the version of the library
-     * @property {String} VERSION
+     * @property VERSION
+     * @type String
      * @static
      */
     VERSION: meta.VERSION,
+    /**
+     * the abstract Writer class
+     * @property Writer
+     * @type Writer
+     * @static
+     */
+    Writer: require('./lib/util/writer').Writer,
+    /**
+     * the abstract ContentWriter class
+     * @property ContentWriter
+     * @type ContentWriter
+     * @static
+     */
+    ContentWriter: require('./lib/util/writer').ContentWriter,
+    /**
+     * the concrete FileWriter class
+     * @property FileWriter
+     * @type FileWriter
+     * @static
+     */
+    FileWriter: require('./lib/util/file-writer'),
     //undocumented
     _yuiLoadHook: require('./lib/util/yui-load-hook'),
     //undocumented
