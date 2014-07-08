@@ -1,5 +1,4 @@
-Istanbul - a JS code coverage tool written in JS
-================================================
+## Istanbul - a JS code coverage tool written in JS
 
 [![Build Status](https://secure.travis-ci.org/gotwarlost/istanbul.png)](http://travis-ci.org/gotwarlost/istanbul)
 [![Dependency Status](https://gemnasium.com/gotwarlost/istanbul.png)](https://gemnasium.com/gotwarlost/istanbul)
@@ -7,27 +6,22 @@ Istanbul - a JS code coverage tool written in JS
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
-Features
---------
+### Features
 
 * All-javascript instrumentation library that tracks **statement, branch,
-and function coverage** and reverse-engineers **line coverage** with 100% fidelity.
+and function coverage**.
 * **Module loader hooks** to instrument code on the fly
 * **Command line tools** to run node unit tests "with coverage turned on" and no cooperation
 whatsoever from the test runner
-* **HTML**, **LCOV**, **Cobertura**, **TeamCity**, and **Clover** reporting.
-* Ability to use as **middleware** when serving JS files that need to be tested on the browser.
+* Multiple report formats: **HTML**, **LCOV**, **Cobertura** and more.
+* Ability to use as [middleware](https://github.com/gotwarlost/istanbul-middleware) when serving JS files that need to be tested on the browser.
 * Can be used on the **command line** as well as a **library**
 * Based on the awesome `esprima` parser and the equally awesome `escodegen` code generator
-* Well-tested on node 0.4.x, 0.6.x, 0.8.x and the browser (instrumentation library only)
+* Well-tested on node (prev, current and next versions) and the browser (instrumentation library only)
 
-Installing
-----------
+### Getting started
 
     $ npm install -g istanbul
-
-Getting started
----------------
 
 The best way to see it in action is to run node unit tests. Say you have a test
 script `test.js` that runs all tests for your node project without coverage.
@@ -41,22 +35,22 @@ and this should produce a `coverage.json`, `lcov.info` and `lcov-report/*html` u
 
 Sample of code coverage reports produced by this tool (for this tool!):
 
-* [HTML reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html)
-* [Standard LCOV reports](http://gotwarlost.github.com/istanbul/public/coverage/std-lcov/index.html) (using `genhtml` on the lcov trace file)
+[HTML reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html)
 
-Use cases
----------
+### Use cases
 
 Supports the following use cases and more
 
 * transparent coverage of nodejs unit tests
-* ability to use in an <code>npm test</code> script for conditional coverage
-* instrumentation of files in batch mode for browser tests (using yeti for example)
+* instrumentation/ reporting of files in batch mode for browser tests
 * Server side code coverage for nodejs by embedding it as custom middleware
 
+### Configuring
 
-Ignoring code for coverage
---------------------------
+Drop a `.istanbul.yml` file at the top of the source tree to configure istanbul.
+`istanbul help config` tells you more about the config file format.
+
+### Ignoring code for coverage
 
 * Skip an `if` or `else` path with `/* istanbul ignore if */` or `/* istanbul ignore else */` respectively.
 * For all other cases, skip the next 'thing' in the source with: `/* istanbul ignore next */`
@@ -101,8 +95,7 @@ Available commands are:
 
 Command names can be abbreviated as long as the abbreviation is unambiguous
 
-The `cover` command
--------------------
+#### The `cover` command
 
     $ istanbul cover my-test-script.js -- my test args
     # note the -- between the command name and the arguments to be passed
@@ -111,10 +104,11 @@ The `cover` command can be used to get a coverage object and reports for any arb
 node script. By default, coverage information is written under `./coverage` - this
 can be changed using command-line options.
 
-The `cover` command can also be passed an optional `--handle-sigint` flag to enable writing reports when a user triggers a manual SIGINT of the process that is being covered. This can be useful when you are generating coverage for a long lived process.
+The `cover` command can also be passed an optional `--handle-sigint` flag to 
+enable writing reports when a user triggers a manual SIGINT of the process that is 
+being covered. This can be useful when you are generating coverage for a long lived process.
 
-The `test` command
--------------------
+#### The `test` command
 
 The `test` command has almost the same behavior as the `cover` command, except that
 it skips coverage unless the `npm_config_coverage` environment variable is set.
@@ -141,52 +135,38 @@ And:
 **Note**: This needs `node 0.6` or better to work. `npm` for `node 0.4.x` does
 not support the `--coverage` flag.
 
-The `instrument` command
-------------------------
+#### The `instrument` command
 
-Instruments a single JS file or an entire directory tree and produces an output directory tree with instrumented code. This should not be required for running node unit tests but is useful for tests to be run on the browser (using `yeti` for example).
+Instruments a single JS file or an entire directory tree and produces an output 
+directory tree with instrumented code. This should not be required for running node 
+unit tests but is useful for tests to be run on the browser (using `yeti` for example).
 
-The `report` command
--------------------
+#### The `report` command
 
-Writes reports using `coverage*.json` files as the source of coverage information. Reports are available in the following formats:
+Writes reports using `coverage*.json` files as the source of coverage information. 
+Reports are available in multiple formats and can be individually configured
+using the istanbul config file. See `istanbul help report` for more details.
 
-* html - produces a bunch of HTML files with annotated source code
-* lcovonly - produces an lcov.info file
-* lcov - produces html + lcov files. This is the default format
-* cobertura - produces a cobertura-coverage.xml file for easy Hudson integration
-* text-summary - produces a compact text summary of coverage, typically to console
-* text - produces a detailed text table with coverage for all files
-* teamcity - produces service messages to report code coverage to TeamCity
-* clover - produces a clover.xml file to integrate with Atlassian Clover
-
-Additional report formats may be plugged in at the library level.
-
-The `check-coverage` command
-----------------------------
+#### The `check-coverage` command
 
 Checks the coverage of statements, functions, branches, and lines against the
 provided thresholds. Postive thresholds are taken to be the minimum percentage
 required and negative numbers are taken to be the number of uncovered entities
 allowed.
 
-Library usage
--------------
+### Library usage
 
 All the features of istanbul can be accessed as a library using its [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
-Changelog
----------
+### Changelog
 
 Changelog has been moved [here](https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md).
 
-License
--------
+### License
 
 istanbul is licensed under the [BSD License](http://github.com/gotwarlost/istanbul/raw/master/LICENSE).
 
-Third-party libraries
----------------------
+### Third-party libraries
 
 The following third-party libraries are used by this module:
 
@@ -207,19 +187,17 @@ The following third-party libraries are used by this module:
 * wordwrap: https://github.com/substack/node-wordwrap - for prettier help
 * prettify: http://code.google.com/p/google-code-prettify/ - for syntax colored HTML reports. Files checked in under `lib/vendor/`
 
-Inspired by
------------
+### Inspired by
 
 * YUI test coverage - https://github.com/yui/yuitest - the grand-daddy of JS coverage tools. Istanbul has been specifically designed to offer an alternative to this library with an easy migration path.
 * cover: https://github.com/itay/node-cover - the inspiration for the `cover` command, modeled after the `run` command in that tool. The coverage methodology used by istanbul is quite different, however
 
-Shout out to
-------------
+### Shout out to
 
    * [mfncooper](https://github.com/mfncooper) - for great brainstorming discussions
    * [reid](https://github.com/reid), [davglass](https://github.com/davglass), the YUI dudes, for interesting conversations, encouragement, support and gentle pressure to get it done :)
 
-Why the funky name?
--------------------
+### Why the funky name?
 
-Since all the good ones are taken. Comes from the loose association of ideas across coverage, carpet-area coverage, the country that makes good carpets and so on...
+Since all the good ones are taken. Comes from the loose association of ideas across 
+coverage, carpet-area coverage, the country that makes good carpets and so on...
