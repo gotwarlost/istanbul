@@ -156,7 +156,8 @@ All the features of istanbul can be accessed as a library.
 ```javascript
     var Instrumenter = new require('istanbul').Instrumenter();
     
-    var generatedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+    var generatedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }',
+        'filename.js');
 ```
 
 #### Generate reports given a bunch of coverage JSON objects
