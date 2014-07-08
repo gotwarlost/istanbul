@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/report/text.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/CloverReport.html">CloverReport</a></li>
+            
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
+            
+                <li><a href="../classes/Collector.html">Collector</a></li>
+            
+                <li><a href="../classes/Config.html">Config</a></li>
+            
+                <li><a href="../classes/Configuration.html">Configuration</a></li>
+            
+                <li><a href="../classes/ContentWriter.html">ContentWriter</a></li>
+            
+                <li><a href="../classes/FileWriter.html">FileWriter</a></li>
+            
+                <li><a href="../classes/Hook.html">Hook</a></li>
+            
+                <li><a href="../classes/HookOptions.html">HookOptions</a></li>
+            
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
+            
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
+            
+                <li><a href="../classes/InstrumentOptions.html">InstrumentOptions</a></li>
+            
+                <li><a href="../classes/Istanbul.html">Istanbul</a></li>
+            
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
+            
+                <li><a href="../classes/JsonSummaryReport.html">JsonSummaryReport</a></li>
+            
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+            
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
+            
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
+            
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
+            
+                <li><a href="../classes/NoneReport.html">NoneReport</a></li>
+            
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+            
+                <li><a href="../classes/Report.html">Report</a></li>
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+                <li><a href="../classes/ReportingOptions.html">ReportingOptions</a></li>
+            
+                <li><a href="../classes/Store.html">Store</a></li>
+            
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
+            
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
+            
+                <li><a href="../classes/Writer.html">Writer</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/config.html">config</a></li>
+            
+                <li><a href="../modules/io.html">io</a></li>
+            
+                <li><a href="../modules/main.html">main</a></li>
+            
+                <li><a href="../modules/report.html">report</a></li>
+            
+                <li><a href="../modules/store.html">store</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/report/text.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+var path = require(&#x27;path&#x27;),
+    mkdirp = require(&#x27;mkdirp&#x27;),
+    util = require(&#x27;util&#x27;),
+    fs = require(&#x27;fs&#x27;),
+    defaults = require(&#x27;./common/defaults&#x27;),
+    Report = require(&#x27;./index&#x27;),
+    TreeSummarizer = require(&#x27;../util/tree-summarizer&#x27;),
+    utils = require(&#x27;../object-utils&#x27;),
+    PCT_COLS = 10,
+    TAB_SIZE = 3,
+    DELIM = &#x27; |&#x27;,
+    COL_DELIM = &#x27;-|&#x27;;
+
+/**
+ * a &#x60;Report&#x60; implementation that produces text output in a detailed table.
+ *
+ * Usage
+ * -----
+ *
+ *      var report = require(&#x27;istanbul&#x27;).Report.create(&#x27;text&#x27;);
+ *
+ * @class TextReport
+ * @extends Report
+ * @module report
+ * @constructor
+ * @param {Object} opts optional
+ * @param {String} [opts.dir] the directory in which to the text coverage report will be written, when writing to a file
+ * @param {String} [opts.file] the filename for the report. When omitted, the report is written to console
+ * @param {Number} [opts.maxCols] the max column width of the report. By default, the width of the report is adjusted based on the length of the paths
+ *              to be reported.
+ */
+function TextReport(opts) {
+    Report.call(this);
+    opts = opts || {};
+    this.dir = opts.dir || process.cwd();
+    this.file = opts.file;
+    this.summary = opts.summary;
+    this.maxCols = opts.maxCols || 0;
+    this.watermarks = opts.watermarks || defaults.watermarks();
+}
+
+TextReport.TYPE = &#x27;text&#x27;;
+util.inherits(TextReport, Report);
+
+function padding(num, ch) {
+    var str = &#x27;&#x27;,
+        i;
+    ch = ch || &#x27; &#x27;;
+    for (i = 0; i &lt; num; i += 1) {
+        str += ch;
+    }
+    return str;
+}
+
+function fill(str, width, right, tabs, clazz) {
+    tabs = tabs || 0;
+    str = String(str);
+
+    var leadingSpaces = tabs * TAB_SIZE,
+        remaining = width - leadingSpaces,
+        leader = padding(leadingSpaces),
+        fmtStr = &#x27;&#x27;,
+        fillStr,
+        strlen = str.length;
+
+    if (remaining &gt; 0) {
+        if (remaining &gt;= strlen) {
+            fillStr = padding(remaining - strlen);
+            fmtStr = right ? fillStr + str : str + fillStr;
+        } else {
+            fmtStr = str.substring(strlen - remaining);
+            fmtStr = &#x27;... &#x27; + fmtStr.substring(4);
+        }
+    }
+
+    fmtStr = defaults.colorize(fmtStr, clazz);
+    return leader + fmtStr;
+}
+
+function formatName(name, maxCols, level, clazz) {
+    return fill(name, maxCols, false, level, clazz);
+}
+
+function formatPct(pct, clazz) {
+    return fill(pct, PCT_COLS, true, 0, clazz);
+}
+
+function nodeName(node) {
+    return node.displayShortName() || &#x27;All files&#x27;;
+}
+
+
+function tableHeader(maxNameCols) {
+    var elements = [];
+    elements.push(formatName(&#x27;File&#x27;, maxNameCols, 0));
+    elements.push(formatPct(&#x27;% Stmts&#x27;));
+    elements.push(formatPct(&#x27;% Branches&#x27;));
+    elements.push(formatPct(&#x27;% Funcs&#x27;));
+    elements.push(formatPct(&#x27;% Lines&#x27;));
+    return elements.join(&#x27; |&#x27;) + &#x27; |&#x27;;
+}
+
+function tableRow(node, maxNameCols, level, watermarks) {
+    var name = nodeName(node),
+        statements = node.metrics.statements.pct,
+        branches = node.metrics.branches.pct,
+        functions = node.metrics.functions.pct,
+        lines = node.metrics.lines.pct,
+        elements = [];
+
+    elements.push(formatName(name, maxNameCols, level, defaults.classFor(&#x27;statements&#x27;, node.metrics, watermarks)));
+    elements.push(formatPct(statements, defaults.classFor(&#x27;statements&#x27;, node.metrics, watermarks)));
+    elements.push(formatPct(branches, defaults.classFor(&#x27;branches&#x27;, node.metrics, watermarks)));
+    elements.push(formatPct(functions, defaults.classFor(&#x27;functions&#x27;, node.metrics, watermarks)));
+    elements.push(formatPct(lines, defaults.classFor(&#x27;lines&#x27;, node.metrics, watermarks)));
+
+    return elements.join(DELIM) + DELIM;
+}
+
+function findNameWidth(node, level, last) {
+    last = last || 0;
+    level = level || 0;
+    var idealWidth = TAB_SIZE * level + nodeName(node).length;
+    if (idealWidth &gt; last) {
+        last = idealWidth;
+    }
+    node.children.forEach(function (child) {
+        last = findNameWidth(child, level + 1, last);
+    });
+    return last;
+}
+
+function makeLine(nameWidth) {
+    var name = padding(nameWidth, &#x27;-&#x27;),
+        pct = padding(PCT_COLS, &#x27;-&#x27;),
+        elements = [];
+
+    elements.push(name);
+    elements.push(pct);
+    elements.push(pct);
+    elements.push(pct);
+    elements.push(pct);
+    return elements.join(COL_DELIM) + COL_DELIM;
+}
+
+function walk(node, nameWidth, array, level, watermarks) {
+    var line;
+    if (level === 0) {
+        line = makeLine(nameWidth);
+        array.push(line);
+        array.push(tableHeader(nameWidth));
+        array.push(line);
+    } else {
+        array.push(tableRow(node, nameWidth, level, watermarks));
+    }
+    node.children.forEach(function (child) {
+        walk(child, nameWidth, array, level + 1, watermarks);
+    });
+    if (level === 0) {
+        array.push(line);
+        array.push(tableRow(node, nameWidth, level, watermarks));
+        array.push(line);
+    }
+}
+
+Report.mix(TextReport, {
+    synopsis: function () {
+        return &#x27;text report that prints a coverage line for every file, typically to console&#x27;;
+    },
+    getDefaultConfig: function () {
+        return { file: null, maxCols: 0 };
+    },
+    writeReport: function (collector /*, sync */) {
+        var summarizer = new TreeSummarizer(),
+            tree,
+            root,
+            nameWidth,
+            statsWidth = 4 * ( PCT_COLS + 2),
+            maxRemaining,
+            strings = [],
+            text;
+
+        collector.files().forEach(function (key) {
+            summarizer.addFileCoverageSummary(key, utils.summarizeFileCoverage(collector.fileCoverageFor(key)));
+        });
+        tree = summarizer.getTreeSummary();
+        root = tree.root;
+        nameWidth = findNameWidth(root);
+        if (this.maxCols &gt; 0) {
+            maxRemaining = this.maxCols - statsWidth - 2;
+            if (nameWidth &gt; maxRemaining) {
+                nameWidth = maxRemaining;
+            }
+        }
+        walk(root, nameWidth, strings, 0, this.watermarks);
+        text = strings.join(&#x27;\n&#x27;) + &#x27;\n&#x27;;
+        if (this.file) {
+            mkdirp.sync(this.dir);
+            fs.writeFileSync(path.join(this.dir, this.file), text, &#x27;utf8&#x27;);
+        } else {
+            console.log(text);
+        }
+        this.emit(&#x27;done&#x27;);
+    }
+});
+
+module.exports = TextReport;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

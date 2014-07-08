@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/CloverReport.html">CloverReport</a></li>
+            
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
+            
+                <li><a href="../classes/Collector.html">Collector</a></li>
+            
+                <li><a href="../classes/Config.html">Config</a></li>
+            
+                <li><a href="../classes/Configuration.html">Configuration</a></li>
+            
+                <li><a href="../classes/ContentWriter.html">ContentWriter</a></li>
+            
+                <li><a href="../classes/FileWriter.html">FileWriter</a></li>
+            
+                <li><a href="../classes/Hook.html">Hook</a></li>
+            
+                <li><a href="../classes/HookOptions.html">HookOptions</a></li>
+            
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
+            
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
+            
+                <li><a href="../classes/InstrumentOptions.html">InstrumentOptions</a></li>
+            
+                <li><a href="../classes/Istanbul.html">Istanbul</a></li>
+            
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
+            
+                <li><a href="../classes/JsonSummaryReport.html">JsonSummaryReport</a></li>
+            
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+            
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
+            
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
+            
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
+            
+                <li><a href="../classes/NoneReport.html">NoneReport</a></li>
+            
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+            
+                <li><a href="../classes/Report.html">Report</a></li>
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+                <li><a href="../classes/ReportingOptions.html">ReportingOptions</a></li>
+            
+                <li><a href="../classes/Store.html">Store</a></li>
+            
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
+            
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
+            
+                <li><a href="../classes/Writer.html">Writer</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/config.html">config</a></li>
+            
+                <li><a href="../modules/io.html">io</a></li>
+            
+                <li><a href="../modules/main.html">main</a></li>
+            
+                <li><a href="../modules/report.html">report</a></li>
+            
+                <li><a href="../modules/store.html">store</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+*/
+
+/*jslint nomen: true */
+var path = require(&#x27;path&#x27;),
+    Store = require(&#x27;./lib/store&#x27;),
+    Report = require(&#x27;./lib/report&#x27;),
+    meta = require(&#x27;./lib/util/meta&#x27;);
+
+//register our standard plaugins
+require(&#x27;./lib/register-plugins&#x27;);
+
+/**
+ * the top-level API for &#x60;istanbul&#x60;. provides access to the key libraries in
+ * istanbul so you can write your own tools using &#x60;istanbul&#x60; as a library.
+ *
+ * Usage
+ * -----
+ *
+ *      var istanbul = require(&#x27;istanbul&#x27;);
+ *
+ *
+ * @class Istanbul
+ * @static
+ * @module main
+ * @main main
+ */
+
+module.exports = {
+    /**
+     * the Instrumenter class.
+     * @property Instrumenter
+     * @type Instrumenter
+     * @static
+     */
+    Instrumenter: require(&#x27;./lib/instrumenter&#x27;),
+    /**
+     * the Store class.
+     * @property  Store
+     * @type Store
+     * @static
+     */
+    Store: Store,
+    /**
+     * the Collector class
+     * @property  Collector
+     * @type Collector
+     * @static
+     */
+    Collector: require(&#x27;./lib/collector&#x27;),
+    /**
+     * the hook module
+     * @property hook
+     * @type Hook
+     * @static
+     */
+    hook: require(&#x27;./lib/hook&#x27;),
+    /**
+     * the Report class
+     * @property Report
+     * @type Report
+     * @static
+     */
+    Report: Report,
+    /**
+     * the config module
+     * @property config
+     * @type Config
+     * @static
+     */
+    config: require(&#x27;./lib/config&#x27;),
+    /**
+     * the Reporter class
+     * @property Reporter
+     * @type Reporter
+     * @static
+     */
+    Reporter: require(&#x27;./lib/reporter&#x27;),
+    /**
+     * utility for processing coverage objects
+     * @property utils
+     * @type ObjectUtils
+     * @static
+     */
+    utils: require(&#x27;./lib/object-utils&#x27;),
+    /**
+     * asynchronously returns a function that can match filesystem paths.
+     * The function returned in the callback may be passed directly as a &#x60;matcher&#x60;
+     * to the functions in the &#x60;hook&#x60; module.
+     *
+     * When no options are passed, the match function is one that matches all JS
+     * files under the current working directory except ones under &#x60;node_modules&#x60;
+     *
+     * Match patterns are &#x60;ant&#x60;-style patterns processed using the &#x60;fileset&#x60; library.
+     * Examples not provided due to limitations in putting asterisks inside
+     * jsdoc comments. Please refer to tests under &#x60;test/other/test-matcher.js&#x60;
+     * for examples.
+     *
+     * @method matcherFor
+     * @static
+     * @param {Object} options Optional. Lookup options.
+     * @param {String} [options.root] the root of the filesystem tree under
+     *     which to match files. Defaults to &#x60;process.cwd()&#x60;
+     * @param {Array} [options.includes] an array of include patterns to match.
+     *     Defaults to all JS files under the root.
+     * @param {Array} [options.excludes] and array of exclude patterns. File paths
+     *     matching these patterns will be excluded by the returned matcher.
+     *     Defaults to files under &#x60;node_modules&#x60; found anywhere under root.
+     * @param {Function(err, matchFunction)} callback  The callback that is
+     *      called with two arguments. The first is an &#x60;Error&#x60; object in case
+     *      of errors or a falsy value if there were no errors. The second
+     *      is a function that may be use as a matcher.
+     */
+    matcherFor: require(&#x27;./lib/util/file-matcher&#x27;).matcherFor,
+    /**
+     * the version of the library
+     * @property VERSION
+     * @type String
+     * @static
+     */
+    VERSION: meta.VERSION,
+    /**
+     * the abstract Writer class
+     * @property Writer
+     * @type Writer
+     * @static
+     */
+    Writer: require(&#x27;./lib/util/writer&#x27;).Writer,
+    /**
+     * the abstract ContentWriter class
+     * @property ContentWriter
+     * @type ContentWriter
+     * @static
+     */
+    ContentWriter: require(&#x27;./lib/util/writer&#x27;).ContentWriter,
+    /**
+     * the concrete FileWriter class
+     * @property FileWriter
+     * @type FileWriter
+     * @static
+     */
+    FileWriter: require(&#x27;./lib/util/file-writer&#x27;),
+    //undocumented
+    _yuiLoadHook: require(&#x27;./lib/util/yui-load-hook&#x27;),
+    //undocumented
+    TreeSummarizer: require(&#x27;./lib/util/tree-summarizer&#x27;),
+    //undocumented
+    assetsDir: path.resolve(__dirname, &#x27;lib&#x27;, &#x27;vendor&#x27;)
+};
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

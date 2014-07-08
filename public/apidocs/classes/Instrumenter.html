@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Instrumenter - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/CloverReport.html">CloverReport</a></li>
+            
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
+            
+                <li><a href="../classes/Collector.html">Collector</a></li>
+            
+                <li><a href="../classes/Config.html">Config</a></li>
+            
+                <li><a href="../classes/Configuration.html">Configuration</a></li>
+            
+                <li><a href="../classes/ContentWriter.html">ContentWriter</a></li>
+            
+                <li><a href="../classes/FileWriter.html">FileWriter</a></li>
+            
+                <li><a href="../classes/Hook.html">Hook</a></li>
+            
+                <li><a href="../classes/HookOptions.html">HookOptions</a></li>
+            
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
+            
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
+            
+                <li><a href="../classes/InstrumentOptions.html">InstrumentOptions</a></li>
+            
+                <li><a href="../classes/Istanbul.html">Istanbul</a></li>
+            
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
+            
+                <li><a href="../classes/JsonSummaryReport.html">JsonSummaryReport</a></li>
+            
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+            
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
+            
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
+            
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
+            
+                <li><a href="../classes/NoneReport.html">NoneReport</a></li>
+            
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+            
+                <li><a href="../classes/Report.html">Report</a></li>
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+                <li><a href="../classes/ReportingOptions.html">ReportingOptions</a></li>
+            
+                <li><a href="../classes/Store.html">Store</a></li>
+            
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
+            
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
+            
+                <li><a href="../classes/Writer.html">Writer</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/config.html">config</a></li>
+            
+                <li><a href="../modules/io.html">io</a></li>
+            
+                <li><a href="../modules/main.html">main</a></li>
+            
+                <li><a href="../modules/report.html">report</a></li>
+            
+                <li><a href="../modules/store.html">store</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Instrumenter Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_instrumenter.js.html#l285"><code>lib&#x2F;instrumenter.js:285</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/main.html">main</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>mechanism to instrument code for coverage. It uses the <code>esprima</code> and
+<code>escodegen</code> libraries for JS parsing and code generation respectively.</p>
+<p>Works on <code>node</code> as well as the browser.</p>
+<h2 id="usage-on-nodejs">Usage on nodejs</h2>
+<pre class="code prettyprint"><code> var instrumenter = new require(&#39;istanbul&#39;).Instrumenter(),
+     changed = instrumenter.instrumentSync(&#39;function meaningOfLife() { return 42; }&#39;, &#39;filename.js&#39;);</code></pre>
+<h2 id="usage-in-a-browser">Usage in a browser</h2>
+<p>Load <code>esprima.js</code>, <code>escodegen.js</code> and <code>instrumenter.js</code> (this file) using <code>script</code> tags or other means.</p>
+<p>Create an instrumenter object as:</p>
+<pre class="code prettyprint"><code> var instrumenter = new Instrumenter(),
+     changed = instrumenter.instrumentSync(&#39;function meaningOfLife() { return 42; }&#39;, &#39;filename.js&#39;);</code></pre>
+<p>Aside from demonstration purposes, it is unclear why you would want to instrument code in a browser.</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_Instrumenter" class="method item">
+    <h3 class="name"><code>Instrumenter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l285"><code>lib&#x2F;instrumenter.js:285</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional. Configuration options.</p>
+
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[coverageVariable]</code>
+                                    <span class="type">String</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>the global variable name to use for
+     tracking coverage. Defaults to <code>__coverage__</code></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[embedSource]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>whether to embed the source code of every
+     file as an array in the file coverage object for that file. Defaults to <code>false</code></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[preserveComments]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>whether comments should be preserved in the output. Defaults to <code>false</code></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[noCompact]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>emit readable code when set. Defaults to <code>false</code></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[noAutoWrap]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>do not automatically wrap the source in
+     an anonymous function before covering it. By default, code is wrapped in
+     an anonymous function before it is parsed. This is done because
+     some nodejs libraries have <code>return</code> statements outside of
+     a function which is technically invalid Javascript and causes the parser to fail.
+     This construct, however, works correctly in node since module loading
+     is done in the context of an anonymous function.</p>
+<p>Note that the semantics of the code <em>returned</em> by the instrumenter does not change in any way.
+The function wrapper is &quot;unwrapped&quot; before the instrumented code is generated.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[codeGenerationOptions]</code>
+                                    <span class="type">Object</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>an object that is directly passed to the <code>escodegen</code>
+     library as configuration for code generation. The <code>noCompact</code> setting is not honored when this
+     option is specified</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[debug]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>assist in debugging. Currently, the only effect of
+     setting this option is a pretty-print of the coverage variable. Defaults to <code>false</code></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[walkDebug]</code>
+                                    <span class="type">Boolean</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>assist in debugging of the AST walker used by this class.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_instrument">instrument</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_instrumentASTSync">instrumentASTSync</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_instrumentSync">instrumentSync</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_lastFileCoverage">lastFileCoverage</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_lastSourceMap">lastSourceMap</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_instrument" class="method item">
+    <h3 class="name"><code>instrument</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>code</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>filename</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l522"><code>lib&#x2F;instrumenter.js:522</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Callback based instrumentation. Note that this still executes synchronously in the same process tick
+and calls back immediately. It only provides the options for callback style error handling as
+opposed to a <code>try-catch</code> style and nothing more. Implemented as a wrapper over <code>instrumentSync</code></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">code</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the code to be instrumented as a String</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">filename</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional. The name of the file from which
+ the code was read. A temporary filename is generated when not specified.
+ Not specifying a filename is only useful for unit tests and demonstrations
+ of this library.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type">Function(err, instrumentedCode)</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>the callback function</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_instrumentASTSync" class="method item">
+    <h3 class="name"><code>instrumentASTSync</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>program</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>filename</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>originalCode</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l456"><code>lib&#x2F;instrumenter.js:456</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>synchronous instrumentation method that instruments an AST instead.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">program</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the AST to be instrumented</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">filename</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional. The name of the file from which
+ the code was read. A temporary filename is generated when not specified.
+ Not specifying a filename is only useful for unit tests and demonstrations
+ of this library.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">originalCode</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the original code corresponding to the AST,
+ used for embedding the source into the coverage object</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_instrumentSync" class="method item">
+    <h3 class="name"><code>instrumentSync</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>code</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>filename</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l380"><code>lib&#x2F;instrumenter.js:380</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>synchronous instrumentation method. Throws when illegal code is passed to it</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">code</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the code to be instrumented as a String</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">filename</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional. The name of the file from which
+ the code was read. A temporary filename is generated when not specified.
+ Not specifying a filename is only useful for unit tests and demonstrations
+ of this library.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_lastFileCoverage" class="method item">
+    <h3 class="name"><code>lastFileCoverage</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l547"><code>lib&#x2F;instrumenter.js:547</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>returns the file coverage object for the code that was instrumented
+just before calling this method. Note that this represents a
+&quot;zero-coverage&quot; object which is not even representative of the code
+being loaded in node or a browser (which would increase the statement
+counts for mainline code).</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>a &quot;zero-coverage&quot; file coverage object for the code last instrumented
+by this instrumenter</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_lastSourceMap" class="method item">
+    <h3 class="name"><code>lastSourceMap</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_instrumenter.js.html#l560"><code>lib&#x2F;instrumenter.js:560</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>returns the source map object for the code that was instrumented
+just before calling this method.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>a source map object for the code last instrumented
+by this instrumenter</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

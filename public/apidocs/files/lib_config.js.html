@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/config.js - The Istanbul API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="The Istanbul API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/CloverReport.html">CloverReport</a></li>
+            
+                <li><a href="../classes/CoberturaReport.html">CoberturaReport</a></li>
+            
+                <li><a href="../classes/Collector.html">Collector</a></li>
+            
+                <li><a href="../classes/Config.html">Config</a></li>
+            
+                <li><a href="../classes/Configuration.html">Configuration</a></li>
+            
+                <li><a href="../classes/ContentWriter.html">ContentWriter</a></li>
+            
+                <li><a href="../classes/FileWriter.html">FileWriter</a></li>
+            
+                <li><a href="../classes/Hook.html">Hook</a></li>
+            
+                <li><a href="../classes/HookOptions.html">HookOptions</a></li>
+            
+                <li><a href="../classes/HtmlReport.html">HtmlReport</a></li>
+            
+                <li><a href="../classes/Instrumenter.html">Instrumenter</a></li>
+            
+                <li><a href="../classes/InstrumentOptions.html">InstrumentOptions</a></li>
+            
+                <li><a href="../classes/Istanbul.html">Istanbul</a></li>
+            
+                <li><a href="../classes/JsonReport.html">JsonReport</a></li>
+            
+                <li><a href="../classes/JsonSummaryReport.html">JsonSummaryReport</a></li>
+            
+                <li><a href="../classes/LcovOnlyReport.html">LcovOnlyReport</a></li>
+            
+                <li><a href="../classes/LcovReport.html">LcovReport</a></li>
+            
+                <li><a href="../classes/LookupStore.html">LookupStore</a></li>
+            
+                <li><a href="../classes/MemoryStore.html">MemoryStore</a></li>
+            
+                <li><a href="../classes/NoneReport.html">NoneReport</a></li>
+            
+                <li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+            
+                <li><a href="../classes/Report.html">Report</a></li>
+            
+                <li><a href="../classes/Reporter.html">Reporter</a></li>
+            
+                <li><a href="../classes/ReportingOptions.html">ReportingOptions</a></li>
+            
+                <li><a href="../classes/Store.html">Store</a></li>
+            
+                <li><a href="../classes/TeamcityReport.html">TeamcityReport</a></li>
+            
+                <li><a href="../classes/TextReport.html">TextReport</a></li>
+            
+                <li><a href="../classes/TextSummaryReport.html">TextSummaryReport</a></li>
+            
+                <li><a href="../classes/TmpStore.html">TmpStore</a></li>
+            
+                <li><a href="../classes/Writer.html">Writer</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/config.html">config</a></li>
+            
+                <li><a href="../modules/io.html">io</a></li>
+            
+                <li><a href="../modules/main.html">main</a></li>
+            
+                <li><a href="../modules/report.html">report</a></li>
+            
+                <li><a href="../modules/store.html">store</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/config.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+ Copyright (c) 2013, Yahoo! Inc.  All rights reserved.
+ Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+var path = require(&#x27;path&#x27;),
+    fs = require(&#x27;fs&#x27;),
+    CAMEL_PATTERN = /([a-z])([A-Z])/g,
+    YML_PATTERN = /\.ya?ml$/,
+    yaml = require(&#x27;js-yaml&#x27;),
+    defaults = require(&#x27;./report/common/defaults&#x27;);
+
+function defaultConfig() {
+    var ret = {
+        verbose: false,
+        instrumentation: {
+            root: &#x27;.&#x27;,
+            &#x27;default-excludes&#x27;: true,
+            excludes: [],
+            &#x27;embed-source&#x27;: false,
+            variable: &#x27;__coverage__&#x27;,
+            compact: true,
+            &#x27;preserve-comments&#x27;: false,
+            &#x27;complete-copy&#x27;: false,
+            &#x27;save-baseline&#x27;: false,
+            &#x27;baseline-file&#x27;: &#x27;./coverage/coverage-baseline.json&#x27;,
+            &#x27;preload-sources&#x27;: false
+        },
+        reporting: {
+            print: &#x27;summary&#x27;,
+            reports: [ &#x27;lcov&#x27; ],
+            dir: &#x27;./coverage&#x27;
+        },
+        hooks: {
+            &#x27;hook-run-in-context&#x27;: false,
+            &#x27;post-require-hook&#x27;: null,
+            &#x27;handle-sigint&#x27;: false
+        }
+    };
+    ret.reporting.watermarks = defaults.watermarks();
+    ret.reporting[&#x27;report-config&#x27;] = defaults.defaultReportConfig();
+    return ret;
+}
+
+function dasherize(word) {
+    return word.replace(CAMEL_PATTERN, function (match, lch, uch) {
+        return lch + &#x27;-&#x27; + uch.toLowerCase();
+    });
+}
+function isScalar(v) {
+    if (v === null) { return true; }
+    return v !== undefined &amp;&amp; !Array.isArray(v) &amp;&amp; typeof v !== &#x27;object&#x27;;
+}
+
+function isObject(v) {
+    return typeof v === &#x27;object&#x27; &amp;&amp; v !== null &amp;&amp; !Array.isArray(v);
+}
+
+function mergeObjects(explicit, template) {
+
+    var ret = {};
+
+    Object.keys(template).forEach(function (k) {
+        var v1 = template[k],
+            v2 = explicit[k];
+
+        if (Array.isArray(v1)) {
+            ret[k] = Array.isArray(v2) &amp;&amp; v2.length &gt; 0 ? v2 : v1;
+        } else if (isObject(v1)) {
+            v2 = isObject(v2) ? v2 : {};
+            ret[k] = mergeObjects(v2, v1);
+        } else {
+            ret[k] = isScalar(v2) ? v2 : v1;
+        }
+    });
+    return ret;
+}
+
+function mergeDefaults(explicit, implicit) {
+    return mergeObjects(explicit || {}, implicit);
+}
+
+function addMethods() {
+    var args = Array.prototype.slice.call(arguments),
+        cons = args.shift();
+
+    args.forEach(function (arg) {
+        var method = arg,
+            property = dasherize(arg);
+        cons.prototype[method] = function () {
+            return this.config[property];
+        };
+    });
+}
+
+/**
+ * Object that returns instrumentation options
+ * @class InstrumentOptions
+ * @module config
+ * @constructor
+ * @param config the instrumentation part of the config object
+ */
+function InstrumentOptions(config) {
+    this.config = config;
+}
+
+/**
+ * returns if default excludes should be turned on. Used by the &#x60;cover&#x60; command.
+ * @method defaultExcludes
+ * @return {Boolean} true if default excludes should be turned on
+ */
+/**
+ * returns if non-JS files should be copied during instrumentation. Used by the
+ * &#x60;instrument&#x60; command.
+ * @method completeCopy
+ * @return {Boolean} true if non-JS files should be copied
+ */
+/**
+ * returns if the source should be embedded in the instrumented code. Used by the
+ * &#x60;instrument&#x60; command.
+ * @method embedSource
+ * @return {Boolean} true if the source should be embedded in the instrumented code
+ */
+/**
+ * the coverage variable name to use. Used by the &#x60;instrument&#x60; command.
+ * @method variable
+ * @return {String} the coverage variable name to use
+ */
+/**
+ * returns if the output should be compact JS. Used by the &#x60;instrument&#x60; command.
+ * @method compact
+ * @return {Boolean} true if the output should be compact
+ */
+/**
+ * returns if comments should be preserved in the generated JS. Used by the
+ * &#x60;cover&#x60; and &#x60;instrument&#x60; commands.
+ * @method preserveComments
+ * @return {Boolean} true if comments should be preserved in the generated JS
+ */
+/**
+ * returns if a zero-coverage baseline file should be written as part of
+ * instrumentation. This allows reporting to display numbers for files that have
+ * no tests. Used by the  &#x60;instrument&#x60; command.
+ * @method saveBaseline
+ * @return {Boolean} true if a baseline coverage file should be written.
+ */
+/**
+ * Sets the baseline coverage filename. Used by the  &#x60;instrument&#x60; command.
+ * @method baselineFile
+ * @return {String} the name of the baseline coverage file.
+ */
+
+
+addMethods(InstrumentOptions,
+    &#x27;defaultExcludes&#x27;, &#x27;completeCopy&#x27;,
+    &#x27;embedSource&#x27;, &#x27;variable&#x27;, &#x27;compact&#x27;, &#x27;preserveComments&#x27;,
+    &#x27;saveBaseline&#x27;, &#x27;baselineFile&#x27;,
+    &#x27;preloadSources&#x27;);
+
+/**
+ * returns the root directory used by istanbul which is typically the root of the
+ * source tree. Used by the &#x60;cover&#x60; and &#x60;report&#x60; commands.
+ * @method root
+ * @return {String} the root directory used by istanbul.
+ */
+InstrumentOptions.prototype.root = function () { return path.resolve(this.config.root); };
+/**
+ * returns an array of fileset patterns that should be excluded for instrumentation.
+ * Used by the &#x60;instrument&#x60; and &#x60;cover&#x60; commands.
+ * @method excludes
+ * @return {Array} an array of fileset patterns that should be excluded for
+ *  instrumentation.
+ */
+InstrumentOptions.prototype.excludes = function (excludeTests) {
+    var defs;
+    if (this.defaultExcludes()) {
+        defs = [ &#x27;**/node_modules/**&#x27; ];
+        if (excludeTests) {
+            defs = defs.concat([&#x27;**/test/**&#x27;, &#x27;**/tests/**&#x27;]);
+        }
+        return defs.concat(this.config.excludes);
+    }
+    return this.config.excludes;
+};
+
+/**
+ * Object that returns reporting options
+ * @class ReportingOptions
+ * @module config
+ * @constructor
+ * @param config the reporting part of the config object
+ */
+function ReportingOptions(config) {
+    this.config = config;
+}
+
+/**
+ * returns the kind of information to be printed on the console. May be one
+ * of &#x60;summary&#x60;, &#x60;detail&#x60;, &#x60;both&#x60; or &#x60;none&#x60;. Used by the
+ * &#x60;cover&#x60; command.
+ * @method print
+ * @return {String} the kind of information to print to the console at the end
+ * of the &#x60;cover&#x60; command execution.
+ */
+/**
+ * returns a list of reports that should be generated at the end of a run. Used
+ * by the &#x60;cover&#x60; and &#x60;report&#x60; commands.
+ * @method reports
+ * @return {Array} an array of reports that should be produced
+ */
+/**
+ * returns the directory under which reports should be generated. Used by the
+ * &#x60;cover&#x60; and &#x60;report&#x60; commands.
+ *
+ * @method dir
+ * @return {String} the directory under which reports should be generated.
+ */
+/**
+ * returns an object that has keys that are report format names and values that are objects
+ * containing detailed configuration for each format. Running &#x60;istanbul help config&#x60;
+ * will give you all the keys per report format that can be overridden.
+ * Used by the &#x60;cover&#x60; and &#x60;report&#x60; commands.
+ * @method reportConfig
+ * @return {Object} detailed report configuration per report format.
+ */
+addMethods(ReportingOptions, &#x27;print&#x27;, &#x27;reports&#x27;, &#x27;dir&#x27;, &#x27;reportConfig&#x27;);
+
+function isInvalidMark(v, key) {
+    var prefix = &#x27;Watermark for [&#x27; + key + &#x27;] :&#x27;;
+
+    if (v.length !== 2) {
+        return prefix + &#x27;must be an array of length 2&#x27;;
+    }
+    v[0] = Number(v[0]);
+    v[1] = Number(v[1]);
+
+    if (isNaN(v[0]) || isNaN(v[1])) {
+        return prefix + &#x27;must have valid numbers&#x27;;
+    }
+    if (v[0] &lt; 0 || v[1] &lt; 0) {
+        return prefix + &#x27;must be positive numbers&#x27;;
+    }
+    if (v[1] &gt; 100) {
+        return prefix + &#x27;cannot exceed 100&#x27;;
+    }
+    if (v[1] &lt;= v[0]) {
+        return prefix + &#x27;low must be less than high&#x27;;
+    }
+    return null;
+}
+
+/**
+ * returns the low and high watermarks to be used to designate whether coverage
+ * is &#x60;low&#x60;, &#x60;medium&#x60; or &#x60;high&#x60;. Statements, functions, branches and lines can
+ * have independent watermarks. These are respected by all reports
+ * that color for low, medium and high coverage. See the default configuration for exact syntax
+ * using &#x60;istanbul help config&#x60;. Used by the &#x60;cover&#x60; and &#x60;report&#x60; commands.
+ *
+ * @method watermarks
+ * @return {Object} an object containing low and high watermarks for statements,
+ *  branches, functions and lines.
+ */
+ReportingOptions.prototype.watermarks = function () {
+    var v = this.config.watermarks,
+        defs = defaults.watermarks(),
+        ret = {};
+
+    Object.keys(defs).forEach(function (k) {
+        var mark = v[k], //it will already be a non-zero length array because of the way the merge works
+            message = isInvalidMark(mark, k);
+        if (message) {
+            console.error(message);
+            ret[k] = defs[k];
+        } else {
+            ret[k] = mark;
+        }
+    });
+    return ret;
+};
+
+/**
+ * Object that returns hook options. Note that istanbul does not provide an
+ * option to hook &#x60;require&#x60;. This is always done by the &#x60;cover&#x60; command.
+ * @class HookOptions
+ * @module config
+ * @constructor
+ * @param config the hooks part of the config object
+ */
+function HookOptions(config) {
+    this.config = config;
+}
+
+/**
+ * returns if &#x60;vm.runInThisContext&#x60; needs to be hooked, in addition to the standard
+ * &#x60;require&#x60; hooks added by istanbul. This should be true for code that uses
+ * RequireJS for example. Used by the &#x60;cover&#x60; command.
+ * @method hookRunInContext
+ * @return {Boolean} true if &#x60;vm.runInThisContext&#x60; needs to be hooked for coverage
+ */
+/**
+ * returns a path to JS file or a dependent module that should be used for
+ * post-processing files after they have been required. See the &#x60;yui-istanbul&#x60; module for
+ * an example of a post-require hook. This particular hook modifies the yui loader when
+ * that file is required to add istanbul interceptors. Use by the &#x60;cover&#x60; command
+ *
+ * @method postRequireHook
+ * @return {String} a path to a JS file or the name of a node module that needs
+ * to be used as a &#x60;require&#x60; post-processor
+ */
+/**
+ * returns if istanbul needs to add a SIGINT (control-c, usually) handler to
+ * save coverage information. Useful for getting code coverage out of processes
+ * that run forever and need a SIGINT to terminate.
+ * @method handleSigint
+ * @return {Boolean} true if SIGINT needs to be hooked to write coverage information
+ */
+
+addMethods(HookOptions, &#x27;hookRunInContext&#x27;, &#x27;postRequireHook&#x27;, &#x27;handleSigint&#x27;);
+
+/**
+ * represents the istanbul configuration and provides sub-objects that can
+ * return instrumentation, reporting and hook options respectively.
+ * Usage
+ * -----
+ *
+ *      var configObj = require(&#x27;istanbul&#x27;).config.loadFile();
+ *
+ *      console.log(configObj.reporting.reports());
+ *
+ * @class Configuration
+ * @module config
+ * @param {Object} obj  the base object to use as the configuration
+ * @param {Object} overrides optional - override attributes that are merged into
+ *  the base config
+ * @constructor
+ */
+function Configuration(obj, overrides) {
+
+    var config = mergeDefaults(obj, defaultConfig());
+    if (isObject(overrides)) {
+        config = mergeDefaults(overrides, config);
+    }
+    if (config.verbose) {
+        console.error(&#x27;Using configuration&#x27;);
+        console.error(&#x27;-------------------&#x27;);
+        console.error(yaml.safeDump(config, { indent: 4, flowLevel: 3 }));
+        console.error(&#x27;-------------------\n&#x27;);
+    }
+    this.verbose = config.verbose;
+    this.instrumentation = new InstrumentOptions(config.instrumentation);
+    this.reporting = new ReportingOptions(config.reporting);
+    this.hooks = new HookOptions(config.hooks);
+    //this.thresholds = new ThresholdOptions(config.thresholds);
+}
+
+/**
+ * true if verbose logging is required
+ * @property verbose
+ * @type Boolean
+ */
+/**
+ * instrumentation options
+ * @property instrumentation
+ * @type InstrumentOptions
+ */
+/**
+ * reporting options
+ * @property reporting
+ * @type ReportingOptions
+ */
+/**
+ * hook options
+ * @property hooks
+ * @type HookOptions
+ */
+
+
+function loadFile(file, overrides) {
+    var defaultConfigFile = path.resolve(&#x27;.istanbul.yml&#x27;),
+        configObject;
+
+    if (file) {
+        if (!fs.existsSync(file)) {
+            throw new Error(&#x27;Invalid configuration file specified:&#x27; + file);
+        }
+    } else {
+        if (fs.existsSync(defaultConfigFile)) {
+            file = defaultConfigFile;
+        }
+    }
+
+    if (file) {
+        console.error(&#x27;Loading config: &#x27; + file);
+        configObject = file.match(YML_PATTERN) ?
+            yaml.safeLoad(fs.readFileSync(file, &#x27;utf8&#x27;), { filename: file }) :
+            require(path.resolve(file));
+    }
+
+    return new Configuration(configObject, overrides);
+}
+
+function loadObject(obj, overrides) {
+    return new Configuration(obj, overrides);
+}
+
+/**
+ * methods to load the configuration object.
+ * Usage
+ * -----
+ *
+ *      var config = require(&#x27;istanbul&#x27;).config,
+ *          configObj = config.loadFile();
+ *
+ *      console.log(configObj.reporting.reports());
+ *
+ * @class Config
+ * @module main
+ * @static
+ */
+module.exports = {
+    /**
+     * loads the specified configuration file with optional overrides. Throws
+     * when a file is specified and it is not found.
+     * @method loadFile
+     * @static
+     * @param {String} file the file to load. If falsy, the default config file, if present, is loaded.
+     *  If not a default config is used.
+     * @param {Object} overrides - an object with override keys that are merged into the
+     *  config object loaded
+     * @return {Configuration} the config object with overrides applied
+     */
+    loadFile: loadFile,
+    /**
+     * loads the specified configuration object with optional overrides.
+     * @method loadObject
+     * @static
+     * @param {Object} obj the object to use as the base configuration.
+     * @param {Object} overrides - an object with override keys that are merged into the
+     *  config object
+     * @return {Configuration} the config object with overrides applied
+     */
+    loadObject: loadObject,
+    /**
+     * returns the default configuration object. Note that this is a plain object
+     * and not a &#x60;Configuration&#x60; instance.
+     * @method defaultConfig
+     * @static
+     * @return {Object} an object that represents the default config
+     */
+    defaultConfig: defaultConfig
+};
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
