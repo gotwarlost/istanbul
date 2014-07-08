@@ -154,7 +154,7 @@ All the features of istanbul can be accessed as a library.
 #### Instrument code
 
 ```javascript
-    var Instrumenter = new require('istanbul').Instrumenter();
+    var instrumenter = new require('istanbul').Instrumenter();
     
     var generatedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }',
         'filename.js');
