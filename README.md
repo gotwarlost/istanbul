@@ -6,6 +6,13 @@
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
+* [Features and use cases][features]
+* [Getting started and configuration][getting-started]
+* [The command line][the-command-line]
+* [Ignoring code for coverage][ignoring-code-for-coverage]
+* [API][api]
+* [Changelog, license and credits][changelog]
+
 ### Features
 
 * All-javascript instrumentation library that tracks **statement, branch,
@@ -18,6 +25,14 @@ whatsoever from the test runner
 * Can be used on the **command line** as well as a **library**
 * Based on the awesome `esprima` parser and the equally awesome `escodegen` code generator
 * Well-tested on node (prev, current and next versions) and the browser (instrumentation library only)
+
+### Use cases
+
+Supports the following use cases and more
+
+* transparent coverage of nodejs unit tests
+* instrumentation/ reporting of files in batch mode for browser tests
+* Server side code coverage for nodejs by embedding it as [custom middleware](https://github.com/gotwarlost/istanbul-middleware)
 
 ### Getting started
 
@@ -37,34 +52,22 @@ Sample of code coverage reports produced by this tool (for this tool!):
 
 [HTML reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html)
 
-### Use cases
-
-Supports the following use cases and more
-
-* transparent coverage of nodejs unit tests
-* instrumentation/ reporting of files in batch mode for browser tests
-* Server side code coverage for nodejs by embedding it as custom middleware
 
 ### Configuring
 
 Drop a `.istanbul.yml` file at the top of the source tree to configure istanbul.
 `istanbul help config` tells you more about the config file format.
 
-### Ignoring code for coverage
-
-* Skip an `if` or `else` path with `/* istanbul ignore if */` or `/* istanbul ignore else */` respectively.
-* For all other cases, skip the next 'thing' in the source with: `/* istanbul ignore next */`
-
-See [ignoring-code-for-coverage.md](ignoring-code-for-coverage.md) for the spec.
-
-The command line
-----------------
+### The command line
 
     $ istanbul help
 
 gives you detailed help on all commands.
 
-Usage: istanbul help <command>
+```
+Usage: istanbul help config | <command>
+
+`config` provides help with istanbul configuration
 
 Available commands are:
 
@@ -94,6 +97,7 @@ Available commands are:
 
 
 Command names can be abbreviated as long as the abbreviation is unambiguous
+```
 
 #### The `cover` command
 
@@ -113,33 +117,14 @@ being covered. This can be useful when you are generating coverage for a long li
 The `test` command has almost the same behavior as the `cover` command, except that
 it skips coverage unless the `npm_config_coverage` environment variable is set.
 
-This helps you set up conditional coverage for tests. In this case you would
-have a `package.json` that looks as follows.
-
-    {
-        "name": "my-awesome-lib",
-        "version": "1.0",
-        "script": {
-            "test": "istanbul test my-test-file.js"
-        }
-    }
-
-Then:
-
-    $ npm test # will run tests without coverage
-
-And:
-
-    $ npm test --coverage # will run tests with coverage
-
-**Note**: This needs `node 0.6` or better to work. `npm` for `node 0.4.x` does
-not support the `--coverage` flag.
+**This command is deprecated** since the latest versions of npm do not seem to
+set the `npm_config_coverage` variable.
 
 #### The `instrument` command
 
 Instruments a single JS file or an entire directory tree and produces an output 
 directory tree with instrumented code. This should not be required for running node 
-unit tests but is useful for tests to be run on the browser (using `yeti` for example).
+unit tests but is useful for tests to be run on the browser.
 
 #### The `report` command
 
@@ -150,11 +135,19 @@ using the istanbul config file. See `istanbul help report` for more details.
 #### The `check-coverage` command
 
 Checks the coverage of statements, functions, branches, and lines against the
-provided thresholds. Postive thresholds are taken to be the minimum percentage
+provided thresholds. Positive thresholds are taken to be the minimum percentage
 required and negative numbers are taken to be the number of uncovered entities
 allowed.
 
-### Library usage
+### Ignoring code for coverage
+
+* Skip an `if` or `else` path with `/* istanbul ignore if */` or `/* istanbul ignore else */` respectively.
+* For all other cases, skip the next 'thing' in the source with: `/* istanbul ignore next */`
+
+See [ignoring-code-for-coverage.md](ignoring-code-for-coverage.md) for the spec.
+
+
+### API
 
 All the features of istanbul can be accessed as a library using its [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
@@ -201,3 +194,4 @@ The following third-party libraries are used by this module:
 
 Since all the good ones are taken. Comes from the loose association of ideas across 
 coverage, carpet-area coverage, the country that makes good carpets and so on...
+
