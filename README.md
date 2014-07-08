@@ -149,7 +149,36 @@ See [ignoring-code-for-coverage.md](ignoring-code-for-coverage.md) for the spec.
 
 ### API
 
-All the features of istanbul can be accessed as a library using its [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
+All the features of istanbul can be accessed as a library.
+ 
+#### Instrument code
+
+```javascript
+    var Instrumenter = new require('istanbul').Instrumenter();
+    
+    var generatedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }', 'filename.js');
+```
+
+#### Generate reports given a bunch of coverage JSON objects
+
+```javascript
+    var istanbul = require('istanbul'), 
+        collector = new istanbul.Collector(),
+        reporter = new istanbul.Reporter(),
+        sync = false;
+
+    collector.add(obj1);
+    collector.add(obj2); //etc.
+
+    reporter.add('text');
+    reporter.addAll([ 'lcov', 'clover' ]);
+    reporter.writeReport(collector, sync, function () {
+        console.log('All reports generated');
+    });
+```
+
+For the gory details consult the [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
+
 
 ### Changelog
 
