@@ -7,11 +7,11 @@
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
 * [Features and use cases](#features)
-* [Getting started and configuration][getting-started]
-* [The command line][the-command-line]
-* [Ignoring code for coverage][ignoring-code-for-coverage]
-* [API][api]
-* [Changelog, license and credits][changelog]
+* [Getting started and configuration](#getting-started)
+* [The command line](#the-command-line)
+* [Ignoring code for coverage](#ignoring-code-for-coverage)
+* [API](#api)
+* [Changelog, license and credits](#changelog)
 
 ### Features
 
