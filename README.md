@@ -11,7 +11,8 @@
 * [The command line](#the-command-line)
 * [Ignoring code for coverage](#ignoring-code-for-coverage)
 * [API](#api)
-* [Changelog, license and credits](#changelog)
+* [Changelog]((https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md))
+* License and credits](#license)
 
 ### Features
 
@@ -180,10 +181,6 @@ All the features of istanbul can be accessed as a library.
 
 For the gory details consult the [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
-
-### Changelog
-
-Changelog has been moved [here](https://github.com/gotwarlost/istanbul/blob/master/CHANGELOG.md).
 
 ### License
 
