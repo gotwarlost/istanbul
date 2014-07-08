@@ -3,13 +3,6 @@ Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
 Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 */
 
-/**
- * provides access to the key libraries in istanbul so you can write
- * your own tools using `istanbul` as a library.
- *
- * @module istanbul
- */
-
 /*jslint nomen: true */
 var path = require('path'),
     Store = require('./lib/store'),
@@ -20,7 +13,8 @@ var path = require('path'),
 require('./lib/register-plugins');
 
 /**
- * the top-level API for `istanbul`.
+ * the top-level API for `istanbul`. provides access to the key libraries in
+ * istanbul so you can write your own tools using `istanbul` as a library.
  *
  * Usage
  * -----
@@ -28,43 +22,65 @@ require('./lib/register-plugins');
  *      var istanbul = require('istanbul');
  *
  *
- * @class API
+ * @class istanbul
+ * @module main
+ * @main main
  */
 
 module.exports = {
     /**
      * the Instrumenter class.
-     * @property {Instrumenter} Instrumenter
+     * @property Instrumenter
+     * @type Instrumenter
      * @static
      */
     Instrumenter: require('./lib/instrumenter'),
     /**
      * the Store class.
-     * @property {Store} Store
+     * @property  Store
+     * @type Store
      * @static
      */
     Store: Store,
     /**
      * the Collector class
-     * @property {Collector} Collector
+     * @property  Collector
+     * @type Collector
      * @static
      */
     Collector: require('./lib/collector'),
     /**
      * the hook module
-     * @property {Hook} hook
+     * @property hook
+     * @type hook
      * @static
      */
     hook: require('./lib/hook'),
     /**
      * the Report class
-     * @property {Report} Report
+     * @property Report
+     * @type Report
      * @static
      */
     Report: Report,
     /**
+     * the config module
+     * @property config
+     * @type config
+     * @static
+     */
+    config: require('./lib/config'),
+    /**
+     * the Reporter class
+     * @property Reporter
+     * @type Reporter
+     * @static
+     */
+    Reporter: require('./lib/reporter'),
+    /**
      * utility for processing coverage objects
-     * @property {ObjectUtils} utils
+     * @property utils
+     * @type ObjectUtils
      * @static
      */
     utils: require('./lib/object-utils'),

@@ -1,5 +1,5 @@
 var path = require('path'),
-    configuration = require('../../lib/configuration'),
+    configuration = require('../../lib/config'),
     oldCwd = process.cwd(),
     newCwd = path.resolve(__dirname, 'config-data'),
     config;
