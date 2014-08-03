@@ -39,7 +39,7 @@
     "preferGlobal": true,
     "scripts": {
         "pretest": "jshint index.js lib/ test/",
-        "test": "test/run.js",
+        "test": "node test/run.js",
         "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
