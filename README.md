@@ -174,7 +174,7 @@ All the features of istanbul can be accessed as a library.
 
     reporter.add('text');
     reporter.addAll([ 'lcov', 'clover' ]);
-    reporter.writeReport(collector, sync, function () {
+    reporter.write(collector, sync, function () {
         console.log('All reports generated');
     });
 ```
