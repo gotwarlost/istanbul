@@ -77,6 +77,11 @@ Available commands are:
               files. Exits 1 if thresholds are not met, 0 otherwise
 
 
+      check-file-coverage
+              checks file coverage from coverage JSON files against coverage
+              thresholds. Exits 1 if file thresholds are not met, 0 otherwise
+
+
       cover   transparently adds coverage information to a node command. Saves
               coverage.json and reports at the end of execution
 
@@ -139,6 +144,15 @@ Checks the coverage of statements, functions, branches, and lines against the
 provided thresholds. Positive thresholds are taken to be the minimum percentage
 required and negative numbers are taken to be the number of uncovered entities
 allowed.
+
+#### The `check-file-coverage` command
+
+Checks the coverage of statements, functions, branches, and lines for each file
+against the provided thresholds. Logs to stdout the file name and coverage
+statistics for each file that does not meet the coverage requirements. Positive
+thresholds are taken to be the minimum percentage required and negative numbers
+are taken to be the number of uncovered entities allowed. This command provides
+the same interface as the `check-coverage` command.
 
 ### Ignoring code for coverage
 
@@ -221,4 +235,3 @@ The following third-party libraries are used by this module:
 
 Since all the good ones are taken. Comes from the loose association of ideas across 
 coverage, carpet-area coverage, the country that makes good carpets and so on...
-
