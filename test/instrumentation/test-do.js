@@ -48,6 +48,26 @@ module.exports = {
             verifier.verify(test, [ -1 ], 1, { lines: { 1: 1, 2: 1, 3: 1, 5: 1 }, branches: {}, functions: {}, statements:  { '1': 1, '2': 1, '3': 1, '4': 1 } });
             test.done();
         }
+    },
+    "with an ignore inside a do-while": {
+        setUp: function (cb) {
+            code = [
+                'do { ',
+                '   /* istanbul ignore next */ ',
+                '   console.log("hi");',
+                '} while (false);',
+                'output = 10'
+            ];
+            verifier = helper.verifier(__filename, code);
+            cb();
+        },
+
+        "should mark statement as skipped": function (test) {
+            verifier.verify(test, [], 10, { lines: { '1': 1, '3': 1, '5': 1 }, branches: {}, functions: {}, statements: { '1': 1, '2': 1, '3': 1 } });
+            var cov = verifier.getFileCoverage();
+            test.equal(true, cov.statementMap[2].skip);
+            test.done();
+        }
     }
 };
 

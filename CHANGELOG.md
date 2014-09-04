@@ -3,6 +3,10 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.1</td>
+<td>Fixes #249</td>
+</tr>
+<tr>
 <td>v0.3.0</td>
 <td>
     The *reports* release. **Potentially backwards-incompatible** if you are using
