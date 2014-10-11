@@ -73,8 +73,8 @@ Usage: istanbul help config | <command>
 Available commands are:
 
       check-coverage
-              checks overall coverage against thresholds from coverage JSON
-              files. Exits 1 if thresholds are not met, 0 otherwise
+              checks overall/per-file coverage against thresholds from coverage
+              JSON files. Exits 1 if thresholds are not met, 0 otherwise
 
 
       cover   transparently adds coverage information to a node command. Saves
@@ -109,8 +109,8 @@ The `cover` command can be used to get a coverage object and reports for any arb
 node script. By default, coverage information is written under `./coverage` - this
 can be changed using command-line options.
 
-The `cover` command can also be passed an optional `--handle-sigint` flag to 
-enable writing reports when a user triggers a manual SIGINT of the process that is 
+The `cover` command can also be passed an optional `--handle-sigint` flag to
+enable writing reports when a user triggers a manual SIGINT of the process that is
 being covered. This can be useful when you are generating coverage for a long lived process.
 
 #### The `test` command
@@ -123,13 +123,13 @@ set the `npm_config_coverage` variable.
 
 #### The `instrument` command
 
-Instruments a single JS file or an entire directory tree and produces an output 
-directory tree with instrumented code. This should not be required for running node 
+Instruments a single JS file or an entire directory tree and produces an output
+directory tree with instrumented code. This should not be required for running node
 unit tests but is useful for tests to be run on the browser.
 
 #### The `report` command
 
-Writes reports using `coverage*.json` files as the source of coverage information. 
+Writes reports using `coverage*.json` files as the source of coverage information.
 Reports are available in multiple formats and can be individually configured
 using the istanbul config file. See `istanbul help report` for more details.
 
@@ -151,12 +151,12 @@ See [ignoring-code-for-coverage.md](ignoring-code-for-coverage.md) for the spec.
 ### API
 
 All the features of istanbul can be accessed as a library.
- 
+
 #### Instrument code
 
 ```javascript
     var instrumenter = new require('istanbul').Instrumenter();
-    
+
     var generatedCode = instrumenter.instrumentSync('function meaningOfLife() { return 42; }',
         'filename.js');
 ```
@@ -164,7 +164,7 @@ All the features of istanbul can be accessed as a library.
 #### Generate reports given a bunch of coverage JSON objects
 
 ```javascript
-    var istanbul = require('istanbul'), 
+    var istanbul = require('istanbul'),
         collector = new istanbul.Collector(),
         reporter = new istanbul.Reporter(),
         sync = false;
@@ -219,6 +219,6 @@ The following third-party libraries are used by this module:
 
 ### Why the funky name?
 
-Since all the good ones are taken. Comes from the loose association of ideas across 
+Since all the good ones are taken. Comes from the loose association of ideas across
 coverage, carpet-area coverage, the country that makes good carpets and so on...
 
