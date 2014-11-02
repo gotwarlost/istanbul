@@ -18,10 +18,16 @@ module.exports = {
             },
             "should cover then path": function (test) {
                 verifier.verify(test, [ 20, 10 ], 20, { lines: { 1: 1, 2: 1, 3: 1 }, branches: { '1': [ 1, 0 ] }, functions: {}, statements: { '1': 1, '2': 1, '3': 1 } });
+                var cov = verifier.getFileCoverage(),
+                    thenBranch = cov.branchMap[1].locations[0];
+                test.deepEqual({ start: { line: 2, column: 0 }, end: { line: 3, column: 20 } }, thenBranch);
                 test.done();
             },
             "should cover else path": function (test) {
                 verifier.verify(test, [ 10, 20 ], -1, { lines: { 1: 1, 2: 1, 3: 0 }, branches: { '1': [ 0, 1 ] }, functions: {}, statements: { '1': 1, '2': 1, '3': 0 } });
+                var cov = verifier.getFileCoverage(),
+                    elseBranch = cov.branchMap[1].locations[1];
+                test.deepEqual({ start: { line: 2, column: 0 }, end: { line: 3, column: 20 } }, elseBranch);
                 test.done();
             }
         },
