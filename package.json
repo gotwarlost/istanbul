@@ -39,7 +39,6 @@
         "Ryan Roemer @ryan-roemer <ryan@loose-bits.com>",
         "Douglas Christopher Wilson @dougwilson"
     ],
-    "preferGlobal": true,
     "scripts": {
         "pretest": "jshint index.js lib/ test/",
         "test": "test/run.js",
