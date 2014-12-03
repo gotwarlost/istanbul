@@ -3,6 +3,14 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.3</td>
+<td>Merge #268 - per file coverage enforcement. Thanks to @ryan-roemer</td>
+</tr>
+<tr>
+<td>v0.3.2</td>
+<td>Republish 0.3.1 because of bad shasum</td>
+</tr>
+<tr>
 <td>v0.3.1</td>
 <td>Fixes #249</td>
 </tr>
