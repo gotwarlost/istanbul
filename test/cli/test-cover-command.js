@@ -5,6 +5,7 @@ var path = require('path'),
     mkdirp = require('mkdirp'),
     COMMAND = 'cover',
     DIR = path.resolve(__dirname, 'sample-project'),
+    DIR_LINK = path.resolve(__dirname, 'sample-project-link'),
     OUTPUT_DIR = path.resolve(DIR, 'coverage'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
@@ -197,6 +198,37 @@ module.exports = {
         helper.setOpts({ lazyHook : true });
         run([ 'test/global-leak.js', '-v' ], function (results) {
             test.ok(results.succeeded());
+            test.done();
+        });
+    },
+    "should cover tests when under symlink": function (test) {
+        try {
+            fs.symlinkSync(DIR, DIR_LINK);
+        } catch (ex) {
+            if (ex.code === 'EPERM') {
+                console.error('#');
+                console.error('# Skipping symlink test');
+                console.error('# ' + ex.message);
+                console.error('#');
+                test.ok(true);
+                test.done();
+            } else {
+              throw ex;
+            }
+            return;
+        }
+        helper.setOpts({ cwd: DIR_LINK, lazyHook : true });
+        run([ 'test/run.js', '-v' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(results.grepError(/Module load hook:/));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+                filtered;
+            filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
+            test.ok(filtered.length === 2);
+            fs.unlinkSync(DIR_LINK);
             test.done();
         });
     }
