@@ -18,7 +18,7 @@ fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
     var extenstion = path.extname(file);
 
     if (extenstion === '.js') {
-        INPUT_DIR_JS_FILE_COUNT++;
+        INPUT_DIR_JS_FILE_COUNT += 1;
     }
 });
 
