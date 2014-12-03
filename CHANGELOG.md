@@ -3,6 +3,10 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.4</td>
+<td>Merge #219 - Support reporting within symlink/junction. Thanks to @dougwilson</td>
+</tr>
+<tr>
 <td>v0.3.3</td>
 <td>Merge #268 - per file coverage enforcement. Thanks to @ryan-roemer</td>
 </tr>
