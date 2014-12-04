@@ -55,21 +55,6 @@ module.exports = {
             test.done();
         });
     },
-    "should preload all files before running tests": function (test) {
-        helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '-v', '--preload-sources' ], function (results) {
-            test.ok(results.succeeded());
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
-                filtered;
-            filtered = Object.keys(coverage).filter(function (k) { return k.match(/unused/); });
-            test.ok(filtered.length === 1);
-            test.ok(results.grepError(/Preload.*bad\.js/));
-            test.done();
-        });
-    },
     "should include all files after running tests": function (test) {
         helper.setOpts({ lazyHook : true });
         run([ 'test/run.js', '0', '-v', '--include-all-sources', '-x', 'lib/util/bad.js' ], function (results) {
