@@ -24,6 +24,7 @@ module.exports = {
             test.equal(false, iOpts.preserveComments());
             test.equal(false, iOpts.completeCopy());
             test.equal(false, iOpts.saveBaseline());
+            test.equal(false, iOpts.includeAllSources());
             test.equal('./coverage/coverage-baseline.json', iOpts.baselineFile());
             test.deepEqual(['**/node_modules/**'], iOpts.excludes());
             test.deepEqual(['**/node_modules/**', '**/test/**', '**/tests/**'], iOpts.excludes(true));
