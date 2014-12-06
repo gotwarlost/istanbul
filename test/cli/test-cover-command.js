@@ -78,6 +78,30 @@ module.exports = {
             test.done();
         });
     },
+    "should include all files after running tests in back-compat mode": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/run.js', '0', '-v', '--preload-sources', '-x', 'lib/util/bad.js' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+                unloadedFilePath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFile.js'),
+                unloadedFileWithFnPath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFileWithFunctionDeclaration.js'),
+                unloadedFile = coverage[unloadedFilePath],
+                unloadedFileWithFn = coverage[unloadedFileWithFnPath];
+
+            Object.keys(unloadedFile.s).forEach(function (statement) {
+                test.ok(unloadedFile.s[statement] === 0);
+            });
+            Object.keys(unloadedFileWithFn.s).forEach(function (statement) {
+                test.ok(unloadedFileWithFn.s[statement] === 0);
+            });
+
+            test.ok(results.grepError(/The preload-sources option is deprecated/));
+            test.done();
+        });
+    },
     "should cover tests as expected without extra noise and not covering excluded files": function (test) {
         helper.setOpts({ lazyHook : true });
         run([ 'test/run.js', '-x', '**/foo.js' ], function (results) {
