@@ -3,6 +3,17 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.5</td>
+<td>
+<p>Merge #275 - `--include-all-sources` option. Thanks @gustavnikolaj</p>
+<p>
+The `--preload-sources` option is now deprecated and superseded by the
+`--include-all-sources` option instead. This provides a better coverage representation
+of the code that has not been included for testing.
+</p>
+</td>
+</tr>
+<tr>
 <td>v0.3.4</td>
 <td>Merge #219 - Support reporting within symlink/junction. Thanks to @dougwilson</td>
 </tr>
