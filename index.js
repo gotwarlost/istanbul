@@ -143,8 +143,6 @@ module.exports = {
      */
     FileWriter: require('./lib/util/file-writer'),
     //undocumented
-    _yuiLoadHook: require('./lib/util/yui-load-hook'),
-    //undocumented
     TreeSummarizer: require('./lib/util/tree-summarizer'),
     //undocumented
     assetsDir: path.resolve(__dirname, 'lib', 'vendor')
