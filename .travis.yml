@@ -16,6 +16,5 @@ after_script:
   - if [[ `node --version` == *v0.10* ]]; then cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js; fi
 
 before_install:
-  - if [[ `node --version` == *v0.8* ]]; then npm install -g npm; fi
-
-
+  # Node v0.8 needs specific NPM version: https://github.com/npm/npm/issues/6246#issuecomment-57911124
+  - if [[ `node --version` == *v0.8* ]]; then npm install -g npm@1.4.28; fi

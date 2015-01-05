@@ -6,4 +6,3 @@ reporting:
   report-config:
     cobertura:
       file: 'foo.xml'
-

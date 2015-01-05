@@ -1,0 +1,13 @@
+check:
+  global:
+    statements: 80
+    functions: 80
+    branches: 40
+    lines: 40
+  each:
+    statements: 72
+    functions: 50
+    branches: 72
+    lines: 72
+    excludes:
+        - lib/bar.js # 40, 0, 40, 0

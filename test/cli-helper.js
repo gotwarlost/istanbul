@@ -36,13 +36,13 @@ var path = require('path'),
  *  3. In the child process,
  *      a. hooks the module loader to set up coverage for our library code
  *      b. Ensures that the `hook` module is not loaded until all this happens
-  *         so that the hook module sees _our_ module loader hook as the original
-  *         loader. This ensures that our hook will be used to instrument this
-  *         library's code. Note that the hook set up by the `cover` command that
-  *         is executed only instruments the modules of the sample test library.
-  *     c. Calls Module.runMain on the command that it was asked to invoke
-  *     d. Sets up an exit handler to write the coverage information for our
-  *         library calls
+ *         so that the hook module sees _our_ module loader hook as the original
+ *         loader. This ensures that our hook will be used to instrument this
+ *         library's code. Note that the hook set up by the `cover` command that
+ *         is executed only instruments the modules of the sample test library.
+ *      c. Calls Module.runMain on the command that it was asked to invoke
+ *      d. Sets up an exit handler to write the coverage information for our
+ *         library calls
  *   4. The exit handler is also set up in special ways because in order to
  *      instrument the `cover` command's exit handler, our exit handler has
  *      to be added later so as to be able to track coverage for the cover
