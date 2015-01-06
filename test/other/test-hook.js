@@ -84,7 +84,7 @@ module.exports = {
             test.done();
         }
     },
-	"when runInThisContext is hooked": {
+	  "when runInThisContext is hooked": {
         setUp: function (cb) {
             currentHook = require('vm').runInThisContext;
             cb();
@@ -108,7 +108,7 @@ module.exports = {
             hook.hookRunInThisContext(matcher, scriptTransformer);
             s = require('vm').runInThisContext('(function () { return 10; }());');
             test.equals(10, s);
-            hook.unhookCreateScript();
+            hook.unhookRunInThisContext();
             test.done();
         },
         "code with non-string filename should not be transformed": function (test) {
@@ -116,8 +116,45 @@ module.exports = {
             hook.hookRunInThisContext(matcher, scriptTransformer);
             s = require('vm').runInThisContext('(function () { return 10; }());', {});
             test.equals(10, s);
-            hook.unhookCreateScript();
+            hook.unhookRunInThisContext();
             test.done();
         }
-	},
+	  },
+	  "when runInNewContext is hooked": {
+        setUp: function (cb) {
+            currentHook = require('vm').runInNewContext;
+            cb();
+        },
+        tearDown: function (cb) {
+            require('vm').runInNewContext = currentHook;
+            cb();
+        },
+        "foo should be transformed": function (test) {
+            var s;
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            s = require('vm').runInNewContext('(function () { return 10; }());', global, '/bar/foo.js');
+            test.equals(42, s);
+            hook.unhookRunInNewContext();
+            s = require('vm').runInNewContext('(function () { return 10; }());', global, '/bar/foo.js');
+            test.equals(10, s);
+            test.done();
+        },
+        "code with no filename should not be transformed": function (test) {
+            var s;
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            s = require('vm').runInNewContext('(function () { return 10; }());', global);
+            test.equals(10, s);
+            hook.unhookRunInNewContext();
+            test.done();
+        },
+        "code with non-string filename should not be transformed": function (test) {
+            var s;
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            s = require('vm').runInThisContext('(function () { return 10; }());', global, {});
+            test.equals(10, s);
+            hook.unhookRunInNewContext();
+            test.done();
+        }
+	  },
+
 };
