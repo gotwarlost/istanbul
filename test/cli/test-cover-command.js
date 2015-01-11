@@ -184,8 +184,10 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+                ipsumPath = path.join('amd', 'ipsum'),
+                loremPath = path.join('amd', 'lorem'),
                 filtered;
-            filtered = Object.keys(coverage).filter(function (k) { return k.match(/amd\/lorem/) || k.match(/amd\/ipsum/); });
+            filtered = Object.keys(coverage).filter(function (k) { return k.indexOf(ipsumPath) >= 0 || k.indexOf(loremPath) >= 0; });
             test.ok(filtered.length === 2);
             test.ok(filtered.length === Object.keys(coverage).length);
             test.done();
