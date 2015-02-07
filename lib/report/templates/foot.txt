@@ -6,11 +6,11 @@
 {{#if prettify}}
 <script src="{{prettify.js}}"></script>
 <script>
-window.addEventListener('load', function () {
+window.onload = function () {
         if (typeof prettyPrint === 'function') {
             prettyPrint();
         }
-});
+};
 </script>
 {{/if}}
 <script src="{{sorter.js}}"></script>
