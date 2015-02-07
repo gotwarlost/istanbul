@@ -70,6 +70,7 @@
         "fileset": "0.1.x",
         "which": "1.0.x",
         "async": "0.9.x",
+        "supports-color": "1.2.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
         "resolve": "0.7.x",
