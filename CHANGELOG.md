@@ -3,6 +3,19 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.6</td>
+<td>
+    <ul>
+        <li>Update to Esprima 2.0</li>
+        <li>Remove YUI dependency and provide custom sort code. No network access needed for HTML report view</li>
+        <li>use supports-color module to colorize output, thanks to @gustavnikolaj</li>
+        <li>Fix tests to work on Windows, thanks to @dougwilson</li>
+        <li>Docs: "Instrument code" API example correction thanks to @robatron</li>
+        <li>Extracted embedded CSS and JavaScript and made them external files, thanks to @booleangate</td>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.5</td>
 <td>
 <p>Merge #275 - `--include-all-sources` option. Thanks @gustavnikolaj</p>
