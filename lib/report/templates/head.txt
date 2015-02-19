@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{prettify.css}}">
 {{/if}}
     <link rel="stylesheet" href="{{base.css}}">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url({{sorter.image}});
+        }
+    </style>
 </head>
 <body>
 <div class="header {{reportClass}}">

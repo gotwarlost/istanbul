@@ -5,8 +5,14 @@
 </div>
 {{#if prettify}}
 <script src="{{prettify.js}}"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
 {{/if}}
-<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
-<script src="{{base.js}}"></script>
+<script src="{{sorter.js}}"></script>
 </body>
 </html>

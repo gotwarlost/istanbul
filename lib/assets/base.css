@@ -138,19 +138,17 @@ div.coverage-summary a:visited { text-decoration: none; color: #333; }
 div.coverage-summary a:hover { text-decoration: underline; }
 div.coverage-summary tfoot td { border-top: 1px solid #666; }
 
-div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+div.coverage-summary .sorter {
     height: 10px;
     width: 7px;
     display: inline-block;
     margin-left: 0.5em;
+    background: url(sort-arrow-sprite.png) no-repeat scroll 0 0 transparent;
 }
-div.coverage-summary .yui3-datatable-sort-indicator {
-    background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
-}
-div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+div.coverage-summary .sorted .sorter {
     background-position: 0 -20px;
 }
-div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+div.coverage-summary .sorted-desc .sorter {
     background-position: 0 -10px;
 }
 
