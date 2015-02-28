@@ -183,6 +183,40 @@ All the features of istanbul can be accessed as a library.
 For the gory details consult the [public API](http://gotwarlost.github.com/istanbul/public/apidocs/index.html)
 
 
+### Multiple Process Usage
+
+Istanbul can be used in a multiple process environment by running each process
+with Istanbul, writing a unique coverage file for each process, and combining
+the results when generating reports. The method used to perform this will
+depend on the process forking API used. For example when using the
+[cluster module](http://nodejs.org/api/cluster.html) you must setup the master
+to start child processes with Istanbul coverage, disable reporting, and output
+coverage files that include the PID in the filename.  Before each run you may
+need to clear out the coverage data directory.
+
+```javascript
+    if(cluster.isMaster) {
+        // setup cluster if running with istanbul coverage
+        if(process.env.running_under_istanbul) {
+            // use coverage for forked process
+            // disabled reporting and output for child process
+            // enable pid in child process coverage filename
+            cluster.setupMaster({
+                exec: './node_modules/.bin/istanbul',
+                args: [
+                    'cover', '--report', 'none', '--print', 'none', '--include-pid',
+                    process.argv[1], '--'].concat(process.argv.slice(2))
+            });
+        }
+        // ...
+        // ... cluster.fork();
+        // ...
+    } else {
+        // ... worker code
+    }
+```
+
+
 ### License
 
 istanbul is licensed under the [BSD License](http://github.com/gotwarlost/istanbul/raw/master/LICENSE).

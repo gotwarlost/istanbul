@@ -83,7 +83,8 @@
         "nodeunit": "0.9.x",
         "jshint": "2.5.x",
         "requirejs": "2.x",
-        "coveralls": "2.x"
+        "coveralls": "2.x",
+        "glob": "4.4.x"
     }
 }
 
