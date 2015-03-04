@@ -3,6 +3,12 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.7</td>
+<td>
+    Fix asset paths on windows, thanks to @juangabreil
+</td>
+</tr>
+<tr>
 <td>v0.3.6</td>
 <td>
     <ul>
