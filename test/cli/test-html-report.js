@@ -78,7 +78,7 @@ module.exports = {
             oldBar = fs.readFileSync(barPath, 'utf8'),
             eol = /(\r?\n|\r)/g,
             newBar = oldBar.replace(eol, "\n"),
-			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            file = path.resolve(OUTPUT_DIR, 'coverage.json'),
             htmlReport = path.resolve(process.cwd(), 'html-report'),
             reporter = new Reporter(),
             obj,
@@ -89,7 +89,7 @@ module.exports = {
                 return path.resolve.apply(null, args);
             };
 
-		fs.writeFileSync(barPath, newBar);
+        fs.writeFileSync(barPath, newBar);
         obj = JSON.parse(fs.readFileSync(file, 'utf8'));
         collector.add(obj);
         try {
@@ -111,7 +111,7 @@ module.exports = {
             oldBar = fs.readFileSync(barPath, 'utf8'),
             eol = /(\r?\n|\r)/g,
             newBar = oldBar.replace(eol, "\r\n"),
-			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            file = path.resolve(OUTPUT_DIR, 'coverage.json'),
             htmlReport = path.resolve(process.cwd(), 'html-report'),
             reporter = new Reporter(),
             obj,
@@ -122,7 +122,7 @@ module.exports = {
                 return path.resolve.apply(null, args);
             };
 
-		fs.writeFileSync(barPath, newBar);
+        fs.writeFileSync(barPath, newBar);
         obj = JSON.parse(fs.readFileSync(file, 'utf8'));
         collector.add(obj);
         try {
@@ -144,7 +144,7 @@ module.exports = {
             oldBar = fs.readFileSync(barPath, 'utf8'),
             eol = /(\r?\n|\r)/g,
             newBar = oldBar.replace(eol, "\r"),
-			file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+            file = path.resolve(OUTPUT_DIR, 'coverage.json'),
             htmlReport = path.resolve(process.cwd(), 'html-report'),
             reporter = new Reporter(),
             obj,
@@ -155,7 +155,7 @@ module.exports = {
                 return path.resolve.apply(null, args);
             };
 
-		fs.writeFileSync(barPath, newBar);
+        fs.writeFileSync(barPath, newBar);
         obj = JSON.parse(fs.readFileSync(file, 'utf8'));
         collector.add(obj);
         try {
@@ -219,6 +219,106 @@ module.exports = {
         console.error('Figure out a way to run meaningful tests for HTML report contents');
         test.ok(1);
         test.done();
+    },
+
+    "should generate proper ancestorHref when path separator is \\" : function(test) {
+        var pathSep = path.sep,
+            reporter = new Reporter(),
+            node, result;
+
+        path.sep = '\\';
+        node = {
+            parent: {
+                relativeName: 'lib\\util\\',
+                parent: {
+                    relativeName: '',
+                    parent: null
+                }
+            },
+            relativeName: 'generate-names-mangled.js'
+        };
+        
+        result = reporter.standardLinkMapper().ancestorHref(node, 2);
+
+        test.ok(result === '../../');
+
+        path.sep = pathSep;
+        test.done();
+    },
+
+    "should generate proper ancestorHref for files using linux paths when path separator is \\" : function(test) {
+        var pathSep = path.sep,
+            reporter = new Reporter(),
+            node, result;
+
+        path.sep = '\\';
+        node = {
+            parent: {
+                relativeName: 'lib/util/',
+                parent: {
+                    relativeName: '',
+                    parent: null
+                }
+            },
+            relativeName: 'generate-names-mangled.js'
+        };
+        
+        result = reporter.standardLinkMapper().ancestorHref(node, 2);
+
+        test.ok(result === '../../');
+
+        path.sep = pathSep;
+        test.done();
+    },
+
+    "should generate proper ancestorHref when path separator is /" : function(test) {
+        var pathSep = path.sep,
+            reporter = new Reporter(),
+            node, result;
+
+        path.sep = '/';
+        node = {
+            parent: {
+                relativeName: 'lib/util/',
+                parent: {
+                    relativeName: '',
+                    parent: null
+                }
+            },
+            relativeName: 'generate-names-mangled.js'
+        };
+
+        result = reporter.standardLinkMapper().ancestorHref(node, 2);
+
+        test.ok(result === '../../');
+
+        path.sep = pathSep;
+        test.done();
+    },
+
+    "should ignore . parts in dir generating ancestorHref" : function(test) {
+        var pathSep = path.sep,
+            reporter = new Reporter(),
+            node, result;
+
+        path.sep = '/';
+
+        node = {
+            parent: {
+                relativeName: 'lib/./util/',
+                parent: {
+                    relativeName: '',
+                    parent: null
+                }
+            },
+            relativeName: './generate-names-mangled.js'
+        };
+
+        result = reporter.standardLinkMapper().ancestorHref(node, 2);
+
+        test.ok(result === '../../');
+
+        path.sep = pathSep;
+        test.done();
     }
 };
-
