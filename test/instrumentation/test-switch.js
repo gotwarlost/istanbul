@@ -61,14 +61,23 @@ module.exports = {
             },
             "should cover one path": function (test) {
                 verifier.verify(test, [ "1" ], "one", { lines: { 1: 1, 2: 1, 3: 1, 4: 0, 5: 0 }, branches: { '1': [ 1, 0, 0 ] }, functions: {}, statements: { '1': 1, '2': 1, '3': 1, '4': 1, '5': 0, '6': 0, '7': 0 } });
+                var cov = verifier.getFileCoverage(),
+                    pathOne = cov.branchMap[1].locations[0];
+                test.deepEqual({ start: { line: 3, column: 3 }, end: { line: 3, column: 35 } }, pathOne);
                 test.done();
             },
             "should cover two path": function (test) {
                 verifier.verify(test, [ "2" ], "two", { lines: { 1: 1, 2: 1, 3: 0, 4: 1, 5: 0 }, branches: { '1': [ 0, 1, 0 ] }, functions: {}, statements: { '1': 1, '2': 1, '3': 0, '4': 0, '5': 1, '6': 1, '7': 0 } });
+                var cov = verifier.getFileCoverage(),
+                    pathTwo = cov.branchMap[1].locations[1];
+                test.deepEqual({ start: { line: 4, column: 3 }, end: { line: 4, column: 35 } }, pathTwo);
                 test.done();
             },
             "should cover unknown path": function (test) {
                 verifier.verify(test, [ "4" ], "three", { lines: { 1: 1, 2: 1, 3: 0, 4: 0, 5: 1 }, branches: { '1': [ 0, 0, 1 ] }, functions: {}, statements: { '1': 1, '2': 1, '3': 0, '4': 0, '5': 0, '6': 0, '7': 1 } });
+                var cov = verifier.getFileCoverage(),
+                    pathDefault = cov.branchMap[1].locations[2];
+                test.deepEqual({ start: { line: 5, column: 3 }, end: { line: 5, column: 29 } }, pathDefault);
                 test.done();
             }
         },
