@@ -57,7 +57,7 @@ module.exports = {
                 test.ok(results.grepError(/Coverage for lines .* global/));
                 test.done();
             });
-        },
+        },        
         "should fail with multiple reasons when multiple thresholds violated": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--statements=72', '--functions=50', '--branches=72', '--lines=72' ], function (results) {
@@ -112,10 +112,11 @@ module.exports = {
                 test.done();
             });
         },
-        "should succeed with any threshold when no coverage found": function (test) {
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            run([ '--statements', '72', '**/foobar.json' ], function (results) {
-                test.ok(results.succeeded());
+        "should fail when no coverage found": function (test) {
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'no-matching-coverage.json')));
+            run([ 'no-matching-coverage.json' ], function (results) {
+                test.ok(!results.succeeded());
+                test.ok(results.grepError(/No coverage files found./));
                 test.done();
             });
         }
