@@ -117,6 +117,23 @@ module.exports = {
             test.done();
         });
     },
+    "should cover tests as expected without extra noise and using includes": function (test) {
+        helper.setOpts({ lazyHook : true });
+        run([ 'test/run.js', '-i', '**/foo.js' ], function (results) {
+            test.ok(results.succeeded());
+            test.ok(!results.grepError(/Module load hook:/));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+                filtered;
+            filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/); });
+            test.ok(filtered.length !== 0);
+            filtered = Object.keys(coverage).filter(function (k) { return k.match(/bar/); });
+            test.ok(filtered.length === 0);
+            test.done();
+        });
+    },
     "should skip reporting when requested": function (test) {
         helper.setOpts({ lazyHook : true });
         run([ 'test/run.js', '--report', 'none', '--print', 'detail' ], function (results) {
