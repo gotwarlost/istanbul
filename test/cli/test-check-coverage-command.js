@@ -18,6 +18,19 @@ module.exports = {
         mkdirp.sync(OUTPUT_DIR);
         helper.resetOpts();
         runCover([ 'test/run.js', '--report', 'none' ], function (/* results */) {
+
+            // Mutate coverage.json to test relative key paths.
+            var covObj = require('./sample-project/coverage/coverage.json');
+            var relCovObj = {};
+            var relCovDotSlashObj = {};
+            Object.keys(covObj).forEach(function (key) {
+                var relKey = path.relative(__dirname + '/sample-project', key);
+                relCovObj[relKey] = covObj[key];
+                relCovDotSlashObj['./' + relKey] = covObj[key];
+            });
+            fs.writeFileSync(path.resolve(__dirname, 'sample-project/coverage/relative.json'), JSON.stringify(relCovObj));
+            fs.writeFileSync(path.resolve(__dirname, 'sample-project/coverage/relative-dot-slash.json'), JSON.stringify(relCovDotSlashObj));
+
             cb();
         });
     },
@@ -126,6 +139,36 @@ module.exports = {
             run([ '--config', 'config-check-each.istanbul.yml' ], function (results) {
                 // vendor/dummy_vendor_lib.js (statements 66.67% vs. 72%)
                 // vendor/dummy_vendor_lib.js (lines 66.67% vs. 72%)
+                test.ok(!results.succeeded());
+                test.ok(!results.grepError(/Coverage for lines .* global/));
+                test.ok(results.grepError(/Coverage for lines .* per-file/));
+                test.ok(results.grepError(/Coverage for statements .* per-file/));
+                test.ok(!results.grepError(/Coverage for branches .* per-file/));
+                test.ok(!results.grepError(/Coverage for functions .* per-file/));
+                test.ok(results.grepError(/dummy_vendor_lib\.js/));
+                test.ok(!results.grepError(/foo\.js/));
+                test.ok(!results.grepError(/foo\.js/));
+                test.done();
+            });
+        },
+        "should fail on inadequate statement and line coverage with relative coverage": function (test) {
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'relative.json')));
+            run([ '--config', 'config-check-each.istanbul.yml', 'coverage/relative.json' ], function (results) {
+                test.ok(!results.succeeded());
+                test.ok(!results.grepError(/Coverage for lines .* global/));
+                test.ok(results.grepError(/Coverage for lines .* per-file/));
+                test.ok(results.grepError(/Coverage for statements .* per-file/));
+                test.ok(!results.grepError(/Coverage for branches .* per-file/));
+                test.ok(!results.grepError(/Coverage for functions .* per-file/));
+                test.ok(results.grepError(/dummy_vendor_lib\.js/));
+                test.ok(!results.grepError(/foo\.js/));
+                test.ok(!results.grepError(/foo\.js/));
+                test.done();
+            });
+        },
+        "should fail on inadequate statement and line coverage with relative './' key coverage": function (test) {
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'relative-dot-slash.json')));
+            run([ '--config', 'config-check-each.istanbul.yml', 'coverage/relative-dot-slash.json' ], function (results) {
                 test.ok(!results.succeeded());
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for lines .* per-file/));
