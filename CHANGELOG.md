@@ -3,6 +3,16 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.8</td>
+<td>
+    <ul>
+        <li>Fail check coverage command when no coverage files found, thanks to @nexus-uw</li>
+        <li>handle relative paths in check-coverage, thanks to @dragn</li>
+        <li>support explicit includes for cover, thanks to @tonylukasavage</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.7</td>
 <td>
     Fix asset paths on windows, thanks to @juangabreil
