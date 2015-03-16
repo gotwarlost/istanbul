@@ -203,6 +203,21 @@ module.exports = {
             verifier.verify(test, [ 1 ], "undef", { lines: { 2: 1, 4: 1 }, branches: { 1: [ 0, 1 ]}, functions: {}, statements: { 1: 1, 2: 1 } });
             test.done();
         }
+    },
+    "with tracker variable check": {
+        setUp: function (cb) {
+            code = [
+                'var foo = function(x) {',
+                'return x > 0 ? ++x : --x;',
+                '}'
+            ];
+            verifier = helper.verifier(__filename, code, { checkTrackerVar: true });
+            cb();
+        },
+        "should check if tracker variable exists before incrementing the counters": function (test) {
+            test.ok(verifier.generatedCode.match(/typeof\s__cov_(?:[\w$_]+)!='undefined'&&[\w$_]+\.[s|f|b]/));
+            test.done();
+        }
     }
 };
 
