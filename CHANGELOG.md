@@ -3,6 +3,58 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.8</td>
+<td>
+    <ul>
+        <li>Fail check coverage command when no coverage files found, thanks to @nexus-uw</li>
+        <li>handle relative paths in check-coverage, thanks to @dragn</li>
+        <li>support explicit includes for cover, thanks to @tonylukasavage</li>
+    </ul>
+</td>
+</tr>
+<tr>
+<td>v0.3.7</td>
+<td>
+    Fix asset paths on windows, thanks to @juangabreil
+</td>
+</tr>
+<tr>
+<td>v0.3.6</td>
+<td>
+    <ul>
+        <li>Update to Esprima 2.0</li>
+        <li>Remove YUI dependency and provide custom sort code. No network access needed for HTML report view</li>
+        <li>use supports-color module to colorize output, thanks to @gustavnikolaj</li>
+        <li>Fix tests to work on Windows, thanks to @dougwilson</li>
+        <li>Docs: "Instrument code" API example correction thanks to @robatron</li>
+        <li>Extracted embedded CSS and JavaScript and made them external files, thanks to @booleangate</td>
+    </ul>
+</td>
+</tr>
+<tr>
+<td>v0.3.5</td>
+<td>
+<p>Merge #275 - `--include-all-sources` option. Thanks @gustavnikolaj</p>
+<p>
+The `--preload-sources` option is now deprecated and superseded by the
+`--include-all-sources` option instead. This provides a better coverage representation
+of the code that has not been included for testing.
+</p>
+</td>
+</tr>
+<tr>
+<td>v0.3.4</td>
+<td>Merge #219 - Support reporting within symlink/junction. Thanks to @dougwilson</td>
+</tr>
+<tr>
+<td>v0.3.3</td>
+<td>Merge #268 - per file coverage enforcement. Thanks to @ryan-roemer</td>
+</tr>
+<tr>
+<td>v0.3.2</td>
+<td>Republish 0.3.1 because of bad shasum</td>
+</tr>
+<tr>
 <td>v0.3.1</td>
 <td>Fixes #249</td>
 </tr>
