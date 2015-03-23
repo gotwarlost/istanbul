@@ -55,7 +55,7 @@
     ],
     "scripts": {
         "pretest": "jshint index.js lib/ test/",
-        "test": "node test/run.js",
+        "test": "node --harmony test/run.js",
         "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
     },
@@ -67,7 +67,7 @@
         "url": "git://github.com/gotwarlost/istanbul.git"
     },
     "dependencies": {
-        "esprima": "2.0.x",
+        "esprima": "2.1.x",
         "escodegen": "1.3.x",
         "handlebars": "1.3.x",
         "mkdirp": "0.5.x",
