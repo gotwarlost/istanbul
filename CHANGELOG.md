@@ -3,6 +3,16 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.9</td>
+<td>
+    <ul>
+        <li>Merge harmony branch and start adding ES6 features to istanbul</li>
+        <li>Arrow functions are the only feature of interest now</li>
+        <li>`for-of` and `yield` support exist but not present in mainline esprima yet</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.8</td>
 <td>
     <ul>
