@@ -1,6 +1,6 @@
 {
     "name": "istanbul",
-    "version": "0.3.9",
+    "version": "0.3.10",
     "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
     "keywords": [ "coverage", "code coverage", "JS code coverage", "JS coverage" ],
     "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
@@ -54,7 +54,7 @@
         "Simon Ramsay @nexus-uw"
     ],
     "scripts": {
-        "pretest": "jshint index.js lib/ test/",
+        "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
         "test": "node --harmony test/run.js",
         "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
         "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
@@ -68,17 +68,17 @@
     },
     "dependencies": {
         "esprima": "2.1.x",
-        "escodegen": "1.3.x",
-        "handlebars": "1.3.x",
+        "escodegen": "1.6.x",
+        "handlebars": "3.0.0",
         "mkdirp": "0.5.x",
         "nopt": "3.x",
         "fileset": "0.1.x",
         "which": "1.0.x",
         "async": "0.9.x",
-        "supports-color": "1.2.x",
+        "supports-color": "1.3.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
-        "resolve": "0.7.x",
+        "resolve": "1.1.x",
         "js-yaml": "3.x",
         "once": "1.x"
     },
