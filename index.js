@@ -9,7 +9,7 @@ var path = require('path'),
     Report = require('./lib/report'),
     meta = require('./lib/util/meta');
 
-//register our standard plaugins
+//register our standard plugins
 require('./lib/register-plugins');
 
 /**
