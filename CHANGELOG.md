@@ -3,6 +3,12 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.11</td>
+<td>
+    Avoid modification of global objects, thanks to @dominykas
+</td>
+</tr>
+<tr>
 <td>v0.3.10</td>
 <td>
     Update escodegen to 1.6.x and add browser download script
