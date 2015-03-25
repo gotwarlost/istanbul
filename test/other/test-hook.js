@@ -2,6 +2,7 @@
 var hook = require('../../lib/hook'),
     currentHook,
     matcher = function (file) { return file.indexOf('foo.js') > 0; },
+    matcher2 = function (file) { return file.indexOf('bar.es6') > 0; },
     transformer = function () { return 'module.exports.bar = function () { return "bar"; };'; },
     transformer2 = function () { return 'module.exports.blah = function () { return "blah"; };'; },
     badTransformer = function () { throw "Boo!"; },
@@ -63,6 +64,32 @@ module.exports = {
             test.equals('foo', foo.foo());
             test.done();
         }
+    },
+    "when extensions are passed to hookRequire": {
+        setUp: function(cb) {
+            var extensions = require('module')._extensions;
+            extensions['.es6'] = extensions['.js'];
+            hook.hookRequire(matcher2, transformer2, { verbose: true, extensions: ['.es6'] });
+            cb();
+        },
+        tearDown: function(cb) {
+            hook.unloadRequireCache(matcher2);
+            delete require('module')._extensions['.es6'];
+            cb();
+        },
+        "bar should be transformed": function(test) {
+            var bar = require('./data/bar');
+            test.ok(bar.blah);
+            test.equals('blah', bar.blah());
+            test.done();
+        },
+
+        "but foo should be skipped": function (test) {
+            var foo = require('./data/foo');
+            test.ok(foo.foo);
+            test.equals('foo', foo.foo());
+            test.done();
+        },
     },
     "when createScript is hooked": {
         setUp: function (cb) {
