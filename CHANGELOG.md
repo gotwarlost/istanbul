@@ -3,6 +3,12 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.12</td>
+<td>
+    Allow other-than-dot-js files to be hooked, thanks to @sethpollack
+</td>
+</tr>
+<tr>
 <td>v0.3.11</td>
 <td>
     Avoid modification of global objects, thanks to @dominykas
