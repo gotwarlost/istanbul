@@ -131,7 +131,7 @@ div.coverage-summary th.pct { border-right: none !important; }
 div.coverage-summary th.abs { border-left: none !important; text-align: right; }
 div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
 div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
-div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+div.coverage-summary td.file { border-left: 1px solid #666; white-space: nowrap;  }
 div.coverage-summary td.pic { min-width: 120px !important;  }
 div.coverage-summary a:link { text-decoration: none; color: #000; }
 div.coverage-summary a:visited { text-decoration: none; color: #333; }
