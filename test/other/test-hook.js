@@ -35,6 +35,15 @@ module.exports = {
             test.done();
         },
 
+        "twice it should save original code": function (test) {
+            hook.hookRequire(matcher, transformer, { verbose: true });
+            hook.unhookRequire();
+            var foo = require('./data/foo');
+            test.ok(foo.foo);
+            test.equals('foo', foo.foo());
+            test.done();
+        },
+
         "postLoadHook should be called": function (test) {
             var called = null,
                 opts = { postLoadHook: function (file) { called = file; }},
