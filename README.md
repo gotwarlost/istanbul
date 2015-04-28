@@ -100,7 +100,7 @@ Available commands are:
 Command names can be abbreviated as long as the abbreviation is unambiguous
 ```
 
-To get detail help for a command and what command-line options it supports, run:
+To get detailed help for a command and what command-line options it supports, run:
 
     istanbul help <command>
 
