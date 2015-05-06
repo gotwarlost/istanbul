@@ -216,6 +216,9 @@ need to clear out the coverage data directory.
     }
 ```
 
+### Coverage.json
+
+For details on the format of the coverage.json object, [see here](./coverage.json.md).
 
 ### License
 
