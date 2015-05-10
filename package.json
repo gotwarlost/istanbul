@@ -64,6 +64,10 @@
     "bin": {
         "istanbul": "./lib/cli.js"
     },
+    "files": [
+      "index.js",
+      "lib/"
+    ],
     "repository": {
         "type": "git",
         "url": "git://github.com/gotwarlost/istanbul.git"
@@ -93,4 +97,3 @@
         "glob": "4.4.x"
     }
 }
-
