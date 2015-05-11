@@ -10,7 +10,8 @@ var path = require('path'),
     runCover = helper.runCommand.bind(null, COVER_COMMAND),
     Reporter = require('../../lib/report/json-summary'),
     Collector = require('../../lib/collector'),
-    existsSync = fs.existsSync || path.existsSync;
+    existsSync = fs.existsSync || path.existsSync,
+    objectUtils = require('../../lib/object-utils');
 
 module.exports = {
     setUp: function (cb) {
@@ -36,6 +37,15 @@ module.exports = {
         obj = JSON.parse(fs.readFileSync(file, 'utf8'));
         collector.add(obj);
         reporter.writeReport(collector, true);
+
+        var summaries = [],
+            finalSummary;
+        collector.files().forEach(function (file) {
+            summaries.push(objectUtils.summarizeFileCoverage(collector.fileCoverageFor(file)));
+        });
+        finalSummary = objectUtils.mergeSummaryObjects.apply(null, summaries);
+        obj.total = finalSummary;
+        
         test.ok(existsSync(jsonFile));
         reportObj = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
         test.deepEqual(Object.keys(obj).sort(), Object.keys(reportObj).sort());
