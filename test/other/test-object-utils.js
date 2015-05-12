@@ -196,6 +196,46 @@ module.exports = {
 
             test.deepEqual(ret, foo);
             test.done();
+        },
+        "increment ignored totals": {
+            setUp: function (cb) {
+                it = {
+                    l: {},
+                    s: {
+                        1: 0
+                    },
+                    b: {
+                        1: [0, 0]
+                    },
+                    f: {
+                        1: 0
+                    },
+                    statementMap: {
+                        1: {skip: true}
+                    },
+                    branchMap: {
+                        1: {
+                            locations: [
+                                {},
+                                {skip: true}
+                            ]
+                        }
+                    },
+                    fnMap: {
+                        1: {skip: true}
+                    }
+                };
+
+                cb();
+            },
+            "should return file coverage object with incremented hits": function (test) {
+                var result = utils.incrementIgnoredTotals(it);
+                test.equal(1, result.s['1']);
+                test.deepEqual([0, 1], result.b['1']);
+                test.equal(1, result.f['1']);
+                test.done();
+            }
         }
     }
 };
+
