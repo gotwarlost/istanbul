@@ -1,0 +1,8 @@
+reporting:
+  reports:
+    - cobertura
+    - html
+    - lcovonly
+  report-config:
+    cobertura:
+      file: 'foo.xml'

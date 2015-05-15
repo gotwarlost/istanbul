@@ -1,0 +1,12 @@
+check:
+  global:
+    statements: 72
+    functions: 50
+    branches: 72
+    lines: 72
+    # Example: Could exclude all files covered (would pass checks and fail the tests).
+    # excludes:
+    #     - lib/foo.js
+    #     - vendor/dummy_vendor_lib.js
+    #     - lib/util/generate-names.js
+    #     - lib/bar.js

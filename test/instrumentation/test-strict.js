@@ -103,7 +103,6 @@ module.exports = {
                 '        output = "pass";',
                 '    }'
             ];
-            console.log(code.join("\n"));
             verifier = helper.verifier(__filename, code);
             cb();
         },

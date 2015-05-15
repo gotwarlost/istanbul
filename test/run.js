@@ -58,6 +58,7 @@ function runTests(pat, forceCover) {
             // run the equivalent of
             // $ istanbul cover run-again.js -- <pat>
             args = [
+                '--harmony',
                 path.resolve(__dirname, '..', 'lib', 'cli.js'),
                 'cover',
                 '--self-test',

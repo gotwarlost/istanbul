@@ -6,7 +6,7 @@
 <script src='/_esprima.js'></script>
 <script src='/_escodegen.js'></script>
 <script src='/_instrumenter.js'></script>
-<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script src="/_yui.js"></script>
 <style type="text/css">
     body { font-family: verdana; font-size: 10pt; margin: 2em; }
     h1 { font-family: arial; font-size: 12pt; }
@@ -34,7 +34,7 @@
 </body>
 <script>window.demoMode = '{{demo}}' === 'yes';</script>
 <script>
-    YUI().use('io-base', 'node', function (Y) {
+    YUI().use('*', function (Y) {
 
         var files,
             testInstrumenter = new Instrumenter({ backdoor: { omitTrackerSuffix: true } }),

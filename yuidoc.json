@@ -3,6 +3,7 @@
     "description": "The Istanbul API: a code coverage library",
     "options": {
         "outdir": "./public/apidocs",
-        "exclude": "vendor,node_modules"
+        "exclude": "vendor,node_modules,misc,test"
     }
 }
+
