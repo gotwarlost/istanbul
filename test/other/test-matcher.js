@@ -64,6 +64,9 @@ module.exports = {
     "should ignore node_modules": function (test) {
         fileMatcher.matcherFor({ root: root }, function (err, matchFn) {
             test.ok(!err);
+            test.ok(matchFn.files);
+            test.deepEqual(allFiles.filter(function (f) { return !f.match(/node_modules/); }).sort(),
+                matchFn.files.sort());
             allFiles.forEach(function (file) {
                 var shouldMatch = file.indexOf('file.js') < 0;
                 if (shouldMatch) {

@@ -1,5 +1,5 @@
 var path = require('path'),
-    configuration = require('../../lib/configuration'),
+    configuration = require('../../lib/config'),
     oldCwd = process.cwd(),
     newCwd = path.resolve(__dirname, 'config-data'),
     config;
@@ -24,6 +24,7 @@ module.exports = {
             test.equal(false, iOpts.preserveComments());
             test.equal(false, iOpts.completeCopy());
             test.equal(false, iOpts.saveBaseline());
+            test.equal(false, iOpts.includeAllSources());
             test.equal('./coverage/coverage-baseline.json', iOpts.baselineFile());
             test.deepEqual(['**/node_modules/**'], iOpts.excludes());
             test.deepEqual(['**/node_modules/**', '**/test/**', '**/tests/**'], iOpts.excludes(true));
@@ -34,6 +35,7 @@ module.exports = {
             test.equal('summary', rOpts.print());
             test.deepEqual( ['lcov'], rOpts.reports());
             test.equal('./coverage', rOpts.dir());
+            test.equal('lcov.info', rOpts.reportConfig().lcovonly.file);
             test.done();
         },
         "default hook options should be correct": function (test) {
@@ -72,6 +74,23 @@ module.exports = {
                 test.equal(false, config.verbose);
                 test.equal(true, config.instrumentation.compact());
                 test.equal(false, config.instrumentation.saveBaseline());
+                test.done();
+            }
+        },
+        "deeper in the tree": {
+            "should use overrides": function (test) {
+                config = configuration.loadObject({
+                    reporting: {
+                        'report-config': {
+                            'lcovonly': {
+                                file: 'foo.info'
+                            }
+                        }
+                    }
+                });
+                test.equal('foo.info', config.reporting.reportConfig().lcovonly.file);
+                test.equal('clover.xml', config.reporting.reportConfig().clover.file);
+                test.equal(null, config.reporting.reportConfig().text.file);
                 test.done();
             }
         }

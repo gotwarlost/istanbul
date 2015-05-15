@@ -28,8 +28,7 @@ if (require('../es6').isYieldAvailable()) {
             test.done();
         }
     };
-} else {
-    console.error('SKIP: yield is not available in this environment');
 }
+
 
 

@@ -6,7 +6,7 @@ var path = require('path'),
     rimraf = require('rimraf'),
     mkdirp = require('mkdirp'),
     INPUT_DIR_CC = path.join(__dirname, '../other/data-complete-copy/'),
-    OUTPUT_DIR = path.resolve(process.cwd(), 'output'),
+    OUTPUT_DIR = path.resolve(__dirname, 'output'),
     COMMAND = 'instrument',
     DIR = path.resolve(__dirname, 'sample-project'),
     helper = require('../cli-helper'),
@@ -18,7 +18,7 @@ fs.readdirSync(INPUT_DIR_CC).forEach(function(file) {
     var extenstion = path.extname(file);
 
     if (extenstion === '.js') {
-        INPUT_DIR_JS_FILE_COUNT++;
+        INPUT_DIR_JS_FILE_COUNT += 1;
     }
 });
 

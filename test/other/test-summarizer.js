@@ -1,4 +1,6 @@
-var TreeSummarizer = require('../../lib/util/tree-summarizer'),
+var path = require('path'),
+    SEP = path.sep || '/',
+    TreeSummarizer = require('../../lib/util/tree-summarizer'),
     utils = require('../../lib/object-utils'),
     summarizer,
     tree,
@@ -31,9 +33,9 @@ module.exports = {
     },
     "with a few files in a few dirs": {
         setUp: function (cb) {
-            summarizer.addFileCoverageSummary('/tmp/lib/foo.js', s1);
-            summarizer.addFileCoverageSummary('/tmp/lib/bar.js', s2);
-            summarizer.addFileCoverageSummary('/tmp/lib/util/baz.js', s3);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'foo.js'), s1);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'bar.js'), s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'util', 'baz.js'), s3);
             tree = summarizer.getTreeSummary();
             cb();
         },
@@ -46,37 +48,37 @@ module.exports = {
                 utilSummary = utils.mergeSummaryObjects(s3),
                 libSummary = utils.mergeSummaryObjects(s1, s2),
                 fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
-            test.equal('/tmp/', node.fullPath());
+            test.equal(SEP + 'tmp' + SEP, node.fullPath());
             test.equal('', node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(fullSummary, node.metrics);
             test.ok(node === tree.getNode(''));
             node = tree.root.children[0];
-            test.equal('/tmp/lib/', node.fullPath());
-            test.equal('lib/', node.displayShortName());
+            test.equal(SEP + ['tmp', 'lib'].join(SEP) + SEP, node.fullPath());
+            test.equal('lib' + SEP, node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(libSummary, node.metrics);
             test.deepEqual(s2, node.children[0].metrics);
             test.deepEqual(s1, node.children[1].metrics);
-            test.ok(node === tree.getNode('lib/'));
+            test.ok(node === tree.getNode('lib' + SEP));
             node = tree.root.children[1];
-            test.equal('/tmp/lib/util/', node.fullPath());
-            test.equal('lib/util/', node.displayShortName());
+            test.equal(SEP + ['tmp', 'lib', 'util'].join(SEP) + SEP, node.fullPath());
+            test.equal(['lib', 'util'].join(SEP) + SEP, node.displayShortName());
             test.equal(1, node.children.length);
             test.deepEqual(utilSummary, node.metrics);
             test.deepEqual(s3, node.children[0].metrics);
-            test.ok(node === tree.getNode('lib/util/'));
-            test.ok(tree.getNode('lib/foo.js'));
-            test.ok(tree.getNode('lib/bar.js'));
-            test.ok(tree.getNode('lib/util/baz.js'));
+            test.ok(node === tree.getNode(path.join('lib', 'util') + SEP));
+            test.ok(tree.getNode(path.join('lib', 'foo.js')));
+            test.ok(tree.getNode(path.join('lib', 'bar.js')));
+            test.ok(tree.getNode(path.join('lib', 'util', 'baz.js')));
             test.done();
         }
     },
     "with the same few files organized differently": {
         setUp: function (cb) {
-            summarizer.addFileCoverageSummary('/tmp/lib/main/foo.js', s1);
-            summarizer.addFileCoverageSummary('/tmp/lib/main/bar.js', s2);
-            summarizer.addFileCoverageSummary('/tmp/lib/util/baz.js', s3);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'main', 'foo.js'), s1);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'main', 'bar.js'), s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'util', 'baz.js'), s3);
             tree = summarizer.getTreeSummary();
             cb();
         },
@@ -85,37 +87,37 @@ module.exports = {
                 utilSummary = utils.mergeSummaryObjects(s3),
                 libSummary = utils.mergeSummaryObjects(s1, s2),
                 fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
-            test.equal('/tmp/lib/', node.fullPath());
+            test.equal(SEP + ['tmp', 'lib'].join(SEP) + SEP, node.fullPath());
             test.equal('', node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(fullSummary, node.metrics);
             test.ok(node === tree.getNode(''));
             node = tree.root.children[0];
-            test.equal('/tmp/lib/main/', node.fullPath());
-            test.equal('main/', node.displayShortName());
+            test.equal(SEP + ['tmp', 'lib', 'main'].join(SEP) + SEP, node.fullPath());
+            test.equal('main' + SEP, node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(libSummary, node.metrics);
             test.deepEqual(s2, node.children[0].metrics);
             test.deepEqual(s1, node.children[1].metrics);
-            test.ok(node === tree.getNode('main/'));
+            test.ok(node === tree.getNode('main' + SEP));
             node = tree.root.children[1];
-            test.equal('/tmp/lib/util/', node.fullPath());
-            test.equal('util/', node.displayShortName());
+            test.equal(SEP + ['tmp', 'lib', 'util'].join(SEP) + SEP, node.fullPath());
+            test.equal('util' + SEP, node.displayShortName());
             test.equal(1, node.children.length);
             test.deepEqual(utilSummary, node.metrics);
             test.deepEqual(s3, node.children[0].metrics);
-            test.ok(node === tree.getNode('util/'));
-            test.ok(tree.getNode('main/foo.js'));
-            test.ok(tree.getNode('main/bar.js'));
-            test.ok(tree.getNode('util/baz.js'));
+            test.ok(node === tree.getNode('util' + SEP));
+            test.ok(tree.getNode(path.join('main', 'foo.js')));
+            test.ok(tree.getNode(path.join('main', 'bar.js')));
+            test.ok(tree.getNode(path.join('util', 'baz.js')));
             test.done();
         }
     },
     "with no room for hoisting": {
         setUp: function (cb) {
-            summarizer.addFileCoverageSummary('/foo.js', s1);
-            summarizer.addFileCoverageSummary('/bar.js', s2);
-            summarizer.addFileCoverageSummary('/util/baz.js', s3);
+            summarizer.addFileCoverageSummary(SEP + 'foo.js', s1);
+            summarizer.addFileCoverageSummary(SEP + 'bar.js', s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('util', 'baz.js'), s3);
             tree = summarizer.getTreeSummary();
             //console.log(JSON.stringify(tree, undefined, 2));
             cb();
@@ -125,29 +127,29 @@ module.exports = {
                 utilSummary = utils.mergeSummaryObjects(s3),
                 libSummary = utils.mergeSummaryObjects(s1, s2),
                 fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
-            test.equal('/', node.fullPath());
+            test.equal(SEP, node.fullPath());
             test.equal('', node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(fullSummary, node.metrics);
             test.ok(node === tree.getNode(''));
             node = tree.root.children[0];
-            test.equal('/__root__/', node.fullPath());
-            test.equal('__root__/', node.displayShortName());
+            test.equal(SEP + '__root__' + SEP, node.fullPath());
+            test.equal('__root__' + SEP, node.displayShortName());
             test.equal(2, node.children.length);
             test.deepEqual(libSummary, node.metrics);
             test.deepEqual(s2, node.children[0].metrics);
             test.deepEqual(s1, node.children[1].metrics);
-            test.ok(node === tree.getNode('__root__/'));
+            test.ok(node === tree.getNode('__root__' + SEP));
             node = tree.root.children[1];
-            test.equal('/util/', node.fullPath());
-            test.equal('util/', node.displayShortName());
+            test.equal(SEP + 'util' + SEP, node.fullPath());
+            test.equal('util' + SEP, node.displayShortName());
             test.equal(1, node.children.length);
             test.deepEqual(utilSummary, node.metrics);
             test.deepEqual(s3, node.children[0].metrics);
-            test.ok(node === tree.getNode('util/'));
+            test.ok(node === tree.getNode('util' + SEP));
             test.ok(tree.getNode('foo.js'));
             test.ok(tree.getNode('bar.js'));
-            test.ok(tree.getNode('util/baz.js'));
+            test.ok(tree.getNode(path.join('util', 'baz.js')));
             test.done();
         }
     },
@@ -162,7 +164,7 @@ module.exports = {
 
             blank.statements.pct = blank.lines.pct = blank.branches.pct = blank.functions.pct = 100;
             test.ok(node);
-            test.equal('/', node.fullPath());
+            test.equal(SEP, node.fullPath());
             test.equal('', node.displayShortName());
             test.equal(0, node.children.length);
             test.deepEqual(blank, node.metrics);
