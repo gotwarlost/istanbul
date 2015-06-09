@@ -54,7 +54,10 @@
         "Simon Ramsay @nexus-uw",
         "Dominykas Blyžė @dominykas",
         "Seth Pollack @sethpollack",
-        "Benjamin E. Coe @bcoe <ben@npmjs.com>"
+        "Benjamin E. Coe @bcoe <ben@npmjs.com>",
+        "Yuren Ju <yurenju@gmail.com>",
+        "Aleksey Verkholantsev <alex-vee@yandex-team.ru>",
+        "Ed S <ejsanders@gmail.com>"
     ],
     "scripts": {
         "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",

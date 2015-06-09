@@ -3,6 +3,18 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.15</td>
+<td>
+    <ul>
+        <li>Fix #375: add nodir option to exclude directory for *.js matcher thanks to @yurenju</li>
+        <li>Fix #362: When setting up the `reportDir` add it to `reporter.dir`</li>
+        <li>Fixes #238 (added a poorman's clone)</li>
+        <li>Incrementing hits on ignored statements implemented</li>
+        <li>`a:visited color: #777` (a nice gray color)</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.14</td>
 <td>
     Add text-lcov report format to emit lcov to console, thanks to @bcoe
