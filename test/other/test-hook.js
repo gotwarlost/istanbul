@@ -76,8 +76,6 @@ module.exports = {
     },
     "when extensions are passed to hookRequire": {
         setUp: function(cb) {
-            var extensions = require('module')._extensions;
-            extensions['.es6'] = extensions['.js'];
             hook.hookRequire(matcher2, transformer2, { verbose: true, extensions: ['.es6'] });
             cb();
         },
@@ -99,6 +97,14 @@ module.exports = {
             test.equals('foo', foo.foo());
             test.done();
         },
+        "bad transformer should return original code": function (test) {
+            hook.unhookRequire();
+            hook.hookRequire(matcher2, badTransformer, { verbose: true, extensions: ['.es6'] });
+            var bar = require('./data/bar');
+            test.ok(bar.bar);
+            test.equals('bar', bar.bar());
+            test.done();
+        }
     },
     "when createScript is hooked": {
         setUp: function (cb) {
