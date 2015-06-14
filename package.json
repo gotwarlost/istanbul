@@ -82,7 +82,7 @@
         "handlebars": "3.0.0",
         "mkdirp": "0.5.x",
         "nopt": "3.x",
-        "fileset": "0.1.6",
+        "fileset": "0.2.x",
         "which": "1.0.x",
         "async": "0.9.x",
         "supports-color": "1.3.x",
