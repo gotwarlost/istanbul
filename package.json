@@ -84,7 +84,7 @@
         "nopt": "3.x",
         "fileset": "0.2.x",
         "which": "1.0.x",
-        "async": "0.9.x",
+        "async": "1.x",
         "supports-color": "1.3.x",
         "abbrev": "1.0.x",
         "wordwrap": "0.0.x",
