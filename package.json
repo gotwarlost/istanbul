@@ -57,7 +57,8 @@
         "Benjamin E. Coe @bcoe <ben@npmjs.com>",
         "Yuren Ju <yurenju@gmail.com>",
         "Aleksey Verkholantsev <alex-vee@yandex-team.ru>",
-        "Ed S <ejsanders@gmail.com>"
+        "Ed S <ejsanders@gmail.com>",
+        "Mordy Tikotzky <mordytk@gmail.com>"
     ],
     "scripts": {
         "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
