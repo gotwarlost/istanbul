@@ -15,19 +15,22 @@ module.exports = {
             statements: { covered: 5, total: 10, pct: 50, skipped: 0 },
             lines: { covered: 5, total: 10, pct: 50, skipped: 0 },
             functions: { covered: 15, total: 20, pct: 75, skipped: 0 },
-            branches: { covered: 100, total: 200, pct: 50, skipped: 0 }
+            branches: { covered: 100, total: 200, pct: 50, skipped: 0 },
+            linesCovered: { '320': 1, '420': 10 }
         };
         s2 = {
             statements: { covered: 10, total: 20, pct: 50, skipped: 0 },
             lines: { covered: 10, total: 20, pct: 50, skipped: 0 },
             functions: { covered: 75, total: 100, pct: 75, skipped: 0 },
-            branches: { covered: 1, total: 2, pct: 50, skipped: 0 }
+            branches: { covered: 1, total: 2, pct: 50, skipped: 0 },
+            linesCovered: { '320': 3, '500': 0 }
         };
         s3 = {
             statements: { covered: 9, total: 10, pct: 90, skipped: 0 },
             lines: { covered: 9, total: 10, pct: 90, skipped: 0 },
             functions: { covered: 15, total: 15, pct: 100, skipped: 0 },
-            branches: { covered: 101, total: 101, pct: 100, skipped: 0 }
+            branches: { covered: 101, total: 101, pct: 100, skipped: 0 },
+            linesCovered: {}
         };
         cb();
     },
@@ -71,6 +74,13 @@ module.exports = {
             test.ok(tree.getNode(path.join('lib', 'foo.js')));
             test.ok(tree.getNode(path.join('lib', 'bar.js')));
             test.ok(tree.getNode(path.join('lib', 'util', 'baz.js')));
+            test.done();
+        },
+        "should combine linesCovered across multiple summary objects": function  (test) {
+            var summary = utils.mergeSummaryObjects(s1, s2);
+            test.equal(4, summary.linesCovered['320']);
+            test.equal(10, summary.linesCovered['420']);
+            test.equal(0, summary.linesCovered['500']);
             test.done();
         }
     },
