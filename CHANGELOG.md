@@ -3,6 +3,19 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.17</td>
+<td>Upgrade esprima, get correct for-of support</td>
+</tr>
+<tr>
+<td>v0.3.16</td>
+<td>
+    <ul>
+        <li>upgrades to filset and async modules, thanks to @roderickhsiao, @popomore</li>
+        <li>updated text reporter so that it displays a list of the lines missing coverage, thanks @bcoe</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.15</td>
 <td>
     <ul>
