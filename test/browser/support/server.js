@@ -12,6 +12,7 @@ var handlebars = require('handlebars'),
     },
     esprimaSource = reader('..', '..', '..', 'node_modules', 'esprima', 'esprima.js'),
     escodegenSource = reader('..', '..', '..', 'node_modules', 'escodegen', 'escodegen.browser.min.js'),
+    estraverseSource = reader('..', '..', '..', 'node_modules', 'estraverse', 'dist', 'estraverse.js'),
     yuiSource = reader('vendor', 'yui-support.js'),
     vm = require('vm'),
     server;
@@ -47,6 +48,11 @@ function handleInstrumenter(request, response) {
     } else {
         response.end(instrumenterSource, 'utf8');
     }
+}
+
+function handleEstraverse(request, response) {
+    response.setHeader('content-type', 'application/javascript');
+    response.end(estraverseSource, 'utf8');
 }
 
 function handleFile(request, response) {
@@ -124,6 +130,9 @@ function handler(request, response) {
             break;
         case '/_instrumenter.js':
             handleInstrumenter(request, response);
+            break;
+        case '/_estraverse.js':
+            handleEstraverse(request, response);
             break;
         default:
             handleFile(request, response);
