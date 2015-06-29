@@ -18,7 +18,8 @@ function runTests(pat, reporter, opts, callback) {
     var files,
         files2,
         files3,
-        files4;
+        files4,
+        files5;
 
     pat = pat || /(.*)+\.js$/;
     if (typeof pat === 'string') { pat = new RegExp(pat); }
@@ -26,9 +27,11 @@ function runTests(pat, reporter, opts, callback) {
     files2 = loadDirTests('other', pat);
     files3 = loadDirTests('cli', pat);
     files4 = loadDirTests('browser', pat);
+    files5 = loadDirTests('source-map', pat);
     files.push.apply(files, files2);
     files.push.apply(files, files3);
     files.push.apply(files, files4);
+    files.push.apply(files, files5);
     reporter.run(files, opts, callback);
 }
 

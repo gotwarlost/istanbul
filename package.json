@@ -98,7 +98,8 @@
     "wordwrap": "0.0.x",
     "resolve": "1.1.x",
     "js-yaml": "3.x",
-    "once": "1.x"
+    "once": "1.x",
+    "source-map": "0.4.x"
   },
   "devDependencies": {
     "rimraf": "2.2.x",
@@ -106,6 +107,8 @@
     "jshint": "2.5.x",
     "requirejs": "2.x",
     "coveralls": "2.x",
-    "glob": "4.4.x"
+    "glob": "4.4.x",
+    "browserify": "9.x",
+    "traceur": "0.x"
   }
 }
