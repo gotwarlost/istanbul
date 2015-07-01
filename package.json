@@ -109,6 +109,7 @@
     "coveralls": "2.x",
     "glob": "4.4.x",
     "browserify": "9.x",
-    "traceur": "0.x"
+    "traceur": "0.x",
+    "typescript": "1.5.0-beta"
   }
 }

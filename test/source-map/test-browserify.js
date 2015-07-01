@@ -34,8 +34,7 @@ module.exports = {
             test.equal(1, Object.keys(originalFileCoverage).length);
             collector = new Collector();
             collector.add(originalFileCoverage);
-            collector.done();
-            finalCoverage = collector.getFinalCoverage();
+            finalCoverage = collector.reportView().getFinalCoverage();
             test.ok(finalCoverage);
             test.equal(4, Object.keys(finalCoverage).length);
             test.done();
