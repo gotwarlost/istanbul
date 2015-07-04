@@ -221,6 +221,21 @@ module.exports = {
         test.done();
     },
 
+    "should use custom templates if specified" : function(test) {
+        var customTemplateDir = path.join(__dirname, 'custom-templates'),
+            reporter = new Reporter({
+                dir: OUTPUT_DIR,
+                verbose: true,
+                templateDir: customTemplateDir
+            }),
+            head = fs.readFileSync(path.join(customTemplateDir, 'head.txt'), 'utf8'),
+            foot = fs.readFileSync(path.join(customTemplateDir, 'foot.txt'), 'utf8');
+
+        test.ok(head === reporter.headerTemplate({}));
+        test.ok(foot === reporter.footerTemplate({}));
+        test.done();
+    },
+
     "should generate proper ancestorHref when path separator is \\" : function(test) {
         var pathSep = path.sep,
             reporter = new Reporter(),
