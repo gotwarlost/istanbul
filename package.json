@@ -65,7 +65,8 @@
     "Ed S <ejsanders@gmail.com>",
     "Mordy Tikotzky <mordytk@gmail.com>",
     "Haoliang Gao @popomore <sakura9515@gmail.com>",
-    "Roderick Hsiao @roderickhsiao"
+    "Roderick Hsiao @roderickhsiao",
+    "Kegan Dougal @Kegsay <kegsay@gmail.com>"
   ],
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
