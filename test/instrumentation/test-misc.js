@@ -57,6 +57,18 @@ module.exports = {
                 test.fail('instrumentation should have succeeded but did not');
             }
             test.done();
+        },
+        "inlne source maps are included in the output when specified": function (test) {
+            try {
+                instrumenter.opts.sourceMap = true;
+                test.ok(/sourceMappingURL=data:application\/json/.test(instrumenter.instrumentSync('var foo = { a: 1 };')));
+
+                instrumenter.opts.sourceMap = false;
+                test.ok(!/sourceMappingURL=data:application\/json/.test(instrumenter.instrumentSync('var foo = { a: 1 };')));
+            } catch (ex) {
+                test.fail('instrumentation should have succeeded but did not');
+            }
+            test.done();
         }
     }
 };
