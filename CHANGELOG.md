@@ -3,6 +3,10 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.18</td>
+<td>Upgrade esprima, get support for more ES6 features</td>
+</tr>
+<tr>
 <td>v0.3.17</td>
 <td>Upgrade esprima, get correct for-of support</td>
 </tr>
