@@ -54,15 +54,15 @@ module.exports = {
     "with an array expression with empty positions": {
         setUp: function (cb) {
             code = [
-                'var x = [, , args[0], ];',
-                'output = x.indexOf(args[0]) === x.length - 1;'
+                'var x = [args[0], , args[1], ];',
+                'output = x.indexOf(args[1]) === x.length - 1 && x[0] !== x[1];'
             ];
             verifier = helper.verifier(__filename, code);
             cb();
         },
 
         "should not barf in any way": function (test) {
-            verifier.verify(test, [ 5 ], true, { lines: { 1: 1, 2: 1 }, branches: {}, functions: {}, statements: { '1': 1, '2': 1 } });
+            verifier.verify(test, [ 1, 5 ], true, { lines: { 1: 1, 2: 1 }, branches: { 1: [ 1, 1 ]}, functions: {}, statements: { '1': 1, '2': 1 } });
             test.done();
         }
     }
