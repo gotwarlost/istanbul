@@ -3,6 +3,11 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.19</td>
+<td>Fix instrumenter for multiple blank array positions, thanks @alexdunphy</td>
+</tr>
+<tr>
+<tr>
 <td>v0.3.18</td>
 <td>Upgrade esprima, get support for more ES6 features</td>
 </tr>
