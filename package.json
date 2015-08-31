@@ -104,7 +104,7 @@
   },
   "devDependencies": {
     "coveralls": "2.x",
-    "glob": "4.4.x",
+    "glob": "^5.0.14",
     "jshint": "^2.8.0",
     "nodeunit": "0.9.x",
     "requirejs": "2.x",
