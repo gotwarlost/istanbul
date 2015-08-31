@@ -103,7 +103,7 @@
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
-    "rimraf": "2.2.x",
+    "rimraf": "^2.4.3",
     "nodeunit": "0.9.x",
     "jshint": "2.5.x",
     "requirejs": "2.x",
