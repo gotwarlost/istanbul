@@ -99,7 +99,7 @@
     "once": "1.x",
     "resolve": "1.1.x",
     "supports-color": "1.3.x",
-    "which": "1.0.x",
+    "which": "^1.1.1",
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
