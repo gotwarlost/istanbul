@@ -87,20 +87,20 @@
     "url": "git://github.com/gotwarlost/istanbul.git"
   },
   "dependencies": {
-    "esprima": "2.5.x",
+    "abbrev": "1.0.x",
+    "async": "1.x",
     "escodegen": "1.6.x",
-    "handlebars": "3.0.0",
+    "esprima": "2.5.x",
+    "fileset": "0.2.x",
+    "handlebars": "^3.0.3",
+    "js-yaml": "3.x",
     "mkdirp": "0.5.x",
     "nopt": "3.x",
-    "fileset": "0.2.x",
-    "which": "1.0.x",
-    "async": "1.x",
-    "supports-color": "1.3.x",
-    "abbrev": "1.0.x",
-    "wordwrap": "0.0.x",
+    "once": "1.x",
     "resolve": "1.1.x",
-    "js-yaml": "3.x",
-    "once": "1.x"
+    "supports-color": "1.3.x",
+    "which": "1.0.x",
+    "wordwrap": "0.0.x"
   },
   "devDependencies": {
     "rimraf": "2.2.x",
