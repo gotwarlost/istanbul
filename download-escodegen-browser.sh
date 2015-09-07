@@ -7,11 +7,11 @@ if [ ! -f ${OUT_FILE} ]
 then
     set -v
     rm -rf __escodegen_clone__
-    git clone https://github.com/estools/escodegen.git __escodegen_clone__
+    git clone --branch ${ESCG_VERSION} https://github.com/estools/escodegen.git __escodegen_clone__
     cd __escodegen_clone__
     npm i && npm run build-min
     mv escodegen.browser.min.js ../${OUT_FILE}
-    rm -rf __escodegen_clone__
     cd -
+    rm -rf __escodegen_clone__
 fi
 
