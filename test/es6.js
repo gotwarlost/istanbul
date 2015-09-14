@@ -35,5 +35,13 @@ module.exports = {
 
     isArrowFnAvailable: function () {
         return tryThis('[1 ,2, 3].map(x => x * x)', 'arrow function');
+    },
+
+    isImportAvailable: function () {
+        return tryThis('import fs from "fs"', 'import');
+    },
+
+    isExportAvailable: function () {
+        return tryThis('export default function foo() {}', 'export');
     }
 };

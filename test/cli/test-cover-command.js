@@ -57,7 +57,7 @@ module.exports = {
     },
     "should include all files after running tests": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '0', '-v', '--include-all-sources', '-x', 'lib/util/bad.js' ], function (results) {
+        run([ 'test/run.js', '0', '-v', '--include-all-sources', '-x', 'lib/util/bad.js', '-x', 'lib/util/es-module.js' ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
@@ -80,7 +80,7 @@ module.exports = {
     },
     "should include all files after running tests in back-compat mode": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '0', '-v', '--preload-sources', '-x', 'lib/util/bad.js' ], function (results) {
+        run([ 'test/run.js', '0', '-v', '--preload-sources', '-x', 'lib/util/bad.js', '-x', 'lib/util/es-module.js' ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
