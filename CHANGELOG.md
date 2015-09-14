@@ -3,6 +3,17 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.20</td>
+<td>
+    <ul>
+        <li>Fix broken es6 `super` support, thanks @sterlinghw</li>
+        <li>Improve readability via better lineHeight, thanks @dhoko</li>
+        <li>Adding ability to set custom block name in teamcity report, thanks @aryelu</li>
+        <li>Replaced deprecated util.puts with console.log, thanks @arty-name
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.19</td>
 <td>Fix instrumenter for multiple blank array positions, thanks @alexdunphy</td>
 </tr>
