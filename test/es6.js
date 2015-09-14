@@ -24,6 +24,10 @@ module.exports = {
         return tryThis('function *foo() { yield 1; }', 'yield');
     },
 
+    isSuperAvailable: function () {
+        return tryThis('class Test extends Object { constructor() { super(); } }\nnew Test();', 'super');
+    },
+
     isForOfAvailable: function () {
         return tryThis('function *foo() { yield 1; }\n' +
             'for (var k of foo()) {}', 'for-of');
