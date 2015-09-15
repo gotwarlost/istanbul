@@ -92,7 +92,7 @@
   "dependencies": {
     "esprima": "2.5.x",
     "escodegen": "1.7.x",
-    "handlebars": "3.0.0",
+    "handlebars": "4.0.0",
     "mkdirp": "0.5.x",
     "nopt": "3.x",
     "fileset": "0.2.x",
