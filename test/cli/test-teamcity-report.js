@@ -49,6 +49,24 @@ module.exports = {
         test.ok(reportLines.indexOf('CodeCoverageL') > 0);
 
         test.done();
+    },
+    "should allow to set custom Block name": function(test){
+    var file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+        outFile = path.resolve(OUTPUT_DIR, 'teamcity-named.txt'),
+        reporter = new Reporter({ dir: OUTPUT_DIR, file: "teamcity-named.txt",  blockName: 'My Custom Block Name' }),
+        obj,
+        reportLines,
+        collector = new Collector();
+
+    obj = JSON.parse(fs.readFileSync(file, 'utf8'));
+    collector.add(obj);
+    reporter.writeReport(collector, true);
+    test.ok(existsSync(outFile));
+    reportLines = fs.readFileSync(outFile, 'utf8');
+
+    test.ok(reportLines.indexOf('##teamcity[blockOpened name=\'My Custom Block Name\']') > 0);
+    test.ok(reportLines.indexOf('##teamcity[blockClosed name=\'My Custom Block Name\']') > 0);
+    test.done();
     }
 };
 

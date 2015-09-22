@@ -1,6 +1,6 @@
 {
   "name": "istanbul",
-  "version": "0.3.17",
+  "version": "0.3.20",
   "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
   "keywords": [
     "coverage",
@@ -65,7 +65,12 @@
     "Ed S <ejsanders@gmail.com>",
     "Mordy Tikotzky <mordytk@gmail.com>",
     "Haoliang Gao @popomore <sakura9515@gmail.com>",
-    "Roderick Hsiao @roderickhsiao"
+    "Roderick Hsiao @roderickhsiao",
+    "Nikita Gusakov @nkt",
+    "Alex Dunphy @alexdunphy <alexanderdunphy@gmail.com>",
+    "Artemy Tregubenko @arty-name <me@arty.name>",
+    "Arye Lukashevski @aryelu",
+    "@sterlinghw"
   ],
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
@@ -85,8 +90,8 @@
     "url": "git://github.com/gotwarlost/istanbul.git"
   },
   "dependencies": {
-    "esprima": "2.4.x",
-    "escodegen": "1.6.x",
+    "esprima": "2.5.x",
+    "escodegen": "1.7.x",
     "handlebars": "3.0.0",
     "mkdirp": "0.5.x",
     "nopt": "3.x",
