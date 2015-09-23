@@ -3,6 +3,14 @@ Changelog
 
 <table>
 <tr>
+<td>v0.3.21</td>
+<td>
+    <ul>
+        <li>Updated dependencies to the latest</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.20</td>
 <td>
     <ul>
