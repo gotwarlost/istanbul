@@ -107,5 +107,27 @@ You get the idea by now.
 })(this, fn);
 ```
 
-This will cause the entire function expression to be skipped for coverage.
+This will cause the entire function expression to be skipped for coverage. If the factory function is
+passed in as an anonymous function, care needs to be given to what "next" is skipped.
 
+```javascript
+(function (root, factory) {
+    'use strict';
+    /* istanbul ignore next */
+    if (typeof exports === 'object') {
+        // CommonJS
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(factory);
+    } else {
+        // Browser globals
+        root.module = factory();
+    }
+}(this, function() {
+
+  return {};
+}));
+```
+
+Otherwise you will ignore coverage for your entire module.
