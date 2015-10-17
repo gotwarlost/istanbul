@@ -3,6 +3,17 @@ Changelog
 
 <table>
 <tr>
+<td>v0.4.0</td>
+<td>
+    <ul>
+        <li>HTML report design, thanks a bunch to @tmcw</li>
+        <li>"loading config file" message on the console is now tied to the verbose state, thanks @asa-git</li>
+        <li>Add the `l` property to documentation, thanks @kitsonk</li>
+
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.3.21</td>
 <td>
     <ul>

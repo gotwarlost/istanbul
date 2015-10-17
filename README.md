@@ -7,6 +7,8 @@
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
+**New** `v0.4.0` now has beautiful HTML reports. Props to Tom MacWright @tmcw for a fantastic job!
+
 * [Features and use cases](#features)
 * [Getting started and configuration](#getting-started)
 * [The command line](#the-command-line)
