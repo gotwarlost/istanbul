@@ -268,7 +268,6 @@ module.exports = {
         "code with no context should be transformed": function (test) {
             var s, context, vm = require('vm');
             hook.hookRunInNewContext(matcher, scriptTransformer);
-            context = vm.createContext({});
             s = vm.runInNewContext('(function () { return 10; }());', null, '/bar/foo.js');
             test.equals(42, s);
             hook.unhookRunInNewContext();
