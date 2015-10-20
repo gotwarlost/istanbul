@@ -89,7 +89,8 @@ function setup(file, codeArray, opts) {
             noAutoWrap: opts.noAutoWrap,
             coverageVariable: coverageVariable,
             embedSource: ps,
-            preserveComments: pc
+            preserveComments: pc,
+            esModules: opts.esModules
         }),
         args = [ codeArray.join("\n")],
         callback = function (err, generated) {
