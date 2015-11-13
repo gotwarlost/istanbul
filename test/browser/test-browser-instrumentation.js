@@ -52,9 +52,11 @@ module.exports = {
         }
 
         var server,
-            port = 9000;
+            port = 9000,
+            complete = false;
 
         var finalFn = function () {
+            complete = true;
             if (server) { server.close(); }
             if (!cp.exited) { cp.kill(); }
         };
@@ -84,6 +86,12 @@ module.exports = {
                 test.done();
             });
             runPhantom(phantom, path.resolve(__dirname, 'support', 'phantom-test.client.js'), port, filesToInstrument, function (err) {
+                if (complete) {
+                    return;
+                }
+
+                finalFn();
+
                 test.ok(false, err.message);
                 test.done();
             });
