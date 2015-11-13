@@ -14,16 +14,17 @@ var which = require('which'),
     exited,
     cp;
 
-function runPhantom(cmd, script, port, files) {
+function runPhantom(cmd, script, port, files, errorCB) {
     var args = [ script ];
     args.push(port);
     args.push.apply(args, files);
     console.log('Start phantom');
-    cp = child_process.spawn(cmd, args);
-    cp.stdout.on('data', function (data) { process.stdout.write(data); });
-    cp.stderr.on('data', function (data) { process.stderr.write(data); });
-    cp.on('exit', function () {
+    cp = child_process.spawn(cmd, args, {stdio: 'inherit'});
+    cp.on('exit', function (code, signal) {
         exited = 1;
+        if (signal) {
+            errorCB(new Error('Phantom exited with signal: ' + signal));
+        }
     });
 }
 
@@ -81,7 +82,10 @@ module.exports = {
                 finalFn();
                 test.done();
             });
-            runPhantom(phantom, path.resolve(__dirname, 'support', 'phantom-test.client.js'), port, filesToInstrument);
+            runPhantom(phantom, path.resolve(__dirname, 'support', 'phantom-test.client.js'), port, filesToInstrument, function (err) {
+                test.ok(false, err.message);
+                test.done();
+            });
         } catch (ex) {
             console.error(ex.message || ex);
             console.error(ex.stack);
