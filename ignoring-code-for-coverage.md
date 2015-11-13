@@ -23,6 +23,15 @@ the source code
   * A part of a logical expression in which case that part of the expression is ignored for branch coverage
 6. It is up to the caller to scope this as narrowly as possible. For example, if you have a source file that is wrapped
 in a function expression, adding `/* istanbul ignore next */` at the top of the file will ignore the whole file!
+7. Ranges of code may be skipped using `/* istanbul ignore start */` and `/* istanbul ignore end */`. When defined, these only ignore locations that they completely cover. Ex:
+
+  ```
+  /* istanbul ignore start */
+  if (foo || bar /* istanbul ignore end */) {
+  }
+  ```
+
+  Will only ignore the `foo || bar` portions of the code and the `if` will continue to be covered.
 
 ### How it works
 
