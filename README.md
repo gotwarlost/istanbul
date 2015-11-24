@@ -72,7 +72,7 @@ the above line into the script object in your package.json file but with normal
 slash.
 
     "scripts": {
-        istanbul cover node_modules/jasmine/bin/jasmine.js
+        "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
     }
 
 ### Configuring
