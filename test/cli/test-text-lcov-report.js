@@ -25,14 +25,14 @@ module.exports = {
         cb();
     },
     "should print lcov.info to standard out": function (test) {
-        var file = path.resolve(OUTPUT_DIR, 'coverage.json'),
+        var output = '',
+            file = path.resolve(OUTPUT_DIR, 'coverage.json'),
             reporter = new Reporter({
                 log: function (ln) {
                     output += ln;
                 }
             }),
-            collector = new Collector(),
-            output = '';
+            collector = new Collector();
 
         collector.add(JSON.parse(fs.readFileSync(file, 'utf8')));
         reporter.writeReport(collector, true);
