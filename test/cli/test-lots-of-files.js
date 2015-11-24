@@ -59,7 +59,7 @@ module.exports = {
         var coverageDir = path.resolve(outputDir, 'coverage'),
             lcovFile = path.resolve(coverageDir, 'lcov.info'),
             lcovDir = path.resolve(coverageDir, 'lcov-report'),
-            jsonFile = path.resolve(coverageDir, 'coverage.json');
+            jsonFile = path.resolve(coverageDir, 'coverage.raw.json');
         createCode();
         createTest();
         runCover([ 'test/test.js' ], function (results) {
@@ -76,7 +76,7 @@ module.exports = {
                 test.ok(existsSync(lcovFile));
                 test.ok(existsSync(lcovDir));
                 test.ok(existsSync(jsonFile));
-                test.ok(fs.readdirSync(path.resolve(lcovDir, 'lib')).length >= MAX_FILES);
+                test.ok(fs.readdirSync(path.resolve(lcovDir)).length >= MAX_FILES);
                 test.done();
             });
         });

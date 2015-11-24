@@ -9,8 +9,7 @@ var path = require('path'),
     OUTPUT_DIR = path.resolve(DIR, 'coverage'),
     helper = require('../cli-helper'),
     existsSync = fs.existsSync || path.existsSync,
-    run = helper.runCommand.bind(null, COMMAND),
-    Report = require('../../lib/report');
+    run = helper.runCommand.bind(null, COMMAND);
 
 module.exports = {
     setUp: function (cb) {
@@ -30,25 +29,26 @@ module.exports = {
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
-            test.ok(filtered.length === 2);
+            test.ok(filtered.length === 2, 'Filtered was ' + filtered);
             test.done();
         });
     },
     "should cover tests running every possible report": function (test) {
         helper.setOpts({ lazyHook : true });
-        var cmd = [ 'test/run.js', '-v', '--print=none' ];
-        Report.getReportList().forEach(function (r) {
+        var cmd = [ 'test/run.js', '-v', '--print=none'],
+            rpts = [ 'none', 'lcovonly', 'html', 'lcov', 'cobertura', 'clover', 'teamcity', 'json'];
+        rpts.forEach(function (r) {
             cmd.push('--report=' + r);
         });
         run(cmd, function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage-final.json')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'cobertura-coverage.xml')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'clover.xml')));
@@ -61,8 +61,8 @@ module.exports = {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 unloadedFilePath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFile.js'),
                 unloadedFileWithFnPath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFileWithFunctionDeclaration.js'),
                 unloadedFile = coverage[unloadedFilePath],
@@ -75,30 +75,6 @@ module.exports = {
                 test.ok(unloadedFileWithFn.s[statement] === 0);
             });
 
-            test.done();
-        });
-    },
-    "should include all files after running tests in back-compat mode": function (test) {
-        helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '0', '-v', '--preload-sources', '-x', 'lib/util/bad.js', '-x', 'lib/util/es-module.js' ], function (results) {
-            test.ok(results.succeeded());
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
-                unloadedFilePath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFile.js'),
-                unloadedFileWithFnPath = path.resolve(OUTPUT_DIR, '..', 'includeAllSources', 'unloadedFileWithFunctionDeclaration.js'),
-                unloadedFile = coverage[unloadedFilePath],
-                unloadedFileWithFn = coverage[unloadedFileWithFnPath];
-
-            Object.keys(unloadedFile.s).forEach(function (statement) {
-                test.ok(unloadedFile.s[statement] === 0);
-            });
-            Object.keys(unloadedFileWithFn.s).forEach(function (statement) {
-                test.ok(unloadedFileWithFn.s[statement] === 0);
-            });
-
-            test.ok(results.grepError(/The preload-sources option is deprecated/));
             test.done();
         });
     },
@@ -109,8 +85,8 @@ module.exports = {
             test.ok(!results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/); });
             test.ok(filtered.length === 0);
@@ -124,8 +100,8 @@ module.exports = {
             test.ok(!results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/); });
             test.ok(filtered.length !== 0);
@@ -140,7 +116,7 @@ module.exports = {
             test.ok(results.succeeded());
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
             test.done();
         });
     },
@@ -150,7 +126,7 @@ module.exports = {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
             test.done();
         });
     },
@@ -160,21 +136,21 @@ module.exports = {
             test.ok(results.succeeded());
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
             test.done();
         });
     },
     "should cover everything under the sun when default excludes are suppressed": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '--no-default-exclude' ], function (results) {
+        run([ 'test/run.js', '--no-default-exclude', '--no-include-all-sources' ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/node_modules/); });
-            test.ok(filtered.length === 1);
+            test.ok(filtered.length === 1, "Filtered was " + filtered);
             test.done();
         });
     },
@@ -185,63 +161,21 @@ module.exports = {
             test.done();
         });
     },
-    "should barf on invalid command": function (test) {
-        run([ 'foobar' ], function (results) {
-            test.ok(!results.succeeded());
-            test.ok(results.grepError(/Unable to resolve file/));
-            test.done();
-        });
-    },
     "should work with RequireJS and AMD modules": function (test) {
         helper.setOpts({ lazyHook : true });
-        run([ 'test/amd-run.js', '-v', '--hook-run-in-context' ], function (results) {
+        run([ 'test/amd-run.js', '-v', '--hook-run-in-context', '--no-include-all-sources' ], function (results) {
             test.ok(results.succeeded());
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 ipsumPath = path.join('amd', 'ipsum'),
                 loremPath = path.join('amd', 'lorem'),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.indexOf(ipsumPath) >= 0 || k.indexOf(loremPath) >= 0; });
             test.ok(filtered.length === 2);
             test.ok(filtered.length === Object.keys(coverage).length);
-            test.done();
-        });
-    },
-    "should apply post-require-hook correctly when absolute path specified": function (test) {
-        helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'node_modules/post-require/hook.js' ], function (results) {
-            test.ok(results.succeeded());
-            test.ok(results.grepError(/PRH: MatchFn was a function/));
-            test.ok(results.grepError(/PRH: TransformFn was a function/));
-            test.ok(results.grepError(/PRH: Verbose was true/));
-            //yes, post require hook must be called always even when a file is not covered
-            test.ok(results.grepError(/PRH: Saw foo\.js/));
-            //and, of course, for covered files as well
-            test.ok(results.grepError(/PRH: Saw bar\.js/));
-            test.done();
-        });
-    },
-    "should apply post-require-hook correctly when module name specified": function (test) {
-        helper.setOpts({ lazyHook : true });
-        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'post-require' ], function (results) {
-            test.ok(results.succeeded());
-            test.ok(results.grepError(/PRH: MatchFn was a function/));
-            test.ok(results.grepError(/PRH: TransformFn was a function/));
-            test.ok(results.grepError(/PRH: Verbose was true/));
-            //yes, post require hook must be called always even when a file is not covered
-            test.ok(results.grepError(/PRH: Saw foo\.js/));
-            //and, of course, for covered files as well
-            test.ok(results.grepError(/PRH: Saw bar\.js/));
-            test.done();
-        });
-    },
-    "should barf when  post-require-hook not available": function (test) {
-        run([ 'test/run.js', '-v', '-x', '**/foo.js', '--post-require-hook', 'does-not-exist' ], function (results) {
-            test.ok(!results.succeeded());
-            test.ok(results.grepError(/Unable to resolve \[does-not-exist\] as a node module/));
             test.done();
         });
     },
@@ -274,8 +208,8 @@ module.exports = {
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
             test.ok(filtered.length === 2);

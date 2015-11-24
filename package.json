@@ -81,7 +81,7 @@
     "Kevin Decker @kpdecker <kpdecker@gmail.com>"
   ],
   "scripts": {
-    "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
+    "pretest": "jshint index.js lib/ test/",
     "test": "node --harmony test/run.js",
     "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
     "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
@@ -98,24 +98,20 @@
     "url": "git://github.com/gotwarlost/istanbul.git"
   },
   "dependencies": {
+    "istanbul-api": "^1.0.0-alpha",
     "abbrev": "1.0.x",
     "async": "1.x",
-    "escodegen": "1.7.x",
-    "esprima": "2.7.x",
-    "fileset": "0.2.x",
-    "handlebars": "^4.0.1",
     "js-yaml": "3.x",
     "mkdirp": "0.5.x",
     "nopt": "3.x",
-    "once": "1.x",
-    "resolve": "1.1.x",
-    "supports-color": "^3.1.0",
     "which": "^1.1.1",
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
     "coveralls": "2.x",
     "glob": "^5.0.14",
+    "istanbul-lib-coverage": "^1.0.0-alpha.0",
+    "istanbul-lib-instrument": "^1.0.0-alpha.0",
     "jshint": "^2.8.0",
     "nodeunit": "0.9.x",
     "requirejs": "2.x",

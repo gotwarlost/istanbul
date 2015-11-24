@@ -1,7 +1,0 @@
-instrumentation:
-  compact: false
-  save-baseline: true
-reporting:
-  reports:
-    - lcov
-    - cobertura

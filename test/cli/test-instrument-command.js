@@ -80,9 +80,9 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'util', 'generate-names.js')));
             test.equal(fs.readFileSync(path.resolve(DIR, 'lib', 'util', 'bad.js'), 'utf8'),
                 fs.readFileSync(path.resolve(OUTPUT_DIR, 'util', 'bad.js'), 'utf8'));
-            test.ok(results.grepOutput(/Processed: foo\.js/));
-            test.ok(results.grepOutput(/Processed \[\d+\] files in/));
-            test.ok(results.grepOutput(/The following 1 file\(s\) had errors and were copied as-is/));
+            test.ok(results.grepError(/Processed: foo\.js/));
+            test.ok(results.grepError(/Processed \[\d+\] files in/));
+            test.ok(results.grepError(/The following 1 file\(s\) had errors and were copied as-is/));
             test.done();
         });
     },
@@ -93,9 +93,9 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'bar.js')));
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'util', 'bad.js')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'util', 'generate-names.js')));
-            test.ok(!results.grepOutput(/Processed: foo\.js/));
-            test.ok(results.grepOutput(/Processed \[\d+\] files in/));
-            test.ok(!results.grepOutput(/The following 1 file\(s\) had errors and were copied as-is/));
+            test.ok(!results.grepError(/Processed: foo\.js/));
+            test.ok(results.grepError(/Processed \[\d+\] files in/));
+            test.ok(!results.grepError(/The following 1 file\(s\) had errors and were copied as-is/));
             test.done();
         });
     },
@@ -104,7 +104,7 @@ module.exports = {
         run([ 'lib/foo.js', '--save-baseline', '--baseline-file=' + covFile ], function (results) {
             test.ok(results.succeeded());
             test.ok(existsSync(covFile));
-            test.ok(results.grepOutput(/Saving baseline coverage at/));
+            test.ok(results.grepError(/Saving baseline coverage at/));
             test.done();
         });
     },

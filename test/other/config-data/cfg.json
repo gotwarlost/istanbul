@@ -1,8 +1,0 @@
-{
-    "instrumentation": {
-        "save-baseline": true
-    },
-    "hooks": {
-        "post-require-hook": "yui-istanbul"
-    }
-}

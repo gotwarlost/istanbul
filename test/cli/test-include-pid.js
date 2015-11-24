@@ -29,8 +29,8 @@ module.exports = {
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
             test.ok(filtered.length === 2);
@@ -44,8 +44,8 @@ module.exports = {
             test.ok(results.grepError(/Module load hook:/));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov.info')));
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'lcov-report')));
-            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
-            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.json'), 'utf8')),
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
+            var coverage = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json'), 'utf8')),
                 filtered;
             filtered = Object.keys(coverage).filter(function (k) { return k.match(/foo/) || k.match(/bar/); });
             test.ok(filtered.length === 2);
