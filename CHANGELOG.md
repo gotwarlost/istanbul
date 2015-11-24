@@ -3,6 +3,18 @@ Changelog
 
 <table>
 <tr>
+<td>v0.4.1</td>
+<td>
+    <ul>
+        <li>Update esprima to 2.7.x, thanks to @ariya</li>
+        <li>Make table header clickable in HTML report, thanks to @iphands</li>
+        <li>Fix strict mode issues thanks to @kpdecker</li>
+        <li>update ignore code example for UMD, thanks to @pgurnee</li>
+        <li>misc build fixes, no user visible changes, thanks to @ariya</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>v0.4.0</td>
 <td>
     <ul>
