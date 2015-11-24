@@ -4,6 +4,8 @@ node_js:
   - "0.10"
   - "0.12"
 
+sudo: false
+
 branches:
   except:
     - gh-pages
