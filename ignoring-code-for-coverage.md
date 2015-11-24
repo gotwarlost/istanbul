@@ -91,9 +91,9 @@ You get the idea by now.
 #### Ignore a UMD wrapper
 
 ```javascript
-/* istanbul ignore next */
 (function (root, factory) {
     'use strict';
+    /* istanbul ignore next */
     if (typeof exports === 'object') {
         // CommonJS
         module.exports = factory();
@@ -108,4 +108,3 @@ You get the idea by now.
 ```
 
 This will cause the entire function expression to be skipped for coverage.
-
