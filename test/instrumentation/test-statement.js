@@ -24,6 +24,27 @@ module.exports = {
             test.done();
         }
     },
+    "with a metaproperty": {
+        setUp: function (cb) {
+            code = [
+                'class FooClass {',
+                '   constructor() {',
+                '       if (new.target === FooClass) {',
+                '           throw new Error(\'Cannot instanciate directly.\');',
+                '       }',
+                '   }',
+                '}'
+            ];
+            verifier = helper.verifier(__filename, code);
+            cb();
+        },
+        "should be able to parse": function (test) {
+            // Do we need to test coverage here really? We're just checking
+            // that a new type of statement is parsable, the if-else logic
+            // is already covered in statement-if.
+            test.done();
+        }
+    },
     "with no filename": {
         setUp: function (cb) {
             code = [
