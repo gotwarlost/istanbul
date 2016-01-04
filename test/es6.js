@@ -1,16 +1,25 @@
 var esprima = require('esprima');
 
 function tryThis(str, feature) {
-    try {
-        /*jshint evil: true */
-        eval(str);
-    } catch (ex) {
-        console.error('ES6 feature [' + feature + '] is not available in this environment');
-        return false;
+    // We can test instrumentation of exports even if the environment doesn't support them. 
+    if (feature !== 'export') {
+        try {
+            /*jshint evil: true */
+            eval(str);
+        } catch (ex) {
+            console.error('ES6 feature [' + feature + '] is not available in this environment');
+            return false;
+        }
     }
 
+   // esprima parses sources with sourceType 'script' per default.
+   // The only way to enable `import`/`export` is to parse as sourceType 'module'.
    try {
-       esprima.parse(str);
+       try {
+           esprima.parse(str);
+       } catch (ex) {
+           esprima.parse(str, { sourceType: 'module' });
+       }
    } catch (ex) {
        console.error('ES6 feature [' + feature + '] is not yet supported by esprima mainline');
        return false;

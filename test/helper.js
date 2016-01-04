@@ -104,6 +104,11 @@ function setup(file, codeArray, opts) {
                 }
                 return;
             }
+
+            // `export`/`import` cannot be wrapped inside a function.
+            // For our purposes, simply remove the `export` from export declarations.
+            generated = generated.replace(/export (var|function|let|const)/g, '$1');
+
             var wrappedCode = '(function (args) { var output;\n' + generated + '\nreturn output;\n})',
                 fn;
             global[coverageVariable] = undefined;
