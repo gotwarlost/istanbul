@@ -78,7 +78,8 @@
     "@RoCat",
     "Ian Page Hands @iphands <iphands@gmail.com>",
     "Eddie Gurnee @pegurnee",
-    "Kevin Decker @kpdecker <kpdecker@gmail.com>"
+    "Kevin Decker @kpdecker <kpdecker@gmail.com>",
+    "isaacs @isaacs <i@izs.me>"
   ],
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",

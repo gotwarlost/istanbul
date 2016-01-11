@@ -3,6 +3,10 @@ Changelog
 
 <table>
 <tr>
+<td>0.4.2</td>
+<td>Fix confusing error message on check-coverage failures, thanks to @isaacs/td>
+</tr>
+<tr>
 <td>v0.4.1</td>
 <td>
     <ul>
