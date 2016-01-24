@@ -101,7 +101,7 @@
   "dependencies": {
     "abbrev": "1.0.x",
     "async": "1.x",
-    "escodegen": "1.7.x",
+    "escodegen": "1.8.x",
     "esprima": "2.7.x",
     "fileset": "0.2.x",
     "handlebars": "^4.0.1",
