@@ -25,6 +25,14 @@ pre {
 }
 a { color:#0074D9; text-decoration:none; }
 a:hover { text-decoration:underline; }
+td.file > a {
+  display: inline-block;
+  padding: 10px;
+  width: 100%;
+}
+td.file > a:hover {
+  background-color: rgba(255,255,255,0.4);
+}
 .strong { font-weight: bold; }
 .space-top1 { padding: 10px 0 0 0; }
 .pad2y { padding: 20px 0; }
@@ -119,7 +127,6 @@ table.coverage td span.cline-any {
 }
 .coverage-summary tr { border-bottom: 1px solid #bbb; }
 .keyline-all { border: 1px solid #ddd; }
-.coverage-summary td, .coverage-summary th { padding: 10px; }
 .coverage-summary tbody { border: 1px solid #bbb; }
 .coverage-summary td { border-right: 1px solid #bbb; }
 .coverage-summary td:last-child { border-right: none; }
@@ -129,14 +136,12 @@ table.coverage td span.cline-any {
   white-space: nowrap;
 }
 .coverage-summary th.file { border-right: none !important; }
-.coverage-summary th.pct { }
 .coverage-summary th.pic,
 .coverage-summary th.abs,
 .coverage-summary td.pct,
-.coverage-summary td.abs { text-align: right; }
+.coverage-summary td.abs { text-align: right; padding: 10px; }
 .coverage-summary td.file { white-space: nowrap;  }
 .coverage-summary td.pic { min-width: 120px !important;  }
-.coverage-summary tfoot td { }
 
 .coverage-summary .sorter {
     height: 10px;
@@ -186,6 +191,7 @@ span.cline-neutral { background: #eaeaea; }
 }
 .chart {
   line-height: 0;
+  margin: 10px;
 }
 .cover-empty {
     background: white;
