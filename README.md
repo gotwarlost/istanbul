@@ -3,11 +3,15 @@
 [![Build Status](https://secure.travis-ci.org/gotwarlost/istanbul.png)](http://travis-ci.org/gotwarlost/istanbul)
 [![Dependency Status](https://gemnasium.com/gotwarlost/istanbul.png)](https://gemnasium.com/gotwarlost/istanbul)
 [![Coverage Status](https://img.shields.io/coveralls/gotwarlost/istanbul.svg)](https://coveralls.io/r/gotwarlost/istanbul?branch=master)
+[![bitHound Score](https://www.bithound.io/github/gotwarlost/istanbul/badges/score.svg)](https://www.bithound.io/github/gotwarlost/istanbul)
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
+**New** `v0.4.0` now has beautiful HTML reports. Props to Tom MacWright @tmcw for a fantastic job!
+
 * [Features and use cases](#features)
 * [Getting started and configuration](#getting-started)
+* [Usage on Windows](#usage-on-windows)
 * [The command line](#the-command-line)
 * [Ignoring code for coverage](#ignoring-code-for-coverage)
 * [API](#api)
@@ -53,6 +57,23 @@ Sample of code coverage reports produced by this tool (for this tool!):
 
 [HTML reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html)
 
+### Usage on Windows
+
+Istanbul assumes that the `command` passed to it is a JS file (e.g. Jasmine, vows etc.),
+this is however not true on Windows where npm wrap bin files in a `.cmd` file.
+Since Istanbul can not parse `.cmd` files you need to reference the bin file manually.
+
+Here is an example using Jasmine 2:
+
+    istanbul cover node_modules\jasmine\bin\jasmine.js
+
+In order to use this cross platform (e.i. Linux, Mac and Windows), you can insert
+the above line into the script object in your package.json file but with normal
+slash.
+
+    "scripts": {
+        "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
+    }
 
 ### Configuring
 
@@ -265,4 +286,3 @@ The following third-party libraries are used by this module:
 
 Since all the good ones are taken. Comes from the loose association of ideas across
 coverage, carpet-area coverage, the country that makes good carpets and so on...
-

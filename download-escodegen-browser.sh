@@ -6,6 +6,16 @@ OUT_FILE=${ESCG_DIR}/escodegen.browser.min.js
 if [ ! -f ${OUT_FILE} ]
 then
     set -v
-    curl -sSL -o ${ESCG_DIR}/escodegen.browser.min.js  https://raw.githubusercontent.com/estools/escodegen/${ESCG_VERSION}/escodegen.browser.min.js
+    rm -rf __escodegen_clone__
+    git clone --branch ${ESCG_VERSION} https://github.com/estools/escodegen.git __escodegen_clone__
+    cd __escodegen_clone__
+
+    # Temporarily ignore missing package, see #489
+    perl -i -ne '/esprima\-moz/ or print' package.json
+
+    npm i && npm run build-min
+    mv escodegen.browser.min.js ../${OUT_FILE}
+    cd -
+    rm -rf __escodegen_clone__
 fi
 

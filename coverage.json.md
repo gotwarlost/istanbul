@@ -27,6 +27,7 @@ paths), and values are coverage data for that file (the result of
   Note for an `if` statement where there is no `else` clause, there will still be two `locations`
   generated.  Istanbul does *not* generate coverage for the `default` case of a switch statement
   if `default` is not explicitly present in the source code.
+* `l` - Hash of line counts, where keys are the line number.
 
   `locations` for an if statement are always 0-length and located at the start of the `if` (even
   the location for the "else").  For a `switch` statement, `locations` start at the start of the
