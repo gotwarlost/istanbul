@@ -7,7 +7,7 @@ body {
     font-size: 14px;
     color:#333;
 }
-.small { font-size: 12px;; }
+.small { font-size: 12px; }
 *, *:after, *:before {
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
