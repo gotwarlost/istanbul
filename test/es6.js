@@ -1,15 +1,12 @@
 var esprima = require('esprima');
 
 function tryThis(str, feature) {
-    // We can test instrumentation of exports even if the environment doesn't support them. 
-    if (feature !== 'export') {
-        try {
-            /*jshint evil: true */
-            eval(str);
-        } catch (ex) {
-            console.error('ES6 feature [' + feature + '] is not available in this environment');
-            return false;
-        }
+    try {
+        /*jshint evil: true */
+        eval(str);
+    } catch (ex) {
+        console.error('ES6 feature [' + feature + '] is not available in this environment');
+        return false;
     }
 
    // esprima parses sources with sourceType 'script' per default.
@@ -51,6 +48,7 @@ module.exports = {
     },
 
     isExportAvailable: function () {
-        return tryThis('export default function foo() {}', 'export');
+        // We can test instrumentation of exports even if the environment doesn't support them.
+        return true;
     }
 };
