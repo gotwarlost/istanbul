@@ -1,7 +1,7 @@
 var items= [],itemsPassed = 0;
 var i, j;
 
-function foo() 
+function foo()
 {
 top:
     for (i = 0; i < items.length; i++){

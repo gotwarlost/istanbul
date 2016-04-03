@@ -1,5 +1,5 @@
 var i = 5;
-do 
+do
 	i--;
  while (i > 0);
 
