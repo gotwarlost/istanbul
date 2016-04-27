@@ -3,6 +3,17 @@ Changelog
 
 <table>
 <tr>
+<td>0.4.3</td>
+<td>
+    <ul>
+        <li>Create new handlebars instance for the HTML report, thanks to @doowb</li>
+        <li>MetaProperty support thanks to @steve-gray</li>
+        <li>Use ansi colors from 16-color palette for better console support, thanks to @jtangelder</li>
+        <li>Misc doc/ css fixes thanks to @pra85, @abejfehr</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>0.4.2</td>
 <td>Fix confusing error message on check-coverage failures, thanks to @isaacs/td>
 </tr>

@@ -45,7 +45,7 @@ module.exports = {
         });
         finalSummary = objectUtils.mergeSummaryObjects.apply(null, summaries);
         obj.total = finalSummary;
-        
+
         test.ok(existsSync(jsonFile));
         reportObj = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
         test.deepEqual(Object.keys(obj).sort(), Object.keys(reportObj).sort());
