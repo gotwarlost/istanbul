@@ -15,7 +15,7 @@ ignoring whichever path was required to be ignored.
 4. For all other cases, the Swiss army knife `/* istanbul ignore next */` may be used which skips the "next thing" in
 the source code
 5. The "next" thing may be, among other things:
-  * A JS statement (including assignments, ifs, loops, switches, functions) in which case all of the the statement is
+  * A JS statement (including assignments, ifs, loops, switches, functions) in which case all of the statement is
   ignored for all forms of coverage.
   * A switch case statement, in which case the particular case is ignored for branch coverage and its contents ignored
   for all forms
@@ -91,9 +91,9 @@ You get the idea by now.
 #### Ignore a UMD wrapper
 
 ```javascript
-/* istanbul ignore next */
 (function (root, factory) {
     'use strict';
+    /* istanbul ignore next */
     if (typeof exports === 'object') {
         // CommonJS
         module.exports = factory();
@@ -108,4 +108,3 @@ You get the idea by now.
 ```
 
 This will cause the entire function expression to be skipped for coverage.
-

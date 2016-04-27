@@ -147,7 +147,7 @@ module.exports = {
     //undocumented
     TreeSummarizer: require('./lib/util/tree-summarizer'),
     //undocumented
-    assetsDir: path.resolve(__dirname, 'lib', 'vendor')
+    assetsDir: path.resolve(__dirname, 'lib', 'assets')
 };
 
 

@@ -237,7 +237,7 @@ module.exports = {
             },
             relativeName: 'generate-names-mangled.js'
         };
-        
+
         result = reporter.standardLinkMapper().ancestorHref(node, 2);
 
         test.ok(result === '../../');
@@ -262,7 +262,7 @@ module.exports = {
             },
             relativeName: 'generate-names-mangled.js'
         };
-        
+
         result = reporter.standardLinkMapper().ancestorHref(node, 2);
 
         test.ok(result === '../../');

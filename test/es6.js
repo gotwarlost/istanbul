@@ -24,6 +24,10 @@ module.exports = {
         return tryThis('function *foo() { yield 1; }', 'yield');
     },
 
+    isSuperAvailable: function () {
+        return tryThis('class Test extends Object { constructor() { super(); } }\nnew Test();', 'super');
+    },
+
     isForOfAvailable: function () {
         return tryThis('function *foo() { yield 1; }\n' +
             'for (var k of foo()) {}', 'for-of');
@@ -31,5 +35,13 @@ module.exports = {
 
     isArrowFnAvailable: function () {
         return tryThis('[1 ,2, 3].map(x => x * x)', 'arrow function');
+    },
+
+    isImportAvailable: function () {
+        return tryThis('import fs from "fs"', 'import');
+    },
+
+    isExportAvailable: function () {
+        return tryThis('export default function foo() {}', 'export');
     }
 };

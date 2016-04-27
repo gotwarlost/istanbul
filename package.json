@@ -1,6 +1,6 @@
 {
   "name": "istanbul",
-  "version": "0.3.17",
+  "version": "0.4.3",
   "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
   "keywords": [
     "coverage",
@@ -65,7 +65,25 @@
     "Ed S <ejsanders@gmail.com>",
     "Mordy Tikotzky <mordytk@gmail.com>",
     "Haoliang Gao @popomore <sakura9515@gmail.com>",
-    "Roderick Hsiao @roderickhsiao"
+    "Roderick Hsiao @roderickhsiao",
+    "Nikita Gusakov @nkt",
+    "Alex Dunphy @alexdunphy <alexanderdunphy@gmail.com>",
+    "Artemy Tregubenko @arty-name <me@arty.name>",
+    "Arye Lukashevski @aryelu",
+    "@sterlinghw",
+    "Gord Tanner <gord@bithound.io>",
+    "Tom MacWright @tmcw <tom@macwright.org>",
+    "Kitson Kelly @kitsonk",
+    "@asa-git",
+    "@RoCat",
+    "Ian Page Hands @iphands <iphands@gmail.com>",
+    "Eddie Gurnee @pegurnee",
+    "Kevin Decker @kpdecker <kpdecker@gmail.com>",
+    "isaacs @isaacs <i@izs.me>",
+    "Steve Gray @steve-gray",
+    "Prayag Verma @pra85 <prayag.verma@gmail.com>",
+    "Abe Fehr @abejfehr <abe.fehr@gmail.com>",
+    "Brian Woodward @doowb <brian.woodward@gmail.com>"
   ],
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",

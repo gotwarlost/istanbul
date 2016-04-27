@@ -43,6 +43,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--statements', '72' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for statements .* global/));
                 test.done();
             });
@@ -51,6 +52,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--branches', '72' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for branches .* global/));
                 test.done();
             });
@@ -59,6 +61,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--functions', '72' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for functions .* global/));
                 test.done();
             });
@@ -67,14 +70,16 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--lines', '72' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));
                 test.done();
             });
-        },        
+        },
         "should fail with multiple reasons when multiple thresholds violated": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--statements=72', '--functions=50', '--branches=72', '--lines=72' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for statements .* global/));
                 test.ok(results.grepError(/Coverage for branches .* global/));
@@ -87,6 +92,7 @@ module.exports = {
             // YML equivalent to: '--statements=72', '--functions=50', '--branches=72', '--lines=72'
             run([ '--config', 'config-check-global.istanbul.yml' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for statements .* global/));
                 test.ok(results.grepError(/Coverage for branches .* global/));
@@ -99,6 +105,7 @@ module.exports = {
             // YML equivalent to: '--statements=72', '--functions=50', '--branches=72', '--lines=72'
             run([ '--statements=10', '--config', 'config-check-global.istanbul.yml' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));
                 test.ok(!results.grepError(/Coverage for statements .* global/));
                 test.ok(results.grepError(/Coverage for branches .* global/));
@@ -110,6 +117,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--statements=-3', '--functions=-10', '--branches=-1', '--lines=-3' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Uncovered count for lines .* global/));
                 test.ok(results.grepError(/Uncovered count for statements .* global/));
                 test.ok(results.grepError(/Uncovered count for branches .* global/));
@@ -129,6 +137,7 @@ module.exports = {
             test.ok(!existsSync(path.resolve(OUTPUT_DIR, 'no-matching-coverage.json')));
             run([ 'no-matching-coverage.json' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/No coverage files found./));
                 test.done();
             });
@@ -141,6 +150,7 @@ module.exports = {
                 // vendor/dummy_vendor_lib.js (statements 66.67% vs. 72%)
                 // vendor/dummy_vendor_lib.js (lines 66.67% vs. 72%)
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for lines .* per-file/));
                 test.ok(results.grepError(/Coverage for statements .* per-file/));
@@ -156,6 +166,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'relative.json')));
             run([ '--config', 'config-check-each.istanbul.yml', 'coverage/relative.json' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for lines .* per-file/));
                 test.ok(results.grepError(/Coverage for statements .* per-file/));
@@ -171,6 +182,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'relative-dot-slash.json')));
             run([ '--config', 'config-check-each.istanbul.yml', 'coverage/relative-dot-slash.json' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for lines .* per-file/));
                 test.ok(results.grepError(/Coverage for statements .* per-file/));
@@ -186,6 +198,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--branches=100', '--functions=100', '--config', 'config-check-each.istanbul.yml' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(!results.grepError(/Coverage for statements .* global/));
                 test.ok(results.grepError(/Coverage for branches .* global/));
@@ -201,6 +214,7 @@ module.exports = {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([ '--config', 'config-check-mixed.istanbul.yml' ], function (results) {
                 test.ok(!results.succeeded());
+                test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(!results.grepError(/Coverage for lines .* global/));
                 test.ok(results.grepError(/Coverage for statements .* global/));
                 test.ok(!results.grepError(/Coverage for branches .* global/));
