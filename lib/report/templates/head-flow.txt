@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="{{prettify.css}}" />
 {{/if}}
     <link rel="stylesheet" href="{{base.css}}" />
-    <script src="../jquery-2.2.3.min.js"></script>
-    <script src="../jquery.documentsize.min.js"></script>
-    <script src="../jquery.scrollable.min.js"></script>
-    <script src="../flow.js"></script>
+    <script src="{{jquery.js}}"></script>
+    <script src="{{documentsize.js}}"></script>
+    <script src="{{scrollable.js}}"></script>
+    <script src="{{flow.js}}"></script>
 </head>
 <body>
   <svg class="defs">
