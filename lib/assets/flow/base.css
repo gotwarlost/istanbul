@@ -1,0 +1,453 @@
+/* Global */
+@font-face {
+  font-weight: normal;
+  font-family: 'Source Sans Pro';
+  src: url(SourceSansPro-Regular.ttf);
+}
+
+@font-face {
+  font-weight: bold;
+  font-family: 'Source Sans Pro';
+  src: url(SourceSansPro-Semibold.ttf);
+}
+
+@font-face {
+  font-weight: normal;
+  font-family: 'Inconsolata';
+  src: url(Inconsolata-Regular.ttf);
+}
+
+@font-face {
+  font-weight: bold;
+  font-family: 'Inconsolata';
+  src: url(Inconsolata-Bold.ttf);
+}
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  color: #333;
+  font-size: 16px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+a {
+  color: #0074d9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  margin: auto;
+  padding: 10px 23px;
+  width: 100%;
+  height: 78px;
+  background-color: #2278cf;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .27);
+  color: #fff;
+}
+
+/* File path */
+header h1 {
+  display: inline-block;
+  margin: 0 0 9px;
+  font-size: 1.4rem;
+}
+
+header a {
+  color: #c8ddff;
+  text-decoration: none;
+}
+
+/* Version info */
+header h2 {
+  float: right;
+  margin: 0;
+  text-align: right;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+/* Stats */
+header > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Used with header > ul */
+.clearfix {
+  display: block;
+}
+
+.clearfix:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+header li {
+  float: left;
+  padding-right: 20px;
+  font-size: 1rem;
+}
+
+/* Metric bubble */
+.metric {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 9px 1px;
+  height: auto;
+  border-radius: 13px;
+  color: #fff;
+  font-size: .9rem;
+}
+
+.metric.uncovered {
+  background-color: #af0407;
+}
+
+.metric.uncovered svg {
+  display: none;
+}
+
+/* Grab the number of uncovered items from the data-uncovered attribute */
+.metric.uncovered:after {
+  content: attr(data-uncovered);
+}
+
+.metric.covered {
+  padding-right: 7px;
+  padding-left: 7px;
+  background-color: #04ae20;
+}
+
+.metric.covered svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -2px;
+}
+
+/*
+ * Detail page
+ */
+
+/* Nav sidebar */
+
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow-y: scroll;
+  padding: 88px 10px 10px;
+  width: 250px;
+  height: 100%;
+  background-color: #eceff1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .27);
+  font-size: .9rem;
+  cursor: default;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  padding: 0 0 0 2px;
+}
+
+/* Highlight the current nav item */
+nav li.current {
+  background-color: #a3cbf7;
+}
+
+nav input[type='checkbox'] {
+  margin-right: 7px;
+}
+
+nav input[type='checkbox']:checked + span {
+  color: #2a9a2d;
+  text-decoration: line-through;
+}
+
+/* Main */
+
+main {
+  margin: 0 auto;
+  min-height: 100%;
+  height: 100%;
+}
+
+pre {
+  margin: 0;
+  padding: 0;
+  -moz-tab-size: 2;
+  tab-size: 2;
+  font: 13px/18px Inconsolata, Consolas, Menlo, 'Courier New', Courier, monospace;
+}
+
+/*
+  padding-top to push it below the header
+  padding-right to push it to left of nav sidebar
+*/
+pre.content {
+  padding: 95px 270px 10px 15px;
+  background-color: #333;
+}
+
+table.coverage {
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+table.coverage td {
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+table.coverage td.line-number {
+  padding: 0;
+  color: #82827d;
+  text-align: right;
+}
+
+table.coverage td.line-number > span {
+  display: inline-block;
+  padding: 0 9px;
+}
+
+table.coverage td.line-number > span:after {
+  content: attr(data-line);
+}
+
+table.coverage td.line-number > span.current {
+  background-color: #4f4f4f;
+}
+
+table.coverage td.line-coverage {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td.line-coverage > span {
+  display: block;
+  padding: 0 5px;
+  width: 100%;
+  background-color: #444;
+}
+
+td.line-coverage > span.ignored {
+  background-color: #ccc;
+}
+
+/* Partially covered */
+td.line-coverage > span.partial {
+  background-color: #ffff98;
+}
+
+td.line-coverage > span.uncovered {
+  background-color: #e27e7e;
+}
+
+td.line-coverage > span.covered {
+  background-color: #bee8c0;
+}
+
+table.coverage td.text {
+  padding-left: 10px;
+}
+
+mark {
+  background-color: #3e8e3e;
+  color: inherit;
+  cursor: default; /* Marked items are clickable, indicate they are active */
+}
+
+mark.statement {
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+mark.statement.uncovered {
+  background-color: #af0407;
+}
+
+mark.statement.current {
+  background-color: #2282e2;
+}
+
+mark.branch {
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: inherit;
+}
+
+mark.branch.uncovered {
+  background-color: #ffff70;
+}
+
+mark.branch.uncovered > span {
+  color: #333;
+}
+
+mark.branch.current {
+  background-color: #2282e2;
+}
+
+mark.branch.current > span {
+  color: #fff;
+}
+
+/* Path not taken badge */
+mark.path {
+  margin-right: 5px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: #fbfe05;
+  text-align: center;
+  font-weight: bold;
+}
+
+mark.path.if:after {
+  content: 'I';
+}
+
+mark.path.else:after {
+  content: 'E';
+}
+
+mark.path.uncovered {
+  background-color: #fbfe05;
+  color: #333;
+}
+
+mark.path.current {
+  background-color: #2282e2;
+  color: #fff;
+}
+
+mark.ignored {
+  background-color: #999;
+}
+
+mark.ignored > span {
+  color: #eee;
+}
+
+pre.prettyprint {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+pre .com {
+  color: #999;
+}
+
+/*
+ * Summary page
+ */
+
+/*
+  padding-top to push it below the header
+*/
+section.summary {
+  padding: 95px 15px 10px 15px;
+}
+
+.summary table {
+  border-collapse: collapse;
+}
+
+.summary thead {
+  background-color: #eee;
+  cursor: default;
+}
+
+.summary tbody tr:hover {
+  background-color: #eaf5ff;
+}
+
+.summary td,
+.summary th {
+  padding: 7px 10px;
+  font-weight: normal;
+}
+
+.summary td {
+  border-right: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.summary td.covered {
+  color: #04ae20;
+}
+
+.summary td.covered svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -2px;
+}
+
+.summary td.uncovered svg {
+  display: none;
+}
+
+/* Grab the number of uncovered items from the data-uncovered attribute */
+.summary td.uncovered:after {
+  content: attr(data-uncovered);
+}
+
+.summary td:last-child {
+  border-right: none;
+}
+
+.summary th.file,
+.summary td.file {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.summary .sorter {
+  display: inline-block;
+  margin-left: .5em;
+  width: 7px;
+  height: 10px;
+  background: url(sort-arrow-sprite.png) no-repeat scroll 0 0 transparent;
+}
+
+.summary .sorted .sorter {
+  background-position: 0 -20px;
+}
+
+.summary .sorted-desc .sorter {
+  background-position: 0 -10px;
+}

@@ -1,0 +1,15 @@
+    <!-- /content -->
+  </main>
+  {{#if prettify}}
+  <script src="{{prettify.js}}"></script>
+  <script>
+  window.onload = function () {
+      if (typeof prettyPrint === 'function') {
+          prettyPrint();
+      }
+  };
+  </script>
+  {{/if}}
+  <script src="{{sorter.js}}"></script>
+</body>
+</html>
