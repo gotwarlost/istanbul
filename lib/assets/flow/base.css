@@ -27,8 +27,8 @@
 *:after,
 *:before {
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html {
@@ -177,6 +177,10 @@ nav ul {
   list-style: none;
 }
 
+nav.empty ul {
+  display: none;
+}
+
 nav li {
   padding: 0 0 0 2px;
 }
@@ -195,6 +199,20 @@ nav input[type='checkbox']:checked + span {
   text-decoration: line-through;
 }
 
+nav span.empty-placeholder {
+  display: none;
+}
+
+nav.empty span.empty-placeholder {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  display: block;
+  width: 100%;
+  color: #999;
+  text-align: center;
+}
+
 /* Main */
 
 main {
@@ -207,7 +225,7 @@ pre {
   margin: 0;
   padding: 0;
   -moz-tab-size: 2;
-  tab-size: 2;
+       tab-size: 2;
   font: 13px/18px Inconsolata, Consolas, Menlo, 'Courier New', Courier, monospace;
 }
 
