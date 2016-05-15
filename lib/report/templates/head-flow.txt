@@ -4,15 +4,12 @@
     <title>Coverage: {{entity}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="timestamp" content="{{timestamp}}">
+    <meta property="istanbul:timestamp" content="{{timestamp}}">
+    <meta property="istanbul:path" content="{{path}}">
 {{#if prettify}}
     <link rel="stylesheet" href="{{prettify.css}}" />
 {{/if}}
     <link rel="stylesheet" href="{{base.css}}" />
-    <script src="{{jquery.js}}"></script>
-    <script src="{{documentsize.js}}"></script>
-    <script src="{{scrollable.js}}"></script>
-    <script src="{{flow.js}}"></script>
 </head>
 <body>
   <svg class="defs">
