@@ -53,6 +53,10 @@ a:hover {
   text-decoration: underline;
 }
 
+svg.defs {
+  display: none;
+}
+
 /* Header */
 
 header {
@@ -145,10 +149,10 @@ header li {
 }
 
 .metric.covered svg {
-  width: 1em;
-  height: 1em;
+  width: .9rem;
+  height: .7rem;
   fill: currentColor;
-  vertical-align: -2px;
+  vertical-align: -1px;
 }
 
 /*
