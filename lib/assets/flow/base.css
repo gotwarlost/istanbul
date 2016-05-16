@@ -44,6 +44,10 @@ html {
   height: 100%;
 }
 
+body.detail-page {
+  background-color: #333;
+}
+
 a {
   color: #0074d9;
   text-decoration: none;
@@ -81,6 +85,7 @@ header h1 {
 }
 
 header a {
+  padding-right: .25em;
   color: #c8ddff;
   text-decoration: none;
 }
@@ -239,7 +244,6 @@ pre {
 */
 pre.content {
   padding: 95px 270px 10px 15px;
-  background-color: #333;
 }
 
 table.coverage {
@@ -360,14 +364,13 @@ mark.path.uncovered {
 
 #item-outline {
   position: absolute;
-  display: block;
-  background: transparent;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
-  border: 4px solid #44A2FF;
+  border: 4px solid #44a2ff;
   border-radius: 6px;
+  background: transparent;
 }
 
 mark.ignored {
@@ -395,7 +398,7 @@ pre .com {
 /*
   padding-top to push it below the header
 */
-section.summary {
+.summary {
   padding: 95px 15px 10px 15px;
 }
 
