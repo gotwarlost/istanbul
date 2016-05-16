@@ -321,10 +321,6 @@ mark.statement.uncovered {
   background-color: #af0407;
 }
 
-mark.statement.current {
-  background-color: #2282e2;
-}
-
 mark.branch {
   padding: 2px 4px;
   border-radius: 2px;
@@ -337,14 +333,6 @@ mark.branch.uncovered {
 
 mark.branch.uncovered > span {
   color: #333;
-}
-
-mark.branch.current {
-  background-color: #2282e2;
-}
-
-mark.branch.current > span {
-  color: #fff;
 }
 
 /* Path not taken badge */
@@ -370,9 +358,16 @@ mark.path.uncovered {
   color: #333;
 }
 
-mark.path.current {
-  background-color: #2282e2;
-  color: #fff;
+#item-outline {
+  position: absolute;
+  display: block;
+  background: transparent;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 4px solid #44A2FF;
+  border-radius: 6px;
 }
 
 mark.ignored {
