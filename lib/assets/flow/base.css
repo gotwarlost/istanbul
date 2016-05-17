@@ -85,7 +85,7 @@ header h1 {
 }
 
 body.modified header h1:before {
-  content: '▶︎ ';
+  content: '•︎ ';
 }
 
 header a {
@@ -461,7 +461,7 @@ pre .com {
 }
 
 td.file.modified > a:before {
-  content: '▶︎ ';
+  content: '• ';
 }
 
 .summary .sorter {
