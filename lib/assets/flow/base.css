@@ -110,17 +110,6 @@ header > ul {
   list-style: none;
 }
 
-/* Used with header > ul */
-.clearfix {
-  display: block;
-}
-
-.clearfix:after {
-  display: table;
-  clear: both;
-  content: '';
-}
-
 header li {
   float: left;
   padding-right: 20px;
