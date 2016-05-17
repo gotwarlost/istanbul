@@ -84,6 +84,10 @@ header h1 {
   font-size: 1.4rem;
 }
 
+body.modified header h1:before {
+  content: '▶︎ ';
+}
+
 header a {
   padding-right: .25em;
   color: #c8ddff;
@@ -454,6 +458,10 @@ pre .com {
 .summary td.file {
   text-align: left;
   white-space: nowrap;
+}
+
+td.file.modified > a:before {
+  content: '▶︎ ';
 }
 
 .summary .sorter {
