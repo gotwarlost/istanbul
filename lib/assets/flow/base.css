@@ -393,13 +393,10 @@ pre .com {
  */
 
 /*
-  padding-top to push it below the header
+  margin-top: 6rem to push it below the header
 */
 .summary {
-  padding: 95px 15px 10px 15px;
-}
-
-.summary table {
+  margin: 6rem 15px 15px 15px;
   border-collapse: collapse;
 }
 
