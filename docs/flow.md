@@ -78,15 +78,15 @@ The **file view** is where all of the magic happens.
 
 In addition to the standard header, the **file view** contains the following elements, from left to right:
 
+* **Nav bar** – At the left edge of the file view is a scrollable list of all uncovered items in the file. Each nav bar item consists of a checkbox toggle, the line number on which the item occurs, and a description of the item.
+
 * **Line number** – The leftmost column displays line numbers for the current file. The line number of the currently selected uncovered item is highlighted.
 
 * **Execution count/status** – The next column displays the execution count and cverage status for each line. Covered lines are green, lines with uncovered statements or functions are red, lines with uncovered branches are yellow.
 
 * **Annotated source code** – The main part of the view contains the file's annotated source code. Uncovered statements and functions are highlighted in red, uncovered branches are highlighted in yellow, and unused if/else paths are marked with a yellow badge ("I" for `if` paths, "E" for `else` paths).
 
-* **Nav bar** – At the right edge of the file view is a scrollable list of all uncovered items in the file. Each nav bar item consists of a checkbox toggle, the line number on which the item occurs, and a description of the item.
-
-#### Navigating items
+#### Navigating
 
 **flow** makes it easy to navigate through the uncovered items in your source code, and mark which items you have covered with tests or ignored with `istanbul ignore` directives.
 

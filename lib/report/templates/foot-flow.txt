@@ -1,5 +1,4 @@
-    <!-- /content -->
-  </main>
+  <!-- /content -->
   {{#if prettify}}
   <script src="{{prettify.js}}"></script>
   {{/if}}

@@ -45,6 +45,9 @@ html {
 }
 
 body.detail-page {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
   background-color: #333;
 }
 
@@ -66,12 +69,12 @@ svg.defs {
 header {
   position: fixed;
   top: 0;
+  right: 0;
   left: 0;
   z-index: 100;
-  margin: auto;
-  padding: 10px 23px;
-  width: 100%;
-  height: 78px;
+  margin: 0;
+  padding: .6rem 1.5rem;
+  height: 5rem;
   background-color: #2278cf;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .27);
   color: #fff;
@@ -80,7 +83,7 @@ header {
 /* File path */
 header h1 {
   display: inline-block;
-  margin: 0 0 9px;
+  margin: 0 0 .6rem;
   font-size: 1.4rem;
 }
 
@@ -89,9 +92,12 @@ body.modified header h1:before {
 }
 
 header a {
-  padding-right: .25em;
   color: #c8ddff;
   text-decoration: none;
+}
+
+header h1 a {
+  padding-right: .2em;
 }
 
 /* Version info */
@@ -111,7 +117,7 @@ header > ul {
 }
 
 header li {
-  float: left;
+  display: inline-block;
   padding-right: 20px;
   font-size: 1rem;
 }
@@ -161,12 +167,12 @@ header li {
 
 nav {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 5rem;
+  bottom: 0;
+  left: 0;
   overflow-y: scroll;
-  padding: 88px 10px 10px;
+  padding: 1rem 10px;
   width: 250px;
-  height: 100%;
   background-color: #eceff1;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .27);
   font-size: .9rem;
@@ -217,31 +223,20 @@ nav.empty span.empty-placeholder {
 
 /* Main */
 
-main {
-  margin: 0 auto;
-  min-height: 100%;
-  height: 100%;
-}
-
-pre {
-  margin: 0;
-  padding: 0;
-  -moz-tab-size: 2;
-       tab-size: 2;
-  font: 13px/18px Inconsolata, Consolas, Menlo, 'Courier New', Courier, monospace;
-}
-
-/*
-  padding-top to push it below the header
-  padding-right to push it to left of nav sidebar
-*/
-pre.content {
-  padding: 95px 270px 10px 15px;
+div.content {
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  bottom: 0;
+  left: 250px;
+  overflow-y: scroll;
+  padding: 1rem;
 }
 
 table.coverage {
   margin: 0;
   padding: 0;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -249,6 +244,8 @@ table.coverage td {
   margin: 0;
   padding: 0;
   vertical-align: top;
+  white-space: pre;
+  font: 13px/18px Inconsolata, Consolas, Menlo, 'Courier New', Courier, monospace;
 }
 
 table.coverage td.line-number {
@@ -299,7 +296,11 @@ td.line-coverage > span.covered {
   background-color: #bee8c0;
 }
 
-table.coverage td.text {
+pre {
+  font: 13px/18px Inconsolata, Consolas, Menlo, 'Courier New', Courier, monospace;
+}
+
+table.coverage td.code {
   padding-left: 10px;
 }
 
@@ -359,6 +360,9 @@ mark.path.uncovered {
   position: absolute;
   top: 0;
   left: 0;
+  /* Make sure it's above the code */
+  z-index: 700;
+  display: none;
   width: 0;
   height: 0;
   border: 4px solid #44a2ff;
