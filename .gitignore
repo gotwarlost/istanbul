@@ -15,6 +15,7 @@ results
 node_modules/
 bower_components/
 .idea/
+flow-report/
 html-report/
 build/
 public/
