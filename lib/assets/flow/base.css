@@ -228,9 +228,9 @@ div.content {
   top: 5rem;
   right: 0;
   bottom: 0;
-  left: 250px;
+  left: 250px; /* width of the nav bar */
   overflow-y: scroll;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 9px;
 }
 
 table.coverage {
@@ -257,6 +257,7 @@ table.coverage td.line-number {
 table.coverage td.line-number > span {
   display: inline-block;
   padding: 0 9px;
+  width: 100%;
 }
 
 table.coverage td.line-number > span:after {
@@ -302,6 +303,8 @@ pre {
 
 table.coverage td.code {
   padding-left: 10px;
+  /* Force this cell to take up all possible space and shrink those to the left to fit */
+  width: 100%;
 }
 
 mark {
