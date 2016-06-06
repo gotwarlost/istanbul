@@ -266,6 +266,7 @@ table.coverage td.line-number > span:after {
 
 table.coverage td.line-number > span.current {
   background-color: #4f4f4f;
+  color: #aaa;
 }
 
 table.coverage td.line-coverage {
