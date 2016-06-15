@@ -1,0 +1,11 @@
+  <!-- /content -->
+  {{#if prettify}}
+  <script src="{{prettify.js}}"></script>
+  {{/if}}
+  <script src="{{sorter.js}}"></script>
+  <script src="{{jquery.js}}"></script>
+  <script src="{{documentsize.js}}"></script>
+  <script src="{{scrollable.js}}"></script>
+  <script src="{{flow.js}}"></script>
+</body>
+</html>

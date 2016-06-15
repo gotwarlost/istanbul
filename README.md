@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
-**New** `v0.4.0` now has beautiful HTML reports. Props to Tom MacWright @tmcw for a fantastic job!
+**New** `v0.5.0` now has a full-featured web app for interactively discovering and fixing uncovered code. For more info, see the [flow docs](docs/flow.md).
 
 * [Features and use cases](#features)
 * [Getting started and configuration](#getting-started)
@@ -26,6 +26,7 @@ and function coverage**.
 * **Command line tools** to run node unit tests "with coverage turned on" and no cooperation
 whatsoever from the test runner
 * Multiple report formats: **HTML**, **LCOV**, **Cobertura** and more.
+* Interactive [web app](docs/flow.md) for discovering and fixing uncovered code.
 * Ability to use as [middleware](https://github.com/gotwarlost/istanbul-middleware) when serving JS files that need to be tested on the browser.
 * Can be used on the **command line** as well as a **library**
 * Based on the awesome `esprima` parser and the equally awesome `escodegen` code generator
