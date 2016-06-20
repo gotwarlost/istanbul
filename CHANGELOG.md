@@ -3,6 +3,17 @@ Changelog
 
 <table>
 <tr>
+<td>0.4.4</td>
+<td>
+    <ul>
+        <li>Handle ExportNamedDeclaration, thanks to @VictoryStick</li>
+        <li>Use tmpdir setting in temp store, thanks to @inversion</li>
+        <li>Set "medium" coverage CSS color scheme to yellow, thanks to @JamesMGreene</li>
+        <li>use os.tmpdir() instead of os.tmpDir(), thanks to @ChALkeR</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>0.4.3</td>
 <td>
     <ul>
