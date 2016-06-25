@@ -40,7 +40,7 @@ module.exports = {
     "Global coverage": {
         "should fail on inadequate statement coverage": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
-            run([ '--statements', '72' ], function (results) {
+            run([ '--statements', '79' ], function (results) {
                 test.ok(!results.succeeded());
                 test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for statements .* global/));
@@ -67,7 +67,7 @@ module.exports = {
         },
         "should fail on inadequate line coverage": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
-            run([ '--lines', '72' ], function (results) {
+            run([ '--lines', '79' ], function (results) {
                 test.ok(!results.succeeded());
                 test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));
@@ -76,7 +76,7 @@ module.exports = {
         },
         "should fail with multiple reasons when multiple thresholds violated": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.raw.json')));
-            run([ '--statements=72', '--functions=50', '--branches=72', '--lines=72' ], function (results) {
+            run([ '--statements=79', '--functions=50', '--branches=72', '--lines=79' ], function (results) {
                 test.ok(!results.succeeded());
                 test.ok(!results.grepError(/lib[\\\/]cli.js:/));
                 test.ok(results.grepError(/Coverage for lines .* global/));

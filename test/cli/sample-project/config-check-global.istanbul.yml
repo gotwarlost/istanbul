@@ -1,9 +1,9 @@
 check:
   global:
-    statements: 72
+    statements: 79
     functions: 50
     branches: 72
-    lines: 72
+    lines: 79
     # Example: Could exclude all files covered (would pass checks and fail the tests).
     # excludes:
     #     - lib/foo.js

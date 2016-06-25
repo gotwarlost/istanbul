@@ -1,6 +1,6 @@
 {
   "name": "istanbul",
-  "version": "1.0.0-alpha.2",
+  "version": "1.1.0-alpha.0",
   "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
   "keywords": [
     "coverage",
@@ -98,7 +98,7 @@
     "url": "git://github.com/gotwarlost/istanbul.git"
   },
   "dependencies": {
-    "istanbul-api": "^1.0.0-alpha",
+    "istanbul-api": "^1.1.0-alpha",
     "abbrev": "1.0.x",
     "async": "1.x",
     "js-yaml": "3.x",
@@ -110,8 +110,8 @@
   "devDependencies": {
     "coveralls": "2.x",
     "glob": "^5.0.14",
-    "istanbul-lib-coverage": "^1.0.0-alpha.0",
-    "istanbul-lib-instrument": "^1.0.0-alpha.0",
+    "istanbul-lib-coverage": "^1.0.0-alpha",
+    "istanbul-lib-instrument": "^1.1.0-alpha",
     "jshint": "^2.8.0",
     "nodeunit": "0.9.x",
     "requirejs": "2.x",
