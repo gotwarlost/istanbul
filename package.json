@@ -111,7 +111,7 @@
     "async": "1.x",
     "escodegen": "1.8.x",
     "esprima": "2.7.x",
-    "fileset": "0.2.x",
+    "fileset": "2.0.2",
     "handlebars": "^4.0.1",
     "js-yaml": "3.x",
     "mkdirp": "0.5.x",
