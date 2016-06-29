@@ -259,7 +259,7 @@ The following third-party libraries are used by this module:
 * async: https://github.com/caolan/async - for parallel instrumentation of files
 * escodegen: https://github.com/Constellation/escodegen - for JS code generation
 * esprima: https://github.com/ariya/esprima - for JS parsing
-* fileset: https://github.com/mklabs/node-fileset - for loading and matching path expressions
+* glob: https://github.com/isaacs/node-glob - for loading and matching path expressions
 * handlebars: https://github.com/wycats/handlebars.js/ - for report template expansion
 * js-yaml: https://github.com/nodeca/js-yaml - for YAML config file load
 * mkdirp: https://github.com/substack/node-mkdirp - to create output directories
