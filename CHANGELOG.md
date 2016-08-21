@@ -3,6 +3,15 @@ Changelog
 
 <table>
 <tr>
+<td>0.4.5</td>
+<td>
+    <ul>
+        <li>log filename when file fails to parse using esprima, thanks to @djorg83</li>
+        <li>swap fileset for glob (security fix), thanks to @popomore and @graingert</li>
+    </ul>
+</td>
+</tr>
+<tr>
 <td>0.4.4</td>
 <td>
     <ul>

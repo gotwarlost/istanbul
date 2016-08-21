@@ -87,7 +87,8 @@
     "@Victorystick",
     "@inversion",
     "@JamesMGreene",
-    "@ChALkeR"
+    "@ChALkeR",
+    "@graingert"
   ],
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
