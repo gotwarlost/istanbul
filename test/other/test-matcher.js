@@ -1,6 +1,6 @@
 /*jslint nomen: true */
 var path = require('path'),
-    fileset = require('fileset'),
+    glob = require('glob'),
     root = path.resolve(__dirname, 'data', 'matcher'),
     src = '../../lib/util/file-matcher.js',
     fileMatcher = require(src),
@@ -9,7 +9,7 @@ var path = require('path'),
 module.exports = {
     setUp: function (cb) {
         if (!allFiles) {
-            fileset('**/*.js', '', { cwd: root}, function (err, files) {
+            glob('**/*.js', { cwd: root}, function (err, files) {
                 allFiles = files.map(function (file) { return path.resolve(root, file); });
                 cb();
             });

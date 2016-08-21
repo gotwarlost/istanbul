@@ -93,7 +93,7 @@ module.exports = {
      * When no options are passed, the match function is one that matches all JS
      * files under the current working directory except ones under `node_modules`
      *
-     * Match patterns are `ant`-style patterns processed using the `fileset` library.
+     * Match patterns are `ant`-style patterns processed using the `glob` library.
      * Examples not provided due to limitations in putting asterisks inside
      * jsdoc comments. Please refer to tests under `test/other/test-matcher.js`
      * for examples.

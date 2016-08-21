@@ -111,7 +111,7 @@
     "async": "1.x",
     "escodegen": "1.8.x",
     "esprima": "2.7.x",
-    "fileset": "0.2.x",
+    "glob": "^5.0.15",
     "handlebars": "^4.0.1",
     "js-yaml": "3.x",
     "mkdirp": "0.5.x",
@@ -124,7 +124,6 @@
   },
   "devDependencies": {
     "coveralls": "2.x",
-    "glob": "^5.0.14",
     "jshint": "^2.8.0",
     "nodeunit": "0.9.x",
     "requirejs": "2.x",
