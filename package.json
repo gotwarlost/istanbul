@@ -118,6 +118,7 @@
     "mkdirp": "0.5.x",
     "nopt": "3.x",
     "once": "1.x",
+    "remap-istanbul": "^0.3.0",
     "resolve": "1.1.x",
     "supports-color": "^3.1.0",
     "which": "^1.1.1",
