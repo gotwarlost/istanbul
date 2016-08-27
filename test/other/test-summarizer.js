@@ -180,5 +180,78 @@ module.exports = {
             test.deepEqual(blank, node.metrics);
             test.done();
         }
+    },
+    "with recursive summaries": {
+        setUp: function (cb) {
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'foo.js'), s1);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'bar.js'), s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'util', 'baz.js'), s3);
+            tree = summarizer.getTreeSummary();
+            cb();
+        },
+        "should have correct folder summaries": function (test) {
+            var node = tree.root,
+                utilSummary = utils.mergeSummaryObjects(s3),
+                libSummary = utils.mergeSummaryObjects(s1, s2),
+                libRecursiveSummary = utils.mergeSummaryObjects(libSummary, utilSummary),
+                fullSummary = utils.mergeSummaryObjects(utilSummary, libSummary);
+
+            test.deepEqual(fullSummary, node.recursiveMetrics);
+            node = tree.root.children[0];
+            test.deepEqual(libRecursiveSummary, node.recursiveMetrics);
+            node = tree.root.children[1];
+            test.deepEqual(utilSummary, node.recursiveMetrics);
+            test.done();
+        }
+    },
+    "with recursive summaries for no-files structure": {
+        setUp: function (cb) {
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'no-files', 'main', 'foo.js'), s1);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'no-files', 'main', 'bar.js'), s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('tmp', 'lib', 'baz.js'), s3);
+            tree = summarizer.getTreeSummary();
+            cb();
+        },
+        "should have correct folder summaries": function (test) {
+            var node = tree.root,
+                libSummary = utils.mergeSummaryObjects(s3),
+                mainSummary = utils.mergeSummaryObjects(s1, s2),
+                libRecursiveSummary = utils.mergeSummaryObjects(mainSummary, libSummary),
+                fullSummary = utils.mergeSummaryObjects(s1,s2,s3);
+
+            test.deepEqual(fullSummary, node.metrics);
+            test.deepEqual(fullSummary, node.recursiveMetrics);
+            node = tree.root.children[0];
+            test.deepEqual(libSummary, node.metrics);
+            test.deepEqual(libRecursiveSummary, node.recursiveMetrics);
+            node = tree.root.children[1];
+            test.deepEqual(mainSummary, node.metrics);
+            test.deepEqual(mainSummary, node.recursiveMetrics);
+            test.done();
+        }
+    },
+    "with recursive summaries and no room for hoisting": {
+        setUp: function (cb) {
+            summarizer.addFileCoverageSummary(SEP + 'foo.js', s1);
+            summarizer.addFileCoverageSummary(SEP + 'bar.js', s2);
+            summarizer.addFileCoverageSummary(SEP + path.join('util', 'baz.js'), s3);
+            tree = summarizer.getTreeSummary();
+            cb();
+        },
+        "should have correct folder summaries": function (test) {
+            var node = tree.root,
+                utilSummary = utils.mergeSummaryObjects(s3),
+                mainSummary = utils.mergeSummaryObjects(s1, s2),
+                fullSummary = utils.mergeSummaryObjects(s1,s2,s3);
+
+            test.deepEqual(fullSummary, node.metrics);
+            test.deepEqual(fullSummary, node.recursiveMetrics);
+            node = tree.root.children[0];
+            test.deepEqual(mainSummary, node.metrics);
+            node = tree.root.children[1];
+            test.deepEqual(utilSummary, node.metrics);
+            test.deepEqual(utilSummary, node.recursiveMetrics);
+            test.done();
+        }
     }
 };
