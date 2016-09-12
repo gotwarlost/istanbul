@@ -80,6 +80,13 @@ slash.
 Drop a `.istanbul.yml` file at the top of the source tree to configure istanbul.
 `istanbul help config` tells you more about the config file format.
 
+### Colors legend
+- Pink: statement not covered
+- Orange: function not covered
+- Yellow: branch not covered
+- [I] and [E] in front of if-else statements: if or else not covered respectively
+- Branch coverage display only kicks in if one or more but not all branches have been taken (if none of the branches were taken the statement coverage will show you that unambiguously)
+
 ### The command line
 
     $ istanbul help
