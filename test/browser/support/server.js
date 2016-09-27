@@ -10,7 +10,7 @@ var handlebars = require('handlebars'),
         file = path.resolve.apply(null, args);
         return fs.readFileSync(file, 'utf8');
     },
-    esprimaSource = reader('..', '..', '..', 'node_modules', 'esprima', 'esprima.js'),
+    esprimaSource = reader('..', '..', '..', 'node_modules', 'esprima', 'dist', 'esprima.js'),
     escodegenSource = reader('..', '..', '..', 'node_modules', 'escodegen', 'escodegen.browser.min.js'),
     yuiSource = reader('vendor', 'yui-support.js'),
     vm = require('vm'),

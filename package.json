@@ -111,7 +111,7 @@
     "abbrev": "1.0.x",
     "async": "1.x",
     "escodegen": "1.8.x",
-    "esprima": "2.7.x",
+    "esprima": "3.0.x",
     "glob": "^5.0.15",
     "handlebars": "^4.0.1",
     "js-yaml": "3.x",
