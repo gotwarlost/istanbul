@@ -93,7 +93,7 @@
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
     "test": "node --harmony test/run.js",
-    "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
+    "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80 && node ./lib/cli.js current-coverage --baseline 95",
     "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
   },
   "bin": {
