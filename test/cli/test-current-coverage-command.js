@@ -54,17 +54,35 @@ module.exports = {
                 test.ok(results.succeeded());
                 test.ok(!results.grepError(/No coverage files found/));
                 test.ok(!results.grepError(/does not meet baseline threshold/));
-                test.ok(results.grepOutput(/71\.64/));
+                test.ok(results.grepOutput(/SUCCESS: Current Coverage/));
+                test.ok(results.grepOutput(/71\.64%/));
+                test.ok(results.grepOutput(/is either equal or better than the baseline/));
+                test.ok(results.grepOutput(/71%/));
                 test.done();
             });
         },
-        "should pass without a baseline": function (test) {
+        "should pass with a 0 baseline": function (test) {
+            test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
+            run([ '--baseline', '0' ], function (results) {
+                test.ok(results.succeeded());
+                test.ok(!results.grepError(/No coverage files found/));
+                test.ok(!results.grepError(/does not meet baseline threshold/));
+                test.ok(results.grepOutput(/SUCCESS: Current Coverage/));
+                test.ok(results.grepOutput(/71\.64%/));
+                test.ok(results.grepOutput(/is either equal or better than the baseline/));
+                test.ok(results.grepOutput(/0%/));
+                test.done();
+            });
+        },
+        "should pass without a baseline but using the txt file": function (test) {
             test.ok(existsSync(path.resolve(OUTPUT_DIR, 'coverage.json')));
             run([], function (results) {
                 test.ok(results.succeeded());
                 test.ok(!results.grepError(/No coverage files found/));
                 test.ok(!results.grepError(/does not meet baseline threshold/));
-                test.ok(results.grepOutput(/71\.64/));
+                test.ok(results.grepOutput(/SUCCESS: Current Coverage/));
+                test.ok(results.grepOutput(/71\.64%/));
+                test.ok(results.grepOutput(/is either equal or better than the baseline/));
                 test.done();
             });
         }
