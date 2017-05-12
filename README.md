@@ -7,6 +7,11 @@
 
 [![NPM](https://nodei.co/npm/istanbul.png?downloads=true)](https://nodei.co/npm/istanbul/)
 
+> *Deprecation Notice:* this version of _istanbul_ is deprecated, we will not be
+  landing pull requests or releasing new versions. But don't worry, the [Istanbul 2.0
+  API is now available](https://istanbul.js.org/) and is being actively developed
+  in the new [istanbuljs organization](https://github.com/istanbuljs).
+
 **New** `v0.4.0` now has beautiful HTML reports. Props to Tom MacWright @tmcw for a fantastic job!
 
 * [Features and use cases](#features)
