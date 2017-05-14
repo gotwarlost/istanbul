@@ -1,5 +1,5 @@
 {
-  "name": "istanbul",
+  "name": "istanbul-checker",
   "version": "0.4.5",
   "description": "Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale",
   "keywords": [
@@ -93,11 +93,11 @@
   "scripts": {
     "pretest": "jshint index.js lib/ test/ && ./download-escodegen-browser.sh",
     "test": "node --harmony test/run.js",
-    "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80",
+    "posttest": "node ./lib/cli.js check-coverage --statements 95 --branches 80 && node ./lib/cli.js current-coverage --baseline 95",
     "docs": "npm install yuidocjs && node node_modules/yuidocjs/lib/cli.js ."
   },
   "bin": {
-    "istanbul": "./lib/cli.js"
+    "istanbul-checker": "./lib/cli.js"
   },
   "files": [
     "index.js",
@@ -105,7 +105,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/gotwarlost/istanbul.git"
+    "url": "git://github.com/elgalu/istanbul-checker.git"
   },
   "dependencies": {
     "abbrev": "1.0.x",
