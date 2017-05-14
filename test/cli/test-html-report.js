@@ -41,7 +41,13 @@ module.exports = {
         collector.add(obj);
         reporter.writeReport(collector, true);
         test.ok(existsSync(htmlReport));
+        test.ok(existsSync(fileFor('base.css')));
         test.ok(existsSync(fileFor('index.html')));
+        test.ok(existsSync(fileFor('prettify.css')));
+        test.ok(existsSync(fileFor('prettify.js')));
+        test.ok(existsSync(fileFor('prettifyInit.js')));
+        test.ok(existsSync(fileFor('sort-arrow-sprite.png')));
+        test.ok(existsSync(fileFor('sorter.js')));
         test.ok(existsSync(fileFor('lib', 'index.html')));
         test.ok(existsSync(fileFor('lib', 'util', 'index.html')));
         test.ok(existsSync(fileFor('lib', 'foo.js.html')));
