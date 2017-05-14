@@ -211,3 +211,52 @@ pre.prettyprint {
 .footer, .push {
   height: 48px;
 }
+
+/* new style table */
+
+table{
+box-shadow: 0 0.12em 0.12em 0 rgba(0,0,0,0.14), 0 0.12em 0.06em -0.12em rgba(0,0,0,0.2), 0 0.06em 0.25em 0 rgba(0,0,0,0.12);
+box-shadow: 0 -0.06em 0 #e5e5e5, 0 0 0.12em rgba(0,0,0,0.12), 0 0.12em 0.25em rgba(0,0,0,0.24);
+border: 0;
+border-top: 0;
+}
+table>thead {
+    background: #f7f7f7;
+}
+table>thead>tr {
+    height: 3em;
+}
+thead>tr>th {
+    color: #808080;
+    font-weight: bold;
+}
+tbody tr {
+    background-color: #fff;
+}
+table>tbody>tr {
+    background: white;
+    height: 2.81em;
+}
+table>tbody>tr>td {
+    border: 0;
+    font-weight: lighter;
+    padding: 0.44em 1em 0.44em 0.5em;
+    vertical-align: middle;
+    border-bottom: 0.06em solid rgba(0,0,0,0.11);
+    font-size: 0.81em;
+    white-space: nowrap;
+    height: 2em;
+}
+div.coverage-summary td,
+div.coverage-summary table  th,
+div.coverage-summary td.file,
+div.coverage-summary td.pct,
+div.coverage-summary td.abs{
+  border: none;
+}
+div.coverage-summary td.pic{
+  text-align: right;
+}
+div.yui3-datatable-sort-liner{
+  outline: 0;
+}
