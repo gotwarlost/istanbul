@@ -115,7 +115,7 @@ module.exports = {
             require('vm').createScript = currentHook;
             cb();
         },
-        "foo should be transformed (without any options)": function (test) {
+        "script.runInThisContext - foo should be transformed (without any options)": function (test) {
             var s;
             hook.hookCreateScript(matcher, scriptTransformer);
             s = require('vm').createScript('(function () { return 10; }());', '/bar/foo.js');
@@ -123,6 +123,30 @@ module.exports = {
             hook.unhookCreateScript();
             s = require('vm').createScript('(function () { return 10; }());', '/bar/foo.js');
             test.equals(10, s.runInThisContext());
+            test.done();
+        },
+        "script.runInContext - foo should be transformed (without any options)": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookCreateScript(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.createScript('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(42, s.runInContext(context));
+            hook.unhookCreateScript();
+            context = vm.createContext({});
+            s = vm.createScript('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(10, s.runInContext(context));
+            test.done();
+        },
+        "script.runInNewContext - foo should be transformed (without any options)": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookCreateScript(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.createScript('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(42, s.runInNewContext(context));
+            hook.unhookCreateScript();
+            context = vm.createContext({});
+            s = require('vm').createScript('(function () { return 10; }());', '/bar/foo.js');
+            test.equals(10, s.runInNewContext(context));
             test.done();
         }
     },
@@ -150,7 +174,7 @@ module.exports = {
             hook.hookRunInThisContext(matcher, scriptTransformer);
             s = require('vm').runInThisContext('(function () { return 10; }());');
             test.equals(10, s);
-            hook.unhookCreateScript();
+            hook.unhookRunInThisContext();
             test.done();
         },
         "code with non-string filename should not be transformed": function (test) {
@@ -158,8 +182,96 @@ module.exports = {
             hook.hookRunInThisContext(matcher, scriptTransformer);
             s = require('vm').runInThisContext('(function () { return 10; }());', {});
             test.equals(10, s);
-            hook.unhookCreateScript();
+            hook.unhookRunInThisContext();
             test.done();
         }
 	},
+    "when runInContext is hooked": {
+        setUp: function (cb) {
+            currentHook = require('vm').runInContext;
+            cb();
+        },
+        tearDown: function (cb) {
+            require('vm').runInContext = currentHook;
+            cb();
+        },
+        "foo should be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInContext('(function () { return 10; }());', context, '/bar/foo.js');
+            test.equals(42, s);
+            hook.unhookRunInContext();
+            context = vm.createContext({});
+            s = vm.runInContext('(function () { return 10; }());', context, '/bar/foo.js');
+            test.equals(10, s);
+            test.done();
+        },
+        "code with no filename should not be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInContext('(function () { return 10; }());', context);
+            test.equals(10, s);
+            hook.unhookRunInContext();
+            test.done();
+        },
+        "code with non-string filename should not be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInThisContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInContext('(function () { return 10; }());', context, {});
+            test.equals(10, s);
+            hook.unhookRunInContext();
+            test.done();
+        }
+    },
+    "when runInNewContext is hooked": {
+        setUp: function (cb) {
+            currentHook = require('vm').runInNewContext;
+            cb();
+        },
+        tearDown: function (cb) {
+            require('vm').runInNewContext = currentHook;
+            cb();
+        },
+        "foo should be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInNewContext('(function () { return 10; }());', context, '/bar/foo.js');
+            test.equals(42, s);
+            hook.unhookRunInNewContext();
+            context = vm.createContext({});
+            s = vm.runInNewContext('(function () { return 10; }());', context, '/bar/foo.js');
+            test.equals(10, s);
+            test.done();
+        },
+        "code with no filename should not be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInNewContext('(function () { return 10; }());', context);
+            test.equals(10, s);
+            hook.unhookRunInNewContext();
+            test.done();
+        },
+        "code with non-string filename should not be transformed": function (test) {
+            var s, context, vm = require('vm');
+            hook.hookRunInThisContext(matcher, scriptTransformer);
+            context = vm.createContext({});
+            s = vm.runInNewContext('(function () { return 10; }());', context, {});
+            test.equals(10, s);
+            hook.unhookRunInNewContext();
+            test.done();
+        },
+        "code with no context should be transformed": function (test) {
+            var s, vm = require('vm');
+            hook.hookRunInNewContext(matcher, scriptTransformer);
+            s = vm.runInNewContext('(function () { return 10; }());', null, '/bar/foo.js');
+            test.equals(42, s);
+            hook.unhookRunInNewContext();
+            test.done();
+        }
+    }
 };
