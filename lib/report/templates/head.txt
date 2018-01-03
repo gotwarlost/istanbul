@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{prettify.css}}" />
 {{/if}}
     <link rel="stylesheet" href="{{base.css}}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
             background-image: url({{sorter.image}});
