@@ -10,18 +10,19 @@ facility by which coverage can be excluded for certain sections of code.
 1. Coverage can be explicitly skipped using comments. There is no automatic pattern match of expressions to determine
 if they should be skipped for coverage.
 2. A coverage skip hint looks like `/* istanbul ignore <word>[non-word] [optional-docs] */`
-3. For `if` conditions you can say `/* istanbul ignore if */` or `/* istanbul ignore else */` and that will end up
+3. To skip an entire file, add `/* istanbul ignore file */` at the top of the file
+4. For `if` conditions you can say `/* istanbul ignore if */` or `/* istanbul ignore else */` and that will end up
 ignoring whichever path was required to be ignored.
-4. For all other cases, the Swiss army knife `/* istanbul ignore next */` may be used which skips the "next thing" in
+5. For all other cases, the Swiss army knife `/* istanbul ignore next */` may be used which skips the "next thing" in
 the source code
-5. The "next" thing may be, among other things:
+6. The "next" thing may be, among other things:
   * A JS statement (including assignments, ifs, loops, switches, functions) in which case all of the statement is
   ignored for all forms of coverage.
   * A switch case statement, in which case the particular case is ignored for branch coverage and its contents ignored
   for all forms
   * A conditional inside a ternary expression in which case the branch is ignored
   * A part of a logical expression in which case that part of the expression is ignored for branch coverage
-6. It is up to the caller to scope this as narrowly as possible. For example, if you have a source file that is wrapped
+7. It is up to the caller to scope this as narrowly as possible. For example, if you have a source file that is wrapped
 in a function expression, adding `/* istanbul ignore next */` at the top of the file will ignore the whole file!
 
 ### How it works
