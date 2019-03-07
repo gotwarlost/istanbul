@@ -25,28 +25,28 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">{{pct}}% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>{{covered}}/{{total}}</span>
+        <span class="fraction">{{covered}}/{{total}}</span>
       </div>
       {{/with}}
       {{#with metrics.branches}}
       <div class='fl pad1y space-right2'>
         <span class="strong">{{pct}}% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>{{covered}}/{{total}}</span>
+        <span class="fraction">{{covered}}/{{total}}</span>
       </div>
       {{/with}}
       {{#with metrics.functions}}
       <div class='fl pad1y space-right2'>
         <span class="strong">{{pct}}% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>{{covered}}/{{total}}</span>
+        <span class="fraction">{{covered}}/{{total}}</span>
       </div>
       {{/with}}
       {{#with metrics.lines}}
       <div class='fl pad1y space-right2'>
         <span class="strong">{{pct}}% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>{{covered}}/{{total}}</span>
+        <span class="fraction">{{covered}}/{{total}}</span>
       </div>
       {{/with}}
       {{#if_has_ignores metrics}}
