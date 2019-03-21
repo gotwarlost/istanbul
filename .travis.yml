@@ -1,5 +1,9 @@
 language: node_js
 
+os:
+  - windows
+  - linux
+
 node_js:
   - "0.10"
   - "0.12"
