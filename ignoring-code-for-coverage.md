@@ -49,7 +49,7 @@ Usually istanbul would complain about missing coverage for the `else` branch but
 
 ```javascript
 /* istanbul ignore if  */
-if (hardToReproduceError)) {
+if (hardToReproduceError) {
     return callback(hardToReproduceError);
 }
 ```
