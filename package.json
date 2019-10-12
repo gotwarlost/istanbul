@@ -124,9 +124,9 @@
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
-    "coveralls": "2.x",
+    "coveralls": "^3.0.7",
     "jshint": "^2.8.0",
-    "nodeunit": "0.9.x",
+    "nodeunit": "^0.11.3",
     "requirejs": "2.x",
     "rimraf": "^2.4.3"
   }
