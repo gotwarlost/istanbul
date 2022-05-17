@@ -121,8 +121,7 @@
     "resolve": "1.1.x",
     "supports-color": "^3.1.0",
     "which": "^1.1.1",
-    "wordwrap": "^1.0.0",
-    "yuidocjs": "^0.10.2"
+    "wordwrap": "^1.0.0"
   },
   "devDependencies": {
     "coveralls": "2.x",
