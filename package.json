@@ -113,7 +113,7 @@
     "escodegen": "1.8.x",
     "esprima": "2.7.x",
     "glob": "^5.0.15",
-    "handlebars": "^4.0.1",
+    "handlebars": "^4.7.7",
     "js-yaml": "3.x",
     "mkdirp": "0.5.x",
     "nopt": "3.x",
