@@ -49,7 +49,7 @@ function runTests(pat, forceCover) {
         //if any test failed then we cannot obviously run self-coverage
         if (err) { throw err; }
         if (selfCover) {
-            //delet the build dir
+            //delete the build dir
             rimraf.sync(common.getBuildDir());
             //set up environment variable to set CLI and browser
             //tests know that they need to run in self-cover mode
