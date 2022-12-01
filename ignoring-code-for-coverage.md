@@ -108,3 +108,43 @@ You get the idea by now.
 ```
 
 This will cause the entire function expression to be skipped for coverage.
+
+### Ignoring nested functions
+
+Nested functions are _not_ skipped from coverage, even when the function they are defined in is skipped. Functions create a new coverage scope.
+
+```javascript
+/* istanbul ignore next */
+function foo() {
+  const val = 32;
+  return function() {
+    return val;
+  }
+} 
+```
+
+To ignore a nested function, you must add an ignore above the nested function(s): 
+
+```javascript
+/* istanbul ignore next */
+function foo() {
+  const val = 32;
+  /* istanbul ignore next */
+  return function() {
+    return val;
+  }
+} 
+```
+
+This also applies to object literals with anonymous functions:
+
+```javascript
+/* istanbul ignore next */
+function foo() {
+  const val = 32;
+  return {
+    /* istanbul ignore next */
+    bar: () => val
+  }
+} 
+```
