@@ -1,7 +1,7 @@
 ## Istanbul - a JS code coverage tool written in JS
 
 **Archive notice: This repo has been inactive for 7 years and is now archived. 
-Please use [the supported version](https://github.com/istanbuljs) instead.
+Please use [the supported version](https://github.com/istanbuljs) instead.**
 
 
 [![Build Status](https://secure.travis-ci.org/gotwarlost/istanbul.svg?branch=master)](http://travis-ci.org/gotwarlost/istanbul)
