@@ -40,13 +40,14 @@ module.exports = {
         reportLines = fs.readFileSync(outFile, 'utf8');
 
         test.ok(reportLines.indexOf('Code Coverage Summary') > 0);
-        test.ok(reportLines.indexOf('CodeCoverageB') > 0);
+        test.ok(reportLines.indexOf('CodeCoverageAbsRCovered') > 0);
+        test.ok(reportLines.indexOf('CodeCoverageAbsRTotal') > 0);
+        test.ok(reportLines.indexOf('CodeCoverageAbsBCovered') > 0);
+        test.ok(reportLines.indexOf('CodeCoverageAbsBTotal') > 0);
         test.ok(reportLines.indexOf('CodeCoverageAbsMCovered') > 0);
         test.ok(reportLines.indexOf('CodeCoverageAbsMTotal') > 0);
-        test.ok(reportLines.indexOf('CodeCoverageM') > 0);
         test.ok(reportLines.indexOf('CodeCoverageAbsLCovered') > 0);
         test.ok(reportLines.indexOf('CodeCoverageAbsLTotal') > 0);
-        test.ok(reportLines.indexOf('CodeCoverageL') > 0);
 
         test.done();
     },
