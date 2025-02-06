@@ -110,6 +110,26 @@ module.exports = {
                         1: { line: 2, type: 'switch', locations: [ ] },
                         2: { line: 3, type: 'if', locations: [ ] }
                     }
+                },
+                bar: {
+                    f: {},
+                    b: {},
+                    s: {},
+                    statementMap: {
+                        1: { start: { line: 1, column: 1}, end: { line: 1, column: 10 }},
+                        2: { start: { line: 2, column: 1}, end: { line: 1, column: 9 }},
+                        3: { start: { line: 2, column: 10 }, end: { line: 2, column: 20 }},
+                        4: { start: { line: 7, column: 0 }, end: { line: 40, column: 10 }},
+                        5: { start: { line: 41, column: 0 }, end: { line: 42, column: 10 }}
+                    },
+                    fnMap: {
+                        1: { name: 'foo', line: 1 },
+                        2: { name: 'anonymous_1', line: 7 }
+                    },
+                    branchMap: {
+                        1: { line: 2, type: 'switch', locations: [ ] },
+                        2: { line: 3, type: 'if', locations: [ ] }
+                    }
                 }
             };
             cb();
@@ -197,6 +217,20 @@ module.exports = {
             test.deepEqual(ret, foo);
             test.done();
         },
+        "handles coverage information missing in the target file": function (test) {
+            var base = JSON.parse(JSON.stringify(it.foo)),
+                ret = utils.mergeFileCoverage(it3.bar, base),
+                foo = it.foo;
+            test.deepEqual(ret, foo);
+            test.done();
+        },
+        "handles coverage information missing in the source file": function (test) {
+            var base = JSON.parse(JSON.stringify(it.foo)),
+                ret = utils.mergeFileCoverage(base, it3.bar),
+                foo = it.foo;
+            test.deepEqual(ret, foo);
+            test.done();
+        },
         "increment ignored totals": {
             setUp: function (cb) {
                 it = {
@@ -238,4 +272,3 @@ module.exports = {
         }
     }
 };
-
