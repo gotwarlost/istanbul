@@ -45,6 +45,21 @@ if (require('../es6').isArrowFnAvailable()) {
                 verifier.verify(test, [], [], { lines: { '1': 1, '2': 1 }, branches: {}, functions: {}, statements: { '1': 1, '2': 1, '3': 0} });
                 test.done();
             }
+        },
+        "with a block arrow expression that uses strict": {
+            setUp: function (cb) {
+                code = [
+                    'var input = args',
+                    'output = input.map(x => { "use strict"; return x * x; })'
+                ];
+                verifier = helper.verifier(__filename, code);
+                cb();
+            },
+            
+            "should cover one statement less": function (test) {
+                verifier.verify(test, [], [], { lines: { '1': 1, '2': 1 }, branches: {}, functions: {}, statements: { '1': 1, '2': 1, '3': 0} });
+                test.done();
+            }
         }
     };
 }
